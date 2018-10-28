@@ -7,7 +7,7 @@
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
-      "prefix": "app",
+      "prefix": "pv",
       "schematics": {},
       "architect": {
         "build": {
@@ -23,7 +23,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/assets/scss/style.scss"
             ],
             "scripts": []
           },
