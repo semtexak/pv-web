@@ -1,0 +1,117 @@
+@import "_variables.scss";
+@import "_mixin.scss";
+@import "_function.scss";
+
+footer {
+  &.footer-1 {
+    background-color: $footer-background-color;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 148px;
+
+    .footer-inner {
+      .nav-section {
+        border-bottom: 1px solid $footer-nav-border-color;
+        margin-left: 0;
+        margin-right: 0;
+        padding-top: 30px;
+        padding-bottom: 15px;
+
+        .card-logos {
+          height: 37px;
+        }
+
+        nav {
+          margin-top: 14px;
+
+          a {
+            color: #9c9c9c;
+            font-size: 1.25rem;
+            margin: 0 13px;
+            text-transform: uppercase;
+
+            &:first-child {
+              margin-left: 0;
+            }
+
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+      }
+
+      .copyright-section {
+        text-align: right;
+        padding-top: 1rem;
+        color: #c3c3c4;
+        @include rem-fallback(font-size, 13);
+        //@include rem-fallback(font-size, 10);
+      }
+    }
+  }
+
+  &.footer-2 {
+    background-color: $footer-background-color;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: $footer-height;
+
+    .info {
+      .nav-section {
+        padding: 15px 0;
+      }
+
+      nav {
+        padding: 9px 0;
+
+        a {
+          color: $footer-copyright-color;
+          @include rem-fallback(font-size, 13);
+          font-weight: 400;
+          margin: 0 10px;
+
+          &:first-child {
+            margin-left: 0;
+          }
+        }
+      }
+
+      .card-logos {
+        height: 37px;
+      }
+    }
+
+    .copyright {
+      background-color: rgba(0,0,0,0.2);
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+      padding: 25px 0;
+      font-size: 13px;
+      color: $footer-copyright-color;
+
+      ul.nav-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        & > li {
+          display: inline-block;
+          padding: 0 5px;
+
+          & + li:before {
+            content: '•';
+            padding: 0 15px 0 5px;
+            color: $footer-copyright-link-color;
+          }
+
+          a {
+            color: $footer-copyright-link-color;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}

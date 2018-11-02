@@ -1,0 +1,7 @@
+@function line-height($font-size, $line-height: $font-size) {
+  @return $line-height / $font-size;
+}
+
+@function strip-unit($num) {
+  @return $num / ($num * 0 + 1);
+}

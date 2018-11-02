@@ -1,0 +1,43 @@
+@import "../_variables.scss";
+@import "../_mixin.scss";
+@import "../_function.scss";
+
+nav.navbar {
+  background-color: $navbar-background-color;
+  border-bottom: rgba(0,0,0,0.05) 1px solid;
+  box-shadow: 0 0 2px rgba(0,0,0,.1);
+  transition: padding .4s, background-color .4s;
+
+  &.fixed-on-scroll {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+
+    &.transparent {
+      background-color: transparent;
+      box-shadow: none;
+      border-bottom: none;
+      padding: 24px 20px;
+
+      .navbar-nav > .nav-item > .nav-link {
+        color: #ffffff;
+      }
+    }
+  }
+
+
+
+  .navbar-nav {
+    & > .nav-item {
+      & > .nav-link {
+        @include rem-fallback(font-size, 14);
+        color: $navbar-link-color;
+        text-transform: uppercase;
+        padding: 13px 20px;
+        font-weight: 600;
+      }
+    }
+  }
+}
