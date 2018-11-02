@@ -1,0 +1,35 @@
+$background-color: #f2f2f2;
+$foreground-color: #666;
+$font-family: 'Open Sans', sans-serif;
+$headings-color: #414141;
+
+$primary: #02A1BF;
+$primary-color: $primary;
+$primary-dark-color: #01748A;
+$selection-color: $primary;
+
+$overlay-background: #005565;
+
+$section-primary-text-color: #ffffff;
+
+/* Navbar */
+$navbar-background-color: #ffffff;
+$navbar-link-color: #1F262D;
+
+/* Footer */
+$footer-height: 136px;
+$footer-background-color: #1f5a77;
+$footer-nav-border-color: #dfdfdf;
+$footer-copyright-color: rgba(255,255,255,0.6);
+$footer-copyright-link-color: $footer-copyright-color;
+
+/* Homepage */
+$homepage-background: #ffffff;
+$carousel-heading-color: #ffffff;
+$carousel-paragraph-color: $carousel-heading-color;
+
+/* Gradient */
+$gradient-primary-start-color: #082e4b;
+$gradient-primary-end-color: #01adce;
+$gradient-success-start-color: #004e38;
+$gradient-success-end-color: #37b34a;

@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {CoreModule} from './core/core.module';
+import { FixedHeaderDirective } from './shared/directive/fixed-header.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FixedHeaderDirective
   ],
   imports: [
     BrowserModule,

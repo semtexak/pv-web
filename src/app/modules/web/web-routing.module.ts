@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {ReceivePaymentComponent} from './page/receive-payment/receive-payment.component';
 import {HomepageComponent} from './page/homepage/homepage.component';
 import {ContactComponent} from './page/contact/contact.component';
+import {SignInComponent} from './page/sign-in/sign-in.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'kontakt',
     component: ContactComponent
+  },
+  {
+    path: 'prihlasit',
+    component: SignInComponent
   }
 ];
 

@@ -1,15 +1,16 @@
-import {Directive, HostBinding, HostListener} from '@angular/core';
+import {Directive, HostBinding, OnInit} from '@angular/core';
+import {Subject} from 'rxjs';
 
 @Directive({
   selector: '[pvDropdown]'
 })
-export class DropdownDirective {
+export class DropdownDirective implements OnInit {
 
-  @HostBinding('class.dropdown') isDropdown = false;
+  @HostBinding('class.show') isOpen;
+  public status: Subject<boolean> = new Subject();
 
-  @HostListener('click') toggleOpen() {
-    console.log(!this.isDropdown);
-    this.isDropdown = !this.isDropdown;
+  ngOnInit() {
+    this.status.subscribe((status: boolean) => this.isOpen = status);
   }
 
 }
