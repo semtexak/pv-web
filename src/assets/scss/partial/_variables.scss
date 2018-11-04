@@ -12,6 +12,20 @@ $overlay-background: #005565;
 
 $section-primary-text-color: #ffffff;
 
+/* Button */
+$button-primary-gradient-start-color: #01748a;
+$button-primary-gradient-end-color: #01adce;
+
+/* Social */
+$facebook-background: #3b5998;
+$facebook-color: #ffffff;
+$google-background: #d34836;
+$google-color: #ffffff;
+
+/* Inputs */
+$input-border-color: #eeeeee;
+$input-border-hover-color: #dddddd;
+
 /* Navbar */
 $navbar-background-color: #ffffff;
 $navbar-link-color: #1F262D;
@@ -28,8 +42,18 @@ $homepage-background: #ffffff;
 $carousel-heading-color: #ffffff;
 $carousel-paragraph-color: $carousel-heading-color;
 
+/* Login */
+$social-media-color: #a7a7a7;
+$social-media-delimiter-color: #dddddd;
+
+
 /* Gradient */
 $gradient-primary-start-color: #082e4b;
 $gradient-primary-end-color: #01adce;
 $gradient-success-start-color: #004e38;
 $gradient-success-end-color: #37b34a;
+
+
+/* Bootstrap defaults */
+$enable-rounded: false;
+$enable-shadows: false;

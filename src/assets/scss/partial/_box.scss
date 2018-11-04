@@ -1,0 +1,38 @@
+.box {
+  background-color: #fff;
+  -webkit-box-shadow: 0 5px 10px 0 rgba(0,0,0,.15);
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,.15);
+
+  &.box-login {
+    margin-left: auto;
+    margin-right: auto;
+
+    header h2 {
+      text-align: center;
+    }
+
+    .social-media-divider {
+      position: relative;
+      margin-bottom: 1.3rem;
+      text-align: center;
+
+      span {
+        background: $white;
+        color: $social-media-color;
+        position: relative;
+        z-index: 1;
+        padding: 0 5px;
+      }
+
+      &:before {
+        background: $social-media-delimiter-color;
+        content: "";
+        display: block;
+        height: 1px;
+        position: absolute;
+        top: 50%;
+        width: 100%;
+      }
+    }
+  }
+}

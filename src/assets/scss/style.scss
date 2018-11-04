@@ -12,7 +12,9 @@
 
 @import "partial/basic/_button.scss";
 @import "partial/basic/_navbar.scss";
+@import "partial/basic/_input.scss";
 @import "partial/_footer.scss";
+@import "partial/_box.scss";
 @import "partial/_utility.scss";
 
 html {
@@ -46,6 +48,37 @@ h1, h2, h3, h4, h5, h6 {
 p {
   @include rem-fallback(font-size, 16);
 }
+
+
+section {
+  &.login {
+    padding: 5rem 0;
+    min-height: calc(100vh - 200.5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //background-image: url(../../assets/images/main-1.jpg);
+    //position: relative;
+    //
+    //&:before {
+    //  content: '';
+    //  position: absolute;
+    //  width: 100%;
+    //  height: 100%;
+    //  top: 0;
+    //  left: 0;
+    //  background-color: rgba(0,0,0,0.4);
+    //}
+
+    p {
+      @include rem-fallback(font-size, 12);
+    }
+  }
+}
+
+
+
+
 
 .homepage-carousel {
   position: relative;

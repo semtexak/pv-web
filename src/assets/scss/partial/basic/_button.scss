@@ -1,0 +1,30 @@
+@import "../_variables.scss";
+@import "../_mixin.scss";
+
+.btn {
+
+  &.btn-full {
+    width: 100%;
+  }
+
+  &.btn-lg {
+    @include rem-fallback(font-size, 18);
+  }
+
+  &.btn-gradient {
+    @include gradient-x($button-primary-gradient-start-color, $button-primary-gradient-end-color);
+    color: $white;
+  }
+
+  &.facebook {
+    background-color: $facebook-background!important;;
+    color: $facebook-color!important;
+    border: none;
+  }
+
+  &.google {
+    background-color: $google-background!important;;
+    color: $google-color!important;;
+    border: none;
+  }
+}
