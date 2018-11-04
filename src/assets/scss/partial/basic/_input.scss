@@ -22,3 +22,36 @@ input.form-control {
     border-color: #02a1bf;
   }
 }
+
+.form-check {
+  padding-left: 0;
+
+  input {
+    display: none;
+
+    &:checked + label:before {
+      background-color: $primary-color;
+    }
+  }
+
+  label {
+    padding-left: 30px;
+    line-height: 2;
+
+    a {
+      font-weight: 600;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #ffffff;
+      border: 1px solid #ddd;
+    }
+  }
+}

@@ -7,6 +7,8 @@ import {SharedModule} from '../../shared/shared.module';
 import { HomepageComponent } from './page/homepage/homepage.component';
 import { ContactComponent } from './page/contact/contact.component';
 import { SignInComponent } from './page/sign-in/sign-in.component';
+import { ForgotPasswordComponent } from './page/forgot-password/forgot-password.component';
+import { SignUpComponent } from './page/sign-up/sign-up.component';
 
 @NgModule({
   imports: [
@@ -14,6 +16,6 @@ import { SignInComponent } from './page/sign-in/sign-in.component';
     WebRoutingModule,
     SharedModule
   ],
-  declarations: [ReceivePaymentComponent, HomepageComponent, ContactComponent, SignInComponent]
+  declarations: [ReceivePaymentComponent, HomepageComponent, ContactComponent, SignInComponent, ForgotPasswordComponent, SignUpComponent]
 })
 export class WebModule { }

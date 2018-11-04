@@ -1,0 +1,44 @@
+<section class="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-4 mr-auto ml-auto p-0">
+        <!--<div class="alert alert-danger">Alert!</div>-->
+      </div>
+    </div>
+    <div class="row">
+      <div class="box box-login col-4 p-4">
+        <header>
+          <h2>Registrace</h2>
+        </header>
+        <div class="box-inner">
+          <form>
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input class="form-control" id="email" placeholder="jan.novak@email.cz" type="email">
+            </div>
+            <div class="form-group">
+              <label for="password">Heslo</label>
+              <input class="form-control" id="password" placeholder="Heslo" type="password">
+            </div>
+            <div class="form-group">
+              <label for="password_verification">Heslo znovu</label>
+              <input class="form-control" id="password_verification" placeholder="Heslo" type="password">
+            </div>
+            <div class="form-group form-check">
+              <input id="agreement" name="agreement" type="checkbox">
+              <label class="form-check-label" for="agreement">
+                Souhlasím s <a href="#!">podmínkami</a>.
+              </label>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary btn-gradient btn-lg btn-full" type="submit">Registrovat</button>
+            </div>
+          </form>
+        </div>
+        <footer class="text-center">
+          <p class="mb-0">Máte již účet? <a routerLink="/uzivatel/prihlaseni">Přihlašte se</a>.</p>
+        </footer>
+      </div>
+    </div>
+  </div>
+</section>

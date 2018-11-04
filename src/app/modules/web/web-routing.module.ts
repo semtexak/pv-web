@@ -4,6 +4,8 @@ import {ReceivePaymentComponent} from './page/receive-payment/receive-payment.co
 import {HomepageComponent} from './page/homepage/homepage.component';
 import {ContactComponent} from './page/contact/contact.component';
 import {SignInComponent} from './page/sign-in/sign-in.component';
+import {ForgotPasswordComponent} from './page/forgot-password/forgot-password.component';
+import {SignUpComponent} from './page/sign-up/sign-up.component';
 
 const routes: Routes = [
   {
@@ -15,13 +17,26 @@ const routes: Routes = [
     component: ReceivePaymentComponent
   },
   {
+    path: 'uzivatel',
+    children: [
+      {
+        path: 'prihlaseni',
+        component: SignInComponent
+      },
+      {
+        path: 'registrace',
+        component: SignUpComponent
+      },
+      {
+        path: 'zapomenute-heslo',
+        component: ForgotPasswordComponent
+      }
+    ]
+  },
+  {
     path: 'kontakt',
     component: ContactComponent
   },
-  {
-    path: 'prihlasit',
-    component: SignInComponent
-  }
 ];
 
 @NgModule({
