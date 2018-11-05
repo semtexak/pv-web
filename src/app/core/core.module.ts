@@ -9,16 +9,32 @@ import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
 import {SharedModule} from '../shared/shared.module';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AuthenticationService} from '../shared/service/authentication.service';
+import {ReactiveFormsModule} from '@angular/forms';
+import {TokenInterceptor} from '../shared/service/interceptor/token-interceptor';
+import {UserService} from '../shared/service/user.service';
 
 @NgModule({
   imports: [
     CommonModule,
     CoreRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
     SharedModule
   ],
   declarations: [AdminLayoutComponent, WebLayoutComponent, PluginLayoutComponent, HeaderComponent, FooterComponent, SidebarComponent],
   exports: [
-    RouterModule
+    RouterModule,
+  ],
+  providers: [
+    AuthenticationService,
+    UserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ]
 })
 export class CoreModule { }

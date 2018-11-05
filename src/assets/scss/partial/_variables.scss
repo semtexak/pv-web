@@ -16,6 +16,10 @@ $section-primary-text-color: #ffffff;
 $button-primary-gradient-start-color: #01748a;
 $button-primary-gradient-end-color: #01adce;
 
+/* Dropdown */
+$dropdown-item-hover-background: #ebf5ff;
+$dropdown-item-hover-color: #212529;
+
 /* Social */
 $facebook-background: #3b5998;
 $facebook-color: #ffffff;
@@ -25,6 +29,8 @@ $google-color: #ffffff;
 /* Inputs */
 $input-border-color: #eeeeee;
 $input-border-hover-color: #dddddd;
+$input-error-color: #dc143c;
+$input-error-border-color: #f594a7;
 
 /* Navbar */
 $navbar-background-color: #ffffff;

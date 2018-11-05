@@ -6,6 +6,8 @@ import {ContactComponent} from './page/contact/contact.component';
 import {SignInComponent} from './page/sign-in/sign-in.component';
 import {ForgotPasswordComponent} from './page/forgot-password/forgot-password.component';
 import {SignUpComponent} from './page/sign-up/sign-up.component';
+import {UserActivationComponent} from './page/user-activation/user-activation.component';
+import {NotLoggedGuard} from '../../core/guard/not-logged.guard';
 
 const routes: Routes = [
   {
@@ -21,7 +23,8 @@ const routes: Routes = [
     children: [
       {
         path: 'prihlaseni',
-        component: SignInComponent
+        component: SignInComponent,
+        canActivate: [NotLoggedGuard]
       },
       {
         path: 'registrace',
@@ -30,6 +33,10 @@ const routes: Routes = [
       {
         path: 'zapomenute-heslo',
         component: ForgotPasswordComponent
+      },
+      {
+        path: 'aktivace/:activationKey',
+        component: UserActivationComponent
       }
     ]
   },

@@ -1,0 +1,32 @@
+@import "_variables.scss";
+@import "/basic/_input.scss";
+
+.form-group {
+  position: relative;
+
+  &.validate {
+    margin-bottom: 2rem;
+  }
+
+  .validation-message {
+    margin-top: 2px;
+    text-align: right;
+    position: absolute;
+    bottom: -19px;
+    width: 100%;
+  }
+
+  &.has-error {
+    label, input.form-control, .validation-message {
+      color: $input-error-color;
+    }
+
+    label {
+      font-weight: 600;
+    }
+
+    input.form-control {
+      border-color: $input-error-border-color;
+    }
+  }
+}

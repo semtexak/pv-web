@@ -1,0 +1,29 @@
+<section class="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-4 mr-auto ml-auto p-0">
+        <!--<div class="alert alert-danger">Alert!</div>-->
+      </div>
+    </div>
+    <div class="row">
+      <div class="box box-login col-4 p-4">
+        <header>
+          <h2>Aktivace</h2>
+        </header>
+        <div class="box-inner" *ngIf="true">
+            <div class="form-group">
+              <button class="btn btn-success btn-lg btn-full" type="submit">proběhla úspěšně</button>
+            </div>
+        </div>
+        <div class="box-inner" *ngIf="false">
+            <div class="form-group">
+              <button class="btn btn-danger btn-lg btn-full" type="submit">selhala</button>
+            </div>
+        </div>
+        <footer class="text-center" *ngIf="true">
+          <p class="mb-0">Pokračujte na <a routerLink="/uzivatel/prihlaseni">přihlášení</a>.</p>
+        </footer>
+      </div>
+    </div>
+  </div>
+</section>

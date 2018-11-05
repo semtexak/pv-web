@@ -9,6 +9,7 @@ import { ContactComponent } from './page/contact/contact.component';
 import { SignInComponent } from './page/sign-in/sign-in.component';
 import { ForgotPasswordComponent } from './page/forgot-password/forgot-password.component';
 import { SignUpComponent } from './page/sign-up/sign-up.component';
+import { UserActivationComponent } from './page/user-activation/user-activation.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { SignUpComponent } from './page/sign-up/sign-up.component';
     WebRoutingModule,
     SharedModule
   ],
-  declarations: [ReceivePaymentComponent, HomepageComponent, ContactComponent, SignInComponent, ForgotPasswordComponent, SignUpComponent]
+  declarations: [ReceivePaymentComponent, HomepageComponent, ContactComponent, SignInComponent, ForgotPasswordComponent, SignUpComponent, UserActivationComponent]
 })
 export class WebModule { }

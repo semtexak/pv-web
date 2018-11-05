@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg" [ngClass]="{'fixed-on-scroll': fixedHeader, 'transparent': fixedHeader && !isOnTop}" #nav (window:scroll)="onWindowScroll($event)">
   <div class="container">
   <a class="navbar-brand" routerLink="/">
-    <img [src]="fixedHeader && !isOnTop ? '../../../assets/images/logo-w.png' : '../../../assets/images/logo-c.png'" />
+    <!--<img [src]="fixedHeader && !isOnTop ? '../../../assets/images/logo-w.png' : '../../../assets/images/logo-c.png'" />-->
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -15,20 +15,22 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/kontakt" routerLinkActive="active">Kontakt</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="!user; else loggedSection">
         <a class="nav-link" routerLink="/uzivatel/prihlaseni" routerLinkActive="active">Přihlášení</a>
       </li>
-      <!--<li class="nav-item dropdown" pvDropdown>-->
-        <!--<a class="nav-link dropdown-toggle" pvDropdownToggle href="#" role="button">-->
-          <!--Dropdown-->
-        <!--</a>-->
-        <!--<div class="dropdown-menu" pvDropdownMenu aria-labelledby="navbarDropdown">-->
-          <!--<a class="dropdown-item" href="#">Action</a>-->
-          <!--<a class="dropdown-item" href="#">Another action</a>-->
-          <!--<div class="dropdown-divider"></div>-->
-          <!--<a class="dropdown-item" href="#">Something else here</a>-->
-        <!--</div>-->
-      <!--</li>-->
+      <ng-template #loggedSection>
+        <li class="nav-item dropdown user-section" pvDropdown>
+          <a class="nav-link dropdown-toggle" pvDropdownToggle href="#" role="button">
+            {{user.name}}
+          </a>
+          <div class="dropdown-menu" pvDropdownMenu aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="/">Můj účet</a>
+            <!--<a class="dropdown-item" href="#">Another action</a>-->
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Odhlásit</a>
+          </div>
+        </li>
+      </ng-template>
     </ul>
   </div>
   </div>
