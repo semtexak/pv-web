@@ -14,7 +14,8 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   injectToken(request: HttpRequest<any>, token: string): HttpRequest<any> {
-    if ((request.url.includes('/register') && token === undefined) || token === '') {
+    // console.log(request.url);
+    if ((request.url.includes('/register') && token === undefined) || token === '' || token === 'undefined' || token === undefined) {
       return request;
     }
     return request.clone({setHeaders: {Authorization: 'Bearer ' + token}});

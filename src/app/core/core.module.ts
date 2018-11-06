@@ -14,18 +14,24 @@ import {AuthenticationService} from '../shared/service/authentication.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import {TokenInterceptor} from '../shared/service/interceptor/token-interceptor';
 import {UserService} from '../shared/service/user.service';
+import {NgHttpLoaderModule} from 'ng-http-loader';
+import {LoaderComponent} from './component/loader/loader.component';
 
 @NgModule({
   imports: [
     CommonModule,
     CoreRoutingModule,
     HttpClientModule,
+    NgHttpLoaderModule,
     ReactiveFormsModule,
     SharedModule
   ],
-  declarations: [AdminLayoutComponent, WebLayoutComponent, PluginLayoutComponent, HeaderComponent, FooterComponent, SidebarComponent],
+  declarations: [AdminLayoutComponent, WebLayoutComponent, PluginLayoutComponent, LoaderComponent, HeaderComponent, FooterComponent, SidebarComponent],
   exports: [
     RouterModule,
+  ],
+  entryComponents: [
+    LoaderComponent
   ],
   providers: [
     AuthenticationService,

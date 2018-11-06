@@ -1,5 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {LayoutService} from '../../../shared/service/layout.service';
 import {AuthenticationService} from '../../../shared/service/authentication.service';
 import {User} from '../../../shared/model/user';

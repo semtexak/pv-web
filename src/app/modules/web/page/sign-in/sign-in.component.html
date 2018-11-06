@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-4 mr-auto ml-auto p-0">
-        <!--<div class="alert alert-danger">Alert!</div>-->
+        <div class="alert alert-danger" *ngIf="error">{{error}}</div>
       </div>
     </div>
     <div class="row">

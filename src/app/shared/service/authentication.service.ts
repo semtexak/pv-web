@@ -7,7 +7,8 @@ import {ISingInForm} from '../model/i-sing-in-form';
 import {environment} from '../../../environments/environment';
 import {IToken} from '../model/i-token';
 import {CookieService} from 'ngx-cookie-service';
-import {map} from 'rxjs/operators';
+import {map, mergeMap, switchMap} from 'rxjs/operators';
+import {LoginStatus} from '../model/login-status';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ import {map} from 'rxjs/operators';
 export class AuthenticationService extends HttpService {
 
   public loggedUser: BehaviorSubject<User> = new BehaviorSubject(undefined);
+  public status: BehaviorSubject<LoginStatus> = new BehaviorSubject(new LoginStatus(false));
 
   private grantType = environment.grantType;
   private clientId = environment.clientId;
@@ -34,13 +36,27 @@ export class AuthenticationService extends HttpService {
     return this.cookieService.get('act');
   }
 
-  public authenticate(credentials: ISingInForm): Subscription {
+  public authenticate(credentials: ISingInForm): Observable<any> {
     const httpParams = this.prepareFormAuth(credentials);
-    return this.obtainToken(httpParams).subscribe((token: IToken) => {
-      this.saveToken(token);
-      this.saveUser();
-      console.log(token);
-    }, error => console.log(error));
+
+    return this.obtainToken(httpParams).pipe(
+      switchMap((token: IToken) => {
+        this.saveToken(token);
+        return this.testSaveUser();
+      })
+    );
+  }
+
+  private testSaveUser(): Observable<any> {
+    return this.getUserData().pipe(
+      map((userData: User) => {
+        const user = this.mapUser(userData);
+        console.log(`User receiver ${userData.name}`);
+        localStorage.setItem('udata', JSON.stringify(user));
+        this.loggedUser.next(user);
+        return user;
+      })
+    );
   }
 
   public obtainToken(params: HttpParams): Observable<any> {
@@ -71,6 +87,7 @@ export class AuthenticationService extends HttpService {
 
   private saveToken(token: IToken) {
     this.cookieService.set('act', token.access_token, new Date(token.expires_at), '/');
+    console.log(`Token ${token.access_token} saved!`);
   }
 
   private prepareFormAuth(credentials: ISingInForm): HttpParams {

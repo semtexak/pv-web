@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {LoaderComponent} from '../../component/loader/loader.component';
 
 @Component({
   selector: 'app-web-layout',
@@ -6,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WebLayoutComponent implements OnInit {
 
-  constructor() { }
+  public loader = LoaderComponent;
+
+  constructor() {
+  }
 
   ngOnInit() {
+
   }
 
 }
