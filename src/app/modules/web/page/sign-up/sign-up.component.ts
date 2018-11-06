@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatchPasswordValidation} from '../../../../core/validation/match-password-validation';
 import {UserService} from '../../../../shared/service/user.service';

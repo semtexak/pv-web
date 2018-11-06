@@ -98,4 +98,9 @@ export class AuthenticationService extends HttpService {
       .set('client_id', this.clientId)
       .set('client_secret', this.clientSecret);
   }
+
+  public logout(): void {
+    this.cookieService.delete('act');
+    localStorage.removeItem('udata');
+  }
 }
