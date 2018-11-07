@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpService} from './http.service';
 import {HttpClient} from '@angular/common/http';
-import {IForgotPasswordForm} from '../model/i-forgot-password-form';
 import {Observable} from 'rxjs';
 import {ISingUpForm} from '../model/i-sing-up-form';
 
@@ -20,5 +19,21 @@ export class UserService extends HttpService {
 
   registerUser(form: ISingUpForm): Observable<any> {
     return this.http.post(`${this.API_URL}/user-service/user/register`, JSON.stringify(form), this.jsonHttpOptions);
+  }
+
+  activateUser(activationKey: string) {
+    return this.http.get(`${this.API_URL}/user-service/user/activate-user?t=${activationKey}`);
+  }
+
+  generateNewActivationKey(email: string) {
+    return this.http.post(`${this.API_URL}/user-service/user/activation-key`, JSON.stringify({email: email}), this.jsonHttpOptions);
+  }
+
+  ongoingPasswordChange(token: string) {
+    return this.http.get(`${this.API_URL}/user-service/user/ongoing-password-change?t=${token}`);
+  }
+
+  changePassword(form: any) {
+    return this.http.put(`${this.API_URL}/user-service/user/change-password-token`, JSON.stringify(form), this.jsonHttpOptions);
   }
 }

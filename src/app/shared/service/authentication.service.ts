@@ -7,8 +7,7 @@ import {ISingInForm} from '../model/i-sing-in-form';
 import {environment} from '../../../environments/environment';
 import {IToken} from '../model/i-token';
 import {CookieService} from 'ngx-cookie-service';
-import {map, mergeMap, switchMap} from 'rxjs/operators';
-import {LoginStatus} from '../model/login-status';
+import {map, switchMap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +15,6 @@ import {LoginStatus} from '../model/login-status';
 export class AuthenticationService extends HttpService {
 
   public loggedUser: BehaviorSubject<User> = new BehaviorSubject(undefined);
-  public status: BehaviorSubject<LoginStatus> = new BehaviorSubject(new LoginStatus(false));
-
   private grantType = environment.grantType;
   private clientId = environment.clientId;
   private clientSecret = environment.clientSecret;
@@ -42,12 +39,12 @@ export class AuthenticationService extends HttpService {
     return this.obtainToken(httpParams).pipe(
       switchMap((token: IToken) => {
         this.saveToken(token);
-        return this.testSaveUser();
+        return this.saveUser();
       })
     );
   }
 
-  private testSaveUser(): Observable<any> {
+  private saveUser(): Observable<any> {
     return this.getUserData().pipe(
       map((userData: User) => {
         const user = this.mapUser(userData);
@@ -61,15 +58,6 @@ export class AuthenticationService extends HttpService {
 
   public obtainToken(params: HttpParams): Observable<any> {
     return this.http.post(`${this.API_URL}/user-service/token`, params.toString(), this.formAuthRequestOptions());
-  }
-
-  private saveUser() {
-    this.getUserData().pipe(map((userData: User) => {
-      return this.mapUser(userData);
-    })).subscribe((user: User) => {
-      this.loggedUser.next(user);
-      localStorage.setItem('udata', JSON.stringify(user));
-    });
   }
 
   private getUserData(): Observable<any> {
@@ -87,7 +75,6 @@ export class AuthenticationService extends HttpService {
 
   private saveToken(token: IToken) {
     this.cookieService.set('act', token.access_token, new Date(token.expires_at), '/');
-    console.log(`Token ${token.access_token} saved!`);
   }
 
   private prepareFormAuth(credentials: ISingInForm): HttpParams {
@@ -102,5 +89,6 @@ export class AuthenticationService extends HttpService {
   public logout(): void {
     this.cookieService.delete('act');
     localStorage.removeItem('udata');
+    this.loggedUser.next(null);
   }
 }

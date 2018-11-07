@@ -2,26 +2,34 @@
   <div class="container">
     <div class="row">
       <div class="col-4 mr-auto ml-auto p-0">
-        <!--<div class="alert alert-danger">Alert!</div>-->
+        <pv-alerts></pv-alerts>
       </div>
     </div>
     <div class="row">
-      <div class="box box-login col-4 p-4">
+      <div class="box box--activate col-4 p-4" *ngIf="activationSuccess === true">
         <header>
-          <h2>Aktivace</h2>
+          <h2>Aktivace účtu</h2>
         </header>
-        <div class="box-inner" *ngIf="true">
-            <div class="form-group">
-              <button class="btn btn-success btn-lg btn-full" type="submit">proběhla úspěšně</button>
-            </div>
+        <div class="box-inner">
+          <div class="alert alert-success">
+            <p>Aktivace účtu byla <strong class="text-primary">úspěšná</strong>.</p>
+          </div>
         </div>
-        <div class="box-inner" *ngIf="false">
-            <div class="form-group">
-              <button class="btn btn-danger btn-lg btn-full" type="submit">selhala</button>
-            </div>
-        </div>
-        <footer class="text-center" *ngIf="true">
+        <footer class="text-center">
           <p class="mb-0">Pokračujte na <a routerLink="/uzivatel/prihlaseni">přihlášení</a>.</p>
+        </footer>
+      </div>
+      <div class="box box--activate col-4 p-4" *ngIf="activationSuccess === false">
+        <header>
+          <h2>Aktivace účtu</h2>
+        </header>
+        <div class="box-inner">
+          <div class="alert alert-danger">
+            <p>Aktivace účtu se <strong class="text-danger">nezdařila</strong>. Pokud problém přetrvává, vygenerujte si, prosím, nový aktivační klíč, který Vám bude zaslán na e-mail uvedený při registraci.</p>
+          </div>
+        </div>
+        <footer class="text-center">
+          <p class="mb-0">Vygenerovat nový <a routerLink="/uzivatel/aktivace/novy-klic">aktivační klíč</a>.</p>
         </footer>
       </div>
     </div>

@@ -1,9 +1,11 @@
+@import "_variables.scss";
+
 .box {
   background-color: #fff;
   -webkit-box-shadow: 0 5px 10px 0 rgba(0,0,0,.15);
   box-shadow: 0 5px 10px 0 rgba(0,0,0,.15);
 
-  &.box-login {
+  &.box--login, &.box--activate {
     margin-left: auto;
     margin-right: auto;
 
@@ -33,6 +35,12 @@
         top: 50%;
         width: 100%;
       }
+    }
+  }
+
+  &.box--activate {
+    header h2 {
+      margin-bottom: 1rem;
     }
   }
 }

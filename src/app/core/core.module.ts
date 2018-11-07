@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {CoreRoutingModule} from './core-routing.module';
-import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
-import { WebLayoutComponent } from './layout/web-layout/web-layout.component';
-import { PluginLayoutComponent } from './layout/plugin-layout/plugin-layout.component';
-import { HeaderComponent } from './component/header/header.component';
-import { FooterComponent } from './component/footer/footer.component';
-import { SidebarComponent } from './component/sidebar/sidebar.component';
+import {AdminLayoutComponent} from './layout/admin-layout/admin-layout.component';
+import {WebLayoutComponent} from './layout/web-layout/web-layout.component';
+import {PluginLayoutComponent} from './layout/plugin-layout/plugin-layout.component';
+import {HeaderComponent} from './component/header/header.component';
+import {FooterComponent} from './component/footer/footer.component';
+import {SidebarComponent} from './component/sidebar/sidebar.component';
 import {SharedModule} from '../shared/shared.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthenticationService} from '../shared/service/authentication.service';
@@ -16,6 +16,7 @@ import {TokenInterceptor} from '../shared/service/interceptor/token-interceptor'
 import {UserService} from '../shared/service/user.service';
 import {NgHttpLoaderModule} from 'ng-http-loader';
 import {LoaderComponent} from './component/loader/loader.component';
+import {AlertService} from '../shared/service/alert.service';
 
 @NgModule({
   imports: [
@@ -26,9 +27,17 @@ import {LoaderComponent} from './component/loader/loader.component';
     ReactiveFormsModule,
     SharedModule
   ],
-  declarations: [AdminLayoutComponent, WebLayoutComponent, PluginLayoutComponent, LoaderComponent, HeaderComponent, FooterComponent, SidebarComponent],
+  declarations: [
+    AdminLayoutComponent,
+    WebLayoutComponent,
+    PluginLayoutComponent,
+    LoaderComponent,
+    HeaderComponent,
+    FooterComponent,
+    SidebarComponent
+  ],
   exports: [
-    RouterModule,
+    RouterModule
   ],
   entryComponents: [
     LoaderComponent
@@ -36,6 +45,7 @@ import {LoaderComponent} from './component/loader/loader.component';
   providers: [
     AuthenticationService,
     UserService,
+    AlertService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
@@ -43,4 +53,5 @@ import {LoaderComponent} from './component/loader/loader.component';
     }
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+}

@@ -5,6 +5,8 @@ import {DropdownMenuDirective} from './directive/dropdown-menu.directive';
 import {DropdownToggleDirective} from './directive/dropdown-toggle.directive';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CookieService} from 'ngx-cookie-service';
+import {AlertsComponent} from './component/alerts/alerts.component';
+import {AlertComponent} from './component/alerts/alert/alert.component';
 
 @NgModule({
   imports: [
@@ -13,6 +15,8 @@ import {CookieService} from 'ngx-cookie-service';
     ReactiveFormsModule
   ],
   declarations: [
+    AlertsComponent,
+    AlertComponent,
     DropdownDirective,
     DropdownMenuDirective,
     DropdownToggleDirective
@@ -24,6 +28,8 @@ import {CookieService} from 'ngx-cookie-service';
     DropdownDirective,
     DropdownMenuDirective,
     DropdownToggleDirective,
+    AlertsComponent,
+    AlertComponent,
     FormsModule,
     ReactiveFormsModule
   ]

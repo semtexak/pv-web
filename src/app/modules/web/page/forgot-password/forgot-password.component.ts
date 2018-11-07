@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../../../shared/service/authentication.service';
 import {IForgotPasswordForm} from '../../../../shared/model/i-forgot-password-form';
 import {UserService} from '../../../../shared/service/user.service';
+import {AlertService} from '../../../../shared/service/alert.service';
 
 @Component({
   selector: 'pv-forgot-password',
@@ -15,6 +16,7 @@ export class ForgotPasswordComponent {
   public success = false;
 
   constructor(private authenticationService: AuthenticationService,
+              private alertService: AlertService,
               private userService: UserService,
               private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
@@ -24,11 +26,11 @@ export class ForgotPasswordComponent {
 
   onSubmit(data: IForgotPasswordForm): void {
     this.userService.forgotPassword(data.username).subscribe(d => {
-      this.sent = true;
-      this.success = true;
+      this.alertService.success('Požadavek na obnovu hesla byl úspěšně odeslán.');
+      this.form.reset();
     }, e => {
       console.log(e);
-      this.sent = true;
+      this.alertService.error('Vyskytla se chyba.');
     });
   }
 

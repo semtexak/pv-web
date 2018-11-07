@@ -4,6 +4,7 @@ import {ISingInForm} from '../../../../shared/model/i-sing-in-form';
 import {AuthenticationService} from '../../../../shared/service/authentication.service';
 import {Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
+import {AlertService} from '../../../../shared/service/alert.service';
 
 @Component({
   selector: 'pv-sign-in',
@@ -15,6 +16,7 @@ export class SignInComponent {
   public error: string;
 
   constructor(private authenticationService: AuthenticationService,
+              private alertService: AlertService,
               private router: Router,
               private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
@@ -31,11 +33,11 @@ export class SignInComponent {
         error => {
           if (error instanceof HttpErrorResponse) {
             if (error.error.error_description.includes('disabled')) {
-              this.error = 'Uživatel nebyl aktivován, nejprve proveďte aktivaci.';
+              this.alertService.warning('Uživatel nebyl aktivován, nejprve proveďte aktivaci.');
             } else if (error.error.error_description.includes('locked')) {
-              this.error = 'Uživatel byl zablokován.';
+              this.alertService.error('Uživatel byl zablokován.');
             } else if (error.error.error_description.includes('credentials')) {
-              this.error = 'Špatná kombinace jména a hesla.';
+              this.alertService.error('Špatná kombinace jména a hesla.');
             }
           }
           console.log(error);

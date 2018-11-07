@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   logout(): void {
-    // this.authenticationService.logout();
+    this.authenticationService.logout();
     this.router.navigateByUrl('/uzivatel/prihlaseni');
   }
 }

@@ -8,6 +8,8 @@ import {ForgotPasswordComponent} from './page/forgot-password/forgot-password.co
 import {SignUpComponent} from './page/sign-up/sign-up.component';
 import {UserActivationComponent} from './page/user-activation/user-activation.component';
 import {NotLoggedGuard} from '../../core/guard/not-logged.guard';
+import {ActivationKeyComponent} from './page/activation-key/activation-key.component';
+import {PasswordChangeComponent} from './page/password-change/password-change.component';
 
 const routes: Routes = [
   {
@@ -33,6 +35,14 @@ const routes: Routes = [
       {
         path: 'zapomenute-heslo',
         component: ForgotPasswordComponent
+      },
+      {
+        path: 'zmena-hesla',
+        component: PasswordChangeComponent
+      },
+      {
+        path: 'aktivace/novy-klic',
+        component: ActivationKeyComponent
       },
       {
         path: 'aktivace/:activationKey',
