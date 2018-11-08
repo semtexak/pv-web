@@ -10,6 +10,7 @@ import {UserActivationComponent} from './page/user-activation/user-activation.co
 import {NotLoggedGuard} from '../../core/guard/not-logged.guard';
 import {ActivationKeyComponent} from './page/activation-key/activation-key.component';
 import {PasswordChangeComponent} from './page/password-change/password-change.component';
+import {AuthGuard} from '../../core/guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -38,7 +39,19 @@ const routes: Routes = [
       },
       {
         path: 'zmena-hesla',
-        component: PasswordChangeComponent
+        children: [
+          {
+            path: ':token',
+            component: PasswordChangeComponent,
+            canActivate: [NotLoggedGuard]
+          },
+          {
+            path: '',
+            pathMatch: 'full',
+            component: PasswordChangeComponent,
+            canActivate: [AuthGuard]
+          },
+        ]
       },
       {
         path: 'aktivace/novy-klic',

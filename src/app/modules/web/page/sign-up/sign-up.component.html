@@ -39,7 +39,7 @@
               <input class="form-control" id="password_verification" placeholder="Heslo" type="password" [formControl]="form.get('passwordConfirm')">
               <div class="validation-message" *ngIf="form.get('passwordConfirm').invalid && form.get('passwordConfirm').dirty">
                 <span *ngIf="form.get('passwordConfirm').hasError('required')">Pole není vyplněno.</span>
-                <span *ngIf="form.get('passwordConfirm').hasError('matchPassword')">Hesla nesouhlasí.</span>
+                <span *ngIf="form.get('passwordConfirm').hasError('matchFields')">Hesla nesouhlasí.</span>
               </div>
             </div>
             <div class="form-group form-check">

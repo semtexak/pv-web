@@ -23,7 +23,7 @@ export class SignUpComponent {
       'password': [null, Validators.compose([Validators.minLength(8), Validators.required])],
       'passwordConfirm': [null, Validators.required],
     }, {
-      validator: MatchPasswordValidation.MatchPassword
+      validator: MatchPasswordValidation.match('password', 'passwordConfirm')
     });
   }
 
