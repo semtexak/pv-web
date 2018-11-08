@@ -1,0 +1,22 @@
+@import "_variables.scss";
+
+.icon {
+  display: inline-block;
+}
+
+.icon--lg {
+  width: 80px;
+  height: 80px;
+}
+
+.icon--light {
+  background-color: rgba(0,0,0,0.05);
+}
+
+.icon--rounded {
+  border-radius: 50%;
+}
+
+.icon--hover:hover {
+  background-color: $primary-color;
+}
