@@ -16,6 +16,11 @@ export class DropdownToggleDirective implements OnInit {
     this.dropdownMenu.status.next(this.isOpen);
   }
 
+  @HostListener('document:click', ['$event']) test(event: MouseEvent) {
+    this.isOpen = !this.isOpen;
+    this.dropdownMenu.status.next(this.isOpen);
+  }
+
   constructor(@Host() @Inject(forwardRef(() => DropdownDirective)) dropdownMenu: DropdownDirective,
               private elRef: ElementRef,
               private renderer: Renderer2) {

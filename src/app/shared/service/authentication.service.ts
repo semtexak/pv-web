@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import {BehaviorSubject, Observable, of, Subscription} from 'rxjs';
 import {User} from '../model/user';
 import {HttpService} from './http.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
@@ -7,7 +7,7 @@ import {ISingInForm} from '../model/i-sing-in-form';
 import {environment} from '../../../environments/environment';
 import {IToken} from '../model/i-token';
 import {CookieService} from 'ngx-cookie-service';
-import {map, switchMap} from 'rxjs/operators';
+import {catchError, map, mergeMap, switchMap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -64,6 +64,11 @@ export class AuthenticationService extends HttpService {
     return this.http.get(`${this.API_URL}/user-service/user/self`);
   }
 
+  private logoutBackend(): Observable<any> {
+    return this.http.delete(`${this.API_URL}/user-service/user/logout`);
+  }
+
+
   private mapUser(userData: User) {
     const user = new User();
     user.id = userData.id;
@@ -75,6 +80,7 @@ export class AuthenticationService extends HttpService {
 
   private saveToken(token: IToken) {
     this.cookieService.set('act', token.access_token, new Date(token.expires_at), '/');
+    console.log('Saving token', token.access_token);
   }
 
   private prepareFormAuth(credentials: ISingInForm): HttpParams {
@@ -86,9 +92,18 @@ export class AuthenticationService extends HttpService {
       .set('client_secret', this.clientSecret);
   }
 
-  public logout(): void {
-    this.cookieService.delete('act');
-    localStorage.removeItem('udata');
-    this.loggedUser.next(null);
+  public logout(): Observable<boolean> {
+    return this.logoutBackend().pipe(
+      switchMap(() => {
+        this.cookieService.delete('act', '/');
+        localStorage.removeItem('udata');
+        this.loggedUser.next(null);
+        return of(true);
+      }),
+      catchError(error => {
+        console.log(error);
+        return of(false);
+      })
+    );
   }
 }

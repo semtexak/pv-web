@@ -6,7 +6,7 @@ nav.navbar {
   background-color: $navbar-background-color;
   border-bottom: rgba(0,0,0,0.05) 1px solid;
   box-shadow: 0 0 2px rgba(0,0,0,.1);
-  transition: padding .4s, background-color .4s;
+  //transition: padding .4s;
 
   &.fixed-on-scroll {
     position: fixed;
@@ -25,6 +25,10 @@ nav.navbar {
         color: #ffffff;
       }
     }
+  }
+
+  &:not(.fixed-on-scroll) {
+    //transition: padding .4s, background-color .4s;
   }
 
 

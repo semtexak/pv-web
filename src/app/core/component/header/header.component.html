@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg" [ngClass]="{'fixed-on-scroll': fixedHeader, 'transparent': fixedHeader && !isOnTop}" #nav (window:scroll)="onWindowScroll($event)">
   <div class="container">
   <a class="navbar-brand" routerLink="/">
-    <!--<img [src]="fixedHeader && !isOnTop ? '../../../assets/images/logo-w.png' : '../../../assets/images/logo-c.png'" />-->
+    <img [src]="fixedHeader && !isOnTop ? '../../../assets/images/logo-w.png' : '../../../assets/images/logo-c.png'" />
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -10,7 +10,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/kontakt" routerLinkActive="active">Přijímání plateb</a>
+        <a class="nav-link" routerLink="/prijimani-plateb" routerLinkActive="active">Přijímání plateb</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/kontakt" routerLinkActive="active">Kontakt</a>
