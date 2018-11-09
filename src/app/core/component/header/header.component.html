@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg" [ngClass]="{'fixed-on-scroll': fixedHeader, 'transparent': fixedHeader && !isOnTop}" #nav (window:scroll)="onWindowScroll($event)">
   <div class="container">
   <a class="navbar-brand" routerLink="/">
-    <img [src]="fixedHeader && !isOnTop ? '../../../assets/images/logo-w.png' : '../../../assets/images/logo-c.png'" />
+    <!--<img [src]="fixedHeader && !isOnTop ? '../../../assets/images/logo-w.png' : '../../../assets/images/logo-c.png'" />-->
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -24,7 +24,7 @@
             {{user.name}}
           </a>
           <div class="dropdown-menu" pvDropdownMenu aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" routerLink="/">Můj účet</a>
+            <a class="dropdown-item" routerLink="/zakaznik">Můj účet</a>
             <a class="dropdown-item" routerLink="/uzivatel/zmena-hesla">Změna hesla</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" (click)="logout()">Odhlásit</a>

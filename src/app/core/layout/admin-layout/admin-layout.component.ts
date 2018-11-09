@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {LoaderComponent} from '../../component/loader/loader.component';
 
 @Component({
   selector: 'app-admin-layout',
@@ -6,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminLayoutComponent implements OnInit {
 
-  constructor() { }
+  public loader = LoaderComponent;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
