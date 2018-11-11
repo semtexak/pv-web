@@ -1,0 +1,42 @@
+@import "_variables.scss";
+@import "_mixin.scss";
+
+.sidebar {
+  position: fixed;
+  width: 250px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: $sidebar-background;
+
+  header {
+  }
+
+  .sidebar__content {
+    flex: 1;
+  }
+
+  .sidebar__customer {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sidebar__item {
+
+    a {
+      display: block;
+      padding: 12px 30px;
+    }
+
+    &:hover, &:active, &:focus, &.active {
+      background-color: #ffffff;
+    }
+  }
+
+  footer {
+  }
+}
+
+.sidebar--minimized {
+  width: 50px;
+}
