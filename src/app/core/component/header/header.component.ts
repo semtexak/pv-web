@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {LayoutService} from '../../../shared/service/layout.service';
 import {AuthenticationService} from '../../../shared/service/authentication.service';
 import {User} from '../../../shared/model/user';
@@ -11,6 +11,7 @@ import {AlertService} from '../../../shared/service/alert.service';
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
 
+  @Input() adminSection = false;
   @ViewChild('nav') nav: ElementRef;
   public user: User;
   public fixedHeader: boolean;
@@ -33,10 +34,12 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   onWindowScroll($event) {
-    const verticalOffset = window.pageYOffset
-      || document.documentElement.scrollTop
-      || document.body.scrollTop || 0;
-    this.isOnTop = verticalOffset >= this.scrollOffset;
+    if (this.fixedHeader) {
+      const verticalOffset = window.pageYOffset
+        || document.documentElement.scrollTop
+        || document.body.scrollTop || 0;
+      this.isOnTop = verticalOffset >= this.scrollOffset;
+    }
   }
 
   logout(): void {

@@ -9,12 +9,20 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/prijimani-plateb" routerLinkActive="active">Přijímání plateb</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/kontakt" routerLinkActive="active">Kontakt</a>
-      </li>
+      <ng-container *ngIf="!adminSection; else admin">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/prijimani-plateb" routerLinkActive="active">Přijímání plateb</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/kontakt" routerLinkActive="active">Kontakt</a>
+        </li>
+      </ng-container>
+      <ng-template #admin>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active">Zpět</a>
+        </li>
+      </ng-template>
+
       <li class="nav-item" *ngIf="!user; else loggedSection">
         <a class="nav-link" routerLink="/uzivatel/prihlaseni" routerLinkActive="active">Přihlášení</a>
       </li>
