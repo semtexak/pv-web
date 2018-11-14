@@ -31,13 +31,20 @@ export class SignInComponent {
           this.router.navigateByUrl('/');
         },
         error => {
+        console.log(error);
           if (error instanceof HttpErrorResponse) {
-            if (error.error.error_description.includes('disabled')) {
-              this.alertService.warning('Uživatel nebyl aktivován, nejprve proveďte aktivaci.');
-            } else if (error.error.error_description.includes('locked')) {
-              this.alertService.error('Uživatel byl zablokován.');
-            } else if (error.error.error_description.includes('credentials')) {
-              this.alertService.error('Špatná kombinace jména a hesla.');
+            if (!error.error.error_description) {
+              this.alertService.error('Vyskytla se neznámá chyba. Prosím, opakujte akci pozdějí.');
+            } else {
+              if (error.error.error_description.includes('disabled')) {
+                this.alertService.warning('Uživatel nebyl aktivován, nejprve proveďte aktivaci.');
+              } else if (error.error.error_description.includes('locked')) {
+                this.alertService.error('Uživatel byl zablokován.');
+              } else if (error.error.error_description.includes('credentials')) {
+                this.alertService.error('Špatná kombinace jména a hesla.');
+              } else {
+                this.alertService.error('Vyskytla se chyba.');
+              }
             }
           }
           console.log(error);
