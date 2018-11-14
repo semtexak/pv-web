@@ -25,6 +25,8 @@
     "foundation-sites": "^6.5.0-rc.4",
     "ng-http-loader": "^3.2.0",
     "ngx-cookie-service": "^2.0.0",
+    "npm": "^6.4.1",
+    "primeng": "^6.1.6",
     "rxjs": "^6.0.0",
     "zone.js": "~0.8.26"
   },

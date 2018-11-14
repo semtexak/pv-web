@@ -1,14 +1,26 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {ClientsComponent} from './page/clients/clients.component';
+import {SubscriptionsComponent} from './page/subscriptions/subscriptions.component';
+import {OrdersComponent} from './page/orders/orders.component';
+import {UsersComponent} from './page/users/users.component';
 
 const routes: Routes = [
   {
-    path: 'clients',
-    loadChildren: './client/client.module#ClientModule'
+    path: 'uzivatele',
+    component: UsersComponent
   },
   {
-    path: 'users',
-    loadChildren: './user/user.module#UserModule'
+    path: 'klienti',
+    component: ClientsComponent
+  },
+  {
+    path: 'predplatne',
+    component: SubscriptionsComponent
+  },
+  {
+    path: 'objednavky',
+    component: OrdersComponent
   }
 ];
 

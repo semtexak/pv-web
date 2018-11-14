@@ -1,9 +1,18 @@
 import { Injectable } from '@angular/core';
+import {Observable} from 'rxjs';
+import {HttpClient} from '../../../../node_modules/@angular/common/http';
+import {HttpService} from './http.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SubscriptionService {
+export class SubscriptionService extends HttpService {
 
-  constructor() { }
+  constructor(private http: HttpClient) {
+    super(http);
+  }
+
+  getSubscriptions(page: number, filter: string, orderBy: string): Observable<any> {
+    return this.http.get(`${this.API_URL}/subscription-service/subscriptions/all`);
+  }
 }

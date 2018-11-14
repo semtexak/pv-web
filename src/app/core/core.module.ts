@@ -17,6 +17,7 @@ import {UserService} from '../shared/service/user.service';
 import {NgHttpLoaderModule} from 'ng-http-loader';
 import {LoaderComponent} from './component/loader/loader.component';
 import {AlertService} from '../shared/service/alert.service';
+import {SubscriptionService} from '../shared/service/subscription.service';
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import {AlertService} from '../shared/service/alert.service';
   providers: [
     AuthenticationService,
     UserService,
+    SubscriptionService,
     AlertService,
     {
       provide: HTTP_INTERCEPTORS,

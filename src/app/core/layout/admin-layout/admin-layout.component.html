@@ -1,119 +1,142 @@
 <pv-header></pv-header>
 <ng-http-loader [debounceDelay]="500" [entryComponent]="loader"></ng-http-loader>
-<main>
-  <section class="sidebar">
-    <nav id="sidebar__nav">
-      <header>
-        <button class="navbar-btn" type="button">
-          <span class="flaticon-menu-2"></span>
-          <span class="item-text">Menu</span>
-        </button>
-      </header>
-      <div class="sidebar__content">
-        <ul class="sidebar__customer">
+
+<section class="sidebar">
+  <nav>
+    <header>
+      <button class="sidebar__menu-button" type="button">
+        <span class="fl flaticon-menu"></span>
+        <span class="item-text">Menu</span>
+      </button>
+    </header>
+    <div class="sidebar__content">
+      <div class="sidebar__customer">
+        <ul class="sidebar__nav">
           <li class="sidebar__item" routerLinkActive="active">
             <a routerLink="/zakaznik">
-              <span class="flaticon-home"></span>
+              <span class="fl flaticon-home"></span>
               <span class="item-text">Můj účet</span>
             </a>
           </li>
-          <li class="sidebar__item" routerLinkActive="active">
-            <a routerLink="/zakaznik/predplatne">
-              <span class="flaticon-credit-card"></span>
-              <span class="item-text">Předplatné</span>
+          <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown>
+            <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
+              <span class="fl flaticon-key-2"></span>
+              <span class="item-text">Služby</span>
             </a>
-          </li>
-          <li class="sidebar__item" routerLinkActive="active">
-            <a routerLink="/zakaznik/platby">
-              <span class="flaticon-bill"></span>
-              <span class="item-text">Platby</span>
-            </a>
-          </li>
-          <li class="sidebar__item" routerLinkActive="active">
-            <a routerLink="/zakaznik/napoveda">
-              <span class="flaticon-question"></span>
-              <span class="item-text">Nápověda</span>
-            </a>
-          </li>
-          <li class="sidebar__item" routerLinkActive="active">
-            <a class="cursor-pointer">
-              <span class="flaticon-key-2"></span>
-              <span class="item-text">Administrace</span>
-            </a>
-            <ul class="submenu collapse show" routerLinkActive="show">
-              <li>
-                <a routerLink="/admin/uzivatele" routerLinkActive="active">
-                  <span class="flaticon-avatar-1 icon-small"></span>
-                  <span class="item-text">Uživatelé</span>
-                </a>
-              </li>
-              <li>
-                <a routerLink="/admin/stranky" routerLinkActive="active">
-                  <span class="flaticon-internet icon-small"></span>
-                  <span class="item-text">Stránky</span>
-                </a>
-              </li>
-              <li>
-                <a routerLink="/admin/predplatne" routerLinkActive="active">
-                  <span class="flaticon-credit-card icon-small"></span>
+            <ul class="sidebar__dropdown-menu" routerLinkActive="show" pvDropdownMenu>
+              <li class="sidebar__item" routerLinkActive="active">
+                <a routerLink="/sluzby/predplatne">
+                  <span class="fl flaticon-credit-card"></span>
                   <span class="item-text">Předplatné</span>
                 </a>
               </li>
-              <li>
-                <a routerLink="/admin/platby" routerLinkActive="active">
-                  <span class="flaticon-wallet icon-small"></span>
-                  <span class="item-text">Transakce</span>
+            </ul>
+          </li>
+          <li class="sidebar__item" routerLinkActive="active">
+            <a routerLink="/zakaznik/platby">
+              <span class="fl flaticon-bill"></span>
+              <span class="item-text">Platby</span>
+            </a>
+          </li>
+          <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown>
+            <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
+              <span class="fl flaticon-key-2"></span>
+              <span class="item-text">Administrace</span>
+            </a>
+            <ul class="sidebar__dropdown-menu" routerLinkActive="show" [routerLinkActiveOptions]="{exact: true}" pvDropdownMenu>
+              <li class="sidebar__item" routerLinkActive="active">
+
+                <a routerLink="/admin/uzivatele">
+                  <span class="fl flaticon-avatar-1"></span>
+                  <span class="item-text">Uživatelé</span>
+                </a>
+              </li>
+              <li class="sidebar__item" routerLinkActive="active">
+                <a routerLink="/admin/stranky">
+                  <span class="fl flaticon-internet"></span>
+                  <span class="item-text">Stránky</span>
+                </a>
+              </li>
+              <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown>
+                <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
+                  <span class="fl flaticon-key-2"></span>
+                  <span class="item-text">Služby</span>
+                </a>
+                <ul class="sidebar__dropdown-menu" routerLinkActive="show" pvDropdownMenu>
+                  <li class="sidebar__item" routerLinkActive="active">
+                    <a routerLink="/admin/predplatne">
+                      <span class="fl flaticon-dashboard-1"></span>
+                      <span class="item-text">Předplatné</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="sidebar__item" routerLinkActive="active">
+                <a routerLink="/admin/platby">
+                  <span class="fl flaticon-wallet"></span>
+                  <span class="item-text">Objednávky</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="sidebar__item" routerLinkActive="active">
+            <a routerLink="/zakaznik/napoveda">
+              <span class="fl flaticon-question"></span>
+              <span class="item-text">Nápověda</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar__applications">
+        <h3><span class="fl flaticon-internet"></span> Moje stránky</h3>
+        <ul class="sidebar__nav">
+          <li class="sidebar__item" routerLinkActive="active">
+            <a routerLink="/klient/registrace">
+              <span class="fl flaticon-plus"></span>
+              <span class="item-text">Přidat</span>
+            </a>
+          </li>
+          <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown>
+            <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
+              <span class="fl flaticon-key-2"></span>
+              <span class="item-text">Biztweet</span>
+            </a>
+            <ul class="sidebar__dropdown-menu" routerLinkActive="show" pvDropdownMenu>
+              <li class="sidebar__item" routerLinkActive="active">
+                <a routerLink="/klient/0123456789">
+                  <span class="fl flaticon-dashboard-1"></span>
+                  <span class="item-text">Přehled</span>
+                </a>
+              </li>
+              <!--<li class="sidebar__item" routerLinkActive="active">-->
+                <!--<a routerLink="/klient/0123456789/objednavky">-->
+                  <!--<span class="fl flaticon-wallet"></span>-->
+                  <!--<span class="item-text">Objednávky</span>-->
+                <!--</a>-->
+              <!--</li>-->
+              <li class="sidebar__item" routerLinkActive="active">
+                <a routerLink="/klient/0123456789/nastaveni">
+                  <span class="fl flaticon-gear-1"></span>
+                  <span class="item-text">Nastavení</span>
                 </a>
               </li>
             </ul>
           </li>
         </ul>
-
-        <!--<div class="sidebar__applications">-->
-          <!--<h3 class="list-heading">-->
-            <!--<span class="flaticon-internet"></span> Moje stránky-->
-          <!--</h3>-->
-          <!--<ul class="sidebar collapse show">-->
-            <!--<li routerLinkActive="active">-->
-              <!--<a class="cursor-pointer" routerLink="/klient/registrace">-->
-                <!--<span class="flaticon-plus"></span>-->
-                <!--<span class="item-text">Přidat</span>-->
-              <!--</a>-->
-            <!--</li>-->
-            <!--<li routerLinkActive="active">-->
-              <!--<a class="cursor-pointer">-->
-                <!--<span class="flaticon-up-arrow"></span>-->
-                <!--<span class="item-text">Biztweet</span>-->
-              <!--</a>-->
-              <!--<ul class="submenu collapse" routerLinkActive="show" id="client7035123467890">-->
-                <!--<li>-->
-                  <!--<a routerLinkActive="active" href="/klient/7035123467890/prehled">-->
-                    <!--<span class="flaticon-dashboard-1 icon-small"></span>-->
-                    <!--<span class="item-text">Přehled</span>-->
-                  <!--</a>-->
-                <!--</li>-->
-                <!--<li><a routerLinkActive="active" href="/klient/7035123467890/platby">-->
-                  <!--<span class="flaticon-wallet icon-small"></span>-->
-                  <!--<span class="item-text">Platby</span>-->
-                <!--</a></li>-->
-                <!--<li><a routerLinkActive="active" href="/klient/7035123467890/zakladni-nastaveni">-->
-                  <!--<span class="flaticon-gear-1 icon-small"></span>-->
-                  <!--<span class="item-text">Základní nastavení</span>-->
-                <!--</a></li>-->
-              <!--</ul>-->
-            <!--</li>-->
-          <!--</ul>-->
-        <!--</div>-->
       </div>
-      <footer>
-        <div class="sidebar__phone">
-          <span class="flaticon-call"></span> +420 606 606 606
-        </div>
-        <div class="sidebar__email">
-          <span class="flaticon-email"></span> info@payvont.cz
-        </div>
-      </footer>
-    </nav>
-  </section>
+    </div>
+    <footer>
+      <div class="sidebar__phone">
+        <span class="fl flaticon-call"></span> +420 606 606 606
+      </div>
+      <div class="sidebar__email">
+        <span class="fl flaticon-email"></span> info@payvont.cz
+      </div>
+    </footer>
+  </nav>
+</section>
+
+<main>
   <router-outlet></router-outlet>
 </main>

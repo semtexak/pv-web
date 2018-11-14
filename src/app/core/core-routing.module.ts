@@ -14,7 +14,13 @@ const routes: Routes = [
   {
     path: 'zakaznik',
     component: AdminLayoutComponent,
-    loadChildren: '../modules/admin/admin.module#AdminModule',
+    loadChildren: '../modules/user/user.module#UserModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'klient',
+    component: AdminLayoutComponent,
+    loadChildren: '../modules/client/client.module#ClientModule',
     canActivate: [AuthGuard]
   },
   {
