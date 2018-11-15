@@ -54,6 +54,11 @@ p {
   @include rem-fallback(font-size, 16);
 }
 
+.btn-sign-in {
+  box-shadow: 0 0 0 2px #ffffff;
+}
+
+
 
 section {
   &.login {

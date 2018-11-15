@@ -1,5 +1,12 @@
 <div class="container-fluid mb-5 mt-3">
-<p-table [value]="users" [columns]="columns" [rows]="page.size" [totalRecords]="page.totalElements" [paginator]="true">
+<p-table
+  [value]="page.content"
+  [columns]="cols"
+  [rows]="page.size"
+  [totalRecords]="page.totalElements"
+  [lazy]="true"
+  (onLazyLoad)="loadLazy($event)"
+  [paginator]="true">
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th *ngFor="let col of columns" [pSortableColumn]="col.field">
@@ -11,16 +18,22 @@
       </th>
     </tr>
     <tr>
-      <!--<th *ngFor="let col of columns" [ngSwitch]="col.field">-->
-        <!--&lt;!&ndash;<input *ngSwitchCase="'id'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">&ndash;&gt;-->
-        <!--<input *ngSwitchCase="'id'" type="text" pInputText placeholder="Vyhledat dle ID" class="form-control has-icon" (keyup.enter)="filter($event.target.value, col.field)">-->
-        <!--<input *ngSwitchCase="'appId'" type="text" pInputText placeholder="Vyhledat dle aplikace" class="form-control has-icon" (keyup.enter)="filter($event.target.value, col.field)">-->
+      <th *ngFor="let col of columns" [ngSwitch]="col.field">
+        <!--<input *ngSwitchCase="'id'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">-->
+        <input *ngSwitchCase="'id'" type="text" pInputText placeholder="Vyhledat dle ID" class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
+        <input *ngSwitchCase="'email'" type="text" pInputText placeholder="Vyhledat e-mailu" class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
         <!--<input *ngSwitchCase="'price'" type="text" pInputText placeholder="Vyhledat dle ceny" class="form-control has-icon" (keyup.enter)="filter($event.target.value, col.field)">-->
-        <!--&lt;!&ndash;<button type="submit"><span class="input-search flaticon-magnifying-glass"></span></button>&ndash;&gt;-->
-        <!--&lt;!&ndash;<p-dropdown *ngSwitchCase="'status'" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>&ndash;&gt;-->
-        <!--&lt;!&ndash;<ng-select *ngSwitchCase="'automaticRenew'" [(ngModel)]="automaticRenew" [items]="automaticRenewOptions" bindLabel="name" bindValue="id" (change)="filterSelect($event, 'automaticRenew')"></ng-select>&ndash;&gt;-->
-        <!--&lt;!&ndash;<ng-select *ngSwitchCase="'status'" [(ngModel)]="status" [items]="statusOptions" bindLabel="name" bindValue="id" (change)="filterSelect($event, 'status')"></ng-select>&ndash;&gt;-->
-      <!--</th>-->
+        <!--<button type="submit"><span class="input-search flaticon-magnifying-glass"></span></button>-->
+        <!--<p-dropdown *ngSwitchCase="'status'" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>-->
+        <!--<ng-select *ngSwitchCase="'automaticRenew'" [(ngModel)]="automaticRenew" [items]="automaticRenewOptions" bindLabel="name" bindValue="id" (change)="filterSelect($event, 'automaticRenew')"></ng-select>-->
+        <!--<ng-select *ngSwitchCase="'status'" [(ngModel)]="status" [items]="statusOptions" bindLabel="name" bindValue="id" (change)="filterSelect($event, 'status')"></ng-select>-->
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-row>
+    <tr>
+      <td>{{row.id}}</td>
+      <td>{{row.email}}</td>
     </tr>
   </ng-template>
 </p-table>

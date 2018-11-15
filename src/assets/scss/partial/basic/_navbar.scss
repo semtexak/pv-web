@@ -41,6 +41,45 @@ nav.navbar {
         text-transform: uppercase;
         padding: 13px 20px;
         font-weight: 600;
+
+        &.notification {
+          position: relative;
+          padding: 9px 12px;
+
+          span {
+            &:before {
+              margin: 0;
+              @include rem-fallback(font-size, 19);
+            }
+          }
+
+          .notification__badge {
+            transition: transform .2s;
+            content:attr(data-count);
+            position:absolute;
+            top: 5px;
+            right: 3px;
+            font-size:.7em;
+            font-family: "Open Sans", sans-serif;
+            background:$danger;
+            color:white;
+            width:18px;
+            height:18px;
+            text-align:center;
+            line-height:18px;
+            border-radius:50%;
+
+            &.notification--empty {
+              transform: scale(0)!important;
+            }
+            &.notification--new {
+              transform: scale(1);
+            }
+          }
+
+
+
+        }
       }
     }
   }

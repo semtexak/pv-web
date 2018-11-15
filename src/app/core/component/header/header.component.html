@@ -1,45 +1,66 @@
-<nav class="navbar navbar-expand-lg" [ngClass]="{'fixed-on-scroll': fixedHeader, 'transparent': fixedHeader && !isOnTop}" #nav (window:scroll)="onWindowScroll($event)">
-  <div class="container">
-  <a class="navbar-brand" routerLink="/">
-    <!--<img [src]="fixedHeader && !isOnTop ? '../../../assets/images/logo-w.png' : '../../../assets/images/logo-c.png'" />-->
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-lg"
+     [ngClass]="{'fixed-on-scroll': fixedHeader, 'transparent': fixedHeader && !isOnTop}" #nav
+     (window:scroll)="onWindowScroll($event)">
+  <div [ngClass]="{'container': !adminSection, 'container-fluid': adminSection}">
+    <a class="navbar-brand" routerLink="/">
+      <!--<img [src]="fixedHeader && !isOnTop ? '../../../assets/images/logo-w.png' : '../../../assets/images/logo-c.png'"/>-->
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
-      <ng-container *ngIf="!adminSection; else admin">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/prijimani-plateb" routerLinkActive="active">Přijímání plateb</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/kontakt" routerLinkActive="active">Kontakt</a>
-        </li>
-      </ng-container>
-      <ng-template #admin>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="active">Zpět</a>
-        </li>
-      </ng-template>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <ng-container *ngIf="!adminSection; else admin">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/prijimani-plateb" routerLinkActive="active">Přijímání plateb</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/kontakt" routerLinkActive="active">Kontakt</a>
+          </li>
+        </ng-container>
+        <ng-template #admin>
+          <!--<li class="nav-item">-->
+          <!--<a class="nav-link" routerLink="/" routerLinkActive="active">Zpět</a>-->
+          <!--</li>-->
+        </ng-template>
 
-      <li class="nav-item" *ngIf="!user; else loggedSection">
-        <a class="nav-link" routerLink="/uzivatel/prihlaseni" routerLinkActive="active">Přihlášení</a>
-      </li>
-      <ng-template #loggedSection>
-        <li class="nav-item dropdown user-section" pvDropdown>
-          <a class="nav-link dropdown-toggle" pvDropdownToggle href="#" role="button">
-            {{user.name}}
-          </a>
-          <div class="dropdown-menu" pvDropdownMenu aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" routerLink="/zakaznik">Můj účet</a>
-            <a class="dropdown-item" routerLink="/uzivatel/zmena-hesla">Změna hesla</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" (click)="logout()">Odhlásit</a>
-          </div>
+        <li class="nav-item" *ngIf="!user; else loggedSection">
+          <a class="nav-link btn-sign-in" routerLink="/uzivatel/prihlaseni" routerLinkActive="active">Přihlášení</a>
         </li>
-      </ng-template>
-    </ul>
-  </div>
+        <ng-template #loggedSection>
+          <li class="nav-item" pvDropdown>
+            <a class="nav-link notification" pvDropdownToggle *ngIf="adminSection">
+              <span class="flaticon-bell-2"></span>
+              <span class="notification__badge" [ngClass]="{'notification--empty': !notifications || (notifications && notifications.length === 0), 'notification--new': shake}">{{notifications.length}}</span>
+            </a>
+            <div class="dropdown-menu" pvDropdownMenu aria-labelledby="navbarDropdown">
+              <ng-container *ngIf="notifications && notifications.length > 0; else notificationsEmpty">
+                <ul>
+                  <li *ngFor="let notification of notifications">
+                    {{notification}}
+                  </li>
+                </ul>
+              </ng-container>
+              <ng-template #notificationsEmpty>
+                Empty.
+              </ng-template>
+            </div>
+          </li>
+          <li class="nav-item user-section" pvDropdown>
+            <a class="nav-link dropdown-toggle" pvDropdownToggle href="#" role="button">
+              {{user.name}}
+            </a>
+            <div class="dropdown-menu" pvDropdownMenu aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" routerLink="/zakaznik">Můj účet</a>
+              <a class="dropdown-item" routerLink="/uzivatel/zmena-hesla">Změna hesla</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" (click)="logout()">Odhlásit</a>
+            </div>
+          </li>
+        </ng-template>
+      </ul>
+    </div>
   </div>
 </nav>

@@ -41,4 +41,8 @@ export class UserService extends HttpService {
       return this.http.put(`${this.API_URL}/user-service/user/change-password`, JSON.stringify(form), this.jsonHttpOptions);
     }
   }
+
+  getUsers(page: number, filter: string, orderBy: string): Observable<any> {
+    return this.http.get(`${this.API_URL}/user-service/users/all`);
+  }
 }

@@ -7,6 +7,7 @@ import {Subject} from 'rxjs';
 export class DropdownDirective implements OnInit {
 
   @HostBinding('class.show') isOpen;
+  @HostBinding('class.dropdown') isDropdown = true;
   public status: Subject<boolean> = new Subject();
 
   ngOnInit() {

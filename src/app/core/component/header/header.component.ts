@@ -4,6 +4,7 @@ import {AuthenticationService} from '../../../shared/service/authentication.serv
 import {User} from '../../../shared/model/user';
 import {Router} from '@angular/router';
 import {AlertService} from '../../../shared/service/alert.service';
+import {NotificationService} from '../../../shared/service/notification.service';
 
 @Component({
   selector: 'pv-header',
@@ -14,23 +15,39 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   @Input() adminSection = false;
   @ViewChild('nav') nav: ElementRef;
   public user: User;
+  public shake = false;
+  public notifications: string[] = [];
   public fixedHeader: boolean;
   public isOnTop = false;
   private scrollOffset = null;
 
   constructor(private authenticationService: AuthenticationService,
+              private notificationService: NotificationService,
               private alertService: AlertService,
               private router: Router,
               private layoutService: LayoutService) {
     this.layoutService.fixedHeader.subscribe((status: boolean) => this.fixedHeader = status);
+    this.notificationService.notifications.subscribe(notifications => this.notifications = notifications);
   }
 
   ngOnInit() {
-    this.authenticationService.loggedUser.subscribe((user: User) => this.user = user);
+    this.authenticationService.loggedUser.subscribe((user: User) => {
+      this.user = user;
+      // if (user && this.adminSection) {
+      //   this.notificationService.connect();
+      // } else {
+      //   this.notificationService.disconnect();
+      // }
+    });
   }
 
   ngAfterViewInit() {
     this.scrollOffset = this.nav.nativeElement.offsetHeight;
+  }
+
+  shakeTest() {
+    this.notificationService.sendTest();
+    // setTimeout(() => { this.shake = false; }, 1000);
   }
 
   onWindowScroll($event) {
