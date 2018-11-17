@@ -18,6 +18,7 @@ export class NotificationService {
   }
 
   connect() {
+
     const socket = new SockJS('http://localhost:10000/notifications');
     // const socket = new SockJS('http://localhost:8765/notification-service/notifications');
     this.stompClient = Stomp.over(socket);
