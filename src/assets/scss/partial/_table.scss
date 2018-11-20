@@ -1,0 +1,16 @@
+@import "_variables.scss";
+@import "_mixin.scss";
+
+.table-filter {
+  background-color: #ffffff;
+
+  th {
+    @include rem-fallback(font-size, 13);
+    text-transform: uppercase;
+    color: #000000;
+  }
+
+  th, td {
+    padding: 1rem;
+  }
+}
