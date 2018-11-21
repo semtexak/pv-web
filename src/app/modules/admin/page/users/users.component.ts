@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../../../shared/service/user.service';
 import {TableService} from '../../service/table.service';
-import {IUser} from '../../../../shared/model/i-user';
-import {IPage} from '../../../../shared/model/i-page';
 import {LazyLoadEvent} from '../../../../../../node_modules/primeng/api';
+import {IPageUser} from '../../../../shared/model/page/i-page-user';
+import {IUser, Role} from '../../../../shared/model/i-user';
 
 @Component({
   selector: 'pv-users',
@@ -11,7 +11,8 @@ import {LazyLoadEvent} from '../../../../../../node_modules/primeng/api';
 })
 export class UsersComponent implements OnInit {
 
-  page: IPage = {
+  Role: typeof Role = Role;
+  page: IPageUser = {
     content: [],
     page: 0,
     empty: true,
@@ -20,14 +21,16 @@ export class UsersComponent implements OnInit {
     totalPages: 0
   };
   cols = [
-    {field: 'id', header: 'ID'},
+    {field: 'id', header: 'id'},
     {field: 'email', header: 'E-mail'},
+    {field: 'active', header: 'Stav'},
+    {field: 'roles', header: 'Oprávnění'},
+    {field: 'createdAt', header: 'Registrace'},
   ];
   filter: Map<string, any> = new Map();
+  sort: string = null;
 
-  constructor(private userService: UserService,
-              private tableService: TableService) {
-    // this.tableService.page$.subscribe((page: IPage) => this.page = page);
+  constructor(private userService: UserService) {
   }
 
   ngOnInit() {
@@ -36,14 +39,18 @@ export class UsersComponent implements OnInit {
   loadLazy(event: LazyLoadEvent) {
     console.log(event);
 
+    if (event.sortField) {
+      this.sort = `${event.sortField},${event.sortOrder > 0 ? 'asc' : 'desc'}`;
+    }
+
     const page = event ? (event.rows > 0 ? event.first / event.rows : 0) : this.page.page;
-    this.callService(page, '', '');
+    this.callService(page, this.prepareQuery(), this.sort);
   }
 
   private callService(page: number, filter: string, orderBy: string) {
-    this.userService.getUsers(page, filter, orderBy).subscribe((ipage: IPage) => {
-      console.log(ipage);
+    this.userService.getUsers(page, filter, orderBy).subscribe((ipage: IPageUser) => {
       this.page = ipage;
+      console.log(this.page);
     });
   }
 
@@ -53,5 +60,18 @@ export class UsersComponent implements OnInit {
     } else {
       this.filter.delete(field);
     }
+
+    console.log(this.filter);
+    this.callService(0, this.prepareQuery(), '');
+  }
+
+  prepareQuery(): string {
+    const queryArray = [];
+    this.filter.forEach((k, v) => queryArray.push(`${v}=${k}`));
+    return queryArray.join('&');
+  }
+
+  hasRole(user: IUser, role: Role): boolean {
+    return user.roles.includes(role);
   }
 }

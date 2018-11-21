@@ -4,13 +4,20 @@ $font-family: 'Open Sans', sans-serif;
 $headings-color: #414141;
 
 $primary: #02A1BF;
-$primary-color: $primary;
 $primary-dark-color: #01748A;
 $selection-color: $primary;
 
 $overlay-background: #005565;
 
 $section-primary-text-color: #ffffff;
+
+/* Bootstrap colors */
+$primary-color: $primary;
+$success-color: #61B329;
+$danger-color: #dc143c;
+$info-color: #ffffff;
+$warning-color: #ffc107;
+
 
 /* Button */
 $button-primary-gradient-start-color: #01748a;

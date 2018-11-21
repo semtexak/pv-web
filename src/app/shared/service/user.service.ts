@@ -4,6 +4,9 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ISingUpForm} from '../model/i-sing-up-form';
 import {IChangePasswordForm} from '../model/i-change-password-form';
+import {map} from 'rxjs/operators';
+import {IPage} from '../model/i-page';
+import {IPageUser} from '../model/page/i-page-user';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +46,6 @@ export class UserService extends HttpService {
   }
 
   getUsers(page: number, filter: string, orderBy: string): Observable<any> {
-    return this.http.get(`${this.API_URL}/user-service/users/all`);
+    return this.http.get(`${this.API_URL}/user-service/users/all?page=${page}${filter ? '&' + filter : ''}${orderBy ? '&sort=' + orderBy : ''}`);
   }
 }

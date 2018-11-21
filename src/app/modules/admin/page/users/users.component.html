@@ -6,6 +6,8 @@
       [columns]="cols"
       [rows]="page.size"
       [totalRecords]="page.totalElements"
+      sortField="email"
+      [sortOrder]="1"
       [lazy]="true"
       (onLazyLoad)="loadLazy($event)"
       [paginator]="true">
@@ -22,8 +24,10 @@
         <tr>
           <th *ngFor="let col of columns" [ngSwitch]="col.field">
             <!--<input *ngSwitchCase="'id'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">-->
-            <input *ngSwitchCase="'id'" type="text" pInputText placeholder="Vyhledat dle ID" class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
-            <input *ngSwitchCase="'email'" type="text" pInputText placeholder="Vyhledat e-mailu" class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
+            <input *ngSwitchCase="'id'" type="text" pInputText placeholder="Vyhledat dle ID"
+                   class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
+            <input *ngSwitchCase="'email'" type="text" pInputText placeholder="Vyhledat e-mailu"
+                   class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
             <!--<input *ngSwitchCase="'price'" type="text" pInputText placeholder="Vyhledat dle ceny" class="form-control has-icon" (keyup.enter)="filter($event.target.value, col.field)">-->
             <!--<button type="submit"><span class="input-search flaticon-magnifying-glass"></span></button>-->
             <!--<p-dropdown *ngSwitchCase="'status'" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>-->
@@ -35,7 +39,27 @@
       <ng-template pTemplate="body" let-row>
         <tr>
           <td>{{row.id}}</td>
-          <td>{{row.email}}</td>
+          <td><strong>{{row.email}}</strong></td>
+          <td>
+          <span class="status" [ngSwitch]="row.active" [ngClass]="[row.active ? 'success' : 'error']">
+            <span *ngSwitchCase="true">Aktivní</span>
+            <span *ngSwitchCase="false">Neaktivní</span>
+          </span>
+          </td>
+          <td>
+          <!--<span class="status" *ngFor="let role of row.roles" [ngClass]="{'error': role.name === 'ADMIN'}">-->
+            <!--<span [ngSwitch]="role.name">-->
+            <!--<span *ngSwitchCase="'USER'">U</span>-->
+            <!--<span *ngSwitchCase="'CLIENT'">K</span>-->
+            <!--<span *ngSwitchCase="'ADMIN'">A</span>-->
+            <!--</span>-->
+          <!--</span>-->
+            <span class="status" [ngClass]="{'disabled': !hasRole(row, Role.USER)}">Uživatel</span>
+            <span class="status" [ngClass]="{'disabled': !hasRole(row, Role.CLIENT)}">Klient</span>
+            <span class="status error" [ngClass]="{'disabled': !hasRole(row, Role.ADMIN)}">Administrátor</span>
+          </td>
+          <td>{{row.createdAt|date: 'dd. MM. yyyy HH:mm:ss'}}</td>
+          <td>{{row.createdAt}}</td>
         </tr>
       </ng-template>
     </p-table>

@@ -13,4 +13,77 @@
   th, td {
     padding: 1rem;
   }
+
+  .ui-sortable-column {
+    cursor: pointer;
+    position: relative;
+
+    .ui-table-sort-icon {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+
+      .ui-sortable-column-icon {
+        padding: 0;
+        display: inline-block;
+        font-family: Flaticon;
+        font-style: normal;
+        @include rem-fallback(font-size, 10);
+        line-height: 1;
+      }
+      .pi-sort-down:before {
+        content: "\f116";
+      }
+      .pi-sort-up:before {
+        content: "\f117";
+      }
+    }
+  }
+
+  th.action {
+    text-align: center;
+  }
+
+  .status {
+    padding: 3px 8px;
+    text-align: center;
+    font-weight: 600;
+    @include rem-fallback(font-size, 11);
+    border: 2px solid;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    & + .status {
+      margin-left: 2px;
+    }
+
+    &.success {
+      color: $success-color;
+
+      &:hover {
+        color: $success-color;
+      }
+    }
+
+    &.warning {
+      color: $warning-color;
+
+      &:hover {
+        color: $warning-color;
+      }
+    }
+
+    &.error {
+      color: $danger-color;
+
+      &:hover {
+        color: $danger-color;
+      }
+    }
+
+    &.disabled {
+      color: rgba(0,0,0,0.2);
+    }
+  }
 }
