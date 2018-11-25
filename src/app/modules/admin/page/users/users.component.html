@@ -1,6 +1,7 @@
 <div class="container-fluid mb-5 mt-3">
-  <div class="table-resonsive">
+  <div class="table-responsive">
     <p-table
+      #table
       [tableStyleClass]="'table table-filter table-bordered table-hover table-striped'"
       [value]="page.content"
       [columns]="cols"
@@ -23,23 +24,19 @@
         </tr>
         <tr>
           <th *ngFor="let col of columns" [ngSwitch]="col.field">
-            <!--<input *ngSwitchCase="'id'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">-->
-            <input *ngSwitchCase="'id'" type="text" pInputText placeholder="Vyhledat dle ID"
+            <input *ngSwitchCase="'email'" type="text" pInputText placeholder="Vyhledat e-mail"
                    class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
-            <input *ngSwitchCase="'email'" type="text" pInputText placeholder="Vyhledat e-mailu"
+            <input *ngSwitchCase="'details.lastName'" type="text" pInputText placeholder="Vyhledat příjmení"
                    class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
-            <!--<input *ngSwitchCase="'price'" type="text" pInputText placeholder="Vyhledat dle ceny" class="form-control has-icon" (keyup.enter)="filter($event.target.value, col.field)">-->
-            <!--<button type="submit"><span class="input-search flaticon-magnifying-glass"></span></button>-->
-            <!--<p-dropdown *ngSwitchCase="'status'" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>-->
-            <!--<ng-select *ngSwitchCase="'automaticRenew'" [(ngModel)]="automaticRenew" [items]="automaticRenewOptions" bindLabel="name" bindValue="id" (change)="filterSelect($event, 'automaticRenew')"></ng-select>-->
-            <!--<ng-select *ngSwitchCase="'status'" [(ngModel)]="status" [items]="statusOptions" bindLabel="name" bindValue="id" (change)="filterSelect($event, 'status')"></ng-select>-->
+            <ng-select *ngSwitchCase="'active'" [items]="filterOptions.active" bindLabel="name" bindValue="value"  [(ngModel)]="active" (change)="addFilter($event, col.field)"></ng-select>
+            <ng-select *ngSwitchCase="'roles'" [items]="filterOptions.roles" bindLabel="name" bindValue="value" [(ngModel)]="roles" (change)="addFilter($event, col.field)"></ng-select>
           </th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-row>
         <tr>
-          <td>{{row.id}}</td>
           <td><strong>{{row.email}}</strong></td>
+          <td>{{row.details?.firstName}} {{row.details?.lastName}}</td>
           <td>
           <span class="status" [ngSwitch]="row.active" [ngClass]="[row.active ? 'success' : 'error']">
             <span *ngSwitchCase="true">Aktivní</span>
@@ -59,7 +56,12 @@
             <span class="status error" [ngClass]="{'disabled': !hasRole(row, Role.ADMIN)}">Administrátor</span>
           </td>
           <td>{{row.createdAt|date: 'dd. MM. yyyy HH:mm:ss'}}</td>
-          <td>{{row.createdAt}}</td>
+          <td class="action-column">
+            <ul class="action-list">
+              <li><a class="btn-xs"><span class="flaticon-pencil"></span></a></li>
+              <li><a class="btn-xs"><span class="flaticon-garbage"></span></a></li>
+            </ul>
+          </td>
         </tr>
       </ng-template>
     </p-table>

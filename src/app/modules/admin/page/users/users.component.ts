@@ -21,16 +21,33 @@ export class UsersComponent implements OnInit {
     totalPages: 0
   };
   cols = [
-    {field: 'id', header: 'id'},
     {field: 'email', header: 'E-mail'},
+    {field: 'details.lastName', header: 'Jméno'},
     {field: 'active', header: 'Stav'},
     {field: 'roles', header: 'Oprávnění'},
     {field: 'createdAt', header: 'Registrace'},
   ];
   filter: Map<string, any> = new Map();
+  roles = null;
+  active = null;
   sort: string = null;
+  filterOptions = {
+    roles: [],
+    active: []
+  };
 
   constructor(private userService: UserService) {
+    this.filterOptions.roles = [
+      {name: 'Vše', value: null},
+      {name: 'Uživatel', value: 'USER'},
+      {name: 'Klient', value: 'CLIENT'},
+      {name: 'Administrátor', value: 'ADMIN'}
+    ];
+    this.filterOptions.active = [
+      {name: 'Vše', value: null},
+      {name: 'Aktivní', value: true},
+      {name: 'Neaktivní', value: false}
+    ];
   }
 
   ngOnInit() {
@@ -56,12 +73,20 @@ export class UsersComponent implements OnInit {
 
   addFilter(value: string, field: string) {
     if (value) {
-      this.filter.set(field, value);
+      if (typeof(value) === 'object') {
+        value = value['value'];
+        if (value !== null) {
+          this.filter.set(field, value);
+        } else {
+          this.filter.delete(field);
+        }
+      } else {
+        this.filter.set(field, value);
+      }
     } else {
       this.filter.delete(field);
     }
 
-    console.log(this.filter);
     this.callService(0, this.prepareQuery(), '');
   }
 

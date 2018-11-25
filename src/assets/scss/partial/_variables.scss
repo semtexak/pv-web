@@ -27,6 +27,11 @@ $button-primary-gradient-end-color: #01adce;
 $dropdown-item-hover-background: #ebf5ff;
 $dropdown-item-hover-color: #212529;
 
+/* Ng select */
+$select-option-dropdown-background: #ffffff;
+$select-option-selected-background-color: #ebf5ff;
+$select-option-selected-color: #000000;
+
 /* Social */
 $facebook-background: #3b5998;
 $facebook-color: #ffffff;
@@ -36,6 +41,7 @@ $google-color: #ffffff;
 /* Inputs */
 $input-border-color: #eeeeee;
 $input-border-hover-color: #dddddd;
+$input-border-focus-color: $primary;
 $input-error-color: #dc143c;
 $input-error-border-color: #f594a7;
 

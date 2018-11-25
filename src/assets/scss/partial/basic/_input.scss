@@ -19,7 +19,7 @@ input.form-control {
   }
 
   &:focus {
-    border-color: #02a1bf;
+    border-color: $input-border-focus-color;
   }
 }
 
