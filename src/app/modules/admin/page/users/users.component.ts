@@ -3,7 +3,7 @@ import {UserService} from '../../../../shared/service/user.service';
 import {TableService} from '../../service/table.service';
 import {LazyLoadEvent} from '../../../../../../node_modules/primeng/api';
 import {IPageUser} from '../../../../shared/model/page/i-page-user';
-import {IUser, Role} from '../../../../shared/model/i-user';
+import {IUser, Role} from '../../../../shared/model/base/i-user';
 
 @Component({
   selector: 'pv-users',
@@ -24,22 +24,25 @@ export class UsersComponent implements OnInit {
     {field: 'email', header: 'E-mail'},
     {field: 'details.lastName', header: 'Jméno'},
     {field: 'active', header: 'Stav'},
+    {field: 'banned', header: 'Přístup'},
     {field: 'roles', header: 'Oprávnění'},
     {field: 'createdAt', header: 'Registrace'},
   ];
   filter: Map<string, any> = new Map();
   roles = null;
   active = null;
+  banned = null;
   sort: string = null;
   filterOptions = {
     roles: [],
-    active: []
+    active: [],
+    banned: []
   };
 
   constructor(private userService: UserService) {
     this.filterOptions.roles = [
       {name: 'Vše', value: null},
-      {name: 'Uživatel', value: 'USER'},
+      // {name: 'Uživatel', value: 'USER'},
       {name: 'Klient', value: 'CLIENT'},
       {name: 'Administrátor', value: 'ADMIN'}
     ];
@@ -48,14 +51,17 @@ export class UsersComponent implements OnInit {
       {name: 'Aktivní', value: true},
       {name: 'Neaktivní', value: false}
     ];
+    this.filterOptions.banned = [
+      {name: 'Vše', value: null},
+      {name: 'Povolen', value: false},
+      {name: 'Zakázán', value: true}
+    ];
   }
 
   ngOnInit() {
   }
 
   loadLazy(event: LazyLoadEvent) {
-    console.log(event);
-
     if (event.sortField) {
       this.sort = `${event.sortField},${event.sortOrder > 0 ? 'asc' : 'desc'}`;
     }

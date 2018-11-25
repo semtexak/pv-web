@@ -1,12 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpService} from './http.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ISingUpForm} from '../model/i-sing-up-form';
 import {IChangePasswordForm} from '../model/i-change-password-form';
-import {map} from 'rxjs/operators';
-import {IPage} from '../model/i-page';
-import {IPageUser} from '../model/page/i-page-user';
 
 @Injectable({
   providedIn: 'root'

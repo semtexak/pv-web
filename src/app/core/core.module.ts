@@ -18,6 +18,7 @@ import {NgHttpLoaderModule} from 'ng-http-loader';
 import {LoaderComponent} from './component/loader/loader.component';
 import {AlertService} from '../shared/service/alert.service';
 import {SubscriptionService} from '../shared/service/subscription.service';
+import {ClientService} from '../shared/service/client.service';
 
 @NgModule({
   imports: [
@@ -46,6 +47,7 @@ import {SubscriptionService} from '../shared/service/subscription.service';
   providers: [
     AuthenticationService,
     UserService,
+    ClientService,
     SubscriptionService,
     AlertService,
     {

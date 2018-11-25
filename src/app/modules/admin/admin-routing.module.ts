@@ -15,6 +15,10 @@ const routes: Routes = [
     component: ClientsComponent
   },
   {
+    path: 'stranky',
+    component: ClientsComponent
+  },
+  {
     path: 'predplatne',
     component: SubscriptionsComponent
   },

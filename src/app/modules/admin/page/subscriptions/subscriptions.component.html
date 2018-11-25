@@ -1,57 +1,67 @@
 <div class="container-fluid mb-5 mt-3">
-  <p-table #dt [columns]="cols" [value]="subscriptions" [lazy]="true" (onLazyLoad)="loadLazy($event)" [paginator]="true"
-           [rows]="subscriptionData.size" [totalRecords]="subscriptionData.totalElements" sortField="status" [sortOrder]="-1">
-    <ng-template pTemplate="header" let-columns>
-      <tr>
-        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-          {{col.header}}
-          <p-sortIcon [field]="col.field"></p-sortIcon>
-        </th>
-        <th class="action">
-          Akce
-        </th>
-      </tr>
-      <tr>
-        <th *ngFor="let col of columns" [ngSwitch]="col.field">
-          <!--<input *ngSwitchCase="'id'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">-->
-          <input *ngSwitchCase="'id'" type="text" pInputText placeholder="Vyhledat dle ID" class="form-control has-icon" (keyup.enter)="filter($event.target.value, col.field)">
-          <input *ngSwitchCase="'appId'" type="text" pInputText placeholder="Vyhledat dle aplikace" class="form-control has-icon" (keyup.enter)="filter($event.target.value, col.field)">
-          <input *ngSwitchCase="'price'" type="text" pInputText placeholder="Vyhledat dle ceny" class="form-control has-icon" (keyup.enter)="filter($event.target.value, col.field)">
-          <!--<button type="submit"><span class="input-search flaticon-magnifying-glass"></span></button>-->
-          <!--<p-dropdown *ngSwitchCase="'status'" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>-->
-          <!--<ng-select *ngSwitchCase="'automaticRenew'" [(ngModel)]="automaticRenew" [items]="automaticRenewOptions" bindLabel="name" bindValue="id" (change)="filterSelect($event, 'automaticRenew')"></ng-select>-->
-          <!--<ng-select *ngSwitchCase="'status'" [(ngModel)]="status" [items]="statusOptions" bindLabel="name" bindValue="id" (change)="filterSelect($event, 'status')"></ng-select>-->
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-row>
-      <tr>
-        <td>{{row.appId}}</td>
-        <td>{{row.client?.name}} ({{row.client?.appId}})</td>
-        <td>{{row.account?.name}} {{row.account?.surname}}  ({{row.account?.email}})</td>
-        <td>{{row.period?.validFrom|date:'dd. MM. yyyy'}} - {{row.period?.validTo|date:'dd. MM. yyyy'}}</td>
-        <!--<td>{{row.appId}}</td>-->
-        <!--<td>{{row.price}} {{row.currency}}</td>-->
-        <td>
-          <div class="" [ngSwitch]="row.automaticRenew" [ngClass]="[row.automaticRenew ? 'success' : 'error']">
+  <div class="table-responsive">
+    <p-table
+      #table
+      [tableStyleClass]="'table table-filter table-bordered table-hover table-striped'"
+      [value]="page.content"
+      [columns]="cols"
+      [rows]="page.size"
+      [totalRecords]="page.totalElements"
+      sortField="createdAt"
+      [sortOrder]="1"
+      [lazy]="true"
+      (onLazyLoad)="loadLazy($event)"
+      [paginator]="true">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+          <th class="action">
+            Akce
+          </th>
+        </tr>
+        <tr>
+          <th *ngFor="let col of columns" [ngSwitch]="col.field">
+            <input *ngSwitchCase="'domain'" type="text" pInputText placeholder="Vyhledat doménu"
+                   class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
+            <input *ngSwitchCase="'name'" type="text" pInputText placeholder="Vyhledat název"
+                   class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
+            <ng-select *ngSwitchCase="'automaticRenew'" [items]="filterOptions.automaticRenew" bindLabel="name" bindValue="value"  [(ngModel)]="active" (change)="addFilter($event, col.field)"></ng-select>
+            <ng-select *ngSwitchCase="'status'" [items]="filterOptions.status" bindLabel="name" bindValue="value"  [(ngModel)]="banned" (change)="addFilter($event, col.field)"></ng-select>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-row>
+        <tr>
+          <td><strong>{{row.hash}}</strong></td>
+          <td>{{row.appId}}</td>
+          <td>
+          <span class="status" [ngSwitch]="row.automaticRenew" [ngClass]="[row.automaticRenew ? 'success' : 'error']">
             <span *ngSwitchCase="true">Ano</span>
             <span *ngSwitchCase="false">Ne</span>
-          </div>
-        </td>
-        <td>
-          <span class="status" [ngSwitch]="row.status" [ngClass]="[row.status ? 'success' : 'error']">
-            <span *ngSwitchCase="2">Aktivní</span>
-            <span *ngSwitchCase="1">Pozastaveno</span>
-            <span *ngSwitchCase="0">Neaktivní</span>
           </span>
-        </td>
-        <td>
-          <ul class="action-list">
-            <li><a (click)="deleteSubscription(row)" class="btn-xs"><span class="flaticon-garbage"></span></a></li>
-          </ul>
-        </td>
-        <!--<td>{{row.created|date:'dd. MM. yyyy'}}</td>-->
-      </tr>
-    </ng-template>
-  </p-table>
+          </td>
+          <td>
+          <span class="status" [ngSwitch]="row.status" [ngClass]="[row.status ? 'success' : 'error']">
+            <span *ngSwitchCase="'NOT_ACTIVE'">Vytvořeno</span>
+            <span *ngSwitchCase="false">Povolen</span>
+          </span>
+          </td>
+          <td>
+
+          </td>
+          <td>{{row.createdAt|date: 'dd. MM. yyyy HH:mm:ss'}}</td>
+          <td class="action-column">
+            <ul class="action-list">
+              <li><a class="btn-xs"><span class="flaticon-pencil"></span></a></li>
+              <li><a class="btn-xs"><span class="flaticon-garbage"></span></a></li>
+            </ul>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
 </div>

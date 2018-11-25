@@ -1,167 +1,93 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SubscriptionService} from '../../../../shared/service/subscription.service';
 import {LazyLoadEvent} from 'primeng/api';
 import {ISubscription} from '../../../../shared/model/i-subscription';
+import {IPageSubscription} from '../../../../shared/model/page/i-page-subscription';
+import {IPageClient} from '../../../../shared/model/page/i-page-client';
 
 @Component({
   selector: 'pv-subscriptions',
   templateUrl: './subscriptions.component.html'
 })
-export class SubscriptionsComponent implements OnInit {
+export class SubscriptionsComponent {
 
   public subscriptions: ISubscription[];
-  public subscriptionData = {
+  page: IPageSubscription = {
+    content: [],
     page: 0,
+    empty: true,
     size: 0,
     totalElements: 0,
     totalPages: 0
   };
-  public cols = [];
-  automaticRenewOptions = [
-    {
-      id: -1, name: 'Vše'
-    },
-    {
-      id: 1, name: 'Ano'
-    },
-    {
-      id: 0, name: 'Ne'
-    }
-  ];
-  statusOptions = [
-    {
-      id: -1, name: 'Vše'
-    },
-    {
-      id: 1, name: 'Aktivní'
-    },
-    {
-      id: 0, name: 'Neaktivní'
-    }
-  ];
-  filtersURL = '';
-  orderBy = null;
-  private filters = [];
-  automaticRenew = -1;
-  status = -1;
+  cols = [];
+  filter: Map<string, any> = new Map();
+  sort = null;
+  filterOptions = {
+    automaticRenew: [],
+    status: []
+  };
 
   constructor(private subscriptionService: SubscriptionService) {
-  }
-
-  ngOnInit() {
     this.cols = [
-      {field: 'id', header: 'ID'},
+      {field: 'hash', header: 'ID'},
       {field: 'plan.appId', header: 'Stránka'},
       {field: 'account.email', header: 'E-mail'},
-      {field: 'period', header: 'Perioda'},
+      {field: 'lastSubscription.validTo', header: 'Perioda'},
       {field: 'automaticRenew', header: 'Obnovování'},
       {field: 'status', header: 'Stav'},
     ];
-
+    this.filterOptions.automaticRenew = [
+      {name: 'Vše', value: null},
+      {name: 'Ano', value: true},
+      {name: 'Ne', value: false}
+    ];
+    this.filterOptions.status = [
+      {name: 'Vše', value: null},
+      {name: 'Aktivní', value: true},
+      {name: 'Neaktivní', value: false}
+    ];
   }
 
   loadLazy(event: LazyLoadEvent) {
-    console.log(event);
+    if (event.sortField) {
+      this.sort = `${event.sortField},${event.sortOrder > 0 ? 'asc' : 'desc'}`;
+    }
 
-    if (event) {
-      this.orderBy = event.sortField;
+    const page = event ? (event.rows > 0 ? event.first / event.rows : 0) : this.page.page;
+    this.callService(page, this.prepareQuery(), this.sort);
+  }
 
-      if (this.orderBy) {
-        if (event.sortOrder > 0) {
-          this.orderBy += ',asc';
+  private callService(page: number, filter: string, orderBy: string) {
+    this.subscriptionService.getSubscriptions(page, filter, orderBy).subscribe((ipage: IPageSubscription) => {
+      this.page = ipage;
+      console.log(this.page.content);
+    });
+  }
+
+  addFilter(value: string, field: string) {
+    if (value) {
+      if (typeof(value) === 'object') {
+        value = value['value'];
+        if (value !== null) {
+          this.filter.set(field, value);
         } else {
-          this.orderBy += ',desc';
+          this.filter.delete(field);
         }
       } else {
-        this.orderBy = '';
+        this.filter.set(field, value);
       }
-    }
-    console.log(this.orderBy);
-
-
-    const page = event ? (event.rows > 0 ? event.first / event.rows : 0) : this.subscriptionData.page;
-    this.callService(page, this.filtersURL !== '' ? this.filtersURL : null, this.orderBy);
-  }
-
-  filter(val: any, field: any = null) {
-    if (field) {
-      val = this.prepareVal(val, field);
-
-      this.transformFilters(false);
-
-      const filterField = this.filters.find(x => x[0] === field);
-      if (filterField) {
-        filterField[1] = val;
-      } else {
-        this.filters.push([field, val]);
-      }
-
-      this.transformFilters();
-      this.callService(0, this.filtersURL);
-    }
-  }
-
-  private callService(page: number = 0, filter: string = null, orderBy: string = null) {
-    this.subscriptionService.getSubscriptions(page, filter, orderBy).subscribe(
-      (subscriptionsPage) => {
-        console.log(subscriptionsPage);
-        this.subscriptionData.size = subscriptionsPage.size;
-        this.subscriptionData.totalElements = subscriptionsPage.totalElements;
-        this.subscriptions = subscriptionsPage.content;
-      }
-    );
-  }
-
-  private transformFilters(toURL = true) {
-    if (toURL) {
-      this.filtersURL = '';
-      const tmp = [];
-      for (const part of this.filters) {
-        tmp.push(part.join('='));
-      }
-      this.filtersURL = tmp.join('&');
     } else {
-      this.filters = [];
-      const parts = this.filtersURL.split('&');
-      for (const part of parts) {
-        this.filters.push(part.split('='));
-      }
-    }
-  }
-
-  filterSelect(event: any, field: any = null) {
-    if (field) {
-      if (event) {
-        this.filter(event.id, field);
-      } else {
-        this.filterClearSelect(event, field);
-      }
-    }
-  }
-
-  filterClearSelect(event: any, field: any = null) {
-    this.automaticRenew = -1;
-    this.filter(this.automaticRenew, field);
-  }
-
-  private prepareVal(val: any, field: any) {
-    if (field === 'automaticRenew' && val === -1) {
-      return undefined;
+      this.filter.delete(field);
     }
 
-    return val;
+    this.callService(0, this.prepareQuery(), '');
   }
 
-  deleteSubscription(subscription) {
-    console.log(subscription.id);
-    // this.subscriptionService.deleteSubscription(subscription.id).then(
-    //   (data) => {
-    //     this.loadLazy(null);
-    //     console.log(data);
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   }
-    // );
+  prepareQuery(): string {
+    const queryArray = [];
+    this.filter.forEach((k, v) => queryArray.push(`${v}=${k}`));
+    return queryArray.join('&');
   }
+
 }

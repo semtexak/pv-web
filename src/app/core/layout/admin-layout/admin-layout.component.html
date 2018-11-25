@@ -51,11 +51,25 @@
                   <span class="item-text">Uživatelé</span>
                 </a>
               </li>
-              <li class="sidebar__item" routerLinkActive="active">
-                <a routerLink="/admin/stranky">
-                  <span class="fl flaticon-internet"></span>
-                  <span class="item-text">Stránky</span>
+              <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown>
+                <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
+                  <span class="fl flaticon-key-2"></span>
+                  <span class="item-text">Klienti</span>
                 </a>
+                <ul class="sidebar__dropdown-menu" routerLinkActive="show" pvDropdownMenu>
+                  <li class="sidebar__item" routerLinkActive="active">
+                    <a routerLink="/admin/klienti">
+                      <span class="fl flaticon-dashboard-1"></span>
+                      <span class="item-text">Přehled</span>
+                    </a>
+                  </li>
+                  <li class="sidebar__item" routerLinkActive="active">
+                    <a routerLink="/admin/stranky">
+                      <span class="fl flaticon-internet"></span>
+                      <span class="item-text">Stránky</span>
+                    </a>
+                  </li>
+                </ul>
               </li>
               <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown>
                 <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
@@ -72,7 +86,7 @@
                 </ul>
               </li>
               <li class="sidebar__item" routerLinkActive="active">
-                <a routerLink="/admin/platby">
+                <a routerLink="/admin/objednavky">
                   <span class="fl flaticon-wallet"></span>
                   <span class="item-text">Objednávky</span>
                 </a>

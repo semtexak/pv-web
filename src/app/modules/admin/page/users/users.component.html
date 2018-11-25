@@ -29,6 +29,7 @@
             <input *ngSwitchCase="'details.lastName'" type="text" pInputText placeholder="Vyhledat příjmení"
                    class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
             <ng-select *ngSwitchCase="'active'" [items]="filterOptions.active" bindLabel="name" bindValue="value"  [(ngModel)]="active" (change)="addFilter($event, col.field)"></ng-select>
+            <ng-select *ngSwitchCase="'banned'" [items]="filterOptions.banned" bindLabel="name" bindValue="value"  [(ngModel)]="banned" (change)="addFilter($event, col.field)"></ng-select>
             <ng-select *ngSwitchCase="'roles'" [items]="filterOptions.roles" bindLabel="name" bindValue="value" [(ngModel)]="roles" (change)="addFilter($event, col.field)"></ng-select>
           </th>
         </tr>
@@ -44,6 +45,12 @@
           </span>
           </td>
           <td>
+          <span class="status" [ngSwitch]="row.banned" [ngClass]="[!row.banned ? 'success' : 'error']">
+            <span *ngSwitchCase="true">Zakázán</span>
+            <span *ngSwitchCase="false">Povolen</span>
+          </span>
+          </td>
+          <td>
           <!--<span class="status" *ngFor="let role of row.roles" [ngClass]="{'error': role.name === 'ADMIN'}">-->
             <!--<span [ngSwitch]="role.name">-->
             <!--<span *ngSwitchCase="'USER'">U</span>-->
@@ -51,7 +58,7 @@
             <!--<span *ngSwitchCase="'ADMIN'">A</span>-->
             <!--</span>-->
           <!--</span>-->
-            <span class="status" [ngClass]="{'disabled': !hasRole(row, Role.USER)}">Uživatel</span>
+            <!--<span class="status" [ngClass]="{'disabled': !hasRole(row, Role.USER)}">Uživatel</span>-->
             <span class="status" [ngClass]="{'disabled': !hasRole(row, Role.CLIENT)}">Klient</span>
             <span class="status error" [ngClass]="{'disabled': !hasRole(row, Role.ADMIN)}">Administrátor</span>
           </td>
