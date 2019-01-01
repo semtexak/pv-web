@@ -33,19 +33,34 @@
           <li class="nav-item" pvDropdown>
             <a class="nav-link notification" pvDropdownToggle *ngIf="adminSection">
               <span class="flaticon-bell-2"></span>
-              <span class="notification__badge" [ngClass]="{'notification--empty': !notifications || (notifications && notifications.length === 0), 'notification--new': shake}">{{notifications.length}}</span>
+              <span class="notification__badge"
+                    [ngClass]="{'notification--empty': !notifications || (notifications && notifications.length === 0), 'notification--new': shake}">{{notifications.length}}</span>
             </a>
-            <div class="dropdown-menu" pvDropdownMenu aria-labelledby="navbarDropdown">
-              <ng-container *ngIf="notifications && notifications.length > 0; else notificationsEmpty">
-                <ul>
-                  <li *ngFor="let notification of notifications">
-                    {{notification}}
-                  </li>
-                </ul>
-              </ng-container>
-              <ng-template #notificationsEmpty>
-                Empty.
-              </ng-template>
+            <div class="dropdown-menu notification__list" pvDropdownMenu aria-labelledby="navbarDropdown">
+              <div class="notification__header row">
+                <div class="col-6">
+                  Notifications ({{notifications.length}})
+                </div>
+                <div class="col-6 text-right">A</div>
+              </div>
+              <div class="notification__content row">
+                <ng-container *ngIf="notifications && notifications.length > 0; else notificationsEmpty">
+                  <ul>
+                    <li *ngFor="let notification of notifications">
+                      {{notification.message}}
+                    </li>
+                  </ul>
+                </ng-container>
+                <ng-template #notificationsEmpty>
+                  Empty.
+                </ng-template>
+              </div>
+
+              <div class="notification__footer row">
+                <div class="col-12 text-center">
+                <a href=""><span class=""></span> Zobrazit vše</a>
+                </div>
+              </div>
             </div>
           </li>
           <li class="nav-item user-section" pvDropdown>
