@@ -1,0 +1,79 @@
+<div class="container-fluid mb-5 mt-3">
+  <div class="table-responsive">
+    <p-table
+      #table
+      [tableStyleClass]="'table table-filter table-bordered table-hover table-striped'"
+      [value]="page.content"
+      [columns]="cols"
+      [rows]="page.size"
+      [totalRecords]="page.totalElements"
+      sortField="domain"
+      [sortOrder]="1"
+      [lazy]="true"
+      (onLazyLoad)="loadLazy($event)"
+      [paginator]="true">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+          <th class="action">
+            Akce
+          </th>
+        </tr>
+        <tr>
+          <th *ngFor="let col of columns" [ngSwitch]="col.field">
+            <input *ngSwitchCase="'domain'" type="text" pInputText placeholder="Vyhledat doménu"
+                   class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
+            <input *ngSwitchCase="'appId'" type="text" pInputText placeholder="Vyhledat App ID"
+                   class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
+            <input *ngSwitchCase="'name'" type="text" pInputText placeholder="Vyhledat název"
+                   class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
+            <input *ngSwitchCase="'client.details.company'" type="text" pInputText placeholder="Vyhledat klienta"
+                   class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
+            <ng-select *ngSwitchCase="'active'" [items]="filterOptions.active" bindLabel="name" bindValue="value"
+                       [(ngModel)]="active" (change)="addFilter($event, col.field)"></ng-select>
+            <ng-select *ngSwitchCase="'banned'" [items]="filterOptions.banned" bindLabel="name" bindValue="value"
+                       [(ngModel)]="banned" (change)="addFilter($event, col.field)"></ng-select>
+            <ng-select *ngSwitchCase="'roles'" [items]="filterOptions.roles" bindLabel="name" bindValue="value"
+                       [(ngModel)]="roles" (change)="addFilter($event, col.field)"></ng-select>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-row>
+        <tr>
+          <td><strong>{{row.domain}}</strong></td>
+          <td>{{row.appId}}</td>
+          <td>
+          <span class="status" [ngSwitch]="row.active" [ngClass]="[row.active ? 'success' : 'error']">
+            <span *ngSwitchCase="true">Aktivní</span>
+            <span *ngSwitchCase="false">Neaktivní</span>
+          </span>
+          </td>
+          <td>{{row.client?.details?.company}}</td>
+          <td>
+            <span class="status info" [ngClass]="{'disabled': !hasService(row, Service.DONATION)}" title="Donatio">Donation</span>
+            <span class="status info" [ngClass]="{'disabled': !hasService(row, Service.SUBSCRIPTION)}" title="Předplatné">Subscription</span>
+            <!--<span class="status info disabled" title="Placený obsah">O</span>-->
+          </td>
+          <td>{{row.createdAt|date: 'dd. MM. yyyy HH:mm:ss'}}</td>
+          <td class="action-column">
+            <ul class="action-list">
+              <li><a class="btn-xs"><span class="flaticon-pencil"></span></a></li>
+              <li><a class="btn-xs"><span class="flaticon-garbage"></span></a></li>
+            </ul>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="columns.length">
+            No records found.
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+</div>
