@@ -24,9 +24,11 @@
         </tr>
         <tr>
           <th *ngFor="let col of columns" [ngSwitch]="col.field">
-            <input *ngSwitchCase="'domain'" type="text" pInputText placeholder="Vyhledat doménu"
+            <input *ngSwitchCase="'hash'" type="text" pInputText placeholder="Vyhledat hash"
                    class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
-            <input *ngSwitchCase="'name'" type="text" pInputText placeholder="Vyhledat název"
+            <input *ngSwitchCase="'appId'" type="text" pInputText placeholder="Vyhledat app id"
+                   class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
+            <input *ngSwitchCase="'user'" type="text" pInputText placeholder="Vyhledat uživatele"
                    class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
             <ng-select *ngSwitchCase="'automaticRenew'" [items]="filterOptions.automaticRenew" bindLabel="name" bindValue="value"  [(ngModel)]="active" (change)="addFilter($event, col.field)"></ng-select>
             <ng-select *ngSwitchCase="'status'" [items]="filterOptions.status" bindLabel="name" bindValue="value"  [(ngModel)]="banned" (change)="addFilter($event, col.field)"></ng-select>
@@ -36,7 +38,9 @@
       <ng-template pTemplate="body" let-row>
         <tr>
           <td><strong>{{row.hash}}</strong></td>
-          <td>{{row.appId}}</td>
+          <td><a routerLink="/admin/klienti/{{row.appId}}">{{row.appId}}</a></td>
+          <td><a routerLink="/admin/uzivatele/{{row.user}}">{{row.user}}</a></td>
+          <td>{{row.lastSubscription?.validTo|date: 'dd. MM. yyyy HH:mm:ss'}}</td>
           <td>
           <span class="status" [ngSwitch]="row.automaticRenew" [ngClass]="[row.automaticRenew ? 'success' : 'error']">
             <span *ngSwitchCase="true">Ano</span>
@@ -44,15 +48,13 @@
           </span>
           </td>
           <td>
-          <span class="status" [ngSwitch]="row.status" [ngClass]="[row.status ? 'success' : 'error']">
-            <span *ngSwitchCase="'NOT_ACTIVE'">Vytvořeno</span>
-            <span *ngSwitchCase="false">Povolen</span>
-          </span>
+            <span class="status" [ngSwitch]="row.status" [ngClass]="{'success': row.status === 'ACTIVE', 'error': row.status === 'NOT_ACTIVE'}">
+              <span *ngSwitchCase="'NEW'">Nový</span>
+              <span *ngSwitchCase="'NOT_ACTIVE'">Neaktivní</span>
+              <span *ngSwitchCase="'ACTIVE'">Aktivní</span>
+            </span>
           </td>
-          <td>
-
-          </td>
-          <td>{{row.createdAt|date: 'dd. MM. yyyy HH:mm:ss'}}</td>
+          <!--<td>{{row.createdAt|date: 'dd. MM. yyyy HH:mm:ss'}}</td>-->
           <td class="action-column">
             <ul class="action-list">
               <li><a class="btn-xs"><span class="flaticon-pencil"></span></a></li>

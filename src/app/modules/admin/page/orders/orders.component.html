@@ -1,3 +1,62 @@
-<p>
-  orders works!
-</p>
+<div class="container-fluid mb-5 mt-3">
+  <div class="table-responsive">
+    <p-table
+      #table
+      [tableStyleClass]="'table table-filter table-bordered table-hover table-striped'"
+      [value]="page.content"
+      [columns]="cols"
+      [rows]="page.size"
+      [totalRecords]="page.totalElements"
+      sortField="createdAt"
+      [sortOrder]="1"
+      [lazy]="true"
+      (onLazyLoad)="loadLazy($event)"
+      [paginator]="true">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+          <th class="action">
+            Akce
+          </th>
+        </tr>
+        <tr>
+          <th *ngFor="let col of columns" [ngSwitch]="col.field">
+            <input *ngSwitchCase="'hash'" type="text" pInputText placeholder="Vyhledat hash"
+                   class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
+            <input *ngSwitchCase="'appId'" type="text" pInputText placeholder="Vyhledat app id"
+                   class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
+            <input *ngSwitchCase="'user'" type="text" pInputText placeholder="Vyhledat uživatele"
+                   class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
+            <ng-select *ngSwitchCase="'automaticRenew'" [items]="filterOptions.automaticRenew" bindLabel="name" bindValue="value"  [(ngModel)]="active" (change)="addFilter($event, col.field)"></ng-select>
+            <ng-select *ngSwitchCase="'status'" [items]="filterOptions.status" bindLabel="name" bindValue="value"  [(ngModel)]="banned" (change)="addFilter($event, col.field)"></ng-select>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-row>
+        <tr>
+          <td><strong>{{row.hash}}</strong></td>
+          <td>{{row.orderData?.clientCompany}}</td>
+          <td>{{row.price?.amount|price:row.price.currency}}</td>
+          <td>
+            <span class="status" [ngSwitch]="row.status" [ngClass]="{'success': row.status === 'ACTIVE', 'error': row.status === 'NOT_ACTIVE'}">
+              <span *ngSwitchCase="'NEW'">Nový</span>
+              <span *ngSwitchCase="'NOT_ACTIVE'">Neaktivní</span>
+              <span *ngSwitchCase="'ACTIVE'">Aktivní</span>
+            </span>
+          </td>
+          <!--<td>{{row.createdAt|date: 'dd. MM. yyyy HH:mm:ss'}}</td>-->
+          <td class="action-column">
+            <ul class="action-list">
+              <li><a class="btn-xs"><span class="flaticon-pencil"></span></a></li>
+              <li><a class="btn-xs"><span class="flaticon-garbage"></span></a></li>
+            </ul>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+</div>

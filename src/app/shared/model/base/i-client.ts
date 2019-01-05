@@ -1,11 +1,15 @@
 export interface IClient {
 
-  appId: string;
-  domain: string;
-  name: string;
-  active: boolean;
+  id: number;
+  details: IClientDetails;
   createdAt: number;
 
+}
+
+export interface IClientDetails {
+  company: string;
+  dic: string;
+  ico: number;
 }
 
 export enum Role {

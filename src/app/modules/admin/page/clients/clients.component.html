@@ -7,11 +7,12 @@
       [columns]="cols"
       [rows]="page.size"
       [totalRecords]="page.totalElements"
-      sortField="domain"
-      [sortOrder]="1"
+      sortField="createdAt"
+      [sortOrder]="-1"
       [lazy]="true"
       (onLazyLoad)="loadLazy($event)"
-      [paginator]="true">
+      [paginator]="true"
+      dataKey="id">
       <ng-template pTemplate="header" let-columns>
         <tr>
           <th *ngFor="let col of columns" [pSortableColumn]="col.field">
@@ -24,9 +25,11 @@
         </tr>
         <tr>
           <th *ngFor="let col of columns" [ngSwitch]="col.field">
-            <input *ngSwitchCase="'domain'" type="text" pInputText placeholder="Vyhledat doménu"
+            <input *ngSwitchCase="'details.company'" type="text" pInputText placeholder="Vyhledat doménu"
                    class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
-            <input *ngSwitchCase="'name'" type="text" pInputText placeholder="Vyhledat název"
+            <input *ngSwitchCase="'details.contactPerson.lastName'" type="text" pInputText placeholder="Vyhledat příjmení"
+                   class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
+            <input *ngSwitchCase="'details.contactPerson.email'" type="text" pInputText placeholder="Vyhledat e-mail"
                    class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
             <ng-select *ngSwitchCase="'active'" [items]="filterOptions.active" bindLabel="name" bindValue="value"  [(ngModel)]="active" (change)="addFilter($event, col.field)"></ng-select>
             <ng-select *ngSwitchCase="'banned'" [items]="filterOptions.banned" bindLabel="name" bindValue="value"  [(ngModel)]="banned" (change)="addFilter($event, col.field)"></ng-select>
@@ -34,31 +37,62 @@
           </th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-row>
-        <tr>
-          <td><strong>{{row.domain}}</strong></td>
-          <td>{{row.appId}}</td>
-          <td>
-          <span class="status" [ngSwitch]="row.active" [ngClass]="[row.active ? 'success' : 'error']">
-            <span *ngSwitchCase="true">Aktivní</span>
-            <span *ngSwitchCase="false">Neaktivní</span>
-          </span>
-          </td>
-          <td>
-          <span class="status" [ngSwitch]="row.banned" [ngClass]="[!row.banned ? 'success' : 'error']">
-            <span *ngSwitchCase="true">Zakázán</span>
-            <span *ngSwitchCase="false">Povolen</span>
-          </span>
-          </td>
-          <td>
-
-          </td>
+      <ng-template pTemplate="body" let-row let-expanded="expanded" let-columns="columns">
+        <tr [ngClass]="{'expanded': expanded}" [pRowToggler]="row">
+          <td><strong [title]="row.details ? row.details.company +(row.details.dic ? ' (DIČ: ' +row.details.dic + ')' : '') +(row.details.ico ? ' (IČO: ' +row.details.ico + ')' : ''): ''">{{row.details?.company}}</strong></td>
+          <td><span *ngIf="row.details?.contactPerson">{{row.details.contactPerson.firstName}} {{row.details.contactPerson.lastName}}</span></td>
+          <td><span *ngIf="row.details?.contactPerson">{{row.details.contactPerson.email}}</span></td>
+          <td>{{row.applications.length}}</td>
+          <td><a routerLink="/admin/uzivatele/{{row.user}}">{{row.user}}</a></td>
           <td>{{row.createdAt|date: 'dd. MM. yyyy HH:mm:ss'}}</td>
           <td class="action-column">
             <ul class="action-list">
               <li><a class="btn-xs"><span class="flaticon-pencil"></span></a></li>
               <li><a class="btn-xs"><span class="flaticon-garbage"></span></a></li>
             </ul>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="rowexpansion" let-row let-columns="columns">
+        <tr>
+          <td [attr.colspan]="columns.length + 1">
+            <table class="table table-filter table-bordered table-hover table-striped">
+              <thead>
+              <tr>
+                <th>Doména</th>
+                <th>App ID</th>
+                <th>Stav</th>
+                <th>Služby</th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let application of row.applications">
+                  <td><strong>{{application.domain}}</strong></td>
+                  <td>{{application.appId}}</td>
+                  <td>
+                    <span class="status" [ngSwitch]="application.active" [ngClass]="[application.active ? 'success' : 'error']">
+                      <span *ngSwitchCase="true">Aktivní</span>
+                      <span *ngSwitchCase="false">Neaktivní</span>
+                    </span>
+                  </td>
+                  <td>
+                    <span class="status info" *ngFor="let service of application.configurations" title="Donatio">
+                      <ng-container [ngSwitch]="service.type">
+                        <ng-container *ngSwitchCase="Service.SUBSCRIPTION">Předplatné</ng-container>
+                        <ng-container *ngSwitchCase="Service.DONATION">Donation</ng-container>
+                      </ng-container>
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="columns.length">
+            No records found.
           </td>
         </tr>
       </ng-template>

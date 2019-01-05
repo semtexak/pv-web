@@ -31,9 +31,9 @@ export class SubscriptionsComponent {
   constructor(private subscriptionService: SubscriptionService) {
     this.cols = [
       {field: 'hash', header: 'ID'},
-      {field: 'plan.appId', header: 'Stránka'},
-      {field: 'account.email', header: 'E-mail'},
-      {field: 'lastSubscription.validTo', header: 'Perioda'},
+      {field: 'appId', header: 'Stránka'},
+      {field: 'user', header: 'Uživatel'},
+      {field: 'lastSubscription.validTo', header: 'Platnost do'},
       {field: 'automaticRenew', header: 'Obnovování'},
       {field: 'status', header: 'Stav'},
     ];
@@ -44,8 +44,10 @@ export class SubscriptionsComponent {
     ];
     this.filterOptions.status = [
       {name: 'Vše', value: null},
-      {name: 'Aktivní', value: true},
-      {name: 'Neaktivní', value: false}
+      {name: 'Nový', value: 0},
+      {name: 'Neaktivní', value: 1},
+      {name: 'Pozastaveno', value: 2},
+      {name: 'Aktivní', value: 3},
     ];
   }
 

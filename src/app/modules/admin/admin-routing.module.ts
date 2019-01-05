@@ -4,6 +4,8 @@ import {ClientsComponent} from './page/clients/clients.component';
 import {SubscriptionsComponent} from './page/subscriptions/subscriptions.component';
 import {OrdersComponent} from './page/orders/orders.component';
 import {UsersComponent} from './page/users/users.component';
+import {ApplicationsComponent} from './page/applications/applications.component';
+import {DonationsComponent} from './page/donations/donations.component';
 
 const routes: Routes = [
   {
@@ -16,11 +18,20 @@ const routes: Routes = [
   },
   {
     path: 'stranky',
-    component: ClientsComponent
+    component: ApplicationsComponent
   },
   {
-    path: 'predplatne',
-    component: SubscriptionsComponent
+    path: 'sluzby',
+    children: [
+      {
+        path: 'predplatne',
+        component: SubscriptionsComponent
+      },
+      {
+        path: 'dary',
+        component: DonationsComponent
+      }
+    ]
   },
   {
     path: 'objednavky',

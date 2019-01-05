@@ -5,6 +5,7 @@ import {User} from '../../../shared/model/user';
 import {Router} from '@angular/router';
 import {AlertService} from '../../../shared/service/alert.service';
 import {NotificationService} from '../../../shared/service/notification.service';
+import {INotification} from '../../../shared/model/base/i-notification';
 
 @Component({
   selector: 'pv-header',
@@ -16,7 +17,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   @ViewChild('nav') nav: ElementRef;
   public user: User;
   public shake = false;
-  public notifications: string[] = [];
+  public notifications: INotification[] = [];
+  public notificationsPreview: INotification[] = [];
   public fixedHeader: boolean;
   public isOnTop = false;
   private scrollOffset = null;
@@ -27,17 +29,20 @@ export class HeaderComponent implements OnInit, AfterViewInit {
               private router: Router,
               private layoutService: LayoutService) {
     this.layoutService.fixedHeader.subscribe((status: boolean) => this.fixedHeader = status);
-    this.notificationService.notifications.subscribe(notifications => this.notifications = notifications);
+    this.notificationService.notifications.subscribe(notifications => {
+      this.notifications = notifications;
+      this.notificationsPreview = notifications.slice(0, 10);
+    });
   }
 
   ngOnInit() {
     this.authenticationService.loggedUser.subscribe((user: User) => {
       this.user = user;
-      // if (user && this.adminSection) {
-      //   this.notificationService.connect();
-      // } else {
-      //   this.notificationService.disconnect();
-      // }
+      if (user && this.adminSection) {
+        this.notificationService.connect();
+      } else {
+        this.notificationService.disconnect();
+      }
     });
   }
 

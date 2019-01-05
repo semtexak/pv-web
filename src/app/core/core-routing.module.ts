@@ -32,7 +32,7 @@ const routes: Routes = [
   {
     path: 'plugin',
     component: PluginLayoutComponent,
-    loadChildren: '../modules/admin/admin.module#AdminModule'
+    loadChildren: '../modules/plugin/plugin.module#PluginModule'
   }
 ];
 

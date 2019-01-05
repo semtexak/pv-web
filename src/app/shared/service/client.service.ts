@@ -15,4 +15,8 @@ export class ClientService extends HttpService {
   getClients(page: number, filter: string, orderBy: string): Observable<any> {
     return this.http.get(`${this.API_URL}/client-service/clients/all?page=${page}${filter ? '&' + filter : ''}${orderBy ? '&sort=' + orderBy : ''}`);
   }
+
+  getApplications(page: number, filter: string, orderBy: string): Observable<any> {
+    return this.http.get(`${this.API_URL}/client-service/applications/all?page=${page}${filter ? '&' + filter : ''}${orderBy ? '&sort=' + orderBy : ''}`);
+  }
 }

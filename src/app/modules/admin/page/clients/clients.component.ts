@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Role} from '../../../../shared/model/base/i-user';
 import {LazyLoadEvent} from 'primeng/api';
 import {ClientService} from '../../../../shared/service/client.service';
 import {IPageClient} from '../../../../shared/model/page/i-page-client';
+import {Service} from '../../../../shared/model/base/i-application';
 
 @Component({
   selector: 'pv-clients',
@@ -10,7 +10,7 @@ import {IPageClient} from '../../../../shared/model/page/i-page-client';
 })
 export class ClientsComponent implements OnInit {
 
-  Role: typeof Role = Role;
+  Service: typeof Service = Service;
   page: IPageClient = {
     content: [],
     page: 0,
@@ -20,9 +20,12 @@ export class ClientsComponent implements OnInit {
     totalPages: 0
   };
   cols = [
-    {field: 'domain', header: 'Doména'},
-    {field: 'appId', header: 'APP ID'},
-    {field: 'active', header: 'Stav'},
+    {field: 'details.company', header: 'Subjekt'},
+    {field: 'details.contactPerson.lastName', header: 'Kontaktní osoba'},
+    {field: 'details.contactPerson.email', header: 'Kontaktní email'},
+    {field: 'details.applications', header: 'Počet stránek'},
+    {field: 'user', header: 'Správce'},
+    {field: 'createdAt', header: 'Založeno'},
   ];
   filter: Map<string, any> = new Map();
   roles = null;

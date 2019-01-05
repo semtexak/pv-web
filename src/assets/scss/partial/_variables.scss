@@ -15,7 +15,7 @@ $section-primary-text-color: #ffffff;
 $primary-color: $primary;
 $success-color: #61B329;
 $danger-color: #dc143c;
-$info-color: #ffffff;
+$info-color: #17a2b8;
 $warning-color: #ffc107;
 
 
@@ -78,10 +78,18 @@ $enable-rounded: false;
 $enable-shadows: false;
 
 /* Sidebar */
+$sidebar-font: 'Roboto';
 $sidebar-background: #262a34;
+//$sidebar-background: #2e323a;
 $sidebar-color: #ffffff;
+//$sidebar-color: #838790;
 $sidebar-width: 250;
 $sidebar-width-minimized: 50;
 $sidebar-nav-li-hover-background: $primary-color;
 $sidebar-nav-li-hover-color: #ffffff;
 $sidebar-nav-li-active-color: #1dc6e6;
+//$sidebar-nav-li-active-color: #ffffff;
+
+/* Table filter */
+$table-row-expanded-background: $primary-color;
+$table-row-expanded-color: #ffffff;

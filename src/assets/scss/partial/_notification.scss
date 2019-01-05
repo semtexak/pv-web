@@ -1,12 +1,19 @@
 @import "_variables.scss";
 @import "_mixin.scss";
 
+.dropdown.show .notification__badge {
+  transform: scale(0)!important;
+}
+
 .notification__list {
   width: 100%;
   min-width: 250px;
   right: 0;
   left: unset;
   top: calc(100% + 7px);
+
+  box-shadow: 0 1px 6px rgba(0,0,0,0.09);
+  border: 1px solid rgba(24,28,33,0.05);
 }
 
 .notification__header {
@@ -16,21 +23,40 @@
 }
 
 .notification__footer {
-  padding: 10px 0;
+  display: block;
+  padding: 10px 15px;
   border-top: 1px solid #e2e2e2;
-  margin: 0;
-
 }
 
 .notification__content {
   margin: 0;
+  max-height: 250px;
+  overflow-y: auto;
 
   ul {
     list-style: none;
     padding: 0;
+    width: 100%;
 
     & > li {
-      padding: 10px 0;
+      display: flex;
+      align-items: center;
+      padding: .625rem .9375rem;
+      border-bottom: 1px solid #f1f1f2;
+      border-left: 0;
+      border-right: 0;
+
+      &:hover, &:focus, &:active, &.active {
+        background-color: rgba(24,28,33,0.015);
+      }
+
+      &:last-child {
+        border-bottom: 0;
+      }
+
+      .notification__message {
+        margin-left: 10px;
+      }
     }
   }
 }

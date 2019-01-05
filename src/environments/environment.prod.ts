@@ -3,5 +3,6 @@ export const environment = {
   API_URL: 'http://localhost:8765',
   grantType: 'password',
   clientId: 'test',
-  clientSecret: 'secret'
+  clientSecret: 'secret',
+  autoLogin: true
 };

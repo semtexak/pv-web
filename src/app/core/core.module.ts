@@ -19,6 +19,8 @@ import {LoaderComponent} from './component/loader/loader.component';
 import {AlertService} from '../shared/service/alert.service';
 import {SubscriptionService} from '../shared/service/subscription.service';
 import {ClientService} from '../shared/service/client.service';
+import {DonationService} from '../shared/service/donation.service';
+import {OrderService} from '../shared/service/order.service';
 
 @NgModule({
   imports: [
@@ -26,7 +28,6 @@ import {ClientService} from '../shared/service/client.service';
     CoreRoutingModule,
     HttpClientModule,
     NgHttpLoaderModule,
-    ReactiveFormsModule,
     SharedModule
   ],
   declarations: [
@@ -49,6 +50,8 @@ import {ClientService} from '../shared/service/client.service';
     UserService,
     ClientService,
     SubscriptionService,
+    DonationService,
+    OrderService,
     AlertService,
     {
       provide: HTTP_INTERCEPTORS,

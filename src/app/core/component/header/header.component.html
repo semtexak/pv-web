@@ -38,16 +38,17 @@
             </a>
             <div class="dropdown-menu notification__list" pvDropdownMenu aria-labelledby="navbarDropdown">
               <div class="notification__header row">
-                <div class="col-6">
+                <div class="col-9">
                   Notifications ({{notifications.length}})
                 </div>
-                <div class="col-6 text-right">A</div>
+                <div class="col-3 text-right">A</div>
               </div>
               <div class="notification__content row">
                 <ng-container *ngIf="notifications && notifications.length > 0; else notificationsEmpty">
                   <ul>
                     <li *ngFor="let notification of notifications">
-                      {{notification.message}}
+                      <span class="notification__icon icon icon--sm icon--rounded icon--light"></span>
+                      <span class="notification__message">{{notification.message | truncate: 50}}</span>
                     </li>
                   </ul>
                 </ng-container>
@@ -55,12 +56,7 @@
                   Empty.
                 </ng-template>
               </div>
-
-              <div class="notification__footer row">
-                <div class="col-12 text-center">
-                <a href=""><span class=""></span> Zobrazit vše</a>
-                </div>
-              </div>
+              <a href="" class="notification__footer col-12 text-center"><span class=""></span> Zobrazit vše</a>
             </div>
           </li>
           <li class="nav-item user-section" pvDropdown>

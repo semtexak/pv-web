@@ -7,10 +7,13 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CookieService} from 'ngx-cookie-service';
 import {AlertsComponent} from './component/alerts/alerts.component';
 import {AlertComponent} from './component/alerts/alert/alert.component';
+import { PricePipe } from './pipe/pipe/price.pipe';
+import {PipeModule} from './pipe/pipe.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    PipeModule,
     FormsModule,
     ReactiveFormsModule
   ],
@@ -19,7 +22,7 @@ import {AlertComponent} from './component/alerts/alert/alert.component';
     AlertComponent,
     DropdownDirective,
     DropdownMenuDirective,
-    DropdownToggleDirective
+    DropdownToggleDirective,
   ],
   providers: [
     CookieService
@@ -28,9 +31,11 @@ import {AlertComponent} from './component/alerts/alert/alert.component';
     DropdownDirective,
     DropdownMenuDirective,
     DropdownToggleDirective,
+    PricePipe,
     AlertsComponent,
     AlertComponent,
     FormsModule,
+    PipeModule,
     ReactiveFormsModule
   ]
 })

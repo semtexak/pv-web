@@ -11,7 +11,7 @@ export class DropdownDirective implements OnInit {
   public status: Subject<boolean> = new Subject();
 
   ngOnInit() {
-    this.status.subscribe((status: boolean) => this.isOpen = status);
+      this.status.subscribe((status: boolean) => this.isOpen = status);
   }
 
 }

@@ -3,10 +3,12 @@
 
 <section class="sidebar">
   <nav>
-    <header>
-      <button class="sidebar__menu-button" type="button">
+    <header class="brand">
+      <span class="brand__logo">P</span>
+      <span class="brand__name">Payvont</span>
+      <button class="sidebar__toggler" type="button">
         <span class="fl flaticon-menu"></span>
-        <span class="item-text">Menu</span>
+        <!--<span class="item-text">Menu</span>-->
       </button>
     </header>
     <div class="sidebar__content">
@@ -14,13 +16,13 @@
         <ul class="sidebar__nav">
           <li class="sidebar__item" routerLinkActive="active">
             <a routerLink="/zakaznik">
-              <span class="fl flaticon-home"></span>
+              <span class="fl fas fa-user"></span>
               <span class="item-text">Můj účet</span>
             </a>
           </li>
           <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown>
             <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
-              <span class="fl flaticon-key-2"></span>
+              <span class="fl fas fa-hammer"></span>
               <span class="item-text">Služby</span>
             </a>
             <ul class="sidebar__dropdown-menu" routerLinkActive="show" pvDropdownMenu>
@@ -34,38 +36,38 @@
           </li>
           <li class="sidebar__item" routerLinkActive="active">
             <a routerLink="/zakaznik/platby">
-              <span class="fl flaticon-bill"></span>
+              <span class="fl fas fa-money-bill-alt"></span>
               <span class="item-text">Platby</span>
             </a>
           </li>
           <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown>
             <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
-              <span class="fl flaticon-key-2"></span>
+              <span class="fl fas fa-key"></span>
               <span class="item-text">Administrace</span>
             </a>
             <ul class="sidebar__dropdown-menu" routerLinkActive="show" [routerLinkActiveOptions]="{exact: true}" pvDropdownMenu>
               <li class="sidebar__item" routerLinkActive="active">
 
                 <a routerLink="/admin/uzivatele">
-                  <span class="fl flaticon-avatar-1"></span>
+                  <!--<span class="fl flaticon-avatar-1"></span>-->
                   <span class="item-text">Uživatelé</span>
                 </a>
               </li>
               <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown>
                 <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
-                  <span class="fl flaticon-key-2"></span>
+                  <!--<span class="fl flaticon-key-2"></span>-->
                   <span class="item-text">Klienti</span>
                 </a>
                 <ul class="sidebar__dropdown-menu" routerLinkActive="show" pvDropdownMenu>
                   <li class="sidebar__item" routerLinkActive="active">
                     <a routerLink="/admin/klienti">
-                      <span class="fl flaticon-dashboard-1"></span>
+                      <!--<span class="ion-md-speedometer"></span>-->
                       <span class="item-text">Přehled</span>
                     </a>
                   </li>
                   <li class="sidebar__item" routerLinkActive="active">
                     <a routerLink="/admin/stranky">
-                      <span class="fl flaticon-internet"></span>
+                      <!--<span class="fl flaticon-internet"></span>-->
                       <span class="item-text">Stránky</span>
                     </a>
                   </li>
@@ -78,16 +80,22 @@
                 </a>
                 <ul class="sidebar__dropdown-menu" routerLinkActive="show" pvDropdownMenu>
                   <li class="sidebar__item" routerLinkActive="active">
-                    <a routerLink="/admin/predplatne">
-                      <span class="fl flaticon-dashboard-1"></span>
+                    <a routerLink="/admin/sluzby/predplatne">
+                      <!--<span class="fl flaticon-dashboard-1"></span>-->
                       <span class="item-text">Předplatné</span>
+                    </a>
+                  </li>
+                  <li class="sidebar__item" routerLinkActive="active">
+                    <a routerLink="/admin/sluzby/dary">
+                      <!--<span class="fl flaticon-dashboard-1"></span>-->
+                      <span class="item-text">Dary</span>
                     </a>
                   </li>
                 </ul>
               </li>
               <li class="sidebar__item" routerLinkActive="active">
                 <a routerLink="/admin/objednavky">
-                  <span class="fl flaticon-wallet"></span>
+                  <!--<span class="fl flaticon-wallet"></span>-->
                   <span class="item-text">Objednávky</span>
                 </a>
               </li>
@@ -95,7 +103,7 @@
           </li>
           <li class="sidebar__item" routerLinkActive="active">
             <a routerLink="/zakaznik/napoveda">
-              <span class="fl flaticon-question"></span>
+              <span class="fl fas fa-question"></span>
               <span class="item-text">Nápověda</span>
             </a>
           </li>
@@ -103,23 +111,26 @@
       </div>
 
       <div class="sidebar__applications">
-        <h3><span class="fl flaticon-internet"></span> Moje stránky</h3>
+        <h3>
+          <!--<span class="fl flaticon-internet"></span> -->
+          Moje stránky</h3>
         <ul class="sidebar__nav">
           <li class="sidebar__item" routerLinkActive="active">
             <a routerLink="/klient/registrace">
-              <span class="fl flaticon-plus"></span>
+              <span class="fl fas fa-plus"></span>
               <span class="item-text">Přidat</span>
             </a>
           </li>
           <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown>
             <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
-              <span class="fl flaticon-key-2"></span>
+              <span class="fl fas fa-desktop"></span>
+
               <span class="item-text">Biztweet</span>
             </a>
             <ul class="sidebar__dropdown-menu" routerLinkActive="show" pvDropdownMenu>
               <li class="sidebar__item" routerLinkActive="active">
                 <a routerLink="/klient/0123456789">
-                  <span class="fl flaticon-dashboard-1"></span>
+                  <!--<span class="fl flaticon-dashboard-1"></span>-->
                   <span class="item-text">Přehled</span>
                 </a>
               </li>
@@ -131,7 +142,7 @@
               <!--</li>-->
               <li class="sidebar__item" routerLinkActive="active">
                 <a routerLink="/klient/0123456789/nastaveni">
-                  <span class="fl flaticon-gear-1"></span>
+                  <!--<span class="fl fas fa-gear"></span>-->
                   <span class="item-text">Nastavení</span>
                 </a>
               </li>

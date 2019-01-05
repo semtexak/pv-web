@@ -45,6 +45,24 @@
     text-align: center;
   }
 
+  tr.expanded {
+    background-color: $table-row-expanded-background!important;
+    color: $table-row-expanded-color!important;
+
+    td {
+      border-color: $table-row-expanded-background;
+
+      a {
+        color: $table-row-expanded-color;
+        text-decoration: underline;
+      }
+    }
+
+    & + tr {
+      background-color: #ffffff;
+    }
+  }
+
   .status {
     padding: 3px 8px;
     text-align: center;
@@ -60,30 +78,26 @@
 
     &.success {
       color: $success-color;
-
-      &:hover {
-        color: $success-color;
-      }
     }
 
     &.warning {
       color: $warning-color;
+    }
 
-      &:hover {
-        color: $warning-color;
-      }
+    &.info {
+      color: $info-color;
     }
 
     &.error {
       color: $danger-color;
-
-      &:hover {
-        color: $danger-color;
-      }
     }
 
     &.disabled {
       color: rgba(0, 0, 0, 0.2);
+
+      &:hover {
+        color: rgba(0, 0, 0, 0.2) !important;
+      }
     }
   }
 
