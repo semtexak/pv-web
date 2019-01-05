@@ -56,7 +56,7 @@ export class AuthenticationService extends HttpService {
             const userTmp = this.loggedUser.getValue();
             userTmp.applications = applications;
             this.loggedUser.next(userTmp);
-            console.log(applications);
+            localStorage.setItem('udata', JSON.stringify(userTmp));
           })
         );
       })
@@ -64,7 +64,7 @@ export class AuthenticationService extends HttpService {
   }
 
   public getUserApplications(user: number): Observable<any> {
-    return this.http.get(`${this.API_URL}/client-service/clients`);
+    return this.http.get(`${this.API_URL}/client-service/client/applications`);
   }
 
   public obtainToken(params: HttpParams): Observable<any> {

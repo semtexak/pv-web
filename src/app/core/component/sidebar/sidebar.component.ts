@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {User} from '../../../shared/model/user';
+import {AuthenticationService} from '../../../shared/service/authentication.service';
 
 @Component({
   selector: 'pv-sidebar',
@@ -6,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  user: User;
+
+  constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
+    this.authenticationService.loggedUser.subscribe((user: User) => {
+      this.user = user;
+    });
   }
 
 }
