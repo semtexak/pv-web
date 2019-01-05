@@ -1,6 +1,7 @@
 $background-color: #f2f2f2;
 $foreground-color: #666;
 $font-family: 'Open Sans', sans-serif;
+$font-awesome-font-family: 'Font Awesome 5 Free';
 $headings-color: #414141;
 
 $primary: #02A1BF;
@@ -80,15 +81,12 @@ $enable-shadows: false;
 /* Sidebar */
 $sidebar-font: 'Roboto';
 $sidebar-background: #262a34;
-//$sidebar-background: #2e323a;
 $sidebar-color: #ffffff;
-//$sidebar-color: #838790;
 $sidebar-width: 250;
 $sidebar-width-minimized: 50;
 $sidebar-nav-li-hover-background: $primary-color;
 $sidebar-nav-li-hover-color: #ffffff;
 $sidebar-nav-li-active-color: #1dc6e6;
-//$sidebar-nav-li-active-color: #ffffff;
 
 /* Table filter */
 $table-row-expanded-background: $primary-color;

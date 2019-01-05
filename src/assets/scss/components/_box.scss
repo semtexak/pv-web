@@ -1,5 +1,5 @@
-@import "_variables.scss";
-@import "_mixin.scss";
+@import "../abstracts/variables";
+@import "../abstracts/mixin";
 
 .box {
   background-color: #fff;

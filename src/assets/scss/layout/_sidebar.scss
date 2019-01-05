@@ -1,5 +1,19 @@
-@import "_variables.scss";
-@import "_mixin.scss";
+@import "../abstracts/variables";
+@import "../abstracts/mixin";
+
+
+pv-sidebar + main {
+  @include rem-fallback(margin-left, $sidebar-width);
+  padding: 2rem;
+}
+
+pv-sidebar .sidebar--minimized {
+  @include rem-fallback(width, $sidebar-width-minimized);
+
+  & + main {
+    @include rem-fallback(margin-left, $sidebar-width-minimized);
+  }
+}
 
 .sidebar {
   position: fixed;
@@ -16,6 +30,7 @@
 
   .fas {
     margin-top: -2px;
+    width: 18px;
   }
 
   h3 {
@@ -28,11 +43,6 @@
     margin-bottom: 16px;
   }
 
-
-  & + main {
-    @include rem-fallback(margin-left, $sidebar-width);
-  }
-
   nav {
     display: flex;
     flex-direction: column;
@@ -43,8 +53,8 @@
     display: flex;
     align-items: center;
     @include rem-fallback(padding-right, 28);
-    @include rem-fallback(padding-left, 28);
-    height: 66px;
+    @include rem-fallback(padding-left, 18);
+    height: 60px;
     border-bottom: 1px solid rgba(255,255,255,0.06);
 
     .brand__logo {
@@ -64,7 +74,7 @@
       @include rem-fallback(font-size, 18);
       line-height: line-height(18);
       color: white;
-      margin-left: .75rem;
+      margin-left: 15px;
     }
 
     .sidebar__toggler {
@@ -100,7 +110,7 @@
     flex-direction: column;
     flex: 1;
 
-    .sidebar__customer, .sidebar__applications {
+    .sidebar__customer, .sidebar__applications, .sidebar__admin {
       margin-top: 16px;
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
@@ -110,10 +120,6 @@
     list-style: none;
     padding: 0;
   }
-
-  ¨)
-
-
 
 
   .sidebar__item {
@@ -158,9 +164,11 @@
   }
 
   .sidebar__dropdown-toggle:after {
-    content: '\f11e';
-    font-family: Flaticon;
+    font-family: $font-awesome-font-family;
+    font-weight: 900;
+    content: "\f078";
     position: absolute;
+    transition: transform .2s ease;
     right: 20px;
     @include rem-fallback(font-size, 8);
   }
@@ -170,7 +178,7 @@
       text-decoration: none;
 
       &:after {
-        transform: rotate(90deg);
+        transform: rotate(180deg);
       }
     }
 
@@ -206,13 +214,5 @@
         padding-left: 50px;
       }
     }
-  }
-}
-
-.sidebar--minimized {
-  @include rem-fallback(width, $sidebar-width-minimized);
-
-  & + main {
-    @include rem-fallback(margin-left, $sidebar-width-minimized);
   }
 }

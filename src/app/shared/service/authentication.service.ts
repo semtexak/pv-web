@@ -46,14 +46,25 @@ export class AuthenticationService extends HttpService {
 
   private saveUser(): Observable<any> {
     return this.getUserData().pipe(
-      map((userData: User) => {
+      switchMap((userData: User) => {
         const user = this.mapUser(userData);
         console.log(`User receiver ${userData.name}`);
         localStorage.setItem('udata', JSON.stringify(user));
         this.loggedUser.next(user);
-        return user;
+        return this.getUserApplications(user.id).pipe(
+          map(applications => {
+            const userTmp = this.loggedUser.getValue();
+            userTmp.applications = applications;
+            this.loggedUser.next(userTmp);
+            console.log(applications);
+          })
+        );
       })
     );
+  }
+
+  public getUserApplications(user: number): Observable<any> {
+    return this.http.get(`${this.API_URL}/client-service/clients`);
   }
 
   public obtainToken(params: HttpParams): Observable<any> {

@@ -1,4 +1,4 @@
-@import "_function.scss";
+@import "function";
 
 @mixin rem-fallback($property, $values...) {
   $max: length($values);

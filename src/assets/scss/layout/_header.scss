@@ -1,6 +1,6 @@
-@import "../_variables.scss";
-@import "../_mixin.scss";
-@import "../_function.scss";
+@import "../abstracts/variables";
+@import "../abstracts/mixin";
+@import "../abstracts/function";
 
 nav.navbar {
   background-color: $navbar-background-color;

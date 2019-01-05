@@ -1,0 +1,31 @@
+html {
+  font-size: 75% !important;
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  background: $background-color;
+  color: $foreground-color;
+  font-family: $font-family;
+  margin-bottom: $footer-height;
+}
+
+a, a:focus, a:hover, a:active {
+  outline: 0;
+  cursor: pointer;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: $headings-color;
+  position: relative;
+  margin: 0 0 30px 0;
+  line-height: 1.5;
+  z-index: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+p {
+  @include rem-fallback(font-size, 16);
+}

@@ -1,5 +1,5 @@
-@import "_variables.scss";
-@import "_mixin.scss";
+@import "../abstracts/variables";
+@import "../abstracts/mixin";
 
 .dropdown.show .notification__badge {
   transform: scale(0)!important;

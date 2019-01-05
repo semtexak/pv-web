@@ -1,5 +1,5 @@
-@import "variables";
-@import "mixin";
+@import "../abstracts/variables";
+@import "../abstracts/mixin";
 
 body.plugin {
   background-color: transparent;
