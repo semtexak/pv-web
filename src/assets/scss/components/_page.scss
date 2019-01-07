@@ -5,5 +5,10 @@
     font-family: $sidebar-font;
     font-weight: 700;
     @include rem-fallback(font-size, 21);
+
+    .page__subtitle {
+      font-weight: 400;
+      @include rem-fallback(font-size, 12);
+    }
   }
 }
