@@ -86,6 +86,9 @@ $sidebar-background: #262a34;
 $sidebar-color: #ffffff;
 $sidebar-width: 250;
 $sidebar-width-minimized: 50;
+$sidebar-burger-color: #838790;
+$sidebar-burger-hover-color: #ffffff;
+$header-burger-hover-color: #000000;
 $sidebar-nav-li-hover-background: $primary-color;
 $sidebar-nav-li-hover-color: #ffffff;
 $sidebar-nav-li-active-color: #1dc6e6;
@@ -93,3 +96,8 @@ $sidebar-nav-li-active-color: #1dc6e6;
 /* Table filter */
 $table-row-expanded-background: $primary-color;
 $table-row-expanded-color: #ffffff;
+
+/* Card */
+$card-header-background: #ffffff;
+$card-footer-background: rgba(193, 193, 193, 0.06);
+$card-header-border-color: rgba(24,28,33,0.06);

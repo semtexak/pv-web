@@ -76,11 +76,13 @@ nav.navbar {
               transform: scale(1);
             }
           }
-
-
-
         }
       }
     }
+  }
+
+  .sidebar__toggler {
+    margin-right: auto;
+    margin-left: 0;
   }
 }

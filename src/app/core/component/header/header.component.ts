@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {LayoutService} from '../../../shared/service/layout.service';
 import {AuthenticationService} from '../../../shared/service/authentication.service';
 import {User} from '../../../shared/model/user';
@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   public notifications: INotification[] = [];
   public notificationsPreview: INotification[] = [];
   public fixedHeader: boolean;
+  public sidebarMinimized: boolean;
   public isOnTop = false;
   private scrollOffset = null;
 
@@ -27,8 +28,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
               private notificationService: NotificationService,
               private alertService: AlertService,
               private router: Router,
+              private renderer: Renderer2,
               private layoutService: LayoutService) {
     this.layoutService.fixedHeader.subscribe((status: boolean) => this.fixedHeader = status);
+    this.layoutService.sidebarMinimized.subscribe((status: boolean) => this.sidebarMinimized = status);
     this.notificationService.notifications.subscribe(notifications => {
       this.notifications = notifications;
       this.notificationsPreview = notifications.slice(0, 10);
@@ -39,9 +42,9 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.authenticationService.loggedUser.subscribe((user: User) => {
       this.user = user;
       if (user && this.adminSection) {
-        this.notificationService.connect();
+        // this.notificationService.connect();
       } else {
-        this.notificationService.disconnect();
+        // this.notificationService.disconnect();
       }
     });
   }
@@ -50,6 +53,17 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.scrollOffset = this.nav.nativeElement.offsetHeight;
   }
 
+  toggleSidebar() {
+    this.layoutService.sidebarMinimized.next(!this.layoutService.sidebarMinimized.getValue());
+    if (this.layoutService.sidebarMinimized.getValue()) {
+      this.renderer.addClass(document.body, 's-h');
+      this.renderer.removeClass(document.body, 's-o');
+    } else {
+      this.renderer.addClass(document.body, 's-o');
+      this.renderer.removeClass(document.body, 's-h');
+    }
+  }
+  
   shakeTest() {
     this.notificationService.sendTest();
     // setTimeout(() => { this.shake = false; }, 1000);

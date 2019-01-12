@@ -11,7 +11,6 @@ import {SidebarComponent} from './component/sidebar/sidebar.component';
 import {SharedModule} from '../shared/shared.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthenticationService} from '../shared/service/authentication.service';
-import {ReactiveFormsModule} from '@angular/forms';
 import {TokenInterceptor} from '../shared/service/interceptor/token-interceptor';
 import {UserService} from '../shared/service/user.service';
 import {NgHttpLoaderModule} from 'ng-http-loader';
@@ -21,6 +20,7 @@ import {SubscriptionService} from '../shared/service/subscription.service';
 import {ClientService} from '../shared/service/client.service';
 import {DonationService} from '../shared/service/donation.service';
 import {OrderService} from '../shared/service/order.service';
+import {ApplicationService} from '../shared/service/application.service';
 
 @NgModule({
   imports: [
@@ -37,7 +37,7 @@ import {OrderService} from '../shared/service/order.service';
     LoaderComponent,
     HeaderComponent,
     FooterComponent,
-    SidebarComponent
+    SidebarComponent,
   ],
   exports: [
     RouterModule
@@ -49,6 +49,7 @@ import {OrderService} from '../shared/service/order.service';
     AuthenticationService,
     UserService,
     ClientService,
+    ApplicationService,
     SubscriptionService,
     DonationService,
     OrderService,

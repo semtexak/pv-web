@@ -5,6 +5,12 @@
     <a class="navbar-brand" routerLink="/">
       <!--<img [src]="fixedHeader && !isOnTop ? '../../../assets/images/logo-w.png' : '../../../assets/images/logo-c.png'"/>-->
     </a>
+
+
+    <button class="sidebar__toggler sidebar__toggler--dhover" type="button" (click)="toggleSidebar()">
+      <span class="fl flaticon-menu"></span>
+    </button>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

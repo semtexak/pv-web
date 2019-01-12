@@ -23,7 +23,7 @@ export class AuthenticationService extends HttpService {
     super(http);
     const udata = localStorage.getItem('udata');
     if (udata && this.getToken() !== '') {
-      this.loggedUser.next(JSON.parse(udata));
+      this.loggedUser.next(this.mapUser(JSON.parse(udata)));
     } else {
       localStorage.removeItem('udata');
     }
@@ -42,6 +42,10 @@ export class AuthenticationService extends HttpService {
         return this.saveUser();
       })
     );
+  }
+
+  public reloadUserData(): Observable<any> {
+    return this.saveUser();
   }
 
   private saveUser(): Observable<any> {
@@ -86,6 +90,7 @@ export class AuthenticationService extends HttpService {
     user.email = userData.email;
     user.name = userData.name ? userData.name : userData.email;
     user.authorities = userData.authorities;
+    user.applications = userData.applications;
     return user;
   }
 
@@ -117,4 +122,5 @@ export class AuthenticationService extends HttpService {
       })
     );
   }
+
 }

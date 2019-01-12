@@ -15,13 +15,15 @@
 
 @import "components/button";
 @import "components/dropdown";
+@import "components/card";
+@import "components/tab";
 @import "components/loader";
 @import "components/box";
 @import "components/notification";
 @import "components/table";
 @import "components/pagination";
-@import "components/page";
 
+@import "layout/page";
 @import "layout/header";
 @import "layout/footer";
 @import "layout/sidebar";

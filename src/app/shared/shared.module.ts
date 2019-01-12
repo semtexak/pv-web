@@ -9,6 +9,8 @@ import {AlertsComponent} from './component/alerts/alerts.component';
 import {AlertComponent} from './component/alerts/alert/alert.component';
 import { PricePipe } from './pipe/pipe/price.pipe';
 import {PipeModule} from './pipe/pipe.module';
+import {TabComponent} from './component/tabs/tab/tab.component';
+import {TabsComponent} from './component/tabs/tabs.component';
 
 @NgModule({
   imports: [
@@ -20,6 +22,8 @@ import {PipeModule} from './pipe/pipe.module';
   declarations: [
     AlertsComponent,
     AlertComponent,
+    TabsComponent,
+    TabComponent,
     DropdownDirective,
     DropdownMenuDirective,
     DropdownToggleDirective,
@@ -34,6 +38,8 @@ import {PipeModule} from './pipe/pipe.module';
     PricePipe,
     AlertsComponent,
     AlertComponent,
+    TabsComponent,
+    TabComponent,
     FormsModule,
     PipeModule,
     ReactiveFormsModule

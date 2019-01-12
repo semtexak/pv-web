@@ -3,6 +3,15 @@
 
 label {
   margin-bottom: 2px;
+  transition: color .2s ease;
+
+  &.control-label {
+    font-weight: 600;
+  }
+
+  .required {
+    color: $input-error-color;
+  }
 }
 
 input.form-control {

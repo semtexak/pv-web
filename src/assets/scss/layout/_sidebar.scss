@@ -3,20 +3,16 @@
 
 
 pv-sidebar + main {
-  @include rem-fallback(margin-left, $sidebar-width);
-  padding: 2rem;
+  padding: 2rem 2.5rem;
 }
 
 pv-sidebar .sidebar--minimized {
-  @include rem-fallback(width, $sidebar-width-minimized);
-
-  & + main {
-    @include rem-fallback(margin-left, $sidebar-width-minimized);
-  }
+  transform: translateX($sidebar-width * -1px);
 }
 
 .sidebar {
   position: fixed;
+  z-index: 1000;
   display: flex;
   @include rem-fallback(width, $sidebar-width);
   height: 100%;
@@ -25,7 +21,7 @@ pv-sidebar .sidebar--minimized {
   background-color: #2e323a;
   color: #838790;
   font-family: $sidebar-font;
-
+  transition: transform .2s ease;
 
 
   .fas {
@@ -38,7 +34,7 @@ pv-sidebar .sidebar--minimized {
     text-transform: uppercase;
     color: #838790;
     font-weight: 500;
-    font-family: Roboto;
+    font-family: $sidebar-font;
     padding: 0 28px;
     margin-bottom: 16px;
   }
@@ -52,7 +48,7 @@ pv-sidebar .sidebar--minimized {
   header {
     display: flex;
     align-items: center;
-    @include rem-fallback(padding-right, 28);
+    @include rem-fallback(padding-right, 18);
     @include rem-fallback(padding-left, 18);
     height: 60px;
     border-bottom: 1px solid rgba(255,255,255,0.06);
@@ -75,31 +71,6 @@ pv-sidebar .sidebar--minimized {
       line-height: line-height(18);
       color: white;
       margin-left: 15px;
-    }
-
-    .sidebar__toggler {
-      color: #838790;
-      @include rem-fallback(font-size, 18);
-      font-weight: 600;
-      text-transform: uppercase;
-      border: 0;
-      background: none;
-      outline: none;
-      cursor: pointer;
-      margin-left: auto;
-
-      .fl:before {
-        margin: 0;
-        @include rem-fallback(font-size, 18);
-      }
-
-      .fl + .item-text {
-        margin-left: 16px;
-      }
-
-      &:hover, &:focus, &:active {
-        color: white;
-      }
     }
   }
 
@@ -169,7 +140,7 @@ pv-sidebar .sidebar--minimized {
     content: "\f078";
     position: absolute;
     transition: transform .2s ease;
-    right: 20px;
+    right: 28px;
     @include rem-fallback(font-size, 8);
   }
 
@@ -213,6 +184,41 @@ pv-sidebar .sidebar--minimized {
       a {
         padding-left: 50px;
       }
+    }
+  }
+}
+
+
+.sidebar__toggler {
+  color: $sidebar-burger-color;
+  @include rem-fallback(font-size, 18);
+  font-weight: 600;
+  text-transform: uppercase;
+  border: 0;
+  background: none;
+  outline: none;
+  cursor: pointer;
+  margin-left: auto;
+  opacity: 1;
+  transition: opacity .2s ease;
+
+  .fl:before {
+    margin: 0;
+    @include rem-fallback(font-size, 18);
+  }
+
+  .fl + .item-text {
+    margin-left: 16px;
+  }
+
+  &:hover, &:focus, &:active {
+    outline: none;
+    color: $sidebar-burger-hover-color;
+  }
+
+  &.sidebar__toggler--dhover {
+    &:hover, &:focus, &:active {
+      color: $header-burger-hover-color;
     }
   }
 }

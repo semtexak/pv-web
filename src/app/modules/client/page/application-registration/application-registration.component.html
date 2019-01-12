@@ -1,0 +1,97 @@
+<div class="container-fluid client-sign-up">
+  <h2 class="page__title"><span class="page__title--disabled">Stránka /</span> Přidání</h2>
+  <div class="row">
+    <div class="col-12">
+      <pv-alerts></pv-alerts>
+      <div class="card mb-4">
+        <h6 class="card-header">
+          Default
+        </h6>
+
+        <form class="form-horizontal" [formGroup]="form" novalidate>
+          <div class="card-body">
+            <fieldset>
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-12" [ngClass]="{'has-error':form.controls['appName'].invalid && form.controls['appName'].dirty}">
+                        <label class="control-label" for="appName">Název aplikace <span class="required">*</span></label>
+                        <input id="appName" type="text" class="form-control" [formControl]="form.controls['appName']">
+                        <div class="validation-message text-right" *ngIf="form.get('appName').invalid && form.get('appName').dirty">
+                            <span *ngIf="form.get('appName').errors.required">
+                               <span>Pole není vyplněno.</span>
+                            </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <img src="http://localhost:8765/client-service/files/PZV_0001.jpg">
+                <div class="col-3">
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-12" [ngClass]="{'has-error':form.controls['domain'].invalid && form.controls['domain'].dirty}">
+                        <label class="control-label" for="domain">Doména aplikace <span class="required">*</span></label>
+                        <input id="domain" type="text" class="form-control" [formControl]="form.controls['domain']">
+                        <div class="validation-message text-right" *ngIf="form.get('domain').invalid && form.get('domain').dirty">
+                            <span *ngIf="form.get('domain').errors.required">
+                               <span>Pole není vyplněno.</span>
+                            </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-12">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12" [ngClass]="{'has-error':form.controls['appImg'].invalid && form.controls['appImg'].dirty}">
+                        <div class="input-group mb-3">
+                          <label class="control-label" for="appImg">Logo aplikace <span class="required">*</span></label>
+                          <div class="img-thumbnail w-100 text-center mb-3" *ngIf="appImg">
+                            <input type="hidden" [formControl]="form.controls['appImgStr']">
+                            <img [src]="appImg" class="img-fluid" alt="" title="">
+                            <span class="flaticon-cancel app-image-delete" (click)="removeImage()"></span>
+                          </div>
+                          <div class="custom-file">
+                            <input id="appImg" type="file" class="custom-file-input" [formControl]="form.controls['appImg']" (change)="onSelectFile($event)">
+                            <label class="custom-file-label" for="appImg">
+                              <span>Vyberte soubor</span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="card-footer">
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group form-check mt-2" [ngClass]="{'has-error':form.controls['agreement'].invalid && form.controls['agreement'].dirty}">
+                  <input type="checkbox" name="agreement" id="agreement" class=""
+                         [formControl]="form.controls['agreement']">
+                  <label for="agreement" class="form-check-label">
+                    Souhlasím se zpracováním osobních údajů. <span class="required">*</span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-6" *ngIf="!hideAres">
+                <div class="form-group text-right mb-2">
+                  <button class="btn btn-primary" (click)="send(form.value)">SEND</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

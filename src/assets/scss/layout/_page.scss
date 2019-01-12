@@ -1,0 +1,48 @@
+@import "../abstracts/variables";
+
+.page {
+  .container-fluid {
+    padding: 0;
+  }
+
+  .page__title {
+    font-family: $sidebar-font;
+    font-weight: 700;
+    @include rem-fallback(font-size, 21);
+
+    .page__title--disabled {
+      font-weight: 100;
+      color: $text-muted;
+    }
+
+    .page__subtitle {
+      font-weight: 400;
+      @include rem-fallback(font-size, 12);
+
+      .subtitle--dashed {
+        margin-bottom: 3px;
+        border-bottom: 1px dashed $text-muted;
+      }
+    }
+  }
+}
+
+.s-o main, .s-o .navbar {
+  transition: margin .2s ease;
+  @include rem-fallback(margin-left, $sidebar-width);
+
+  @include media-breakpoint-down(md) {
+    @include rem-fallback(margin-left, 0);
+  }
+}
+
+.s-h main, .s-h .navbar {
+  transition: margin .2s ease;
+  @include rem-fallback(margin-left, 0);
+}
+
+.s-o .navbar .sidebar__toggler {
+  opacity: 0;
+  visibility: hidden;
+}
+

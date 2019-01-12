@@ -19,4 +19,16 @@ export class ClientService extends HttpService {
   getApplications(page: number, filter: string, orderBy: string): Observable<any> {
     return this.http.get(`${this.API_URL}/client-service/applications/all?page=${page}${filter ? '&' + filter : ''}${orderBy ? '&sort=' + orderBy : ''}`);
   }
+
+  getApplication(appId: string): Observable<any> {
+    return this.http.get(`${this.API_URL}/client-service/applications/${appId}`);
+  }
+
+  getAresData(ico: number): Observable<any> {
+    return this.http.get(`${this.API_URL}/client-service/ares/${ico}`);
+  }
+
+  createClient(form): Observable<any> {
+    return this.http.post(`${this.API_URL}/client-service/clients`, JSON.stringify(form), this.jsonHttpOptions);
+  }
 }

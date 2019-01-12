@@ -1,12 +1,11 @@
-<section class="sidebar">
+<section class="sidebar" [ngClass]="{'sidebar--minimized': isHidden}">
   <nav>
     <header class="brand">
-      <span class="brand__logo">P</span>
-      <span class="brand__name">Payvont</span>
-      <button class="sidebar__toggler" type="button">
-        <span class="fl flaticon-menu"></span>
-        <!--<span class="item-text">Menu</span>-->
-      </button>
+    <span class="brand__logo">P</span>
+    <span class="brand__name">Payvont</span>
+    <button class="sidebar__toggler" type="button" (click)="toggleSidebar()">
+    <span class="fl flaticon-menu"></span>
+    </button>
     </header>
     <div class="sidebar__content">
       <div class="sidebar__customer">
@@ -33,7 +32,7 @@
           </li>
           <li class="sidebar__item" routerLinkActive="active">
             <a routerLink="/zakaznik/platby">
-              <span class="fl fas fa-money-bill-alt"></span>
+              <span class="fl fas fa-dollar-sign"></span>
               <span class="item-text">Platby</span>
             </a>
           </li>
@@ -50,14 +49,23 @@
         <h3>
           <!--<span class="fl flaticon-internet"></span> -->
           Moje stránky</h3>
-        <ul class="sidebar__nav">
+        <ul class="sidebar__nav" *ngIf="!user?.hasRole('CLIENT')">
           <li class="sidebar__item" routerLinkActive="active">
             <a routerLink="/klient/registrace">
               <span class="fl fas fa-plus"></span>
               <span class="item-text">Přidat</span>
             </a>
           </li>
-          <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown *ngFor="let application of user.applications">
+        </ul>
+        <ul class="sidebar__nav" *ngIf="user?.hasRole('CLIENT')">
+          <li class="sidebar__item" routerLinkActive="active">
+            <a routerLink="/klient/stranka/registrace">
+              <span class="fl fas fa-plus"></span>
+              <span class="item-text">Přidat stránku</span>
+            </a>
+          </li>
+          <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown
+              *ngFor="let application of user.applications">
             <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
               <span class="fl fas fa-desktop"></span>
 
@@ -65,7 +73,7 @@
             </a>
             <ul class="sidebar__dropdown-menu" routerLinkActive="show" pvDropdownMenu>
               <li class="sidebar__item" routerLinkActive="active">
-                <a routerLink="/klient/{{application.appId}}">
+                <a routerLink="/klient/stranka/{{application.appId}}">
                   <!--<span class="fl flaticon-dashboard-1"></span>-->
                   <span class="item-text">Přehled</span>
                 </a>
@@ -77,7 +85,7 @@
               <!--</a>-->
               <!--</li>-->
               <li class="sidebar__item" routerLinkActive="active">
-                <a routerLink="/klient/{{application.appId}}/nastaveni">
+                <a routerLink="/klient/stranka/{{application.appId}}/nastaveni">
                   <!--<span class="fl fas fa-gear"></span>-->
                   <span class="item-text">Nastavení</span>
                 </a>
@@ -87,20 +95,18 @@
         </ul>
       </div>
 
-
-      <div class="sidebar__admin">
-        <h3>
-          <!--<span class="fl flaticon-internet"></span> -->
-          Administrace</h3>
+<button (click)="testReload()">TEST RELOAD</button>
+      <div class="sidebar__admin" *ngIf="user?.hasRole('ADMIN')">
+        <h3> Administrace</h3>
         <ul class="sidebar__nav">
           <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown>
             <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
               <span class="fl fas fa-key"></span>
               <span class="item-text">Administrace</span>
             </a>
-            <ul class="sidebar__dropdown-menu" routerLinkActive="show" [routerLinkActiveOptions]="{exact: true}" pvDropdownMenu>
+            <ul class="sidebar__dropdown-menu" routerLinkActive="show" [routerLinkActiveOptions]="{exact: true}"
+                pvDropdownMenu>
               <li class="sidebar__item" routerLinkActive="active">
-
                 <a routerLink="/admin/uzivatele">
                   <!--<span class="fl flaticon-avatar-1"></span>-->
                   <span class="item-text">Uživatelé</span>

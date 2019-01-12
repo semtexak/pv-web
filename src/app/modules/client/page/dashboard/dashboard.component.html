@@ -1,7 +1,7 @@
 <div class="container-fluid dashboard">
-  <h2 class="page__title">Přehled aplikace
+  <h2 class="page__title"><span class="page__title--disabled">{{statistics ? statistics.name : 'Stránka'}} /</span> Přehled
     <div class="page__subtitle">
-      <span class="text-muted">Období: leden 2019</span>
+      <span class="text-muted">Období - <span class="subtitle--dashed">Leden 2019</span></span>
     </div>
   </h2>
   <div class="row">
@@ -9,10 +9,10 @@
       <div class="card mb-4">
         <div class="card-body">
           <div class="d-flex align-items-center">
-            <div class="fas fa-money-bill-alt text-success"></div>
+            <div class="fas fa-dollar-sign text-success"></div>
             <div class="ml-4">
-              <div class="sales-title">Prodeje za období</div>
-              <div class="sales-number" counto [step]="30" [countTo]="3521" [countFrom]="0" [duration]="1.25" (countoChange)="counto = $event" (countoEnd)="onCountoEnd()">{{counto|number:'1.0-0'}}</div>
+              <div class="sales-title">Tržby</div>
+              <div class="sales-number" counto [step]="30" [countTo]="statistics?.total?.price.amount" [countFrom]="0" [duration]="1.25" (countoChange)="totalPrice = $event">{{totalPrice|number:'1.0-0'|price: statistics?.total?.price.currency}}</div>
             </div>
           </div>
         </div>
@@ -22,10 +22,10 @@
       <div class="card mb-4">
         <div class="card-body">
           <div class="d-flex align-items-center">
-            <div class="fas fa-money-bill-alt text-success"></div>
+            <div class="fas fa-shopping-cart text-info"></div>
             <div class="ml-4">
-              <div class="sales-title">Monthly sales</div>
-              <div class="sales-number" counto [step]="30" [countTo]="3521" [countFrom]="0" [duration]="1.25" (countoChange)="counto = $event" (countoEnd)="onCountoEnd()">{{counto|number:'1.0-0'}}</div>
+              <div class="sales-title">Prodeje</div>
+              <div class="sales-number" counto [step]="30" [countTo]="statistics?.total?.sales" [countFrom]="0" [duration]="1.25" (countoChange)="sales = $event">{{sales|number:'1.0-0'}}</div>
             </div>
           </div>
         </div>
@@ -35,10 +35,10 @@
       <div class="card mb-4">
         <div class="card-body">
           <div class="d-flex align-items-center">
-            <div class="fas fa-money-bill-alt text-success"></div>
+            <div class="fas fa-money-bill-alt text-danger"></div>
             <div class="ml-4">
-              <div class="sales-title">Monthly sales</div>
-              <div class="sales-number" counto [step]="30" [countTo]="3521" [countFrom]="0" [duration]="1.25" (countoChange)="counto = $event" (countoEnd)="onCountoEnd()">{{counto|number:'1.0-0'}}</div>
+              <div class="sales-title">Průměr transakce</div>
+              <div class="sales-number" counto [step]="30" [countTo]="statistics?.total?.averagePrice.amount" [countFrom]="0" [duration]="1.25" (countoChange)="averagePrice = $event">{{averagePrice|number:'1.0-0'|price: statistics?.total?.price.currency}}</div>
             </div>
           </div>
         </div>
@@ -48,12 +48,53 @@
       <div class="card mb-4">
         <div class="card-body">
           <div class="d-flex align-items-center">
-            <div class="fas fa-money-bill-alt text-success"></div>
+            <div class="fas fa-users text-warning"></div>
             <div class="ml-4">
-              <div class="sales-title">Monthly sales</div>
-              <div class="sales-number" counto [step]="30" [countTo]="3521" [countFrom]="0" [duration]="1.25" (countoChange)="counto = $event" (countoEnd)="onCountoEnd()">{{counto|number:'1.0-0'}}</div>
+              <div class="sales-title">Uživatelé</div>
+              <div class="sales-number" counto [step]="30" [countTo]="statistics?.total?.uniqueSales" [countFrom]="0" [duration]="1.25" (countoChange)="uniqueSales = $event">{{uniqueSales|number:'1.0-0'}}</div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <h6 class="card-header">
+          Vývoj za období
+        </h6>
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label class="form-label">Email address</label>
+              <input type="email" class="form-control" placeholder="Email" data-cip-id="cIPJQ342845640">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-control" placeholder="Password" data-cip-id="cIPJQ342845641">
+            </div>
+            <div class="form-group">
+              <label class="form-label w-100">File input</label>
+              <input type="file">
+              <small class="form-text text-muted">Example block-level help text here.</small>
+            </div>
+            <div class="form-group">
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input">
+                <span class="custom-control-label">Check this custom checkbox</span>
+              </label>
+            </div>
+            <div class="form-group">
+              <label class="form-check">
+                <input class="form-check-input" type="checkbox" checked="">
+                <div class="form-check-label">
+                  Check me out
+                </div>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
         </div>
       </div>
     </div>
