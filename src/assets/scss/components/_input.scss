@@ -14,7 +14,7 @@ label {
   }
 }
 
-input.form-control {
+input.form-control, .custom-file label {
   border-color: $input-border-color;
   border-radius: 0;
   height: auto;
@@ -83,5 +83,36 @@ input.form-control {
       background: #ffffff;
       border: 1px solid #bdc3c7;
     }
+  }
+}
+
+.custom-file {
+  height: auto;
+
+  input {
+    height: auto;
+    padding: .8rem .8rem .8rem 1.1rem;
+    outline: 0;
+    box-shadow: none;
+
+    &:focus ~ label, &:focus ~ label:after {
+      box-shadow: none!important;
+      border-color: $input-border-focus-color!important;
+    }
+  }
+
+  label {
+    outline: 0;
+
+    &:after {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+  }
+
+  &:hover label {
+    box-shadow: none;
+    border-color: $input-border-hover-color;
   }
 }

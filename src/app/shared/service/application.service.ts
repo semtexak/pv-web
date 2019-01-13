@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpService} from './http.service';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,10 @@ export class ApplicationService extends HttpService {
   }
 
   createApplication(form): Observable<any> {
-    return this.http.post(`${this.API_URL}/client-service/applications/logo`, form);
+    let headers = new HttpHeaders();
+    headers.set('Content-Type', null);
+    headers.set('Accept', "multipart/form-data");
+
+    return this.http.post(`${this.API_URL}/client-service/applications`, form, { headers: headers});
   }
 }

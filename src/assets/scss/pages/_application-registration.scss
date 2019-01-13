@@ -1,0 +1,47 @@
+.application-registration {
+  .custom-file {
+    label:after {
+      content: "\f03e"!important;
+      font-family: $font-awesome-font-family;
+      @include rem-fallback(font-size, 20);
+    }
+
+    .custom-file-input {
+      display: none;
+    }
+  }
+
+  .logo-placeholder {
+    width: 100%;
+  }
+
+  .img-thumbnail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 150px;
+    max-height: 150px;
+
+    img {
+      max-height: 150px;
+    }
+  }
+
+  .logo-placeholder__circle {
+    display: inline-block;
+    background-color: $background-color;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+
+    .fas {
+      color: $text-muted;
+      @include rem-fallback(font-size, 60);
+      display: flex;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
