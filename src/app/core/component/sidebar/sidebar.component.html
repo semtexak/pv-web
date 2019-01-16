@@ -68,13 +68,11 @@
               *ngFor="let application of user.applications">
             <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
               <span class="fl fas fa-desktop"></span>
-
               <span class="item-text">{{application.name}}</span>
             </a>
             <ul class="sidebar__dropdown-menu" routerLinkActive="show" pvDropdownMenu>
-              <li class="sidebar__item" routerLinkActive="active">
-                <a routerLink="/klient/stranka/{{application.appId}}">
-                  <!--<span class="fl flaticon-dashboard-1"></span>-->
+              <li class="sidebar__item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink="/klient/stranka/{{application.appId}}/prehled">
                   <span class="item-text">Přehled</span>
                 </a>
               </li>
@@ -84,9 +82,8 @@
               <!--<span class="item-text">Objednávky</span>-->
               <!--</a>-->
               <!--</li>-->
-              <li class="sidebar__item" routerLinkActive="active">
+              <li class="sidebar__item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a routerLink="/klient/stranka/{{application.appId}}/nastaveni">
-                  <!--<span class="fl fas fa-gear"></span>-->
                   <span class="item-text">Nastavení</span>
                 </a>
               </li>
@@ -114,19 +111,16 @@
               </li>
               <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown>
                 <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
-                  <!--<span class="fl flaticon-key-2"></span>-->
                   <span class="item-text">Klienti</span>
                 </a>
                 <ul class="sidebar__dropdown-menu" routerLinkActive="show" pvDropdownMenu>
                   <li class="sidebar__item" routerLinkActive="active">
                     <a routerLink="/admin/klienti">
-                      <!--<span class="ion-md-speedometer"></span>-->
                       <span class="item-text">Přehled</span>
                     </a>
                   </li>
                   <li class="sidebar__item" routerLinkActive="active">
                     <a routerLink="/admin/stranky">
-                      <!--<span class="fl flaticon-internet"></span>-->
                       <span class="item-text">Stránky</span>
                     </a>
                   </li>

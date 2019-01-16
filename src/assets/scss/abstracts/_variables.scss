@@ -102,5 +102,8 @@ $card-header-background: #ffffff;
 $card-footer-background: rgba(193, 193, 193, 0.06);
 $card-header-border-color: rgba(24,28,33,0.06);
 
+/* Form */
+$form-delimiter-border-color: $card-header-border-color;
+
 /* Service settings */
 $service-hover-background: $dropdown-item-hover-background;

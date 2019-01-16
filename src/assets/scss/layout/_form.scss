@@ -8,6 +8,10 @@
     margin-bottom: 2rem;
   }
 
+  &.form-delimiter {
+    border-bottom: 1px solid $form-delimiter-border-color;
+  }
+
   .validation-message {
     margin-top: 2px;
     text-align: right;

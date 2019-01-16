@@ -1,5 +1,5 @@
 <div class="container-fluid settings">
-  <h2 class="page__title"><span class="page__title--disabled">Biztweet /</span> Nastavení</h2>
+  <h2 class="page__title"><span class="page__title--disabled">{{application?.name}} /</span> Nastavení</h2>
   <div class="row">
     <div class="col-12">
       <pv-alerts></pv-alerts>
@@ -12,43 +12,79 @@
           <form class="form-horizontal" [formGroup]="form" novalidate (ngSubmit)="onSubmit(form.value)">
             <div class="card-body">
               <pv-tabs [icons]="true" [defaultVisible]="4" (onTabChange)="onTabChange($event)" #tabs>
-                <pv-tab title="Příspěvky" icon="fas fa-donate" #t1>
+                <pv-tab title="Příspěvky" type="donation" icon="fas fa-donate" #t1>
                   <fieldset>
                     <div class="row">
                       <div class="col-12">
-                        <div class="form-group form-check mt-2" [ngClass]="{'has-error': donationForm.controls['_enabled'].invalid && donationForm.controls['_enabled'].dirty}">
-                          <input type="checkbox" name="donation_enabled" id="donation_enabled" class="" [formControl]="donationForm.controls['_enabled']" (change)="toggleActivatedTab(t1, donationForm.controls['type'].value, donationForm.controls['_enabled'].value)">
-                          <label for="donation_enabled" class="form-check-label" >
-                            Povoleno
+                        <div class="form-group form-delimiter pb-4 mt-2" [ngClass]="{'has-error': donationForm.controls['active'].invalid && donationForm.controls['active'].dirty}">
+                          <div class="form-check form-check-inline">
+                            <input type="radio" id="donation_active" [value]="true" [formControl]="donationForm.controls['active']">
+                            <label for="donation_active">Aktivní</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input type="radio" id="donation_nonactive" [value]="false" [formControl]="donationForm.controls['active']">
+                            <label for="donation_nonactive">Neaktivní</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                </pv-tab>
+                <pv-tab title="Předplatné" type="subscription" icon="fas fa-redo-alt" #t2>
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="form-group form-delimiter pb-4 mt-2" [ngClass]="{'has-error': subscriptionForm.controls['active'].invalid && subscriptionForm.controls['active'].dirty}">
+                          <div class="form-check form-check-inline">
+                            <input type="radio" name="subscription_active" id="subscription_active" [value]="true" [formControl]="subscriptionForm.controls['active']">
+                            <label for="subscription_active">Aktivní</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input type="radio" name="subscription_active" id="subscription_nonactive" [value]="false" [formControl]="subscriptionForm.controls['active']">
+                            <label for="subscription_nonactive">Neaktivní</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group form-check mt-2" [ngClass]="{'has-error': subscriptionForm.controls['checkOnLoad'].invalid && subscriptionForm.controls['checkOnLoad'].dirty}">
+                          <input type="checkbox" name="checkOnLoad" id="checkOnLoad" class="" [formControl]="subscriptionForm.controls['checkOnLoad']">
+                          <label for="checkOnLoad" class="form-check-label" >
+                            Kontrolovat předplatné po načtení
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group form-check mt-2" [ngClass]="{'has-error': subscriptionForm.controls['popupOnLoad'].invalid && subscriptionForm.controls['popupOnLoad'].dirty}">
+                          <input type="checkbox" name="popupOnLoad" id="popupOnLoad" class="" [formControl]="subscriptionForm.controls['popupOnLoad']">
+                          <label for="popupOnLoad" class="form-check-label" >
+                            Vyskakování okna po načtení stránky
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group form-check mt-2" [ngClass]="{'has-error': subscriptionForm.controls['closable'].invalid && subscriptionForm.controls['closable'].dirty}">
+                          <input type="checkbox" name="closable" id="closable" class="" [formControl]="subscriptionForm.controls['closable']">
+                          <label for="closable" class="form-check-label" >
+                            Umožnit návštěvníkům zavření vyskakovacího okna
                           </label>
                         </div>
                       </div>
                     </div>
                   </fieldset>
                 </pv-tab>
-                <pv-tab title="Předplatné" icon="fas fa-redo-alt" #t2>
+                <pv-tab title="Placený obsah" type="paid-content" icon="fas fa-pen-nib" [disabled]="true" #t3>
                   <fieldset>
                     <div class="row">
                       <div class="col-12">
-                        <div class="form-group form-check mt-2" [ngClass]="{'has-error': subscriptionForm.controls['_enabled'].invalid && subscriptionForm.controls['_enabled'].dirty}">
-                          <input type="checkbox" name="subscription_enabled" id="subscription_enabled" class="" [formControl]="subscriptionForm.controls['_enabled']" (change)="toggleActivatedTab(t2, subscriptionForm.controls['type'].value, subscriptionForm.controls['_enabled'].value)">
-                          <label for="subscription_enabled" class="form-check-label" >
-                            Povoleno
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </fieldset>
-                </pv-tab>
-                <pv-tab title="Placený obsah" icon="fas fa-pen-nib" [disabled]="true" #t3>
-                  <fieldset>
-                    <div class="row">
-                      <div class="col-12">
-                        <div class="form-group form-check mt-2" [ngClass]="{'has-error': paidContentForm.controls['_enabled'].invalid && paidContentForm.controls['_enabled'].dirty}">
-                          <input type="checkbox" name="paidContentForm_enabled" id="paidContentForm_enabled" class="" [formControl]="paidContentForm.controls['_enabled']" (change)="toggleActivatedTab(t3, paidContentForm.controls['type'].value, paidContentForm.controls['_enabled'].value)">
-                          <label for="paidContentForm_enabled" class="form-check-label" >
-                            Povoleno
-                          </label>
+                        <div class="form-group form-delimiter pb-4 mt-2" [ngClass]="{'has-error': paidContentForm.controls['active'].invalid && paidContentForm.controls['active'].dirty}">
+                          <div class="form-check form-check-inline">
+                            <input type="radio" name="paid-content_active" id="paid-content_active" [value]="true" [formControl]="paidContentForm.controls['active']">
+                            <label for="paid-content_active">Aktivní</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input type="radio" name="paid-content_active" id="paid-content_nonactive" [value]="false" [formControl]="paidContentForm.controls['active']">
+                            <label for="paid-content_nonactive">Neaktivní</label>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -61,9 +97,9 @@
               <div class="row">
                 <div class="col-12">
                   <div class="form-group text-right mb-0">
-                    <input type="submit" class="btn btn-primary" value="Uložit 1" *ngIf="activeTab === t1" [disabled]="donationForm.invalid">
-                    <input type="submit" class="btn btn-primary" value="Uložit 2" *ngIf="activeTab === t2" [disabled]="subscriptionForm.invalid">
-                    <input type="submit" class="btn btn-primary" value="Uložit 3" *ngIf="activeTab === t3" [disabled]="paidContentForm.invalid">
+                    <input type="submit" class="btn btn-primary" value="Uložit 1" [hidden]="activeTab !== t1" [disabled]="donationForm.invalid">
+                    <input type="submit" class="btn btn-primary" value="Uložit 2" [hidden]="activeTab !== t2" [disabled]="subscriptionForm.invalid">
+                    <input type="submit" class="btn btn-primary" value="Uložit 3" [hidden]="activeTab !== t3" [disabled]="paidContentForm.invalid">
                   </div>
                 </div>
               </div>
