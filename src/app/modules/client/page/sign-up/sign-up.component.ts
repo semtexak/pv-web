@@ -3,13 +3,12 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {IcoValidation} from '../../../../core/validation/ico-validation';
 import {ClientService} from '../../../../shared/service/client.service';
 import {AlertService} from '../../../../shared/service/alert.service';
-import {HttpErrorResponse} from '../../../../../../node_modules/@angular/common/http';
+import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 
 @Component({
   selector: 'pv-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  templateUrl: './sign-up.component.html'
 })
 export class SignUpComponent implements OnInit {
 

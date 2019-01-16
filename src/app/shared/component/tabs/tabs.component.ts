@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, ContentChildren, Input, OnInit, QueryList} from '@angular/core';
+import {AfterContentInit, Component, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList} from '@angular/core';
 import {TabComponent} from './tab/tab.component';
 
 @Component({
@@ -7,6 +7,11 @@ import {TabComponent} from './tab/tab.component';
 })
 export class TabsComponent implements AfterContentInit {
 
+  @Input() icons: boolean = false;
+  @Input() justify: boolean = false;
+  @Input() extended: boolean = false;
+  @Input() defaultVisible: number = 4;
+  @Output('onTabChange') onTabChange: EventEmitter<TabComponent> = new EventEmitter();
   @ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
 
   constructor() {
@@ -16,7 +21,9 @@ export class TabsComponent implements AfterContentInit {
     let activeTabs = this.tabs.filter(it => it.active);
 
     if (activeTabs.length === 0) {
-      this.selectTab(this.tabs.first);
+      let tab = this.tabs.first;
+      this.selectTab(tab);
+      this.onTabChange.emit(tab);
     }
   }
 
@@ -24,6 +31,14 @@ export class TabsComponent implements AfterContentInit {
     this.tabs.forEach(it => it.active = false);
 
     tab.active = true;
+    this.onTabChange.emit(tab);
   }
 
+  activateToggleTab(tab: TabComponent, status: boolean) {
+    tab.activated = status;
+  }
+
+  more() {
+    this.extended = true;
+  }
 }

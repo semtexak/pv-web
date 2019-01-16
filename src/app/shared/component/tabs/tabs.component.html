@@ -1,6 +1,21 @@
-<ul class="nav nav-tabs">
-  <li class="nav-item" *ngFor="let tab of tabs">
-    <a class="nav-link" [class.active]="tab.active" (click)="selectTab(tab)">{{tab.title}}</a>
-  </li>
+<ul class="nav" [ngClass]="{'nav-tabs': !icons, 'nav-icons': icons, 'nav-fill': justify}">
+  <ng-container *ngIf="!icons">
+    <li class="nav-item" *ngFor="let tab of tabs" [ngClass]="{'disabled': tab.disabled}">
+      <a class="nav-link" [class.active]="tab.active" (click)="selectTab(tab)">{{tab.title}}</a>
+    </li>
+  </ng-container>
+  <ng-container *ngIf="icons">
+    <li class="nav-item col-3 mb-4" *ngFor="let tab of tabs; let i = index" [hidden]="((tabs.length > defaultVisible && i >= defaultVisible-1) || (i > defaultVisible-1)) && !extended">
+      <a class="nav-link" [ngClass]="{'nav-link--disabled': tab.disabled, 'nav-link--active': tab.active, 'nav-link--enabled': tab.activated}" (click)="selectTab(tab)">
+        <span class="nav-link__icon" [ngClass]="tab.icon"></span>
+        <span class="nav-link__text">{{tab.title}}</span>
+      </a>
+    </li>
+    <li class="nav-item col-3 mb-4" *ngIf="tabs.length > defaultVisible && !extended">
+      <a class="nav-link" (click)="more()">
+        <span class="fas fa-ellipsis-h"></span>
+      </a>
+    </li>
+  </ng-container>
 </ul>
 <ng-content></ng-content>

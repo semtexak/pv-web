@@ -1,3 +1,76 @@
-<div class="container-fluid dashboard">
+<div class="container-fluid settings">
   <h2 class="page__title"><span class="page__title--disabled">Biztweet /</span> Nastavení</h2>
+  <div class="row">
+    <div class="col-12">
+      <pv-alerts></pv-alerts>
+      <div class="">
+        <div class="card card--md mb-4">
+          <h6 class="card-header">
+            {{activeTab.title}}
+          </h6>
+
+          <form class="form-horizontal" [formGroup]="form" novalidate (ngSubmit)="onSubmit(form.value)">
+            <div class="card-body">
+              <pv-tabs [icons]="true" [defaultVisible]="4" (onTabChange)="onTabChange($event)" #tabs>
+                <pv-tab title="Příspěvky" icon="fas fa-donate" #t1>
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="form-group form-check mt-2" [ngClass]="{'has-error': donationForm.controls['_enabled'].invalid && donationForm.controls['_enabled'].dirty}">
+                          <input type="checkbox" name="donation_enabled" id="donation_enabled" class="" [formControl]="donationForm.controls['_enabled']" (change)="toggleActivatedTab(t1, donationForm.controls['type'].value, donationForm.controls['_enabled'].value)">
+                          <label for="donation_enabled" class="form-check-label" >
+                            Povoleno
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                </pv-tab>
+                <pv-tab title="Předplatné" icon="fas fa-redo-alt" #t2>
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="form-group form-check mt-2" [ngClass]="{'has-error': subscriptionForm.controls['_enabled'].invalid && subscriptionForm.controls['_enabled'].dirty}">
+                          <input type="checkbox" name="subscription_enabled" id="subscription_enabled" class="" [formControl]="subscriptionForm.controls['_enabled']" (change)="toggleActivatedTab(t2, subscriptionForm.controls['type'].value, subscriptionForm.controls['_enabled'].value)">
+                          <label for="subscription_enabled" class="form-check-label" >
+                            Povoleno
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                </pv-tab>
+                <pv-tab title="Placený obsah" icon="fas fa-pen-nib" [disabled]="true" #t3>
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="form-group form-check mt-2" [ngClass]="{'has-error': paidContentForm.controls['_enabled'].invalid && paidContentForm.controls['_enabled'].dirty}">
+                          <input type="checkbox" name="paidContentForm_enabled" id="paidContentForm_enabled" class="" [formControl]="paidContentForm.controls['_enabled']" (change)="toggleActivatedTab(t3, paidContentForm.controls['type'].value, paidContentForm.controls['_enabled'].value)">
+                          <label for="paidContentForm_enabled" class="form-check-label" >
+                            Povoleno
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                </pv-tab>
+              </pv-tabs>
+
+            </div>
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group text-right mb-0">
+                    <input type="submit" class="btn btn-primary" value="Uložit 1" *ngIf="activeTab === t1" [disabled]="donationForm.invalid">
+                    <input type="submit" class="btn btn-primary" value="Uložit 2" *ngIf="activeTab === t2" [disabled]="subscriptionForm.invalid">
+                    <input type="submit" class="btn btn-primary" value="Uložit 3" *ngIf="activeTab === t3" [disabled]="paidContentForm.invalid">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

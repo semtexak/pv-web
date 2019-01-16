@@ -23,4 +23,8 @@ export class ApplicationService extends HttpService {
 
     return this.http.post(`${this.API_URL}/client-service/applications`, form, { headers: headers});
   }
+
+  addServicesToApplication(appId: string, form): Observable<any> {
+    return this.http.post(`${this.API_URL}/client-service/applications/${appId}/services`, form);
+  }
 }

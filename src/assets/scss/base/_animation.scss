@@ -15,3 +15,20 @@
 //    transform: translate3d(2px, 0, 0);
 //  }
 //}
+
+@keyframes fall-in {
+  0% {
+    opacity: 0;
+    transform: scale(3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

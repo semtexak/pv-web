@@ -7,7 +7,10 @@ import {Component, Input, OnInit} from '@angular/core';
 export class TabComponent {
 
   @Input() title: string;
+  @Input() icon: string;
   @Input() active: boolean = false;
+  @Input() disabled: boolean = false;
+  @Input() activated: boolean = false;
 
   constructor() { }
 
