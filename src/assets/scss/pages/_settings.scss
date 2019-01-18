@@ -24,7 +24,7 @@
           background-color: darken($background-color, 2%);
         }
 
-        &.nav-link--enabled, &.nav-link--active {
+        &.nav-link--enabled {
           background-color: $success-color;
           color: $white;
         }

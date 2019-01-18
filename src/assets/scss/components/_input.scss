@@ -71,6 +71,19 @@ input.form-control, .custom-file label {
         }
       }
     }
+
+    &[disabled] + label {
+      pointer-events: none;
+      opacity: 0.4;
+    }
+
+    &.form-check--active:checked + label:after {
+      background: $success-color;
+    }
+
+    &.form-check--nonactive:checked + label:after {
+      background: $danger-color;
+    }
   }
 
   label {

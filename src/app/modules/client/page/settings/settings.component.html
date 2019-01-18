@@ -18,11 +18,11 @@
                       <div class="col-12">
                         <div class="form-group form-delimiter pb-4 mt-2" [ngClass]="{'has-error': donationForm.controls['active'].invalid && donationForm.controls['active'].dirty}">
                           <div class="form-check form-check-inline">
-                            <input type="radio" id="donation_active" [value]="true" [formControl]="donationForm.controls['active']">
+                            <input type="radio" class="form-check--active" id="donation_active" (change)="toggleDisabledState(true)" [value]="true" [formControl]="donationForm.controls['active']">
                             <label for="donation_active">Aktivní</label>
                           </div>
                           <div class="form-check form-check-inline">
-                            <input type="radio" id="donation_nonactive" [value]="false" [formControl]="donationForm.controls['active']">
+                            <input type="radio" class="form-check--nonactive" id="donation_nonactive" (change)="toggleDisabledState(false)" [value]="false" [formControl]="donationForm.controls['active']">
                             <label for="donation_nonactive">Neaktivní</label>
                           </div>
                         </div>
@@ -36,11 +36,11 @@
                       <div class="col-12">
                         <div class="form-group form-delimiter pb-4 mt-2" [ngClass]="{'has-error': subscriptionForm.controls['active'].invalid && subscriptionForm.controls['active'].dirty}">
                           <div class="form-check form-check-inline">
-                            <input type="radio" name="subscription_active" id="subscription_active" [value]="true" [formControl]="subscriptionForm.controls['active']">
+                            <input type="radio" class="form-check--active" name="subscription_active" id="subscription_active" (change)="toggleDisabledState(true)" [value]="true" [formControl]="subscriptionForm.controls['active']">
                             <label for="subscription_active">Aktivní</label>
                           </div>
                           <div class="form-check form-check-inline">
-                            <input type="radio" name="subscription_active" id="subscription_nonactive" [value]="false" [formControl]="subscriptionForm.controls['active']">
+                            <input type="radio" class="form-check--nonactive" name="subscription_active" id="subscription_nonactive" (change)="toggleDisabledState(false)" [value]="false" [formControl]="subscriptionForm.controls['active']">
                             <label for="subscription_nonactive">Neaktivní</label>
                           </div>
                         </div>
@@ -48,7 +48,7 @@
                       <div class="col-12">
                         <div class="form-group form-check mt-2" [ngClass]="{'has-error': subscriptionForm.controls['checkOnLoad'].invalid && subscriptionForm.controls['checkOnLoad'].dirty}">
                           <input type="checkbox" name="checkOnLoad" id="checkOnLoad" class="" [formControl]="subscriptionForm.controls['checkOnLoad']">
-                          <label for="checkOnLoad" class="form-check-label" >
+                          <label for="checkOnLoad" class="form-check-label">
                             Kontrolovat předplatné po načtení
                           </label>
                         </div>
@@ -78,11 +78,11 @@
                       <div class="col-12">
                         <div class="form-group form-delimiter pb-4 mt-2" [ngClass]="{'has-error': paidContentForm.controls['active'].invalid && paidContentForm.controls['active'].dirty}">
                           <div class="form-check form-check-inline">
-                            <input type="radio" name="paid-content_active" id="paid-content_active" [value]="true" [formControl]="paidContentForm.controls['active']">
+                            <input type="radio" class="form-check--active" name="paid-content_active" id="paid-content_active" [value]="true" [formControl]="paidContentForm.controls['active']">
                             <label for="paid-content_active">Aktivní</label>
                           </div>
                           <div class="form-check form-check-inline">
-                            <input type="radio" name="paid-content_active" id="paid-content_nonactive" [value]="false" [formControl]="paidContentForm.controls['active']">
+                            <input type="radio" class="form-check--nonactive" name="paid-content_active" id="paid-content_nonactive" [value]="false" [formControl]="paidContentForm.controls['active']">
                             <label for="paid-content_nonactive">Neaktivní</label>
                           </div>
                         </div>

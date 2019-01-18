@@ -21,6 +21,24 @@ export class SettingsComponent implements OnInit {
   activeTab: TabComponent;
   application: IApplication = null;
 
+  initFormData = [
+    {
+      type: 'donation',
+      debug: false,
+      active: false
+    },
+    {
+      type: 'subscription',
+      debug: false,
+      active: false
+    },
+    {
+      type: 'paid-content',
+      debug: false,
+      active: false
+    }
+  ];
+
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private applicationService: ApplicationService) {
@@ -28,68 +46,94 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
+      this.initForm();
       if (params['appId']) {
         this.appId = params['appId'];
-        console.log(this.appId);
+        this.setDefaults(this.initFormData, 'INIT');
         this.applicationService.getApplication(this.appId).subscribe((application: IApplication) => {
           this.application = application;
-          this.setDefaults(this.application.configurations);
-          console.log(this.application);
+          if (this.application && this.application.configurations.length > 0) {
+            this.setDefaults(this.application.configurations, 'LOAD');
+          }
         });
       }
-    });
-    this.donationForm = this.formBuilder.group({
-      'type': ['donation', Validators.compose([Validators.required])],
-      'debug': [false, Validators.compose([Validators.required])],
-      'active': [false, Validators.compose([Validators.required])],
-      '_enabled': [false, Validators.compose([Validators.required])],
-    });
-    this.subscriptionForm = this.formBuilder.group({
-      'type': ['subscription', Validators.compose([Validators.required])],
-      'debug': [false, Validators.compose([Validators.required])],
-      'active': [false, Validators.compose([Validators.required])],
-      'checkOnLoad': [true, Validators.compose([Validators.required])],
-      'popupOnLoad': [false, Validators.compose([Validators.required])],
-      'closable': [false, Validators.compose([Validators.required])],
-      '_enabled': [false, Validators.compose([Validators.required])],
-    });
-    this.paidContentForm = this.formBuilder.group({
-      'type': ['paid-content', Validators.compose([Validators.required])],
-      'debug': [false, Validators.compose([Validators.required])],
-      'active': [false, Validators.compose([Validators.required])],
-      '_enabled': [false, Validators.compose([Validators.required])],
-    });
-    this.form = this.formBuilder.group({
-      'donation': this.donationForm,
-      'subscription': this.subscriptionForm,
-      'paid-content': this.paidContentForm
     });
   }
 
   onSubmit(values) {
     const form = values[this.activeTab.type];
     if (form) {
+      console.log(form);
       this.applicationService.addServicesToApplication(this.appId, form).subscribe(data => {
         console.log(data);
       });
     }
   }
 
-  setDefaults(values: Array<any>) {
-    console.log(values);
-    for (const config of values) {
-      for (const key of Object.keys(config)) {
-        console.log(`Setting field ${key} with value ${config[key]} -> ${this.form.controls[config.type]}`);
-        if (this.form.controls[config.type].get(key)) {
-          this.form.controls[config.type].get(key).setValue(config[key]);
+  setDefaults(values: Array<any>, source: string) {
+    console.log(`---------- ${source} ----------`);
+    for (const item of values) {
+      console.log(item.type);
+      const subForm = this.form.controls[item.type];
+      if (this.tabs.tabs) {
+        const tabByType: TabComponent = this.tabs.tabs.find(tab => tab.type === item.type);
+        tabByType.activated = item.active;
+      }
+      for (const valKey of Object.keys(item)) {
+        const control = subForm.get(valKey);
+        if (control) {
+          control.patchValue(item[valKey]);
+          // console.log(`Form: ${item.type}, valKey: ${valKey}`);
         }
       }
-      // this.form.controls[config.type];
-      console.log(this.form.controls[config.type]);
     }
   }
 
   onTabChange(tab: TabComponent) {
     this.activeTab = tab;
+  }
+
+  toggleDisabledState(value: boolean) {
+    console.log(value);
+    const form = this.form.controls[this.activeTab.type];
+    if (form) {
+      const controls = form['controls'];
+      for (const controlKey of Object.keys(controls)) {
+        if (controlKey !== 'active' && controlKey !== 'type') {
+          if (value) {
+            controls[controlKey].enable();
+          } else {
+            controls[controlKey].disable();
+          }
+
+        }
+      }
+    }
+  }
+
+  private initForm() {
+    this.donationForm = this.formBuilder.group({
+      'type': ['donation', Validators.compose([Validators.required])],
+      'debug': [null, Validators.compose([Validators.required])],
+      'active': [null, Validators.compose([Validators.required])],
+    });
+    this.subscriptionForm = this.formBuilder.group({
+      'type': ['subscription', Validators.compose([Validators.required])],
+      'debug': [null, Validators.compose([Validators.required])],
+      'active': [null, Validators.compose([Validators.required])],
+      'checkOnLoad': [null, Validators.compose([Validators.required])],
+      'popupOnLoad': [null, Validators.compose([Validators.required])],
+      'closable': [null, Validators.compose([Validators.required])],
+    });
+    this.paidContentForm = this.formBuilder.group({
+      'type': ['paid-content', Validators.compose([Validators.required])],
+      'debug': [null, Validators.compose([Validators.required])],
+      'active': [null, Validators.compose([Validators.required])],
+    });
+    this.form = this.formBuilder.group({
+      'donation': this.donationForm,
+      'subscription': this.subscriptionForm,
+      'paid-content': this.paidContentForm
+    });
   }
 }

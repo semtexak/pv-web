@@ -57,6 +57,7 @@ export class AuthenticationService extends HttpService {
         this.loggedUser.next(user);
         return this.getUserApplications(user.id).pipe(
           map(applications => {
+            console.log(applications);
             const userTmp = this.loggedUser.getValue();
             userTmp.applications = applications;
             this.loggedUser.next(userTmp);

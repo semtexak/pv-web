@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ClientService} from '../../../../shared/service/client.service';
 import {ApplicationService} from '../../../../shared/service/application.service';
-import {HttpHeaders} from '@angular/common/http';
+import {HttpHeaders, HttpResponse} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {AlertService} from '../../../../shared/service/alert.service';
 
 @Component({
   selector: 'pv-application-registration',
@@ -15,7 +17,9 @@ export class ApplicationRegistrationComponent implements OnInit {
   file: File = null;
 
   constructor(private formBuilder: FormBuilder,
-              private applicationService: ApplicationService) {
+              private alertService: AlertService,
+              private applicationService: ApplicationService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -63,7 +67,16 @@ export class ApplicationRegistrationComponent implements OnInit {
       console.log(formdata);
 
       values.test = this.file;
-      this.applicationService.createApplication(formdata).subscribe(status => console.log(status));
+      this.applicationService.createApplication(formdata).subscribe((response: HttpResponse<any>) => {
+        console.log(response);
+        console.log(response.headers.keys());
+        let location = response.headers.get('Location');
+        console.log(location);
+        if (location) {
+          const appId = location.split('/').pop();
+          this.router.navigate([`/klient/stranka/${appId}/nastaveni`]).then(() => this.alertService.success('Registrace nové stránky proběhla úspěšně. Nastavte si požadované služby a začněte vydělávat.'))
+        }
+      });
     }
   }
 }
