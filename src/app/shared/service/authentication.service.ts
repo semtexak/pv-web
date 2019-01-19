@@ -96,7 +96,9 @@ export class AuthenticationService extends HttpService {
   }
 
   private saveToken(token: IToken) {
-    this.cookieService.set('act', token.access_token, new Date(token.expires_at), '/');
+    const current = new Date();
+    const expiresAt = new Date(current.getTime() + (token.expires_in * 1000));
+    this.cookieService.set('act', token.access_token, expiresAt, '/');
     console.log('Saving token', token.access_token);
   }
 
