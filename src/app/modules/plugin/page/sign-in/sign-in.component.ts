@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../../../shared/service/authentication.service';
 import {AlertService} from '../../../../shared/service/alert.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ISingInForm} from '../../../../shared/model/i-sing-in-form';
 import {HttpErrorResponse} from '@angular/common/http';
 
@@ -10,13 +10,15 @@ import {HttpErrorResponse} from '@angular/common/http';
   selector: 'pv-sign-in',
   templateUrl: './sign-in.component.html'
 })
-export class SignInComponent {
+export class SignInComponent implements OnInit {
 
   public form: FormGroup;
   public error: string;
+  private redirectUrl: string = '/';
 
   constructor(private authenticationService: AuthenticationService,
               private alertService: AlertService,
+              private route: ActivatedRoute,
               private router: Router,
               private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
@@ -25,10 +27,20 @@ export class SignInComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(queryParams => {
+      const redirect = queryParams['redirect'];
+      if (redirect) {
+        this.redirectUrl = redirect;
+      }
+    });
+  }
+
   onSubmit(data: ISingInForm): void {
     if (this.form.valid) {
       this.authenticationService.authenticate(data).subscribe(() => {
-          this.router.navigateByUrl('/');
+        console.log(`Redirecting to: ${this.redirectUrl}`);
+          this.router.navigateByUrl(this.redirectUrl);
         },
         error => {
           console.log(error);

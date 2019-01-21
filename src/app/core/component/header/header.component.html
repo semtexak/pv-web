@@ -7,7 +7,7 @@
     </a>
 
 
-    <button class="sidebar__toggler sidebar__toggler--dhover" type="button" (click)="toggleSidebar()">
+    <button class="sidebar__toggler sidebar__toggler--dhover" type="button" *ngIf="adminSection" (click)="toggleSidebar()">
       <span class="fl flaticon-menu"></span>
     </button>
 

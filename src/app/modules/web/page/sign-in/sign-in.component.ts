@@ -16,6 +16,7 @@ export class SignInComponent implements OnInit {
   @ViewChild('password') passwordInput: ElementRef;
   public form: FormGroup;
   public error: string;
+  private redirectUrl: string = '/';
 
   constructor(private authenticationService: AuthenticationService,
               private alertService: AlertService,
@@ -29,21 +30,26 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      const login = params['e'];
+    this.route.queryParams.subscribe(queryParams => {
+      const login = queryParams['e'];
       this.form.get('username').setValue(login);
       if (login) {
         this.passwordInput.nativeElement.focus();
       } else {
         this.usernameInput.nativeElement.focus();
       }
-    })
+      const redirect = queryParams['redirect'];
+      if (redirect) {
+        this.redirectUrl = redirect;
+      }
+    });
   }
 
   onSubmit(data: ISingInForm): void {
     if (this.form.valid) {
       this.authenticationService.authenticate(data).subscribe(() => {
-          this.router.navigateByUrl('/');
+          console.log(`Redirecting to: ${this.redirectUrl}`);
+          this.router.navigateByUrl(this.redirectUrl);
         },
         error => {
         console.log(error);
