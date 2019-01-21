@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ApplicationService} from '../../../../shared/service/application.service';
 import {TabComponent} from '../../../../shared/component/tabs/tab/tab.component';
 import {IApplication} from '../../../../shared/model/base/i-application';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'pv-settings',
@@ -41,7 +42,9 @@ export class SettingsComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
+              private titleService: Title,
               private applicationService: ApplicationService) {
+    this.titleService.setTitle('Nastavení stránky');
   }
 
   ngOnInit() {

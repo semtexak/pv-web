@@ -6,6 +6,7 @@ import {TestComponent} from './page/test/test.component';
 import {ApplicationComponent} from './page/application/application.component';
 import {DonationComponent} from './page/application/donation/donation.component';
 import {SubscriptionComponent} from './page/application/subscription/subscription.component';
+import {AuthGuard} from '../../core/guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
   {
     path: 'app/:appId',
     component: ApplicationComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'donation',
