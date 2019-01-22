@@ -23,8 +23,11 @@ $warning-color: #ffc107;
 
 
 /* Button */
-$button-primary-gradient-start-color: #01748a;
-$button-primary-gradient-end-color: #01adce;
+$button-primary-gradient-start-background: #01748a;
+$button-primary-gradient-end-background: #01adce;
+$button-success-gradient-start-background: #069447;
+$button-success-gradient-end-background: #6cbe45;
+$button-success-gradient-border: $button-success-gradient-start-background;
 
 /* Dropdown */
 $dropdown-item-hover-background: #ebf5ff;

@@ -5,6 +5,8 @@ export class User {
   id: number;
   email: String;
   name: String;
+  firstName: String;
+  lastName: String;
   authorities: IAuthority[];
   applications: IApplication[] = [];
 

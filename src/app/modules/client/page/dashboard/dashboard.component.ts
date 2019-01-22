@@ -5,6 +5,8 @@ import {IApplicationStatistics} from '../../../../shared/model/base/statistics/i
 import {IStatistics} from '../../../../shared/model/base/statistics/i-statistics';
 import {DatePipe} from '@angular/common';
 import {Chart} from 'chart.js';
+import * as moment from 'moment';
+import {Moment} from 'moment';
 
 @Component({
   selector: 'pv-dashboard',
@@ -63,120 +65,128 @@ export class DashboardComponent implements OnInit {
     this.statistics = statistics;
 
     const xData = this.getRange(this.statisticPeriod.from, this.statisticPeriod.to);
-    const yData = this.prepareChartData(xData, statistics.statistics['donate'].data);
+    const yData = this.prepareChartData(xData, statistics.statistics);
+
     this.chart = new Chart('canvas', {
       type: 'line',
       data: {
-        labels: yData.map(d => d.t.toLocaleString()),
-        datasets: [{
-          label: 'Demo',
-          data: yData,
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
-          borderWidth: 1
-        }]
+        datasets: [
+          {
+            data: yData.donation,
+            label: 'Příspěvky',
+            borderWidth: 1,
+            backgroundColor: '#1cb4ff20',
+            borderColor: '#1cb4ff',
+            fill: true,
+          },
+          {
+            data: yData.subscription,
+            label: 'Předplatné',
+            borderWidth: 1,
+            backgroundColor: '#F5B04120',
+            borderColor: '#F5B041',
+            fill: true,
+          }
+        ]
       },
       options: {
-        responsive: true,
         scales: {
-          xAxes: {
+          xAxes: [{
+            gridLines: {
+              display: true
+            },
             type: 'time',
             time: {
+              parser: 'YYYY-MM-DD HH:mm:ss',
+              unit: 'day',
               displayFormats: {
-                'millisecond': 'MMM DD',
-                'second': 'MMM DD',
-                'minute': 'MMM DD',
-                'hour': 'MMM DD',
-                'day': 'MMM DD',
-                'week': 'MMM DD',
-                'month': 'MMM DD',
-                'quarter': 'MMM DD',
-                'year': 'MMM DD',
-              }
+                day: 'DD.'
+              },
+              min: '2019-01-01 18:43:53',
+              max: '2019-01-31 18:43:53'
+            },
+            ticks: {
+              source: 'data'
             }
-          },
+          }],
           yAxes: [{
-            stacked: true,
+            gridLines: {
+              display: false
+            },
           }]
         },
-        animation: {
-          duration: 750,
-        },
-      }
+        legend: {
+          display: true
+        }
+      },
+      plugins: [{
+        beforeInit: function (chart) {
+          const time = chart.options.scales.xAxes[0].time,
+            timeDiff = moment(time.max).diff(moment(time.min), 'd');
+          for (let i = 0; i <= timeDiff; i++) {
+            const label = moment(time.min).add(i, 'd').format('YYYY-MM-DD HH:mm:ss');
+            chart.data.labels.push(label);
+          }
+        }
+      }]
     });
   }
 
   switchPeriod(type: string) {
-    let date, year, month, day, from, to;
+    let date, year, month, day, start, end;
     date = new Date();
     year = date.getFullYear();
     month = date.getMonth();
     day = date.getDate();
 
+
     switch (type) {
       case 'today':
-        from = new Date(year, month, day);
-        to = new Date(year, month, day);
-        to.setHours(23, 59, 59);
+        start = new Date(year, month, day);
+        end = new Date(year, month, day);
+        end.setHours(23, 59, 59);
         break;
       case 'curmonth':
-        from = new Date(year, month, 1);
-        to = new Date(year, month + 1, 0);
-        to.setHours(23, 59, 59);
+        start = moment().startOf('month').format('YYYY-MM-DD HH:mm:ss');
+        end = moment().endOf('month').format('YYYY-MM-DD HH:mm:ss');
         break;
       case 'curyear':
-        from = new Date(year, 0, 1);
-        to = new Date(year, 11 + 1, 0);
-        to.setHours(23, 59, 59);
+        start = new Date(year, 0, 1);
+        end = new Date(year, 11 + 1, 0);
+        end.setHours(23, 59, 59);
         break;
     }
-    return {from: this.datePipe.transform(from, 'yyyy-MM-dd HH:mm:ss'), to: this.datePipe.transform(to, 'yyyy-MM-dd HH:mm:ss')};
+    return {from: start, to: end};
   }
 
-  private getRange(from: string, to: string): Array<Date> {
-    const fromDate = new Date(from);
-    const toDate = new Date(to);
+  private getRange(from: string, to: string): string[] {
+    const startDate = moment(from);
+    const endDate = moment(to);
+    const diffInDays = endDate.diff(startDate, 'days');
     const result = [];
-    let current: Date = new Date(from);
-    result.push(fromDate);
-    while (current < toDate) {
-      const tmp = new Date(current.setDate(current.getDate() + 1).valueOf());
-      result.push(tmp);
-      current = tmp;
+
+    for (let i = 0; i <= diffInDays; i++) {
+      result.push(moment(startDate).add(i, 'd').format('YYYY-MM-DD'));
     }
-    console.log(result);
     return result;
   }
 
-  private prepareChartData(dates: Array<Date>, data: Array<any>): Array<any> {
-    const result = [];
-    for (const item of data) {
-      item.createdAt = new Date(item.createdAt);
-      item.createdAt.setHours(0, 0, 0, 0);
-    }
+  private prepareChartData(dates: string[], statistics) {
+    const donationData = [];
+    const subscriptionData = [];
+
     for (const date of dates) {
-      const filteredData = data.filter(item => item.createdAt.valueOf() === date.valueOf()).map(item => item.price.amount);
-      const totalPrice = filteredData.reduce((a, b) => a + b, 0);
-      result.push({
-        t: date,
-        y: totalPrice
-      });
+      if (statistics['donate']) {
+        const totalDonationPrice = statistics['donate'].data.filter(item => moment(item.createdAt).isSame(moment(date), 'days'))
+          .map(item => item.price.amount).reduce((a, b) => a + b, 0);
+        donationData.push(totalDonationPrice);
+      }
+      if (statistics['subscription']) {
+        const totalSubscriptionPrice = statistics['subscription'].data.filter(item => moment(item.createdAt).isSame(moment(date), 'days'))
+          .map(item => item.price.amount).reduce((a, b) => a + b, 0);
+        subscriptionData.push(totalSubscriptionPrice);
+      }
     }
-    console.log(result);
-    return result;
+    return {donation: donationData, subscription: subscriptionData};
   }
 }

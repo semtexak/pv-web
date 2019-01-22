@@ -19,11 +19,23 @@ export class AuthenticationService extends HttpService {
   private clientId = environment.clientId;
   private clientSecret = environment.clientSecret;
 
+  private static mapUser(userData: User) {
+    const user = new User();
+    user.id = userData.id;
+    user.email = userData.email;
+    user.name = userData.name ? userData.name : (userData.firstName ? `${userData.firstName} ${userData.lastName}` : userData.email);
+    user.firstName = userData.firstName;
+    user.lastName = userData.lastName;
+    user.authorities = userData.authorities;
+    user.applications = userData.applications;
+    return user;
+  }
+
   constructor(private http: HttpClient, private cookieService: CookieService) {
     super(http);
     const udata = localStorage.getItem('udata');
     if (udata && this.getToken() !== '') {
-      this.loggedUser.next(this.mapUser(JSON.parse(udata)));
+      this.loggedUser.next(AuthenticationService.mapUser(JSON.parse(udata)));
     } else {
       localStorage.removeItem('udata');
     }
@@ -51,8 +63,8 @@ export class AuthenticationService extends HttpService {
   private saveUser(): Observable<any> {
     return this.getUserData().pipe(
       switchMap((userData: User) => {
-        const user = this.mapUser(userData);
-        console.log(`User receiver ${userData.name}`);
+        const user = AuthenticationService.mapUser(userData);
+        console.log(`User received: ${userData.email}`);
         localStorage.setItem('udata', JSON.stringify(user));
         this.loggedUser.next(user);
         return this.getUserApplications(user.id).pipe(
@@ -82,17 +94,6 @@ export class AuthenticationService extends HttpService {
 
   private logoutBackend(): Observable<any> {
     return this.http.delete(`${this.API_URL}/user-service/user/logout`);
-  }
-
-
-  private mapUser(userData: User) {
-    const user = new User();
-    user.id = userData.id;
-    user.email = userData.email;
-    user.name = userData.name ? userData.name : userData.email;
-    user.authorities = userData.authorities;
-    user.applications = userData.applications;
-    return user;
   }
 
   private saveToken(token: IToken) {

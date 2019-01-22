@@ -12,8 +12,20 @@
   }
 
   &.btn-gradient {
-    @include gradient-x($button-primary-gradient-start-color, $button-primary-gradient-end-color);
+    @include gradient-x($button-primary-gradient-start-background, $button-primary-gradient-end-background);
     color: $white;
+
+    &.btn-gradient--success {
+      @include gradient-x($button-success-gradient-start-background, $button-success-gradient-end-background);
+      border-color: $button-success-gradient-start-background;
+
+      &:focus {
+        box-shadow: 0 0 0 0.2rem #06944782!important;
+      }
+      &:active {
+        border-color: $button-success-gradient-start-background!important;
+      }
+    }
   }
 
   &.facebook {

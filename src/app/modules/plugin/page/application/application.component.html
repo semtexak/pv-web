@@ -1,9 +1,75 @@
-<div class="row">
-  <div class="">
-    test
-  </div>
-  <div class="col">
-    <router-outlet></router-outlet>
+<div class="container-fluid plugin-application">
+  <div class="row">
+    <div class="col-12 col-sm-4 col-lg-3 p-0">
+      <div class="box box__plugin-login p-4">
+        <header>
+          <div class="client">
+            <!--<pv-alert></pv-alert>-->
+            <img *ngIf="application" class="client__logo"
+                 src="http://localhost:8765/client-service/applications/img/{{application.appId}}.png"
+                 alt="{{application.name}}">
+          </div>
+          <div class="user">
+            <div class="col-md-12 col-sm-12 text-center">
+              <h2 class="user__name">{{user?.name}}
+                <small class="user__logout">(<a>Odhlásit</a>)</small>
+              </h2>
+            </div>
+          </div>
+          <div class="payment__info">
+            <table>
+              <tbody>
+              <tr>
+                <td class="payment--strong">Produkt</td>
+                <td class="payment--ellipsis">aa</td>
+              </tr>
+              <tr>
+                <td class="payment--strong">Příjemce</td>
+                <td class="payment--ellipsis">{{application?.domain}}</td>
+              </tr>
+              <tr>
+                <td class="payment--strong">Cena</td>
+                <td class="payment--ellipsis">19 Kč</td>
+              </tr>
+              <tr>
+                <td class="payment--strong">Úhrada</td>
+                <td class="payment--ellipsis">Kartou ihned</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="payment__form">
+            <form [formGroup]="form" (submit)="onSubmit(form.value)">
+              <div class="form-group form-check mt-2" [ngClass]="{'has-error':form.controls['use-remembered-card'].invalid && form.controls['use-remembered-card'].dirty}">
+                <input type="checkbox" name="use-remembered-card" id="use-remembered-card" class=""
+                       [formControl]="form.controls['use-remembered-card']">
+                <label for="use-remembered-card" class="form-check-label">
+                  Použít mou zapamatovanou kartu
+                </label>
+              </div>
+              <div class="form-group form-check mt-2" [ngClass]="{'has-error':form.controls['auto-renew'].invalid && form.controls['auto-renew'].dirty}">
+                <input type="checkbox" name="auto-renew" id="auto-renew" class=""
+                       [formControl]="form.controls['auto-renew']">
+                <label for="auto-renew" class="form-check-label">
+                  Obnova
+                </label>
+              </div>
+              <div class="form-group">
+                <input class="btn btn-primary btn-gradient btn-gradient--success btn-lg btn-full order-submit" type="submit" [value]="'Zaplatit: ' + '19 Kč'">
+              </div>
+            </form>
+          </div>
+        </header>
+        <div class="box-inner">
+
+        </div>
+        <footer class="text-center">
+          <p class="mb-0">Více o službě <a href="http://payvont.com" target="_blank">Payvont</a>.</p>
+        </footer>
+      </div>
+    </div>
+    <div class="col-12 col-sm-8 col-lg-9 pr-0">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>
-
