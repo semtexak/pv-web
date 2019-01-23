@@ -1,5 +1,30 @@
 .dashboard {
+  .card-body.card-body--border-right {
+    border-right: 1px solid rgba(24, 28, 33, 0.06);
+  }
+
+
+
   .chart__wrapper {
-    height: 240px;
+    position: relative;
+    height: 290px;
+    padding: 25px;
+
+    .axis-label {
+      position: absolute;
+      color: $chart-label-color;
+      font-family: $sidebar-font;
+
+      &.axis-label__y {
+        top: 50%;
+        left: -15px;
+        transform: rotate(-90deg) translateY(-50%);
+      }
+      &.axis-label__x {
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+      }
+    }
   }
 }

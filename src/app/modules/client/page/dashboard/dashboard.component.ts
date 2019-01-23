@@ -93,7 +93,8 @@ export class DashboardComponent implements OnInit {
         scales: {
           xAxes: [{
             gridLines: {
-              display: true
+              display: true,
+              color: 'rgba(24, 28, 33, 0.06)'
             },
             type: 'time',
             time: {
@@ -107,18 +108,20 @@ export class DashboardComponent implements OnInit {
             },
             ticks: {
               source: 'data',
-              fontColor: '#b0b0b0'
+              fontColor: '#b0b0b0',
+              padding: 10,
             }
           }],
           yAxes: [{
             gridLines: {
               display: true,
-              color: 'black'
+              color: 'rgba(24, 28, 33, 0.06)'
             },
             ticks: {
               fontColor: '#b0b0b0',
-              autoSkip: true,
+              autoSkip: false,
               maxTicksLimit: 5,
+              padding: 15,
               beginAtZero: true,
               callback: (label, index, labels) => {
                 return `${label} Kč`;

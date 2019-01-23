@@ -66,14 +66,44 @@
         </h6>
         <div class="row">
         <div class="col-8">
-          <div class="card-body">
+          <div class="card-body card-body--border-right">
             <div class="chart__wrapper" *ngIf="chart">
+              <span class="axis-label axis-label__y">Výše prodejů</span>
+              <span class="axis-label axis-label__x">Den v měsíci</span>
               <canvas id="canvas">{{ chart }}</canvas>
             </div>
           </div>
         </div>
         <div class="col-4">
-          <div class="card-body"></div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-6 col-xl-5 text-muted mb-3">Total sales</div>
+              <div class="col-6 col-xl-7 mb-3">
+                <span class="text-big">10,332</span>
+                <sup class="text-success">+12%</sup>
+              </div>
+              <div class="col-6 col-xl-5 text-muted mb-3">Income amount</div>
+              <div class="col-6 col-xl-7 mb-3">
+                <span class="text-big">$1,534</span>
+                <sup class="text-danger">-5%</sup>
+              </div>
+              <div class="col-6 col-xl-5 text-muted mb-3">Total budget</div>
+              <div class="col-6 col-xl-7 mb-3">
+                <span class="text-big">$10,534</span>
+                <sup class="text-success">+12%</sup>
+              </div>
+              <div class="col-6 col-xl-5 text-muted mb-3">Page views</div>
+              <div class="col-6 col-xl-7 mb-3">
+                <span class="text-big">21,332</span>
+                <sup class="text-danger">-12%</sup>
+              </div>
+              <div class="col-6 col-xl-5 text-muted mb-3">Completed tasks</div>
+              <div class="col-6 col-xl-7 mb-3">
+                <span class="text-big">12</span>
+                <sup class="text-success">+12%</sup>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       </div>

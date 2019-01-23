@@ -1,0 +1,21 @@
+.plugin-payment-form {
+
+  .payment__header, .payment__content {
+    text-align: center;
+  }
+
+  .payment__heading {
+    font-weight: 600;
+    @include rem-fallback(font-size, 31);
+    font-family: $sidebar-font;
+    padding: 21px;
+    margin-bottom: 0;
+    line-height: 1;
+
+    &.payment__heading--gradient {
+      @include gradient-x($plugin-gradient-start-color, $plugin-gradient-end-color);
+      color: $white;
+    }
+  }
+
+}
