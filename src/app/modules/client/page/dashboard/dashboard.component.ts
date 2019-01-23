@@ -6,7 +6,6 @@ import {IStatistics} from '../../../../shared/model/base/statistics/i-statistics
 import {DatePipe} from '@angular/common';
 import {Chart} from 'chart.js';
 import * as moment from 'moment';
-import {Moment} from 'moment';
 
 @Component({
   selector: 'pv-dashboard',
@@ -90,6 +89,7 @@ export class DashboardComponent implements OnInit {
         ]
       },
       options: {
+        maintainAspectRatio: false,
         scales: {
           xAxes: [{
             gridLines: {
@@ -106,17 +106,28 @@ export class DashboardComponent implements OnInit {
               max: '2019-01-31 18:43:53'
             },
             ticks: {
-              source: 'data'
+              source: 'data',
+              fontColor: '#b0b0b0'
             }
           }],
           yAxes: [{
             gridLines: {
-              display: false
+              display: true,
+              color: 'black'
             },
+            ticks: {
+              fontColor: '#b0b0b0',
+              autoSkip: true,
+              maxTicksLimit: 5,
+              beginAtZero: true,
+              callback: (label, index, labels) => {
+                return `${label} Kč`;
+              }
+            }
           }]
         },
         legend: {
-          display: true
+          display: true,
         }
       },
       plugins: [{
