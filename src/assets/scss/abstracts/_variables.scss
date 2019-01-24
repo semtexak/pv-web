@@ -77,9 +77,11 @@ $gradient-primary-start-color: #082e4b;
 $gradient-primary-end-color: #01adce;
 $gradient-success-start-color: #004e38;
 $gradient-success-end-color: #37b34a;
+$plugin-gradient-start-color: #082e4b;
+$plugin-gradient-end-color: #01adce;
 
 
-/* Bootstrap defaults */
+  /* Bootstrap defaults */
 $enable-rounded: false;
 $enable-shadows: false;
 
@@ -110,3 +112,6 @@ $form-delimiter-border-color: $card-header-border-color;
 
 /* Service settings */
 $service-hover-background: $dropdown-item-hover-background;
+
+/* Chart */
+$chart-label-color: #949494;
