@@ -132,7 +132,7 @@ export class DashboardComponent implements OnInit {
       },
       plugins: [{
         beforeInit: function (chart) {
-          const time = chart.options.scales.xAxes[0].time,
+          const time = chart['options'].scales.xAxes[0].time,
             timeDiff = moment(time.max).diff(moment(time.min), 'd');
           for (let i = 0; i <= timeDiff; i++) {
             const label = moment(time.min).add(i, 'd').format('YYYY-MM-DD HH:mm:ss');
