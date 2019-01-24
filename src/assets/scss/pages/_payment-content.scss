@@ -18,4 +18,47 @@
     }
   }
 
+  .payment__content {
+    h2 {
+      font-weight: 600;
+      @include rem-fallback(font-size, 28);
+      font-family: $sidebar-font;
+      color: #14667e;
+    }
+
+    p {
+      @include rem-fallback(font-size, 15);
+      font-weight: 100;
+    }
+  }
+
+  .payment__action {
+    .btn {
+      padding: 13px 15px;
+      @include rem-fallback(font-size, 15);
+      text-align: left;
+
+      &.btn-outline-secondary:hover {
+        border-color: darken($secondary, 25%);
+        color: darken($secondary, 25%)
+      }
+
+      &.btn-outline-info:hover {
+        border-color: $button-primary-gradient-start-background;
+        color: $button-primary-gradient-start-background;
+      }
+
+      &:hover {
+        background: none;
+      }
+
+      .fas {
+        position: absolute;
+        right: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+
 }
