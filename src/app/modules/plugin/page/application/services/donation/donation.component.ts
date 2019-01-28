@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ApplicationContextService} from '../../../service/application-context.service';
-import {IApplication} from '../../../../../shared/model/base/i-application';
+import {ApplicationContextService} from '../../../../service/application-context.service';
+import {IApplication} from '../../../../../../shared/model/base/i-application';
 import {Router} from '@angular/router';
 
 @Component({

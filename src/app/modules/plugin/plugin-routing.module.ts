@@ -3,10 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { SignInComponent } from './page/sign-in/sign-in.component';
 import { SignUpComponent } from './page/sign-up/sign-up.component';
 import {ApplicationComponent} from './page/application/application.component';
-import {DonationComponent} from './page/application/donation/donation.component';
-import {SubscriptionComponent} from './page/application/subscription/subscription.component';
+import {DonationComponent} from './page/application/services/donation/donation.component';
+import {SubscriptionComponent} from './page/application/services/subscription/subscription.component';
 import {AuthGuard} from '../../core/guard/auth.guard';
 import {OrderStatusComponent} from './page/application/order-status/order-status.component';
+import {ServicesComponent} from './page/application/services/services.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {redirectUrl: '/plugin/sign-in'},
     children: [
+      {
+        path: '',
+        component: ServicesComponent
+      },
       {
         path: 'donation',
         component: DonationComponent

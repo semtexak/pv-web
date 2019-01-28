@@ -16,7 +16,8 @@
               </h2>
             </div>
           </div>
-          <div class="payment__info">
+          <div class="payment__info" *ngIf="!order">Nothing.</div>
+          <div class="payment__info" *ngIf="order">
             <table>
               <tbody>
               <tr>

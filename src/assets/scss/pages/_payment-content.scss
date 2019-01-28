@@ -1,6 +1,8 @@
 .plugin-payment-form {
 
   .payment__header, .payment__content {
+    display: flex;
+    flex-direction: column;
     text-align: center;
   }
 
@@ -19,6 +21,8 @@
   }
 
   .payment__content {
+    flex: 1;
+
     h2 {
       font-weight: 600;
       @include rem-fallback(font-size, 28);
