@@ -15,4 +15,8 @@ export class OrderService extends HttpService {
   getOrders(page: number, filter: string, orderBy: string): Observable<any> {
     return this.http.get(`${this.API_URL}/order-service/orders/all?page=${page}${filter ? '&' + filter : ''}${orderBy ? '&sort=' + orderBy : ''}`);
   }
+
+  getOrderStatus(hash: string): Observable<any> {
+    return this.http.get(`${this.API_URL}/order-service/orders/${hash}/status`);
+  }
 }

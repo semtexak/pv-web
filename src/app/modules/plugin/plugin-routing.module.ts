@@ -6,6 +6,7 @@ import {ApplicationComponent} from './page/application/application.component';
 import {DonationComponent} from './page/application/donation/donation.component';
 import {SubscriptionComponent} from './page/application/subscription/subscription.component';
 import {AuthGuard} from '../../core/guard/auth.guard';
+import {OrderStatusComponent} from './page/application/order-status/order-status.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
       {
         path: 'subscription',
         component: SubscriptionComponent
+      },
+      {
+        path: 'status',
+        component: OrderStatusComponent
       }
     ]
   }

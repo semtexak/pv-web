@@ -1,17 +1,25 @@
 export interface IOrder {
+  hash: string;
+  status: Status;
+  price: Price;
+  products: Product[];
+}
 
-  id: number;
-  email: string;
-  active: boolean;
-  createdAt: number;
-  roles: Role[];
+export enum Status {
+  NEW = 'NEW',
+  PAID = 'PAID',
+  OVERDUE = 'OVERDUE',
+  ACTIVE = 'ACTIVE',
+  FINISHED = 'FINISHED'
 
 }
 
-export enum Role {
+export interface Product {
+  name: string;
+  price: Price;
+}
 
-  USER = 'USER',
-  CLIENT = 'CLIENT',
-  ADMIN = 'ADMIN',
-
+export interface Price {
+  amount: number;
+  currency: string;
 }

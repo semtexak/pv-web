@@ -9,6 +9,7 @@ import {SharedModule} from '../../shared/shared.module';
 import { ApplicationComponent } from './page/application/application.component';
 import { DonationComponent } from './page/application/donation/donation.component';
 import { SubscriptionComponent } from './page/application/subscription/subscription.component';
+import { OrderStatusComponent } from './page/application/order-status/order-status.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { SubscriptionComponent } from './page/application/subscription/subscript
     PluginRoutingModule,
     SharedModule
   ],
-  declarations: [SignInComponent, SignUpComponent, TestComponent, ApplicationComponent, DonationComponent, SubscriptionComponent]
+  declarations: [SignInComponent, SignUpComponent, TestComponent, ApplicationComponent, DonationComponent, SubscriptionComponent, OrderStatusComponent]
 })
 export class PluginModule { }

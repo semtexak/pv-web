@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ApplicationService} from '../../../../shared/service/application.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {IApplication} from '../../../../shared/model/base/i-application';
 import {ApplicationContextService} from '../../service/application-context.service';
 import {AuthenticationService} from '../../../../shared/service/authentication.service';
 import {User} from '../../../../shared/model/user';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ISingInForm} from '../../../../shared/model/i-sing-in-form';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {IOrder, Status} from '../../../../shared/model/base/i-order';
 
 @Component({
   selector: 'pv-application',
@@ -15,6 +15,8 @@ import {ISingInForm} from '../../../../shared/model/i-sing-in-form';
 export class ApplicationComponent implements OnInit {
 
   application: IApplication;
+  order: IOrder;
+  formDisabled: boolean = false;
   user: User;
   form: FormGroup;
 
@@ -31,6 +33,11 @@ export class ApplicationComponent implements OnInit {
 
   ngOnInit() {
     this.authenticationService.loggedUser.subscribe((user: User) => this.user = user);
+    this.applicationContextService.order.subscribe((order: IOrder) => {
+      this.order = order;
+      this.formDisabled = order.status === Status.PAID;
+      this.toggleDisabledState(this.formDisabled);
+    });
     this.route.params.subscribe(params => {
       const appId = params['appId'];
       if (appId) {
@@ -45,6 +52,19 @@ export class ApplicationComponent implements OnInit {
   onSubmit(data): void {
     if (this.form.valid) {
       console.log(data);
+    }
+  }
+
+  toggleDisabledState(disabled: boolean) {
+    for (const controlKey of Object.keys(this.form.controls)) {
+      if (controlKey !== 'active' && controlKey !== 'type') {
+        if (disabled) {
+          this.form.controls[controlKey].disable();
+        } else {
+          this.form.controls[controlKey].enable();
+        }
+
+      }
     }
   }
 

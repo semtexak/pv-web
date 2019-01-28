@@ -1,0 +1,10 @@
+<p>
+  Status for order: {{orderHash}}
+</p>
+
+<div *ngIf="order?.status === OrderStatus.NEW">
+  NEW
+</div>
+<div *ngIf="order?.status === OrderStatus.PAID">
+  PAID
+</div>

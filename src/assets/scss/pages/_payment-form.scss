@@ -79,7 +79,7 @@
 
   .payment__form {
     padding-top: 10px;
-    padding-bottom: 15px;
+    //padding-bottom: 15px;
 
     .order-submit {
       @include rem-fallback(font-size, 20);
