@@ -26,6 +26,7 @@ export class ApplicationComponent implements OnInit {
   newOrder: {
     price: Price
   };
+  OrderStatus = Status;
 
   constructor(private route: ActivatedRoute,
               private authenticationService: AuthenticationService,
