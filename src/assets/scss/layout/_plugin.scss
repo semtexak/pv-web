@@ -4,4 +4,34 @@
 body.plugin {
   background-color: transparent;
   margin-bottom: 0;
+
+  .plugin-applications {
+    display: flex;
+    flex-direction: row;
+
+    .side {
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+      -webkit-box-shadow: 0 5px 10px 0 rgba(0,0,0,.15);
+      box-shadow: 0 5px 10px 0 rgba(0,0,0,.15);
+
+      &.side--left {
+        width: 300px;
+      }
+
+      &.side--right {
+        flex: 1 0 auto;
+        margin-left: 20px;
+
+        pv-services, pv-donation, pv-subscription {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+        }
+      }
+    }
+  }
 }
+
+

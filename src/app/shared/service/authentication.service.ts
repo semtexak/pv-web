@@ -3,7 +3,7 @@ import {BehaviorSubject, Observable, of, Subscription} from 'rxjs';
 import {User} from '../model/user';
 import {HttpService} from './http.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {ISingInForm} from '../model/i-sing-in-form';
+import {ISingInForm} from '../model/form/i-sing-in-form';
 import {environment} from '../../../environments/environment';
 import {IToken} from '../model/i-token';
 import {CookieService} from 'ngx-cookie-service';

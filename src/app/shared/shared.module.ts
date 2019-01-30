@@ -11,6 +11,8 @@ import { PricePipe } from './pipe/pipe/price.pipe';
 import {PipeModule} from './pipe/pipe.module';
 import {TabComponent} from './component/tabs/tab/tab.component';
 import {TabsComponent} from './component/tabs/tabs.component';
+import { CartComponent } from './component/cart/cart.component';
+import { CartItemComponent } from './component/cart/cart-item/cart-item.component';
 
 @NgModule({
   imports: [
@@ -27,6 +29,8 @@ import {TabsComponent} from './component/tabs/tabs.component';
     DropdownDirective,
     DropdownMenuDirective,
     DropdownToggleDirective,
+    CartComponent,
+    CartItemComponent,
   ],
   providers: [
     CookieService
@@ -40,6 +44,8 @@ import {TabsComponent} from './component/tabs/tabs.component';
     AlertComponent,
     TabsComponent,
     TabComponent,
+    CartComponent,
+    CartItemComponent,
     FormsModule,
     PipeModule,
     ReactiveFormsModule

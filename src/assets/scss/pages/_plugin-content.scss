@@ -1,4 +1,4 @@
-.plugin-payment-form {
+.plugin-content {
 
   .payment__header, .payment__content {
     display: flex;
@@ -6,21 +6,42 @@
     text-align: center;
   }
 
-  .payment__heading {
-    font-weight: 600;
-    @include rem-fallback(font-size, 31);
-    font-family: $sidebar-font;
-    padding: 21px;
-    margin-bottom: 0;
-    line-height: 1;
+  .payment__header {
+    position: relative;
 
-    &.payment__heading--gradient {
-      @include gradient-x($plugin-gradient-start-color, $plugin-gradient-end-color);
+    .payment__heading {
+      font-weight: 600;
+      @include rem-fallback(font-size, 31);
+      font-family: $sidebar-font;
+      padding: 21px;
+      margin-bottom: 0;
+      line-height: 1;
+
+      &.payment__heading--gradient {
+        @include gradient-x($plugin-gradient-start-color, $plugin-gradient-end-color);
+        color: $white;
+      }
+    }
+
+    .payment__back {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
       color: $white;
+      z-index: 2;
+
+      .fas:before {
+        @include rem-fallback(font-size, 20);
+      }
     }
   }
 
+
   .payment__content {
+    padding: 15px;
     flex: 1;
 
     h2 {
@@ -34,9 +55,15 @@
       @include rem-fallback(font-size, 15);
       font-weight: 100;
     }
+
+    p + h2 {
+      margin: 0;
+    }
   }
 
   .payment__action {
+    padding: 0 15px 15px;
+
     .btn {
       padding: 13px 15px;
       @include rem-fallback(font-size, 15);
@@ -52,7 +79,14 @@
         color: $button-primary-gradient-start-background;
       }
 
-      &:hover {
+      &.btn-cta {
+        @include rem-fallback(font-size, 20);
+        font-weight: 100;
+        text-align: center;
+        margin-bottom: 15px;
+      }
+
+      &:not(.btn-cta):hover {
         background: none;
       }
 

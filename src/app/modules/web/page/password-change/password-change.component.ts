@@ -6,7 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatchPasswordValidation} from '../../../../core/validation/match-password-validation';
 import {catchError, map, switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
-import {IChangePasswordForm} from '../../../../shared/model/i-change-password-form';
+import {IChangePasswordForm} from '../../../../shared/model/form/i-change-password-form';
 import {AuthenticationService} from '../../../../shared/service/authentication.service';
 import {HttpErrorResponse} from '@angular/common/http';
 

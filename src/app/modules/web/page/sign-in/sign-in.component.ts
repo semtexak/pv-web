@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ISingInForm} from '../../../../shared/model/i-sing-in-form';
+import {ISingInForm} from '../../../../shared/model/form/i-sing-in-form';
 import {AuthenticationService} from '../../../../shared/service/authentication.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';

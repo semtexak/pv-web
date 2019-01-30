@@ -1,78 +1,87 @@
-<div class="container-fluid plugin-payment-form">
-  <div class="row">
-    <div class="col-12 col-sm-4 col-lg-3 p-0">
-      <div class="box box__plugin-login p-4">
-        <header>
-          <div class="client">
-            <!--<pv-alert></pv-alert>-->
-            <img *ngIf="application" class="client__logo"
-                 src="http://localhost:8765/client-service/applications/img/{{application.appId}}.png"
-                 alt="{{application.name}}">
-          </div>
-          <div class="user">
-            <div class="col-md-12 col-sm-12 text-center">
-              <h2 class="user__name">{{user?.name}}
-                <small class="user__logout">(<a>Odhlásit</a>)</small>
-              </h2>
-            </div>
-          </div>
-          <div class="payment__info" *ngIf="!order">Nothing.</div>
-          <div class="payment__info" *ngIf="order">
-            <table>
-              <tbody>
-              <tr>
-                <td class="payment--strong">Produkt</td>
-                <td class="payment--ellipsis" *ngIf="order">{{order.products[0].name}}</td>
-              </tr>
-              <tr>
-                <td class="payment--strong">Příjemce</td>
-                <td class="payment--ellipsis">{{application?.domain}}</td>
-              </tr>
-              <tr>
-                <td class="payment--strong">Cena</td>
-                <td class="payment--ellipsis" *ngIf="order">{{order.price.amount|price:order.price.currency}}</td>
-              </tr>
-              <tr>
-                <td class="payment--strong">Úhrada</td>
-                <td class="payment--ellipsis">Kartou ihned</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="payment__form">
-            <form [formGroup]="form" (submit)="onSubmit(form.value)">
-              <div class="form-group form-check mt-2" [ngClass]="{'has-error':form.controls['use-remembered-card'].invalid && form.controls['use-remembered-card'].dirty}">
-                <input type="checkbox" name="use-remembered-card" id="use-remembered-card" class=""
-                       [formControl]="form.controls['use-remembered-card']">
-                <label for="use-remembered-card" class="form-check-label">
-                  Použít mou zapamatovanou kartu
-                </label>
-              </div>
-              <div class="form-group form-check mt-2" [ngClass]="{'has-error':form.controls['auto-renew'].invalid && form.controls['auto-renew'].dirty}">
-                <input type="checkbox" name="auto-renew" id="auto-renew" class=""
-                       [formControl]="form.controls['auto-renew']">
-                <label for="auto-renew" class="form-check-label">
-                  Obnova
-                </label>
-              </div>
-              <div class="form-group">
-                <input class="btn btn-primary btn-gradient btn-gradient--success btn-lg btn-full order-submit" *ngIf="!order" type="submit" [disabled]="formDisabled" [value]="'Zaplatit: '">
-                <input class="btn btn-primary btn-gradient btn-gradient--success btn-lg btn-full order-submit" *ngIf="order && !formDisabled" type="submit" [disabled]="formDisabled" [value]="'Zaplatit: ' + order.price.amount|price:order.price.currency">
-                <input class="btn btn-primary btn-gradient btn-gradient--success btn-lg btn-full order-submit" *ngIf="order && formDisabled" type="submit" [disabled]="formDisabled" value="Zaplaceno">
-              </div>
-            </form>
-          </div>
-        </header>
-        <div class="box-inner">
-
-        </div>
-        <!--<footer class="text-center">-->
-          <!--<p class="mb-0">Více o službě <a href="http://payvont.com" target="_blank">Payvont</a>.</p>-->
-        <!--</footer>-->
+<div class="plugin-applications">
+  <div class="side side--left">
+    <header>
+      <div class="client">
+        <!--<pv-alert></pv-alert>-->
+        <img *ngIf="application" class="client__logo"
+             src="http://localhost:8765/client-service/applications/img/{{application.appId}}.png"
+             alt="{{application.name}}">
       </div>
-    </div>
-    <div class="col-12 col-sm-8 col-lg-9 pr-0">
-      <router-outlet></router-outlet>
-    </div>
+      <div class="user">
+        <div class="col-md-12 col-sm-12 text-center">
+          <h2 class="user__name" (click)="addToCart('czk', 1)">{{user?.name}}
+            <small class="user__logout">(<a>Odhlásit</a>)</small>
+          </h2>
+        </div>
+      </div>
+    </header>
+    <section class="payment payment--stretch">
+      <ng-template #noOrder>
+        <!--<div class="payment__cart payment&#45;&#45;stretch payment__cart&#45;&#45;empty"></div>-->
+        <div class="payment__cart payment--stretch" (click)="removeFromCart()" [ngClass]="{'payment__cart--empty': isCartEmpty}">
+          <ng-container *ngIf="isCartEmpty">
+            Vaše objednávka zatím neobsahuje žádnou položku.
+          </ng-container>
+          <pv-cart (onChange)="onCartChanged($event)" [compactMode]="true"></pv-cart>
+        </div>
+      </ng-template>
+      <div class="payment__info payment--stretch" *ngIf="order; else noOrder">
+        <table>
+          <tbody>
+          <tr>
+            <td class="payment--strong">Produkt</td>
+            <td class="payment--ellipsis" *ngIf="order">{{order.products[0].name}}</td>
+          </tr>
+          <tr>
+            <td class="payment--strong">Příjemce</td>
+            <td class="payment--ellipsis">{{application?.domain}}</td>
+          </tr>
+          <tr>
+            <td class="payment--strong">Cena</td>
+            <td class="payment--ellipsis" *ngIf="order">{{order.price.amount|price:order.price.currency}}</td>
+          </tr>
+          <tr>
+            <td class="payment--strong">Úhrada</td>
+            <td class="payment--ellipsis">Kartou ihned</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="payment__form">
+        <form [formGroup]="form" (submit)="onSubmit(form.value)">
+          <div class="form-group form-check mt-2"
+               [ngClass]="{'has-error':form.controls['use-remembered-card'].invalid && form.controls['use-remembered-card'].dirty}">
+            <input type="checkbox" name="use-remembered-card" id="use-remembered-card" class=""
+                   [formControl]="form.controls['use-remembered-card']">
+            <label for="use-remembered-card" class="form-check-label">
+              Použít mou zapamatovanou kartu
+            </label>
+          </div>
+          <div class="form-group form-check mt-2"
+               [ngClass]="{'has-error':form.controls['auto-renew'].invalid && form.controls['auto-renew'].dirty}">
+            <input type="checkbox" name="auto-renew" id="auto-renew" class=""
+                   [formControl]="form.controls['auto-renew']">
+            <label for="auto-renew" class="form-check-label">
+              Obnova
+            </label>
+          </div>
+          <div class="form-group mb-0">
+            <input class="btn btn-primary btn-gradient btn-gradient--success btn-lg btn-full order-submit"
+                   *ngIf="!order && newOrder" type="submit" [disabled]="formDisabled" [value]="'Zaplatit: ' + newOrder.price.amount|price:newOrder.price.currency">
+            <input class="btn btn-primary btn-gradient btn-gradient--success btn-lg btn-full order-submit"
+                   *ngIf="order && !formDisabled" type="submit" [disabled]="formDisabled"
+                   [value]="'Zaplatit: ' + order.price.amount|price:order.price.currency">
+            <input class="btn btn-primary btn-gradient btn-gradient--success btn-lg btn-full order-submit"
+                   *ngIf="order && formDisabled" type="submit" [disabled]="formDisabled" value="Zaplaceno">
+          </div>
+        </form>
+      </div>
+    </section>
+    <!--<footer class="text-center">-->
+      <!--<p class="mb-0">Více o službě <a href="http://payvont.com" target="_blank">Payvont</a>.</p>-->
+    <!--</footer>-->
+  </div>
+  <div class="plugin-content side side--right">
+    <router-outlet></router-outlet>
   </div>
 </div>

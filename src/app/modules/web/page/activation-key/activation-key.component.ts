@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../../../shared/service/authentication.service';
 import {AlertService} from '../../../../shared/service/alert.service';
 import {UserService} from '../../../../shared/service/user.service';
-import {IForgotPasswordForm} from '../../../../shared/model/i-forgot-password-form';
+import {IForgotPasswordForm} from '../../../../shared/model/form/i-forgot-password-form';
 
 @Component({
   selector: 'pv-activation-key',

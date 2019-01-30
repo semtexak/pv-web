@@ -1,4 +1,4 @@
-import {IPage} from '../i-page';
+import {IPage} from './i-page';
 import {IClient} from '../base/i-client';
 import {IApplication} from '../base/i-application';
 

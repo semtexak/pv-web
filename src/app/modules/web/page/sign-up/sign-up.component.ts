@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatchPasswordValidation} from '../../../../core/validation/match-password-validation';
 import {UserService} from '../../../../shared/service/user.service';
-import {ISingUpForm} from '../../../../shared/model/i-sing-up-form';
+import {ISingUpForm} from '../../../../shared/model/form/i-sing-up-form';
 import {Router} from '@angular/router';
 import {AlertService} from '../../../../shared/service/alert.service';
 import {environment} from '../../../../../environments/environment';

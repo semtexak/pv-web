@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {IPage} from '../../../shared/model/i-page';
+import {IPage} from '../../../shared/model/page/i-page';
 import {BehaviorSubject} from 'rxjs';
 
 @Injectable({

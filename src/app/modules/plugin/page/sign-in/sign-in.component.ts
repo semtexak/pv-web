@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../../../shared/service/authentication.service';
 import {AlertService} from '../../../../shared/service/alert.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ISingInForm} from '../../../../shared/model/i-sing-in-form';
+import {ISingInForm} from '../../../../shared/model/form/i-sing-in-form';
 import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({

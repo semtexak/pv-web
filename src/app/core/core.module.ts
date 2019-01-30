@@ -21,6 +21,7 @@ import {ClientService} from '../shared/service/client.service';
 import {DonationService} from '../shared/service/donation.service';
 import {OrderService} from '../shared/service/order.service';
 import {ApplicationService} from '../shared/service/application.service';
+import {CartService} from '../shared/service/cart.service';
 
 @NgModule({
   imports: [
@@ -54,6 +55,7 @@ import {ApplicationService} from '../shared/service/application.service';
     DonationService,
     OrderService,
     AlertService,
+    CartService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

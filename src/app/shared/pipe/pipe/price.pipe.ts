@@ -9,13 +9,16 @@ export class PricePipe implements PipeTransform {
     switch (currency) {
       case Currency.CZK:
         return `${value} Kč`;
+      case Currency.EUR:
+        return `${value} €`;
       default:
-        return `${value} Kč`;
+        return `${value}`;
     }
   }
 
 }
 
 export enum Currency {
-  CZK = 'CZK'
+  CZK = 'CZK',
+  EUR = 'EUR'
 }

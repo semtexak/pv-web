@@ -1,19 +1,25 @@
 <header class="payment__header">
-  <h1 class="payment__heading payment__heading--gradient">Děkujeme vám.</h1>
+  <!--<button class="payment__back text-hide" (click)="goBack()">Return <span class="fas fa-long-arrow-alt-left"></span></button>-->
+  <h1 class="payment__heading payment__heading--gradient">Podpořte nás, prosím.</h1>
 </header>
-<section class="payment__content">
-  <div class="d-flex flex-column align-items-center justify-content-center flex-grow">
-    <h2>Vaše předplatné je aktivní.</h2>
-    <p>Nyní si můžete užívat obsah na Vašich oblíbených stránkách <br /> příjemně, nerušeně a bez reklam.</p>
+<section class="payment__content p-4">
+  <div class="content-stretch content-stretch--center">
+    <p>Chtěli byste nás finančně podpořit? <br /> Nabízíme možnost jak <strong>jednorázového</strong>, tak i <strong>opakovaného</strong> příspěvku.</p>
+    <h2>Předem děkujeme za jakýkoliv finanční příspěvek.</h2>
   </div>
-  <div class="payment__action">
-    <div class="row">
-      <div class="col-6">
-        <a href="http://payvont.com" target="_blank" class="btn btn-outline-info btn-md btn-full">Zjistěte výhody <span class="fas fa-chevron-right"></span></a>
-      </div>
-      <div class="col-6">
-        <a href="http://payvont.com" target="_blank" class="btn btn-outline-secondary btn-md btn-full">Pokračovat na web <span class="fas fa-chevron-right"></span></a>
-      </div>
+</section>
+<section class="payment__action">
+  <div class="row">
+    <div class="col">
+      <button (click)="selectDonate()" class="btn btn-primary btn-gradient btn-gradient--success btn-lg btn-full btn-cta">Přispět</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <a href="http://payvont.com" target="_blank" class="btn btn-outline-info btn-md btn-full">Zjistěte výhody <span class="fas fa-chevron-right"></span></a>
+    </div>
+    <div class="col">
+      <a href="http://payvont.com" target="_blank" class="btn btn-outline-secondary btn-md btn-full">Pokračovat na web <span class="fas fa-chevron-right"></span></a>
     </div>
   </div>
 </section>

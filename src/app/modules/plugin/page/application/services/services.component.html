@@ -2,27 +2,32 @@
   <h1 class="payment__heading payment__heading--gradient">Vyberte typ služby.</h1>
 </header>
 <section class="payment__content">
-  <div class="d-flex flex-column align-items-center justify-content-center flex-grow">
+  <div class="content-stretch content-stretch--center">
     <ul class="nav nav-icons">
-      <li class="nav-item col mb-4">
-        <a class="nav-link"><span class="nav-link__icon fas fa-donate"></span><span class="nav-link__text">Příspěvky</span></a>
+      <li class="nav-item col">
+        <a class="nav-link" (click)="selectService('donation')"><span class="nav-link__icon fas fa-donate"></span><span
+          class="nav-link__text">Příspěvky</span></a>
       </li>
-      <li class="nav-item col mb-4">
-        <a class="nav-link" ><span class="nav-link__icon fas fa-redo-alt"></span><span class="nav-link__text">Předplatné</span></a>
+      <li class="nav-item col">
+        <a class="nav-link" (click)="selectService('subscription')"><span class="nav-link__icon fas fa-redo-alt"></span><span
+          class="nav-link__text">Předplatné</span></a>
       </li>
-      <li class="nav-item col mb-4" *ngIf="false">
-        <a class="nav-link nav-link--disabled"><span class="nav-link__icon fas fa-pen-nib"></span><span class="nav-link__text">Placený obsah</span></a>
+      <li class="nav-item col" *ngIf="false">
+        <a class="nav-link" (click)="selectService('paid-content')"><span
+          class="nav-link__icon fas fa-pen-nib"></span><span class="nav-link__text">Placený obsah</span></a>
       </li>
     </ul>
   </div>
-  <div class="payment__action">
-    <div class="row">
-      <div class="col-6">
-        <a href="http://payvont.com" target="_blank" class="btn btn-outline-info btn-md btn-full">Zjistěte výhody <span class="fas fa-chevron-right"></span></a>
-      </div>
-      <div class="col-6">
-        <a href="http://payvont.com" target="_blank" class="btn btn-outline-secondary btn-md btn-full">Pokračovat na web <span class="fas fa-chevron-right"></span></a>
-      </div>
+</section>
+<section class="payment__action">
+  <div class="row">
+    <div class="col-6">
+      <a href="http://payvont.com" target="_blank" class="btn btn-outline-info btn-md btn-full">Zjistěte výhody <span
+        class="fas fa-chevron-right"></span></a>
+    </div>
+    <div class="col-6">
+      <a href="http://payvont.com" target="_blank" class="btn btn-outline-secondary btn-md btn-full">Pokračovat na web
+        <span class="fas fa-chevron-right"></span></a>
     </div>
   </div>
 </section>
