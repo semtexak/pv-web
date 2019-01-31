@@ -1,15 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {ApplicationService} from '../../../../shared/service/application.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {IApplication} from '../../../../shared/model/base/i-application';
 import {ApplicationContextService} from '../../service/application-context.service';
 import {AuthenticationService} from '../../../../shared/service/authentication.service';
 import {User} from '../../../../shared/model/user';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {IOrder, Price, Status} from '../../../../shared/model/base/i-order';
-import {CartItem} from '../../../../shared/model/base/cart-item';
+import {IOrder, Status} from '../../../../shared/model/base/i-order';
 import {CartService} from '../../../../shared/service/cart.service';
-import {interval} from 'rxjs';
+import {HttpResponse} from '@angular/common/http';
+import {OrderService} from '../../../../shared/service/order.service';
+import {Price} from '../../../../shared/model/base/price';
 
 @Component({
   selector: 'pv-application',
@@ -29,10 +30,12 @@ export class ApplicationComponent implements OnInit {
   OrderStatus = Status;
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private authenticationService: AuthenticationService,
               private applicationService: ApplicationService,
               private applicationContextService: ApplicationContextService,
               private cartService: CartService,
+              private orderService: OrderService,
               private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
       'use-remembered-card': [true, null],
@@ -45,6 +48,7 @@ export class ApplicationComponent implements OnInit {
     this.authenticationService.loggedUser.subscribe((user: User) => this.user = user);
     this.applicationContextService.order.subscribe((order: IOrder) => {
       this.order = order;
+      this.cartService.setProducts(order.products);
       this.formDisabled = order.status === Status.PAID;
       this.toggleDisabledState(this.formDisabled);
     });
@@ -57,15 +61,25 @@ export class ApplicationComponent implements OnInit {
         });
       }
     });
-
-    interval(1000).subscribe((i) => {
-      // this.addToCart('czk', i);
-    });
   }
 
+  /** TODO multiple products **/
   onSubmit(data): void {
-    if (this.form.valid) {
-      console.log(data);
+    if (this.form.valid && !this.cartService.empty()) {
+      const products = this.cartService.items.getValue();
+      console.log(products);
+
+      this.orderService.createOrder({
+        appId: this.application.appId,
+        products: products.map(el => {
+          return {name: el.name, price: el.price, type: el.type};
+        })
+      }).subscribe((response: HttpResponse<any>) => {
+        const location = response.headers.get('Location');
+        if (location) {
+          this.router.navigate([`/plugin/app/${this.application.appId}/status`], {queryParams: {order: location.split('/').pop()}});
+        }
+      });
     }
   }
 
@@ -80,19 +94,6 @@ export class ApplicationComponent implements OnInit {
 
       }
     }
-  }
-
-  addToCart(currency: string, index: number) {
-    const product: CartItem = {
-      name: `Produkt ${index}`,
-      quantity: 1,
-      price: {
-        amount: Math.round((Math.random() * 1000) + 1),
-        currency: currency.toUpperCase()
-      }
-    };
-
-    this.cartService.add(product);
   }
 
   removeFromCart() {

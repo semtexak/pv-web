@@ -1,8 +1,7 @@
 <ul class="products">
-  <!--<pv-cart-item *ngFor="let item of items" [item]="item"></pv-cart-item>-->
   <li class="product__item" *ngFor="let item of items">
     <span class="product__title">{{item.name}}</span>
     <span class="product__action"></span>
-    <span class="product__price">{{(item.price.amount*item.quantity)|price:item.price.currency}}</span>
+    <span class="product__price">{{(item.price.amount*(item.quantity ? item.quantity : 1))|price:item.price.currency}}</span>
   </li>
 </ul>

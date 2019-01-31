@@ -121,9 +121,9 @@
         }
 
         .product__price {
+          @include rem-fallback(font-size, 12);
           font-weight: 700;
           color: #231f20;
-          font-size: 12px;
           text-align: right;
         }
       }

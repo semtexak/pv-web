@@ -1,8 +1,12 @@
+import {Price} from './price';
+
 export interface IOrder {
+  id: number;
   hash: string;
   status: Status;
   price: Price;
-  products: Product[];
+  products: IProduct[];
+  createdAt: number;
 }
 
 export enum Status {
@@ -14,12 +18,20 @@ export enum Status {
 
 }
 
-export interface Product {
+export interface IProduct {
   name: string;
+  quantity: number;
   price: Price;
+  type: ProductType;
 }
 
-export interface Price {
-  amount: number;
-  currency: string;
+
+export enum ProductType {
+  // DONATION = 'donation',
+  // SUBSCRIPTION = 'subscription',
+  // PAID_CONTENT = 'paid-content'
+  NONE = 0,
+  DONATION = 1,
+  SUBSCRIPTION = 2,
+  PAID_CONTENT = 3
 }

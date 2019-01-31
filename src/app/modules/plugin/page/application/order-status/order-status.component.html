@@ -1,10 +1,11 @@
-<p>
-  Status for order: {{orderHash}}
-</p>
-
-<div *ngIf="order?.status === OrderStatus.NEW">
-  NEW
-</div>
-<div *ngIf="order?.status === OrderStatus.PAID">
-  PAID
-</div>
+<header class="payment__header">
+  <h1 class="payment__heading payment__heading--gradient">Objednávka č. <ng-container *ngIf="order">{{order?.createdAt|date: 'yyyy'}}{{(order?.id|number:'6.0').replace(',', '')}}</ng-container></h1>
+  <h1 class="payment__heading payment__heading--gradient payment__heading--success" *ngIf="order?.status === OrderStatus.PAID">Objednávka byla zaplacena.</h1>
+  <!--<h1 class="payment__heading payment__heading&#45;&#45;gradient payment__heading&#45;&#45;error" *ngIf="order?.status !== OrderStatus.">Objednávka nebyla zaplacena.</h1>-->
+</header>
+<section class="payment__content p-4">
+  <div class="content-stretch content-stretch--center" *ngIf="!select">
+    <p>Chtěli byste nás finančně podpořit? <br /> Nabízíme možnost jak <strong>jednorázového</strong>, tak i <strong>opakovaného</strong> příspěvku.</p>
+    <h2>Předem děkujeme za jakýkoliv finanční příspěvek.</h2>
+  </div>
+</section>

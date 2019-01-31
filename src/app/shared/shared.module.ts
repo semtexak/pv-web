@@ -7,12 +7,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CookieService} from 'ngx-cookie-service';
 import {AlertsComponent} from './component/alerts/alerts.component';
 import {AlertComponent} from './component/alerts/alert/alert.component';
-import { PricePipe } from './pipe/pipe/price.pipe';
+import {PricePipe} from './pipe/pipe/price.pipe';
 import {PipeModule} from './pipe/pipe.module';
 import {TabComponent} from './component/tabs/tab/tab.component';
 import {TabsComponent} from './component/tabs/tabs.component';
-import { CartComponent } from './component/cart/cart.component';
-import { CartItemComponent } from './component/cart/cart-item/cart-item.component';
+import {CartComponent} from './component/cart/cart.component';
+import {CartItemComponent} from './component/cart/cart-item/cart-item.component';
 
 @NgModule({
   imports: [

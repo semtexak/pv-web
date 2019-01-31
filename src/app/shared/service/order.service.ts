@@ -19,4 +19,10 @@ export class OrderService extends HttpService {
   getOrderStatus(hash: string): Observable<any> {
     return this.http.get(`${this.API_URL}/order-service/orders/${hash}/status`);
   }
+
+  createOrder(form): Observable<any> {
+    const response = this.jsonHttpOptions;
+    response['observe'] = 'response';
+    return this.http.post(`${this.API_URL}/order-service/orders`, JSON.stringify(form), response);
+  }
 }

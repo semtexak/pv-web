@@ -15,4 +15,5 @@ export class DonationService extends HttpService {
   getDonations(page: number, filter: string, orderBy: string): Observable<any> {
     return this.http.get(`${this.API_URL}/donation-service/donations/all?page=${page}${filter ? '&' + filter : ''}${orderBy ? '&sort=' + orderBy : ''}`);
   }
+
 }

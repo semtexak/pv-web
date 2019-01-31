@@ -49,7 +49,7 @@ $google-color: #ffffff;
 $input-border-color: #eeeeee;
 $input-border-hover-color: #dddddd;
 $input-border-focus-color: $primary;
-$input-error-color: #dc143c;
+$input-error-color: $danger-color;
 $input-error-border-color: #f594a7;
 
 /* Navbar */
@@ -78,6 +78,8 @@ $gradient-primary-start-color: #082e4b;
 $gradient-primary-end-color: #01adce;
 $gradient-success-start-color: #004e38;
 $gradient-success-end-color: #37b34a;
+$gradient-danger-start-color: $danger-color;
+$gradient-danger-end-color: lighten($danger-color, 15%);
 $plugin-gradient-start-color: #082e4b;
 $plugin-gradient-end-color: #01adce;
 

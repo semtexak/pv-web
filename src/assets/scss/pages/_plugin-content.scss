@@ -20,6 +20,18 @@
       &.payment__heading--gradient {
         @include gradient-x($plugin-gradient-start-color, $plugin-gradient-end-color);
         color: $white;
+
+        &.payment__heading--success {
+          @include gradient-x($button-success-gradient-start-background, $button-success-gradient-end-background);
+          border-color: $button-success-gradient-start-background;
+          color: $white;
+        }
+
+        &.payment__heading--error {
+          @include gradient-x($gradient-danger-start-color, $gradient-danger-end-color);
+          border-color: $gradient-danger-start-color;
+          color: $white;
+        }
       }
     }
 
@@ -69,33 +81,40 @@
       @include rem-fallback(font-size, 15);
       text-align: left;
 
-      &.btn-outline-secondary:hover {
-        border-color: darken($secondary, 25%);
-        color: darken($secondary, 25%)
+
+      &.plugin-secondary {
+        &.btn-outline-secondary:hover {
+          border-color: darken($secondary, 25%);
+          color: darken($secondary, 25%)
+        }
+
+        &.btn-outline-info:hover {
+          border-color: $button-primary-gradient-start-background;
+          color: $button-primary-gradient-start-background;
+        }
+
+        &:hover {
+          background: none;
+        }
+
+        .fas {
+          position: absolute;
+          right: 30px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
       }
 
-      &.btn-outline-info:hover {
-        border-color: $button-primary-gradient-start-background;
-        color: $button-primary-gradient-start-background;
-      }
 
-      &.btn-cta {
+      &.btn-cta, &.add-to-cart {
         @include rem-fallback(font-size, 20);
         font-weight: 100;
         text-align: center;
         margin-bottom: 15px;
       }
 
-      &:not(.btn-cta):hover {
-        background: none;
-      }
 
-      .fas {
-        position: absolute;
-        right: 30px;
-        top: 50%;
-        transform: translateY(-50%);
-      }
+
     }
   }
 

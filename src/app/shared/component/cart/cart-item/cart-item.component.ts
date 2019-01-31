@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CartItem} from '../../../model/base/cart-item';
+import {IProduct} from '../../../model/base/i-order';
 
 @Component({
   selector: 'pv-cart-item',
@@ -7,7 +8,7 @@ import {CartItem} from '../../../model/base/cart-item';
 })
 export class CartItemComponent implements OnInit {
 
-  @Input('item') item: CartItem;
+  @Input('item') item: IProduct;
 
   constructor() { }
 
