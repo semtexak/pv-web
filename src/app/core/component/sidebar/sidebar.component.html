@@ -57,8 +57,8 @@
             </a>
           </li>
         </ul>
-        <ul class="sidebar__nav" *ngIf="user?.hasRole('CLIENT')">
-          <li class="sidebar__item" routerLinkActive="active">
+        <ul class="sidebar__nav">
+          <li class="sidebar__item" routerLinkActive="active" *ngIf="user?.hasRole('CLIENT')">
             <a routerLink="/klient/stranka/registrace">
               <span class="fl fas fa-plus"></span>
               <span class="item-text">Přidat stránku</span>
@@ -91,8 +91,6 @@
           </li>
         </ul>
       </div>
-
-<button (click)="testReload()">TEST RELOAD</button>
       <div class="sidebar__admin" *ngIf="user?.hasRole('ADMIN')">
         <h3> Administrace</h3>
         <ul class="sidebar__nav">
@@ -157,13 +155,13 @@
         </ul>
       </div>
     </div>
-    <footer>
-      <div class="sidebar__phone">
-        <span class="fl flaticon-call"></span> +420 606 606 606
-      </div>
-      <div class="sidebar__email">
-        <span class="fl flaticon-email"></span> info@payvont.cz
-      </div>
-    </footer>
+    <!--<footer>-->
+      <!--<div class="sidebar__phone">-->
+        <!--<span class="fl flaticon-call"></span> +420 606 606 606-->
+      <!--</div>-->
+      <!--<div class="sidebar__email">-->
+        <!--<span class="fl flaticon-email"></span> info@payvont.cz-->
+      <!--</div>-->
+    <!--</footer>-->
   </nav>
 </section>

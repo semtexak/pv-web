@@ -41,8 +41,9 @@
           <td>{{row.orderData?.clientCompany}}</td>
           <td>{{row.price?.amount|price:row.price.currency}}</td>
           <td>
-            <span class="status" [ngSwitch]="row.status" [ngClass]="{'success': row.status === 'ACTIVE', 'error': row.status === 'NOT_ACTIVE'}">
+            <span class="status" [ngSwitch]="row.status" [ngClass]="{'success': row.status === 'PAID', 'error': row.status === 'NOT_ACTIVE'}">
               <span *ngSwitchCase="'NEW'">Nový</span>
+              <span *ngSwitchCase="'PAID'">Zaplaceno</span>
               <span *ngSwitchCase="'NOT_ACTIVE'">Neaktivní</span>
               <span *ngSwitchCase="'ACTIVE'">Aktivní</span>
             </span>

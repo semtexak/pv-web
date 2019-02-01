@@ -16,13 +16,13 @@ export class NotificationService {
   notifications: BehaviorSubject<INotification[]> = new BehaviorSubject(this._notifications);
 
   constructor() {
-    // this.connect();
+    this.connect();
   }
 
   connect() {
 
-    const socket = new SockJS('sdads');
-    // const socket = new SockJS('http://localhost:10000/notifications');
+    // const socket = new SockJS('sdads');
+    const socket = new SockJS('http://localhost:10000/notifications');
     // const socket = new SockJS('http://localhost:8765/ws');
     this.stompClient = Stomp.over(socket);
     this.stompClient.debug(null);

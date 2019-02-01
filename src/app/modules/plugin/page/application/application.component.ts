@@ -45,11 +45,18 @@ export class ApplicationComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  loadData() {
     this.authenticationService.loggedUser.subscribe((user: User) => this.user = user);
     this.applicationContextService.order.subscribe((order: IOrder) => {
       this.order = order;
-      this.cartService.setProducts(order.products);
-      this.formDisabled = order.status === Status.PAID;
+
+      if (order) {
+        this.cartService.setProducts(order.products);
+        this.formDisabled = order.status === Status.PAID;
+      }
       this.toggleDisabledState(this.formDisabled);
     });
     this.route.params.subscribe(params => {
@@ -102,7 +109,6 @@ export class ApplicationComponent implements OnInit {
     this.isCartEmpty = items === 0;
 
     const price = this.cartService.totalPrice();
-    console.log(price);
     if (price['czk']) {
       this.formDisabled = false;
       this.toggleDisabledState(this.formDisabled);
@@ -121,5 +127,14 @@ export class ApplicationComponent implements OnInit {
 
   proceedToPayment() {
     console.log('Payment gateway');
+  }
+
+  logout(): void {
+    this.authenticationService.logout().subscribe(() => {
+        this.router.navigate(['/plugin/sign-in'], {queryParams: {redirect: this.route.snapshot['_routerState'].url}});
+      },
+      error => {
+        console.log(error);
+      });
   }
 }

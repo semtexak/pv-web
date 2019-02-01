@@ -4,15 +4,15 @@
 <section class="payment__content">
   <div class="content-stretch content-stretch--center">
     <ul class="nav nav-icons">
-      <li class="nav-item col">
+      <li class="nav-item col" *ngIf="hasService('donation')">
         <a class="nav-link" (click)="selectService('donation')"><span class="nav-link__icon fas fa-donate"></span><span
           class="nav-link__text">Příspěvky</span></a>
       </li>
-      <li class="nav-item col">
+      <li class="nav-item col" *ngIf="hasService('subscription')">
         <a class="nav-link" (click)="selectService('subscription')"><span class="nav-link__icon fas fa-redo-alt"></span><span
           class="nav-link__text">Předplatné</span></a>
       </li>
-      <li class="nav-item col" *ngIf="false">
+      <li class="nav-item col" *ngIf="hasService('paid-content')">
         <a class="nav-link" (click)="selectService('paid-content')"><span
           class="nav-link__icon fas fa-pen-nib"></span><span class="nav-link__text">Placený obsah</span></a>
       </li>

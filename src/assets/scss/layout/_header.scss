@@ -42,6 +42,11 @@ nav.navbar {
         padding: 13px 20px;
         font-weight: 600;
 
+        &.refresh {
+          @include rem-fallback(font-size, 16);
+          padding: 11px;
+        }
+
         &.notification {
           position: relative;
           padding: 9px 12px;

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ApplicationContextService} from '../../../service/application-context.service';
 import {IApplication} from '../../../../../shared/model/base/i-application';
 
@@ -12,22 +12,26 @@ export class ServicesComponent implements OnInit {
   application: IApplication;
 
   constructor(private router: Router,
+              private route: ActivatedRoute,
               private applicationContextService: ApplicationContextService) {
   }
 
   ngOnInit() {
     this.applicationContextService.application.subscribe(app => {
       this.application = app;
-      if (app && app.configurations.length > 0) {
-        if (app.configurations.length === 1) {
-          this.selectService(app.configurations.pop());
-        }
-      }
+      // if (app && app.configurations.length > 0) {
+      //   if (app.configurations.length === 1) {
+      //     this.selectService(app.configurations.pop().type);
+      //   }
+      // }
     });
   }
 
+  hasService(service: string): boolean {
+    return this.application && (this.application.configurations.findIndex(el => el.type === service && el.active) !== -1);
+  }
+
   selectService(service: string) {
-    console.log(this.application);
-    this.router.navigateByUrl(`/plugin/app/${this.application.appId}/${service}`);
+    this.router.navigate([service], {relativeTo: this.route});
   }
 }

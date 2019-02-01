@@ -10,14 +10,14 @@
       <div class="user">
         <div class="col-md-12 col-sm-12 text-center">
           <h2 class="user__name">{{user?.name}}
-            <small class="user__logout">(<a>Odhlásit</a>)</small>
+            <small class="user__logout" (click)="logout()">(<a>Odhlásit</a>)</small>
           </h2>
         </div>
       </div>
     </header>
     <section class="payment payment--stretch">
       <ng-template #noOrder>
-        <div class="payment__cart payment--stretch" (click)="removeFromCart()" [ngClass]="{'payment__cart--empty': isCartEmpty}">
+        <div class="payment__cart payment--stretch" [ngClass]="{'payment__cart--empty': isCartEmpty}">
           <ng-container *ngIf="isCartEmpty">
             Vaše objednávka zatím neobsahuje žádnou položku.
           </ng-container>

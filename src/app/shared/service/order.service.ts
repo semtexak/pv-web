@@ -25,4 +25,8 @@ export class OrderService extends HttpService {
     response['observe'] = 'response';
     return this.http.post(`${this.API_URL}/order-service/orders`, JSON.stringify(form), response);
   }
+
+  testUpdateOrderStatus(hash: string, status: string): Observable<any> {
+    return this.http.put(`${this.API_URL}/order-service/orders/${hash}?status=${status}`, null);
+  }
 }

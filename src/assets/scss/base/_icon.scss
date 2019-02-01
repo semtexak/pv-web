@@ -24,6 +24,30 @@
   background-color: rgba(0,0,0,0.05);
 }
 
+.icon--info {
+  background-color: $info-color;
+  color: $white;
+}
+
+.icon--success {
+  background-color: $success-color;
+  color: $white;
+}
+
+.icon--danger {
+  background-color: $danger-color;
+  color: $white;
+}
+
+.icon--warning {
+  background-color: $warning-color;
+}
+
+.icon--primary {
+  background-color: $primary-color;
+  color: $white;
+}
+
 .icon--rounded {
   border-radius: 50%;
 }

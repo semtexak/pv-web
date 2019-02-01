@@ -5,6 +5,7 @@
       border-left: 1px dashed rgba(24, 28, 33, 0.2);
     }
     .nav-link {
+      position: relative;
       text-align: center;
       width: 85px;
       height: 85px;
@@ -22,9 +23,16 @@
         background-color: darken($background-color, 2%);
       }
 
-      &.nav-link--enabled {
+      &.nav-link--enabled:after {
+        content: '';
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        border-radius: 50%;
+
         background-color: $success-color;
-        color: $white;
       }
 
       &.nav-link--disabled {
