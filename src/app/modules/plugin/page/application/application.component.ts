@@ -63,11 +63,9 @@ export class ApplicationComponent implements OnInit {
     });
   }
 
-  /** TODO multiple products **/
-  onSubmit(data): void {
+  createOrder(): void {
     if (this.form.valid && !this.cartService.empty()) {
       const products = this.cartService.items.getValue();
-      console.log(products);
 
       this.orderService.createOrder({
         appId: this.application.appId,
@@ -119,5 +117,9 @@ export class ApplicationComponent implements OnInit {
       };
     }
 
+  }
+
+  proceedToPayment() {
+    console.log('Payment gateway');
   }
 }
