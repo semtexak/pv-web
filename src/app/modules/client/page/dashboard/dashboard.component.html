@@ -12,7 +12,7 @@
             <div class="fas fa-dollar-sign text-success"></div>
             <div class="ml-4">
               <div class="sales-title">Tržby</div>
-              <div class="sales-number" counto [step]="30" [countTo]="statistics ? statistics.total.price.amount : 0" [countFrom]="0" [duration]="1.25" (countoChange)="totalPrice = $event">{{totalPrice|number:'1.0-0'|price: statistics?.total?.price.currency}}</div>
+              <div class="sales-number" counto [step]="30" [countTo]="statistics ? statistics.total.price.amount : 0" [countFrom]="0" [duration]="1.25" (countoChange)="counters.totalPrice = $event">{{counters.totalPrice|number:'1.0-0'|price: statistics?.total?.price.currency}}</div>
             </div>
           </div>
         </div>
@@ -25,7 +25,7 @@
             <div class="fas fa-shopping-cart text-info"></div>
             <div class="ml-4">
               <div class="sales-title">Prodeje</div>
-              <div class="sales-number" counto [step]="30" [countTo]="statistics ? statistics.total.sales : 0" [countFrom]="0" [duration]="1.25" (countoChange)="sales = $event">{{sales|number:'1.0-0'}}</div>
+              <div class="sales-number" counto [step]="30" [countTo]="statistics ? statistics.total.sales : 0" [countFrom]="0" [duration]="1.25" (countoChange)="counters.sales = $event">{{counters.sales|number:'1.0-0'}}</div>
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@
             <div class="fas fa-money-bill-alt text-danger"></div>
             <div class="ml-4">
               <div class="sales-title">Průměr transakce</div>
-              <div class="sales-number" counto [step]="30" [countTo]="statistics ? statistics.total.averagePrice.amount : 0" [countFrom]="0" [duration]="1.25" (countoChange)="averagePrice = $event">{{averagePrice|number:'1.0-0'|price: statistics?.total?.price.currency}}</div>
+              <div class="sales-number" counto [step]="30" [countTo]="statistics ? statistics.total.averagePrice.amount : 0" [countFrom]="0" [duration]="1.25" (countoChange)="counters.averagePrice = $event">{{counters.averagePrice|number:'1.0-0'|price: statistics?.total?.price.currency}}</div>
             </div>
           </div>
         </div>
@@ -51,7 +51,7 @@
             <div class="fas fa-users text-warning"></div>
             <div class="ml-4">
               <div class="sales-title">Uživatelé</div>
-              <div class="sales-number" counto [step]="30" [countTo]="statistics ? statistics.total.uniqueSales : 0" [countFrom]="0" [duration]="1.25" (countoChange)="uniqueSales = $event">{{uniqueSales|number:'1.0-0'}}</div>
+              <div class="sales-number" counto [step]="30" [countTo]="statistics ? statistics.total.uniqueSales : 0" [countFrom]="0" [duration]="1.25" (countoChange)="counters.uniqueSales = $event">{{counters.uniqueSales|number:'1.0-0'}}</div>
             </div>
           </div>
         </div>

@@ -29,7 +29,7 @@ export class PasswordChangeComponent implements OnInit {
   //     return of(false);
   //   })
   // );
-  private token: string;
+  token: string;
 
   constructor(private userService: UserService,
               private authenticationService: AuthenticationService,
