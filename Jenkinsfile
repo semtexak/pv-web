@@ -24,7 +24,7 @@ pipeline{
 
                     stage("Run Docker image"){
                         sh "docker stop $appName || true && docker rm $appName || true" 
-                        sh "docker run -p 80:80 -d $registry/$appName:${env.BUILD_ID}"
+                        sh "docker run -p 80:80 -d $registry/$appName:${env.BUILD_ID} --name $appName"
                     }
                 }
             }
