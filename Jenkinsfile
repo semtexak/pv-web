@@ -1,15 +1,12 @@
 pipeline{
     agent any
-  
-  environment {
-    DOCKER_HUB_PWD = credentials('dockerHubPwd')
-  }
 
     stages{
         stage("Main"){
             steps{
                 script{
                     registry = "tomasblaha"
+                    registryPwd = "wordlife"
                     tag = "1"
                     appName = "pv-web"
 
@@ -18,7 +15,7 @@ pipeline{
                     }
 
                     stage("Push Docker image"){
-                        sh "docker login -u $registry -p ${DOCKER_HUB_PWD}"
+                        sh "docker login -u $registry -p $registryPwd"
                         sh "docker push $registry/$appName:$tag"
                     }
 
