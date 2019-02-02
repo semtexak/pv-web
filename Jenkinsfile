@@ -6,8 +6,8 @@ pipeline{
             steps{
                 script{
                     registry = ""
-                    tag = ""
-                    appName = ""
+                    tag = "1"
+                    appName = "pv-web"
 
                     stage("Build Docker image"){
                         sh "docker build $appName:$tag ."
