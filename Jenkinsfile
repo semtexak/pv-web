@@ -15,16 +15,16 @@ pipeline{
 
                     stage("Build Docker image"){
                         sh "docker login -u $registry -p ${DOCKER_HUB_PWD}"
-                        sh "docker build -t $registry/$appName:$tag ."
+                        sh "docker build -t $registry/$appName:${env.BUILD_ID} ."
                     }
 
                     stage("Push Docker image"){
-                        sh "docker push $registry/$appName:$tag"
+                        sh "docker push $registry/$appName:${env.BUILD_ID}"
                     }
 
                     stage("Run Docker image"){
                         sh "docker stop $appName || true && docker rm $appName || true" 
-                        sh "docker run -p 1111:1111 $registry/$appName:$tag"
+                        sh "docker run -p 80:80 $registry/$appName:${env.BUILD_ID}"
                     }
                 }
             }
