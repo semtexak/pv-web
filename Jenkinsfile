@@ -1,5 +1,9 @@
 pipeline{
     agent any
+  
+  environment {
+    DOCKER_HUB_PWD = credentials('dockerHubPwd')
+  }
 
     stages{
         stage("Main"){
@@ -14,9 +18,7 @@ pipeline{
                     }
 
                     stage("Push Docker image"){
-                        withCredentials([string(credentialsId: 'docker-hub-pwd', variable: 'dockerHubPwd')]) {
-                          sh "docker login -u $registry -p ${dockerHubPwd}"
-                        }
+                        sh "docker login -u $registry -p ${DOCKER_HUB_PWD}"
                         sh "docker push $registry/$appName:$tag"
                     }
 
