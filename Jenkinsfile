@@ -10,7 +10,7 @@ pipeline{
                     appName = "pv-web"
 
                     stage("Build Docker image"){
-                        sh "docker build $appName:$tag ."
+                        sh "docker build -t $appName:$tag ."
                         sh "docker push $appName:$tag"
                     }
 
