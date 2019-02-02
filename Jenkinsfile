@@ -14,11 +14,11 @@ pipeline{
                     appName = "pv-web"
 
                     stage("Build Docker image"){
+                        sh "docker login -u $registry -p ${DOCKER_HUB_PWD}"
                         sh "docker build -t $registry/$appName:$tag ."
                     }
 
                     stage("Push Docker image"){
-                        sh "docker login -u $registry -p ${DOCKER_HUB_PWD}"
                         sh "docker push $registry/$appName:$tag"
                     }
 
