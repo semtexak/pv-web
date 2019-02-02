@@ -27,7 +27,7 @@
   }
 }
 
-.s-o main, .s-o .navbar {
+.admin.s-o main, .admin.s-o .navbar {
   transition: margin .2s ease;
   @include rem-fallback(margin-left, $sidebar-width);
 
@@ -36,12 +36,12 @@
   }
 }
 
-.s-h main, .s-h .navbar {
+.admin.s-h main, .admin.s-h .navbar {
   transition: margin .2s ease;
   @include rem-fallback(margin-left, 0);
 }
 
-.s-o .navbar .sidebar__toggler {
+.admin.s-o .navbar .sidebar__toggler {
   opacity: 0;
   visibility: hidden;
 }

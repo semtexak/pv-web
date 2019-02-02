@@ -54,6 +54,12 @@
         border-bottom: 0;
       }
 
+      .notification__icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
       .notification__message {
         margin-left: 10px;
       }

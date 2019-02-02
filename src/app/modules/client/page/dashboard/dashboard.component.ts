@@ -24,13 +24,17 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  loadData() {
     this.route.params.subscribe(params => {
       console.log(params);
       if (params['appId']) {
         this.applicationService.getApplicationStatistics(params['appId'], this.statisticPeriod.from, this.statisticPeriod.to).subscribe((statistics: IApplicationStatistics) => {
           this.statistics = statistics;
           this.calculateStatistics(statistics);
-          console.log(statistics.statistics);
+          console.log(statistics);
         });
       }
     });
@@ -53,6 +57,7 @@ export class DashboardComponent implements OnInit {
       if (statistics.statistics[type]) {
         tmp.sales += statistics.statistics[type].sales;
         tmp.price.amount += statistics.statistics[type].price.amount;
+        tmp.uniqueSales += statistics.statistics[type].uniqueSales;
       }
     }
 
@@ -103,8 +108,8 @@ export class DashboardComponent implements OnInit {
               displayFormats: {
                 day: 'DD.'
               },
-              min: '2019-01-01 18:43:53',
-              max: '2019-01-31 18:43:53'
+              min: moment().startOf('month').format('YYYY-MM-DD HH:mm:ss'),
+              max: moment().endOf('month').format('YYYY-MM-DD HH:mm:ss')
             },
             ticks: {
               source: 'data',

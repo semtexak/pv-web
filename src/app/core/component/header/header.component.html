@@ -7,7 +7,8 @@
     </a>
 
 
-    <button class="sidebar__toggler sidebar__toggler--dhover" type="button" *ngIf="adminSection" (click)="toggleSidebar()">
+    <button class="sidebar__toggler sidebar__toggler--dhover" type="button" *ngIf="adminSection"
+            (click)="toggleSidebar()">
       <span class="fl flaticon-menu"></span>
     </button>
 
@@ -27,17 +28,20 @@
           </li>
         </ng-container>
         <ng-template #admin>
-          <!--<li class="nav-item">-->
-          <!--<a class="nav-link" routerLink="/" routerLinkActive="active">Zpět</a>-->
-          <!--</li>-->
+          <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active">Zpět</a>
+          </li>
         </ng-template>
 
         <li class="nav-item" *ngIf="!user; else loggedSection">
           <a class="nav-link btn-sign-in" routerLink="/uzivatel/prihlaseni" routerLinkActive="active">Přihlášení</a>
         </li>
         <ng-template #loggedSection>
-          <li class="nav-item" pvDropdown>
-            <a class="nav-link notification" pvDropdownToggle *ngIf="adminSection">
+          <li class="nav-item" *ngIf="adminSection">
+            <a class="nav-link refresh" (click)="testReload()"><span class="fas fa-sync-alt"></span></a>
+          </li>
+          <li class="nav-item" *ngIf="adminSection" pvDropdown>
+            <a class="nav-link notification" pvDropdownToggle>
               <span class="flaticon-bell-2"></span>
               <span class="notification__badge"
                     [ngClass]="{'notification--empty': !notifications || (notifications && notifications.length === 0), 'notification--new': shake}">{{notifications.length}}</span>
@@ -53,7 +57,7 @@
                 <ng-container *ngIf="notifications && notifications.length > 0; else notificationsEmpty">
                   <ul>
                     <li *ngFor="let notification of notifications">
-                      <span class="notification__icon icon icon--sm icon--rounded icon--light"></span>
+                      <span class="notification__icon icon icon--sm icon--rounded icon--light" [ngClass]="{'icon--info': notification.type === 'user'}"><span class="fas fa-user"></span></span>
                       <span class="notification__message">{{notification.message | truncate: 50}}</span>
                     </li>
                   </ul>

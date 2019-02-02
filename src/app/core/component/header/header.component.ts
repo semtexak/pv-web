@@ -53,6 +53,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.scrollOffset = this.nav.nativeElement.offsetHeight;
   }
 
+  testReload() {
+    this.authenticationService.reloadUserData().subscribe();
+  }
+
   toggleSidebar() {
     this.layoutService.sidebarMinimized.next(!this.layoutService.sidebarMinimized.getValue());
     if (this.layoutService.sidebarMinimized.getValue()) {

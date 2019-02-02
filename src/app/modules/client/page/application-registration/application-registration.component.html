@@ -24,7 +24,7 @@
                     <div class="input-group mb-3">
                       <div class="img-thumbnail w-100 text-center mb-3" *ngIf="appImg">
                         <img [src]="appImg" class="img-fluid" alt="" title="">
-                        <span class="flaticon-cancel app-image-delete" (click)="removeImage()"></span>
+                        <span class="fas fa-times app-image-delete" (click)="removeImage()"></span>
                       </div>
                       <div class="custom-file">
                         <input id="appImg" type="file" class="custom-file-input" [formControl]="form.controls['appImg']" (change)="onSelectFile($event)" #uploader>
@@ -59,7 +59,7 @@
           </div>
           <div class="card-footer">
             <div class="row">
-              <div class="col-6">
+              <div class="col-8">
                 <div class="form-group form-check mt-2" [ngClass]="{'has-error':form.controls['agreement'].invalid && form.controls['agreement'].dirty}">
                   <input type="checkbox" name="agreement" id="agreement" class="" [formControl]="form.controls['agreement']">
                   <label for="agreement" class="form-check-label">
@@ -67,9 +67,9 @@
                   </label>
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-4">
                 <div class="form-group text-right mb-2">
-                  <input type="submit" class="btn btn-primary" value="Submit">
+                  <input type="submit" class="btn btn-primary" value="Odeslat">
                 </div>
               </div>
             </div>

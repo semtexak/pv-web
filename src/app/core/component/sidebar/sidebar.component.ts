@@ -33,10 +33,6 @@ export class SidebarComponent implements OnInit {
     });
   }
 
-  testReload() {
-    this.authenticationService.reloadUserData().subscribe(data => console.log(data));
-  }
-
   toggleSidebar() {
     this.layoutService.sidebarMinimized.next(!this.isHidden);
     if (this.isHidden) {

@@ -1,7 +1,7 @@
 <div class="container-fluid dashboard">
-  <h2 class="page__title"><span class="page__title--disabled">{{statistics ? statistics.name : 'Stránka'}} /</span> Přehled
+  <h2 class="page__title"><span class="page__title--disabled">{{statistics ? statistics.name : 'Stránka'}} /</span> Přehled <button (click)="loadData()" class="btn refresh-button"><span class="fas fa-sync-alt"></span></button>
     <div class="page__subtitle">
-      <span class="text-muted">Období - <span class="subtitle--dashed">Leden 2019</span></span>
+      <span class="text-muted">Období - <span class="subtitle--dashed">Únor 2019</span></span>
     </div>
   </h2>
   <div class="row">
@@ -51,7 +51,7 @@
             <div class="fas fa-users text-warning"></div>
             <div class="ml-4">
               <div class="sales-title">Uživatelé</div>
-              <div class="sales-number" counto [step]="30" [countTo]="statistics ? statistics.total?.uniqueSales : 0" [countFrom]="0" [duration]="1.25" (countoChange)="uniqueSales = $event">{{uniqueSales|number:'1.0-0'}}</div>
+              <div class="sales-number" counto [step]="30" [countTo]="statistics ? statistics.total.uniqueSales : 0" [countFrom]="0" [duration]="1.25" (countoChange)="uniqueSales = $event">{{uniqueSales|number:'1.0-0'}}</div>
             </div>
           </div>
         </div>

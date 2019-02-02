@@ -31,4 +31,9 @@ export class OrderStatusComponent implements OnInit {
     });
   }
 
+  /** TODO remove */
+  testUpdateOrderStatus(status: string) {
+    this.orderService.testUpdateOrderStatus(this.order.hash, status).subscribe(response => console.log(response));
+  }
+
 }

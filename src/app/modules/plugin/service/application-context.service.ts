@@ -8,7 +8,7 @@ import {IOrder} from '../../../shared/model/base/i-order';
 })
 export class ApplicationContextService {
 
-  application: Subject<IApplication> = new Subject();
+  application: BehaviorSubject<IApplication> = new BehaviorSubject(null);
   order: Subject<IOrder> = new Subject();
 
   constructor() { }

@@ -6,6 +6,8 @@ import {ApplicationService} from '../../../../shared/service/application.service
 import {TabComponent} from '../../../../shared/component/tabs/tab/tab.component';
 import {IApplication} from '../../../../shared/model/base/i-application';
 import {Title} from '@angular/platform-browser';
+import {HttpResponse} from '@angular/common/http';
+import {AlertService} from '../../../../shared/service/alert.service';
 
 @Component({
   selector: 'pv-settings',
@@ -43,6 +45,7 @@ export class SettingsComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private titleService: Title,
+              private alertService: AlertService,
               private applicationService: ApplicationService) {
     this.titleService.setTitle('Nastavení stránky');
   }
@@ -53,12 +56,16 @@ export class SettingsComponent implements OnInit {
       if (params['appId']) {
         this.appId = params['appId'];
         this.setDefaults(this.initFormData, 'INIT');
-        this.applicationService.getApplication(this.appId).subscribe((application: IApplication) => {
-          this.application = application;
-          if (this.application && this.application.configurations.length > 0) {
-            this.setDefaults(this.application.configurations, 'LOAD');
-          }
-        });
+        this.loadData();
+      }
+    });
+  }
+
+  loadData() {
+    this.applicationService.getApplication(this.appId).subscribe((application: IApplication) => {
+      this.application = application;
+      if (this.application && this.application.configurations.length > 0) {
+        this.setDefaults(this.application.configurations, 'LOAD');
       }
     });
   }
@@ -67,8 +74,11 @@ export class SettingsComponent implements OnInit {
     const form = values[this.activeTab.type];
     if (form) {
       console.log(form);
-      this.applicationService.addServicesToApplication(this.appId, form).subscribe(data => {
-        console.log(data);
+      this.applicationService.addServicesToApplication(this.appId, form).subscribe((response: HttpResponse<any>) => {
+        if (response.status === 200) {
+          this.alertService.success('Nastavení bylo úspěšně uloženo.');
+          this.loadData();
+        }
       });
     }
   }
