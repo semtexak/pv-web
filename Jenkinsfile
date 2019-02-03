@@ -23,7 +23,8 @@ pipeline{
                     }
 
                     stage("Run Docker image"){
-                        sh "docker rm $(docker stop $(docker ps -a -q --filter ancestor=$appName --format="{{.ID}}"))" 
+                        containers = sh(returnStdout: true, script: 'docker ps -aq --filter ancestor=$appName')
+                        sh "docker rm $(docker stop $containers)" 
                         sh "docker run -p 80:80 -d -name $appName $registry/$appName:${env.BUILD_ID}"
                     }
                 }
