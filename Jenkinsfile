@@ -23,8 +23,8 @@ pipeline{
                     }
 
                     stage("Run Docker image"){
-                        sh "docker stop $appName || true && docker rm $appName || true" 
-                        sh "docker run -p 80:80 -d $registry/$appName:${env.BUILD_ID} --name $appName"
+                        sh "docker rm $(docker stop $(docker ps -a -q --filter ancestor=$appName --format="{{.ID}}"))" 
+                        sh "docker run -p 80:80 -d -name $appName $registry/$appName:${env.BUILD_ID}"
                     }
                 }
             }
