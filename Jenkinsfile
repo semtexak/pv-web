@@ -11,7 +11,7 @@ pipeline{
                 script{
                     registry = "tomasblaha"
                     appName = "pv-web"
-                    tag = "v2"
+                    tag = "v0.2"
 
                     stage("DockerHub login"){
                         sh "docker login -u $registry -p ${DOCKER_HUB_PWD}"
