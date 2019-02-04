@@ -10,20 +10,18 @@ pipeline{
             steps{
                 script{
                     registry = "tomasblaha"
-                    tag = "1"
                     appName = "pv-web"
 
-                    stage("Build Docker image"){
+                    stage("DockerHub login"){
                         sh "docker login -u $registry -p ${DOCKER_HUB_PWD}"
+                    }
+                  
+                    stage("Build Docker image"){
                         sh "docker build -t $registry/$appName:${env.BUILD_ID} ."
                     }
 
                     stage("Push Docker image"){
                         sh "docker push $registry/$appName:${env.BUILD_ID}"
-                    }
-
-                    stage("Run Docker image"){
-                        sh "docker run -p 80:80 -d -name $appName $registry/$appName:${env.BUILD_ID}"
                     }
                 }
             }
@@ -31,17 +29,16 @@ pipeline{
     }
     post {
         success {
-            echo 'OK :)'
+            echo 'Build SUCCESS.'
         }
         always {
-            echo 'One way or another, I have finished'
             deleteDir()
         }
         unstable {
-            echo 'I am unstable :/'
+            echo 'UNSTRABLE.'
         }
         failure {
-            echo 'I failed :('
+            echo 'Build FAILED.'
         }
     }
 }
