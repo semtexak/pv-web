@@ -11,15 +11,14 @@ pipeline{
                 script{
                     registry = "tomasblaha"
                     appName = "pv-web"
-                    sh "git tag --sort version:refname | tail -1 > version.tmp"
-                    tag = readFile 'version.tmp'
+                    tag = "latest"
 
                     stage("DockerHub login"){
                         sh "docker login -u $registry -p ${DOCKER_HUB_PWD}"
                     }
                   
                     stage("Build Docker image"){
-                        sh "docker build -t $registry/$appName:${env.BUILD_ID} ."
+                        sh "docker build -t $registry/$appName:$tag ."
                     }
 
                     stage("Push Docker image"){
