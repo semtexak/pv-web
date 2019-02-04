@@ -6,19 +6,19 @@ pipeline{
     }
 
     stages{
+        def tag = sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()
         stage("Main"){
             steps{
                 script{
                     registry = "tomasblaha"
                     appName = "pv-web"
-                    tag = env.TAG_NAME
 
                     stage("DockerHub login"){
                         sh "docker login -u $registry -p ${DOCKER_HUB_PWD}"
                     }
                   
                     stage("Build Docker image"){
-                      sh "docker build -t $registry/$appName:${env.TAG_NAME} ."
+                      sh "docker build -t $registry/$appName:$tag ."
                     }
 
                     stage("Push Docker image"){
