@@ -11,7 +11,8 @@ pipeline{
                 script{
                     registry = "tomasblaha"
                     appName = "pv-web"
-                    tag = sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()
+                    sh "git tag --sort version:refname | tail -1 > version.tmp"
+                    tag = readFile 'version.tmp'
                     echo tag
 
                     stage("DockerHub login"){
