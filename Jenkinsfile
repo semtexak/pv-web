@@ -3,6 +3,7 @@ pipeline{
   
     environment {
       DOCKER_HUB_PWD = credentials('dockerHubPwd')
+      tag = sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()
     }
 
     stages{
@@ -17,11 +18,12 @@ pipeline{
                     }
                   
                     stage("Build Docker image"){
-                        sh "docker build -t $registry/$appName:${env.BUILD_ID} ."
+                      sh "docker build -t $registry/$appName:$tag ."
+                      sh "docker tag $registry/$appName:$tag $registry/$appName:latest"
                     }
 
                     stage("Push Docker image"){
-                        sh "docker push $registry/$appName:${env.BUILD_ID}"
+                        sh "docker push $registry/$appName:$tag"
                     }
                 }
             }
