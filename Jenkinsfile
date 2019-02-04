@@ -11,7 +11,7 @@ pipeline{
                 script{
                     registry = "tomasblaha"
                     appName = "pv-web"
-                    tag = "v0.2"
+                    tag = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
 
                     stage("DockerHub login"){
                         sh "docker login -u $registry -p ${DOCKER_HUB_PWD}"
