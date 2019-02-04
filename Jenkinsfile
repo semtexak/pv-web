@@ -13,7 +13,6 @@ pipeline{
                     appName = "pv-web"
                     sh "git tag --sort version:refname | tail -1 > version.tmp"
                     tag = readFile 'version.tmp'
-                    echo tag
 
                     stage("DockerHub login"){
                         sh "docker login -u $registry -p ${DOCKER_HUB_PWD}"
