@@ -3,10 +3,10 @@ pipeline{
   
     environment {
       DOCKER_HUB_PWD = credentials('dockerHubPwd')
+      tag = sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()
     }
 
     stages{
-        def tag = sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()
         stage("Main"){
             steps{
                 script{
