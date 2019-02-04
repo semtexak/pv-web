@@ -19,7 +19,7 @@ pipeline{
                     }
                   
                     stage("Build Docker image"){
-                        sh "docker build -t $registry/$appName:$tag ."
+                        sh "docker build -t $registry/$appName:${env.BUILD_ID} ."
                     }
 
                     stage("Push Docker image"){
