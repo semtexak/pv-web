@@ -11,14 +11,14 @@ pipeline{
                 script{
                     registry = "tomasblaha"
                     appName = "pv-web"
-                    tag = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
+                    tag = env.TAG_NAME
 
                     stage("DockerHub login"){
                         sh "docker login -u $registry -p ${DOCKER_HUB_PWD}"
                     }
                   
                     stage("Build Docker image"){
-                        sh "docker build -t $registry/$appName:$tag ."
+                      sh "docker build -t $registry/$appName:${env.TAG_NAME} ."
                     }
 
                     stage("Push Docker image"){
