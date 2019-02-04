@@ -71,6 +71,7 @@ export class DashboardComponent implements OnInit {
     const xData = this.getRange(this.statisticPeriod.from, this.statisticPeriod.to);
     const yData = this.prepareChartData(xData, statistics.statistics);
 
+    // @ts-ignore
     this.chart = new Chart('canvas', {
       type: 'line',
       data: {
