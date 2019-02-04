@@ -21,7 +21,7 @@
       color: $white;
 
       &:focus {
-        box-shadow: 0 0 0 0.2rem #06944782!important;
+        //box-shadow: 0 0 0 0.2rem #06944782!important;
       }
       &:active {
         border-color: $button-success-gradient-start-background!important;

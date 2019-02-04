@@ -17,6 +17,12 @@ export class DashboardComponent implements OnInit {
   statisticPeriod = this.switchPeriod('curmonth');
   statistics: IApplicationStatistics;
   chart = [];
+  counters = {
+    averagePrice: 0,
+    sales: 0,
+    totalPrice: 0,
+    uniqueSales: 0
+  };
 
   constructor(private route: ActivatedRoute,
               private datePipe: DatePipe,
