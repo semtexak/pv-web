@@ -19,6 +19,7 @@ pipeline{
                   
                     stage("Build Docker image"){
                       sh "docker build -t $registry/$appName:$tag ."
+                      sh "docker tag $registry/$appName:$tag $registry/$appName:latest"
                     }
 
                     stage("Push Docker image"){
