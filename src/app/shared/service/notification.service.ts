@@ -16,7 +16,7 @@ export class NotificationService {
   notifications: BehaviorSubject<INotification[]> = new BehaviorSubject(this._notifications);
 
   constructor() {
-    this.connect();
+    // this.connect();
   }
 
   connect() {
