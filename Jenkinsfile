@@ -3,7 +3,6 @@ pipeline{
   
     environment {
       DOCKER_HUB_PWD = credentials('dockerHubPwd')
-      tag = sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()
     }
 
     stages{
@@ -12,17 +11,18 @@ pipeline{
                 script{
                     registry = "tomasblaha"
                     appName = "pv-web"
+                    tag = env.GIT_COMMIT
 
-                    stage("DockerHub login"){
-                        sh "docker login -u $registry -p ${DOCKER_HUB_PWD}"
-                    }
-                  
-                    stage("Build Docker image"){
+                    stage("Docker BUILD"){
                       sh "docker build -t $registry/$appName:$tag ."
                       sh "docker tag $registry/$appName:$tag $registry/$appName:latest"
                     }
+                    
+                    stage("Docker LOGIN"){
+                        sh "docker login -u $registry -p ${DOCKER_HUB_PWD}"
+                    }
 
-                    stage("Push Docker image"){
+                    stage("Docker PUSH"){
                         sh "docker push $registry/$appName:$tag"
                     }
                 }
@@ -37,7 +37,7 @@ pipeline{
             deleteDir()
         }
         unstable {
-            echo 'UNSTRABLE.'
+            echo 'Build UNSTABLE.'
         }
         failure {
             echo 'Build FAILED.'
