@@ -1,0 +1,54 @@
+<div class="container-fluid mb-5 mt-3">
+  <h2 class="page__title">Faktury <button class="btn refresh-button"><span class="fas fa-sync-alt"></span></button>
+  </h2>
+  <div class="table-responsive">
+    <p-table
+      #table
+      [tableStyleClass]="'table table-filter table-bordered table-hover table-striped'"
+      [value]="page.content"
+      [columns]="cols"
+      [rows]="page.size"
+      [totalRecords]="page.totalElements"
+      sortField="createdAt"
+      [sortOrder]="1"
+      [lazy]="true"
+      (onLazyLoad)="loadLazy($event)"
+      [paginator]="true">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+          <th class="action">
+            Akce
+          </th>
+        </tr>
+        <tr>
+          <th *ngFor="let col of columns" [ngSwitch]="col.field">
+            <input *ngSwitchCase="'hash'" type="text" pInputText placeholder="Vyhledat hash"
+                   class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
+            <input *ngSwitchCase="'appId'" type="text" pInputText placeholder="Vyhledat app id"
+                   class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
+            <ng-select *ngSwitchCase="'period'" [items]="filterOptions.period" bindLabel="name" bindValue="value" [(ngModel)]="active" (change)="addFilter($event, col.field)"></ng-select>
+          </th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-row>
+        <tr>
+          <td><strong>{{months[+row.period?.split('-')[1] - 1]}} {{row.period?.split('-')[0]}}</strong></td>
+          <td>{{row.appId}}</td>
+          <td><strong>{{row.price ? (row.commission.amount|price:row.price.currency) : (0|price:'CZK')}}</strong></td>
+          <td>{{row.commission ? (row.commission.amount|price:row.commission.currency) : (0|price:'CZK')}}</td>
+          <td class="action-column">
+            <ul class="action-list">
+              <li><a class="btn-xs" href="{{row.invoiceLink}}" target="_blank"><span class="fas fa-file-pdf"></span></a></li>
+            </ul>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+</div>
