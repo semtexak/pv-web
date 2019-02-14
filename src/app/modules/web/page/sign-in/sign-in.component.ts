@@ -71,6 +71,7 @@ export class SignInComponent implements OnInit {
           console.log(error);
         });
     }
+    // this.authenticationService.saveUser().subscribe(cc => console.log(cc));
   }
 
 }

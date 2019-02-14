@@ -36,7 +36,7 @@
       </ng-template>
       <ng-template pTemplate="body" let-row>
         <tr>
-          <td><strong>{{row.email}}</strong></td>
+          <td><strong><a routerLink="/admin/uzivatele/{{row.id}}">{{row.email}}</a></strong></td>
           <td>{{row.details?.firstName}} {{row.details?.lastName}}</td>
           <td>
           <span class="status" [ngSwitch]="row.active" [ngClass]="[row.active ? 'success' : 'error']">

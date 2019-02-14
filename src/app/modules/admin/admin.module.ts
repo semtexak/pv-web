@@ -12,6 +12,7 @@ import {FormsModule} from '@angular/forms';
 import {ApplicationsComponent} from './page/applications/applications.component';
 import {DonationsComponent} from './page/donations/donations.component';
 import {PipeModule} from '../../shared/pipe/pipe.module';
+import { UserDetailComponent } from './page/users/user-detail/user-detail.component';
 
 
 @NgModule({
@@ -23,7 +24,7 @@ import {PipeModule} from '../../shared/pipe/pipe.module';
     FormsModule,
     NgSelectModule
   ],
-  declarations: [UsersComponent, ClientsComponent, ApplicationsComponent, SubscriptionsComponent, OrdersComponent, DonationsComponent]
+  declarations: [UsersComponent, ClientsComponent, ApplicationsComponent, SubscriptionsComponent, OrdersComponent, DonationsComponent, UserDetailComponent]
 })
 export class AdminModule {
 }

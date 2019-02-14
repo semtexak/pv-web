@@ -10,6 +10,8 @@ import {PipeModule} from '../../shared/pipe/pipe.module';
 import {SharedModule} from '../../shared/shared.module';
 import { ApplicationRegistrationComponent } from './page/application-registration/application-registration.component';
 import {NgSelectModule} from '@ng-select/ng-select';
+import { InvoicesComponent } from './page/invoices/invoices.component';
+import {TableModule} from 'primeng/table';
 
 @NgModule({
   imports: [
@@ -17,9 +19,10 @@ import {NgSelectModule} from '@ng-select/ng-select';
     SharedModule,
     CountoModule,
     PipeModule,
+    TableModule,
     NgSelectModule,
     ClientRoutingModule
   ],
-  declarations: [DashboardComponent, SignUpComponent, SettingsComponent, ApplicationRegistrationComponent]
+  declarations: [DashboardComponent, SignUpComponent, SettingsComponent, ApplicationRegistrationComponent, InvoicesComponent]
 })
 export class ClientModule { }

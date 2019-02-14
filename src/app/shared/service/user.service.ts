@@ -71,4 +71,8 @@ export class UserService extends HttpService {
   getUsers(page: number, filter: string, orderBy: string): Observable<any> {
     return this.http.get(`${this.API_URL}/user-service/users/all?page=${page}${filter ? '&' + filter : ''}${orderBy ? '&sort=' + orderBy : ''}`);
   }
+
+  getUser(id: number): Observable<any> {
+    return this.http.get(`${this.API_URL}/user-service/users/${id}`);
+  }
 }

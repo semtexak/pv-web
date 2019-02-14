@@ -60,9 +60,11 @@ export class AuthenticationService extends HttpService {
     return this.saveUser();
   }
 
-  private saveUser(): Observable<any> {
+  public saveUser(): Observable<any> {
+    console.log('SaveUser()');
     return this.getUserData().pipe(
       switchMap((userData: User) => {
+        console.log('AAA');
         const user = AuthenticationService.mapUser(userData);
         console.log(`User received: ${userData.email}`);
         localStorage.setItem('udata', JSON.stringify(user));
@@ -89,6 +91,7 @@ export class AuthenticationService extends HttpService {
   }
 
   private getUserData(): Observable<any> {
+    console.log('Getting user data');
     return this.http.get(`${this.API_URL}/user-service/user/self`);
   }
 
@@ -101,6 +104,7 @@ export class AuthenticationService extends HttpService {
     const expiresAt = new Date(current.getTime() + (token.expires_in * 1000));
     this.cookieService.set('act', token.access_token, expiresAt, '/');
     console.log('Saving token', token.access_token);
+    console.log(this.getToken());
   }
 
   private prepareFormAuth(credentials: ISingInForm): HttpParams {

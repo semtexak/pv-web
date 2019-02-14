@@ -10,7 +10,7 @@
     <div class="sidebar__content">
       <div class="sidebar__customer">
         <ul class="sidebar__nav">
-          <li class="sidebar__item" routerLinkActive="active">
+          <li class="sidebar__item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
             <a routerLink="/zakaznik">
               <span class="fl fas fa-user"></span>
               <span class="item-text">Můj účet</span>
@@ -23,7 +23,13 @@
             </a>
             <ul class="sidebar__dropdown-menu" routerLinkActive="show" pvDropdownMenu>
               <li class="sidebar__item" routerLinkActive="active">
-                <a routerLink="/sluzby/predplatne">
+                <a routerLink="/zakaznik/sluzby/dary">
+                  <span class="fl flaticon-credit-card"></span>
+                  <span class="item-text">Dary</span>
+                </a>
+              </li>
+              <li class="sidebar__item" routerLinkActive="active">
+                <a routerLink="/zakaznik/sluzby/predplatne">
                   <span class="fl flaticon-credit-card"></span>
                   <span class="item-text">Předplatné</span>
                 </a>
@@ -85,6 +91,19 @@
               <li class="sidebar__item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a routerLink="/klient/stranka/{{application.appId}}/nastaveni">
                   <span class="item-text">Nastavení</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown  *ngIf="user?.hasRole('CLIENT')">
+            <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
+              <span class="fl fas fa-key"></span>
+              <span class="item-text">Administrace</span>
+            </a>
+            <ul class="sidebar__dropdown-menu" routerLinkActive="show" pvDropdownMenu>
+              <li class="sidebar__item" routerLinkActive="active">
+                <a routerLink="/klient/faktury">
+                  <span class="item-text">Faktury</span>
                 </a>
               </li>
             </ul>

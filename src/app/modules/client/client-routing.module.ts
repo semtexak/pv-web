@@ -4,6 +4,7 @@ import {DashboardComponent} from './page/dashboard/dashboard.component';
 import {SignUpComponent} from './page/sign-up/sign-up.component';
 import {SettingsComponent} from './page/settings/settings.component';
 import {ApplicationRegistrationComponent} from './page/application-registration/application-registration.component';
+import {InvoicesComponent} from './page/invoices/invoices.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
         component: SettingsComponent
       }
     ]
+  },
+  {
+    path: 'faktury',
+    component: InvoicesComponent
   }
 ];
 

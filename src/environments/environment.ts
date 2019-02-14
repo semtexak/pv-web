@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  API_URL: 'http://localhost:8765',
+  API_URL: 'https://localhost:8765',
   grantType: 'password',
   clientId: 'test',
   clientSecret: 'secret',

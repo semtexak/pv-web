@@ -6,11 +6,16 @@ import {OrdersComponent} from './page/orders/orders.component';
 import {UsersComponent} from './page/users/users.component';
 import {ApplicationsComponent} from './page/applications/applications.component';
 import {DonationsComponent} from './page/donations/donations.component';
+import {UserDetailComponent} from './page/users/user-detail/user-detail.component';
 
 const routes: Routes = [
   {
     path: 'uzivatele',
     component: UsersComponent
+  },
+  {
+    path: 'uzivatele/:id',
+    component: UserDetailComponent
   },
   {
     path: 'klienti',
