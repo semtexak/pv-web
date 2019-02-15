@@ -52,8 +52,8 @@
           "options": {
             "browserTarget": "payvont:build",
             "ssl": true,
-            "sslKey": "cert/local.payvont.key",
-            "sslCert": "cert/local.payvont.crt"
+            "sslKey": "cert/local/payvont.key",
+            "sslCert": "cert/local/payvont.crt"
           },
           "configurations": {
             "production": {
