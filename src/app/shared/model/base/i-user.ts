@@ -4,6 +4,7 @@ export interface IUser {
   email: string;
   active: boolean;
   createdAt: number;
+  details: IUserDetails;
   roles: Role[];
 
 }
@@ -14,4 +15,15 @@ export enum Role {
   CLIENT = 'CLIENT',
   ADMIN = 'ADMIN',
 
+}
+
+export interface IUserDetails {
+  firstName: string;
+  lastName: string;
+  sex: Sex;
+}
+
+export enum Sex {
+  MALE = 'MALE',
+  FEMALE = 'FEMALE'
 }

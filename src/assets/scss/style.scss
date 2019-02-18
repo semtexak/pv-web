@@ -6,6 +6,9 @@
 
 @import "~bootstrap/scss/bootstrap.scss";
 @import "../icons/flaticon.css";
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+
+@import "vendors/ng-select";
 
 @import "base/animation";
 @import "base/font";
@@ -14,6 +17,7 @@
 @import "base/utility";
 
 @import "components/button";
+@import "components/alert";
 @import "components/dropdown";
 @import "components/card";
 @import "components/tab";
@@ -38,8 +42,8 @@
 @import "pages/application-registration";
 @import "pages/plugin-applications";
 @import "pages/plugin-content";
+@import "pages/my-account";
 
-@import "vendors/ng-select";
 
 
 .cta {

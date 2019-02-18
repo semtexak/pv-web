@@ -8,12 +8,15 @@ import { DonationsComponent } from './services/donations/donations.component';
 import { SubscriptionsComponent } from './services/subscriptions/subscriptions.component';
 import { HelpComponent } from './help/help.component';
 import { OrdersComponent } from './orders/orders.component';
+import {SharedModule} from '../../shared/shared.module';
+import { SocialMediaComponent } from './component/social-media/social-media.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     UserRoutingModule
   ],
-  declarations: [MyAccountComponent, ServicesComponent, DonationsComponent, SubscriptionsComponent, HelpComponent, OrdersComponent]
+  declarations: [MyAccountComponent, ServicesComponent, DonationsComponent, SubscriptionsComponent, HelpComponent, OrdersComponent, SocialMediaComponent]
 })
 export class UserModule { }
