@@ -104,6 +104,7 @@ $sidebar-nav-li-active-color: #1dc6e6;
 /* Table filter */
 $table-row-expanded-background: $primary-color;
 $table-row-expanded-color: #ffffff;
+$table-odd-background: #fafafa;
 
 /* Card */
 $card-header-background: #ffffff;
@@ -125,3 +126,12 @@ $cart-empty-background: #fbfbfb;
 /* Refresh button */
 $refresh-button-color: #e0e0e0;
 $refresh-button-hover-color: $headings-color;
+
+/* My Account */
+$my-account-list-group-action-color: #8c8e90;
+$my-account-list-group-action-active-color: #4E5155;
+$my-account-list-group-action-active-background: #ffffff;
+$my-account-list-group-action-border-color: #f1f1f2;
+$my-account-list-group-action-hover-background: rgba(24,28,33,0.015);
+
+$alert-warning-border: #f5de99;

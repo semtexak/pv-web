@@ -14,6 +14,14 @@
     padding: 1rem;
   }
 
+  tbody tr:nth-child(odd) {
+    background-color: $table-odd-background;
+  }
+
+  tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.04)
+  }
+
   .ui-sortable-column {
     cursor: pointer;
     position: relative;
@@ -27,16 +35,41 @@
       .ui-sortable-column-icon {
         padding: 0;
         display: inline-block;
-        font-family: Flaticon;
+        font-family: $font-awesome-font-family;
         font-style: normal;
         @include rem-fallback(font-size, 10);
         line-height: 1;
+        color: #000;
       }
-      .pi-sort-down:before {
-        content: "\f116";
+
+      %pi-sort {
+        &:before {
+          content: "\f30c";
+          opacity: .3;
+        }
+        &:after {
+          content: "\f309";
+          opacity: .3;
+          margin-left: 1px;
+        }
       }
-      .pi-sort-up:before {
-        content: "\f117";
+
+      .pi-sort {
+        @extend %pi-sort;
+      }
+
+      .pi-sort-down {
+        @extend %pi-sort;
+        &:after {
+          opacity: 1;
+        }
+      }
+
+      .pi-sort-up {
+        @extend %pi-sort;
+        &:before {
+          opacity: 1;
+        }
       }
     }
   }
@@ -120,7 +153,7 @@
 
       span:before {
         margin: 0;
-        @include rem-fallback(font-size, 19);
+        @include rem-fallback(font-size, 16);
       }
     }
   }

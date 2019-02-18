@@ -1,4 +1,4 @@
-<section class="sidebar" [ngClass]="{'sidebar--minimized': isHidden}">
+<section class="sidebar" [ngClass]="{'sidebar--minimized': isHidden}" perfectScrollbar>
   <nav>
     <header class="brand">
       <span class="brand__logo">P</span>
@@ -63,13 +63,15 @@
             </a>
           </li>
         </ul>
-        <ul class="sidebar__nav">
+        <ul class="sidebar__nav" *ngIf="user?.hasRole('CLIENT')">
           <li class="sidebar__item" routerLinkActive="active" *ngIf="user?.hasRole('CLIENT')">
             <a routerLink="/klient/stranka/registrace">
               <span class="fl fas fa-plus"></span>
               <span class="item-text">Přidat stránku</span>
             </a>
           </li>
+        </ul>
+        <ul class="sidebar__nav">
           <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown
               *ngFor="let application of user.applications">
             <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
@@ -95,6 +97,8 @@
               </li>
             </ul>
           </li>
+        </ul>
+        <ul class="sidebar__nav" *ngIf="user?.hasRole('CLIENT')">
           <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown  *ngIf="user?.hasRole('CLIENT')">
             <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
               <span class="fl fas fa-key"></span>

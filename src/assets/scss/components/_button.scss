@@ -40,4 +40,21 @@
     color: $google-color!important;;
     border: none;
   }
+
+  &.refresh {
+    background: none;
+    border: none;
+    @include rem-fallback(font-size, 17);
+    color: $refresh-button-color;
+    transition: .1s all ease;
+
+    &:hover, &:focus, &:active {
+      background: none;
+      box-shadow: none;
+      color: $refresh-button-hover-color;
+      animation: spin 1s;
+      animation-timing-function: linear;
+      outline: none;
+    }
+  }
 }

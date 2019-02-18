@@ -1,0 +1,54 @@
+<ng-container [ngSwitch]="type">
+  <ng-container *ngSwitchCase="'instagram'">
+    <ng-container *ngIf="linked; else instagram">
+      <h5 class="mb-2">
+        <i class="ion ion-logo-instagram text-instagram"></i>
+        You are connected to Instagram:
+      </h5>
+      <span class="social-media-remove text-tiny"><i class="fas fa-times"></i></span>
+      <span class="connected-email">{{email}}</span>
+    </ng-container>
+    <ng-template #instagram>
+      <button type="button" class="btn btn-social instagram">Connect to <strong>Instagram</strong></button>
+    </ng-template>
+  </ng-container>
+  <ng-container *ngSwitchCase="'google'">
+    <ng-container *ngIf="linked; else google">
+      <h5 class="mb-2">
+        <i class="ion ion-logo-google text-google"></i>
+        You are connected to Google:
+      </h5>
+      <span class="social-media-remove text-tiny"><i class="fas fa-times"></i></span>
+      <span class="connected-email">{{email}}</span>
+    </ng-container>
+    <ng-template #google>
+      <button type="button" class="btn btn-social google">Connect to <strong>Google</strong></button>
+    </ng-template>
+  </ng-container>
+  <ng-container *ngSwitchCase="'facebook'">
+    <ng-container *ngIf="linked; else facebook">
+      <h5 class="mb-2">
+        <i class="ion ion-logo-facebook text-facebook"></i>
+        You are connected to Facebook:
+      </h5>
+      <span class="social-media-remove text-tiny"><i class="fas fa-times"></i></span>
+      <span class="connected-email">{{email}}</span>
+    </ng-container>
+    <ng-template #facebook>
+      <button type="button" class="btn btn-social facebook">Connect to <strong>Facebook</strong></button>
+    </ng-template>
+  </ng-container>
+  <ng-container *ngSwitchCase="'twitter'">
+    <ng-container *ngIf="linked; else twitter">
+      <h5 class="mb-2">
+        <i class="ion ion-logo-twitter text-twitter"></i>
+        You are connected to Twitter:
+      </h5>
+      <span class="social-media-remove text-tiny"><i class="fas fa-times"></i></span>
+      <span class="connected-email">{{email}}</span>
+    </ng-container>
+    <ng-template #twitter>
+      <button type="button" class="btn btn-social twitter">Connect to <strong>Twitter</strong></button>
+    </ng-template>
+  </ng-container>
+</ng-container>

@@ -1,4 +1,5 @@
-<div class="container-fluid mb-5 mt-3">
+<div class="container-fluid mb-5">
+  <h2 class="page__title"><span class="page__title--disabled">Administrace /</span> Objednávky</h2>
   <div class="table-responsive">
     <p-table
       #table
@@ -11,7 +12,7 @@
       [sortOrder]="1"
       [lazy]="true"
       (onLazyLoad)="loadLazy($event)"
-      [paginator]="true">
+      [paginator]="page.totalPages > 1">
       <ng-template pTemplate="header" let-columns>
         <tr>
           <th *ngFor="let col of columns" [pSortableColumn]="col.field">
@@ -33,6 +34,7 @@
             <ng-select *ngSwitchCase="'automaticRenew'" [items]="filterOptions.automaticRenew" bindLabel="name" bindValue="value"  [(ngModel)]="active" (change)="addFilter($event, col.field)"></ng-select>
             <ng-select *ngSwitchCase="'status'" [items]="filterOptions.status" bindLabel="name" bindValue="value"  [(ngModel)]="banned" (change)="addFilter($event, col.field)"></ng-select>
           </th>
+          <th></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-row>
@@ -51,9 +53,16 @@
           <!--<td>{{row.createdAt|date: 'dd. MM. yyyy HH:mm:ss'}}</td>-->
           <td class="action-column">
             <ul class="action-list">
-              <li><a class="btn-xs"><span class="flaticon-pencil"></span></a></li>
-              <li><a class="btn-xs"><span class="flaticon-garbage"></span></a></li>
+              <li><a class="btn-xs"><span class="fas fa-pencil-alt"></span></a></li>
+              <li><a class="btn-xs"><span class="fas fa-trash"></span></a></li>
             </ul>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="columns.length">
+            No records found.
           </td>
         </tr>
       </ng-template>

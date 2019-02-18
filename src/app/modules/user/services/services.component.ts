@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'pv-services',
-  templateUrl: './services.component.html',
-  styleUrls: ['./services.component.css']
+  templateUrl: './services.component.html'
 })
 export class ServicesComponent implements OnInit {
 
