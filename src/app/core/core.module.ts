@@ -60,7 +60,7 @@ import {CartService} from '../shared/service/cart.service';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    }
+    },
   ]
 })
 export class CoreModule {

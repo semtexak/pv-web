@@ -14,7 +14,6 @@ import {DonationsComponent} from './page/donations/donations.component';
 import {PipeModule} from '../../shared/pipe/pipe.module';
 import { UserDetailComponent } from './page/users/user-detail/user-detail.component';
 
-
 @NgModule({
   imports: [
     CommonModule,

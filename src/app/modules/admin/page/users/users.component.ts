@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../../../shared/service/user.service';
-import {TableService} from '../../service/table.service';
-import {LazyLoadEvent} from '../../../../../../node_modules/primeng/api';
+import {LazyLoadEvent} from 'primeng/api';
 import {IPageUser} from '../../../../shared/model/page/i-page-user';
-import {IUser, Role} from '../../../../shared/model/base/i-user';
+import {IUser, Role, Sex} from '../../../../shared/model/base/i-user';
 
 @Component({
   selector: 'pv-users',
@@ -12,6 +11,7 @@ import {IUser, Role} from '../../../../shared/model/base/i-user';
 export class UsersComponent implements OnInit {
 
   Role: typeof Role = Role;
+  Sex: typeof Sex = Sex;
   page: IPageUser = {
     content: [],
     page: 0,

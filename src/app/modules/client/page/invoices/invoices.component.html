@@ -1,6 +1,21 @@
 <div class="container-fluid mb-5 mt-3">
-  <h2 class="page__title">Faktury <button class="btn refresh-button"><span class="fas fa-sync-alt"></span></button>
+  <h2 class="page__title">Faktury <button class="btn refresh"><span class="fas fa-sync-alt"></span></button>
   </h2>
+
+  <div class="row">
+    <div class="col-3" *ngFor="let col of cols" [ngSwitch]="col.field">
+      <div class="form-group">
+      <label *ngSwitchCase="'period'" class="control-label" for="appId">Období</label>
+      <label *ngSwitchCase="'appId'" class="control-label" for="appId">Stránka</label>
+      <input *ngSwitchCase="'hash'" [name]="'hash'" [id]="'hash'" type="text" pInputText placeholder="Vyhledat hash"
+             class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
+      <input *ngSwitchCase="'appId'" name="appId" id="appId" type="text" pInputText placeholder="Vyhledat app id"
+             class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
+      <ng-select *ngSwitchCase="'period'" [name]="'period'" [id]="'period'" [items]="filterOptions.period" bindLabel="name" bindValue="value" [(ngModel)]="period" (change)="addFilter($event, col.field)"></ng-select>
+      </div>
+    </div>
+  </div>
+
   <div class="table-responsive">
     <p-table
       #table
@@ -13,7 +28,7 @@
       [sortOrder]="1"
       [lazy]="true"
       (onLazyLoad)="loadLazy($event)"
-      [paginator]="true">
+      [paginator]="page.totalPages > 1">
       <ng-template pTemplate="header" let-columns>
         <tr>
           <th *ngFor="let col of columns" [pSortableColumn]="col.field">
@@ -23,16 +38,6 @@
           <th class="action">
             Akce
           </th>
-        </tr>
-        <tr>
-          <th *ngFor="let col of columns" [ngSwitch]="col.field">
-            <input *ngSwitchCase="'hash'" type="text" pInputText placeholder="Vyhledat hash"
-                   class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
-            <input *ngSwitchCase="'appId'" type="text" pInputText placeholder="Vyhledat app id"
-                   class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
-            <ng-select *ngSwitchCase="'period'" [items]="filterOptions.period" bindLabel="name" bindValue="value" [(ngModel)]="active" (change)="addFilter($event, col.field)"></ng-select>
-          </th>
-          <th></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-row>

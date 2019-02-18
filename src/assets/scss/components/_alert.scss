@@ -1,0 +1,5 @@
+.alert {
+  &.alert-warning {
+    border-color: $alert-warning-border;
+  }
+}

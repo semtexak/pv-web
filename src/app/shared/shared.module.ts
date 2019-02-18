@@ -13,12 +13,24 @@ import {TabComponent} from './component/tabs/tab/tab.component';
 import {TabsComponent} from './component/tabs/tabs.component';
 import {CartComponent} from './component/cart/cart.component';
 import {CartItemComponent} from './component/cart/cart-item/cart-item.component';
+import {TabToggleDirective} from './directive/tab-toggle.directive';
+import {TabContentDirective} from './directive/tab-content.directive';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { TooltipModule } from 'ng2-tooltip-directive';
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
 
 @NgModule({
   imports: [
     CommonModule,
     PipeModule,
+    PerfectScrollbarModule,
     FormsModule,
+    TooltipModule,
     ReactiveFormsModule
   ],
   declarations: [
@@ -29,16 +41,25 @@ import {CartItemComponent} from './component/cart/cart-item/cart-item.component'
     DropdownDirective,
     DropdownMenuDirective,
     DropdownToggleDirective,
+    TabToggleDirective,
+    TabContentDirective,
     CartComponent,
     CartItemComponent,
   ],
   providers: [
-    CookieService
+    CookieService,
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
   ],
   exports: [
     DropdownDirective,
     DropdownMenuDirective,
     DropdownToggleDirective,
+    TabToggleDirective,
+    TabContentDirective,
+    TooltipModule,
     PricePipe,
     AlertsComponent,
     AlertComponent,
@@ -47,6 +68,7 @@ import {CartItemComponent} from './component/cart/cart-item/cart-item.component'
     CartComponent,
     CartItemComponent,
     FormsModule,
+    PerfectScrollbarModule,
     PipeModule,
     ReactiveFormsModule
   ]

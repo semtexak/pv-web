@@ -26,6 +26,7 @@ export class InvoicesComponent {
     period: [],
   };
   months = DateNames.months.map(month => month.charAt(0).toUpperCase() + month.slice(1));
+  period;
 
   constructor(private orderService: OrderService) {
     this.cols = [
@@ -39,6 +40,8 @@ export class InvoicesComponent {
       {name: 'Vše', value: null},
     ];
 
+    this.period = this.filterOptions.period[0];
+
     const start = moment('2019-01-01');
     const end = moment();
     for (const tmp = moment(start); tmp.isSameOrBefore(end); tmp.add(1, 'months')) {
@@ -47,6 +50,7 @@ export class InvoicesComponent {
       this.filterOptions.period.push({name: `${this.months[+tmp.format('M') - 1]} ${tmp.format('YYYY')}`, value: tmp.format('YYYY-MM')});
     }
 
+    console.log(this.period);
   }
 
   loadLazy(event: LazyLoadEvent) {
@@ -61,7 +65,7 @@ export class InvoicesComponent {
   private callService(page: number, filter: string, orderBy: string) {
     this.orderService.getInvoices(page, filter, orderBy).subscribe((ipage: IPageInvoice) => {
       this.page = ipage;
-      console.log(this.page.content);
+      console.log(this.page);
     });
   }
 

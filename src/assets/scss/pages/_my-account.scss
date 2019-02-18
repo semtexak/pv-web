@@ -1,0 +1,63 @@
+.my-account {
+
+  h5 {
+    @include rem-fallback(font-size, 16);
+  }
+
+  .text-google {
+    color: $google-background;
+  }
+
+  .text-facebook {
+    color: $facebook-background;
+  }
+
+  .btn-social {
+    @include rem-fallback(font-size, 14);
+    padding: .75rem 1.5rem;
+  }
+
+  .social-media-remove {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    color: $text-muted;
+    transform: translateY(-50%);
+    transition: all .2s ease;
+
+    &:hover {
+      color: $danger-color;
+    }
+
+    .ion, .fas {
+      @include rem-fallback(font-size, 15);
+    }
+  }
+
+  .connected-email {
+    @include rem-fallback(font-size, 13);
+  }
+
+  .list-group-item.list-group-item-action {
+    padding: 1rem 2rem;
+    color: $my-account-list-group-action-color;
+    @include rem-fallback(font-size, 14);
+    font-family: $sidebar-font;
+    border-color: $my-account-list-group-action-border-color;
+
+    &:hover {
+      background-color: $my-account-list-group-action-hover-background;
+    }
+    &.active {
+      font-weight: 600;
+      background-color: $my-account-list-group-action-active-background;
+    }
+    &:hover, &.active {
+      color: $my-account-list-group-action-active-color;
+    }
+  }
+
+  .col-delimiter-right {
+    border-right: 1px solid $card-header-border-color;
+  }
+}
