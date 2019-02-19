@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpService} from './http.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
@@ -14,6 +14,10 @@ export class OrderService extends HttpService {
 
   getOrders(page: number, filter: string, orderBy: string): Observable<any> {
     return this.http.get(`${this.API_URL}/order-service/orders/all?page=${page}${filter ? '&' + filter : ''}${orderBy ? '&sort=' + orderBy : ''}`);
+  }
+
+  getUserOrders(page: number, filter: string, orderBy: string): Observable<any> {
+    return this.http.get(`${this.API_URL}/order-service/orders?page=${page}${filter ? '&' + filter : ''}${orderBy ? '&sort=' + orderBy : ''}`);
   }
 
   getInvoices(page: number, filter: string, orderBy: string): Observable<any> {
