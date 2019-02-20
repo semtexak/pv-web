@@ -45,12 +45,13 @@ export class InvoicesComponent {
     const start = moment('2019-01-01');
     const end = moment();
     for (const tmp = moment(start); tmp.isSameOrBefore(end); tmp.add(1, 'months')) {
-      // console.log(tmp.format('YYYY-MM-DD HH:mm:ss'));
-      // console.log(this.months[+tmp.format('M') - 1]);
       this.filterOptions.period.push({name: `${this.months[+tmp.format('M') - 1]} ${tmp.format('YYYY')}`, value: tmp.format('YYYY-MM')});
     }
 
-    console.log(this.period);
+  }
+
+  reloadData() {
+    this.callService(this.page.page, this.prepareQuery(), this.sort);
   }
 
   loadLazy(event: LazyLoadEvent) {
@@ -62,7 +63,7 @@ export class InvoicesComponent {
     this.callService(page, this.prepareQuery(), this.sort);
   }
 
-  private callService(page: number, filter: string, orderBy: string) {
+  callService(page: number, filter: string, orderBy: string) {
     this.orderService.getInvoices(page, filter, orderBy).subscribe((ipage: IPageInvoice) => {
       this.page = ipage;
       console.log(this.page);

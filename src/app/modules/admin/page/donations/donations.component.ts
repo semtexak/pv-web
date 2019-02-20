@@ -20,32 +20,19 @@ export class DonationsComponent {
   cols = [];
   filter: Map<string, any> = new Map();
   sort = null;
-  filterOptions = {
-    automaticRenew: [],
-    status: []
-  };
 
   constructor(private donationService: DonationService) {
     this.cols = [
-      {field: 'hash', header: 'ID'},
       {field: 'appId', header: 'Stránka'},
       {field: 'user', header: 'Uživatel'},
-      {field: 'lastSubscription.validTo', header: 'Platnost do'},
-      {field: 'automaticRenew', header: 'Obnovování'},
-      {field: 'status', header: 'Stav'},
+      {field: 'comment', header: 'Komentář'},
+      {field: 'price', header: 'Cena'},
+      {field: 'createdAt', header: 'Datum'},
     ];
-    this.filterOptions.automaticRenew = [
-      {name: 'Vše', value: null},
-      {name: 'Ano', value: true},
-      {name: 'Ne', value: false}
-    ];
-    this.filterOptions.status = [
-      {name: 'Vše', value: null},
-      {name: 'Nový', value: 0},
-      {name: 'Neaktivní', value: 1},
-      {name: 'Pozastaveno', value: 2},
-      {name: 'Aktivní', value: 3},
-    ];
+  }
+
+  reloadData() {
+    this.callService(this.page.page, this.prepareQuery(), this.sort);
   }
 
   loadLazy(event: LazyLoadEvent) {

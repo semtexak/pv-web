@@ -1,5 +1,5 @@
 <div class="container-fluid mb-5">
-  <h2 class="page__title"><span class="page__title--disabled">Administrace /</span> Dary</h2>
+  <h2 class="page__title"><span class="page__title--disabled">Administrace /</span> Dary <button class="btn refresh" (click)="reloadData()"><span class="fas fa-sync-alt"></span></button></h2>
   <div class="table-responsive">
     <p-table
       #table
@@ -9,7 +9,7 @@
       [rows]="page.size"
       [totalRecords]="page.totalElements"
       sortField="createdAt"
-      [sortOrder]="1"
+      [sortOrder]="0"
       [lazy]="true"
       (onLazyLoad)="loadLazy($event)"
       [paginator]="page.totalPages > 1">
@@ -25,37 +25,21 @@
         </tr>
         <tr>
           <th *ngFor="let col of columns" [ngSwitch]="col.field">
-            <input *ngSwitchCase="'hash'" type="text" pInputText placeholder="Vyhledat hash"
-                   class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
             <input *ngSwitchCase="'appId'" type="text" pInputText placeholder="Vyhledat app id"
                    class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
             <input *ngSwitchCase="'user'" type="text" pInputText placeholder="Vyhledat uživatele"
                    class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
-            <ng-select *ngSwitchCase="'automaticRenew'" [items]="filterOptions.automaticRenew" bindLabel="name" bindValue="value"  [(ngModel)]="active" (change)="addFilter($event, col.field)"></ng-select>
-            <ng-select *ngSwitchCase="'status'" [items]="filterOptions.status" bindLabel="name" bindValue="value"  [(ngModel)]="banned" (change)="addFilter($event, col.field)"></ng-select>
           </th>
           <th></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-row>
         <tr>
-          <td><strong>{{row.hash}}</strong></td>
           <td><a routerLink="/admin/stranky/{{row.appId}}">{{row.appId}}</a></td>
-          <td><a routerLink="/admin/uzivatele/{{row.user}}">{{row.user}}</a></td>
-          <td>{{row.lastSubscription?.validTo|date: 'dd. MM. yyyy HH:mm:ss'}}</td>
-          <td>
-          <span class="status" [ngSwitch]="row.automaticRenew" [ngClass]="[row.automaticRenew ? 'success' : 'error']">
-            <span *ngSwitchCase="true">Ano</span>
-            <span *ngSwitchCase="false">Ne</span>
-          </span>
-          </td>
-          <td>
-            <span class="status" [ngSwitch]="row.status" [ngClass]="{'success': row.status === 'ACTIVE', 'error': row.status === 'NOT_ACTIVE'}">
-              <span *ngSwitchCase="'NEW'">Nový</span>
-              <span *ngSwitchCase="'NOT_ACTIVE'">Neaktivní</span>
-              <span *ngSwitchCase="'ACTIVE'">Aktivní</span>
-            </span>
-          </td>
+          <td><a *ngIf="row.user" routerLink="/admin/uzivatele/{{row.user}}">{{row.user}}</a> <ng-container *ngIf="!row.user">Anonym</ng-container></td>
+          <td>{{row.comment}}</td>
+          <td>{{row.price?.amount|price: row.price?.currency}}</td>
+          <td>{{row.createdAt|date: 'dd. MM. yyyy HH:mm:ss'}}</td>
           <!--<td>{{row.createdAt|date: 'dd. MM. yyyy HH:mm:ss'}}</td>-->
           <td class="action-column">
             <ul class="action-list">

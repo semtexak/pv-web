@@ -1,6 +1,5 @@
 <div class="container-fluid mb-5 mt-3">
-  <h2 class="page__title">Faktury <button class="btn refresh"><span class="fas fa-sync-alt"></span></button>
-  </h2>
+  <h2 class="page__title"><span class="page__title--disabled">Klient /</span>Faktury <button class="btn refresh" (click)="reloadData()"><span class="fas fa-sync-alt"></span></button></h2>
 
   <div class="row">
     <div class="col-3" *ngFor="let col of cols" [ngSwitch]="col.field">
@@ -17,6 +16,28 @@
   </div>
 
   <div class="table-responsive">
+    <!--<pv-table [columns]="cols" [filterOptions]="filterOptions" [serviceCall]="callService">-->
+      <!--<tr header>-->
+        <!--&lt;!&ndash;<th *ngFor="let col of columns" [pSortableColumn]="col.field">&ndash;&gt;-->
+          <!--&lt;!&ndash;{{col.header}}&ndash;&gt;-->
+          <!--&lt;!&ndash;<p-sortIcon [field]="col.field"></p-sortIcon>&ndash;&gt;-->
+        <!--&lt;!&ndash;</th>&ndash;&gt;-->
+        <!--&lt;!&ndash;<th class="action">&ndash;&gt;-->
+          <!--&lt;!&ndash;Akce&ndash;&gt;-->
+        <!--&lt;!&ndash;</th>&ndash;&gt;-->
+      <!--</tr>-->
+      <!--<tr body>-->
+        <!--&lt;!&ndash;<td><strong>{{months[+row.period?.split('-')[1] - 1]}} {{row.period?.split('-')[0]}}</strong></td>&ndash;&gt;-->
+        <!--&lt;!&ndash;<td>{{row.appId}}</td>&ndash;&gt;-->
+        <!--&lt;!&ndash;<td><strong>{{row.price ? (row.commission.amount|price:row.price.currency) : (0|price:'CZK')}}</strong></td>&ndash;&gt;-->
+        <!--&lt;!&ndash;<td>{{row.commission ? (row.commission.amount|price:row.commission.currency) : (0|price:'CZK')}}</td>&ndash;&gt;-->
+        <!--&lt;!&ndash;<td class="action-column">&ndash;&gt;-->
+          <!--&lt;!&ndash;<ul class="action-list">&ndash;&gt;-->
+            <!--&lt;!&ndash;<li><a class="btn-xs" href="{{row.invoiceLink}}" target="_blank"><span class="fas fa-file-pdf"></span></a></li>&ndash;&gt;-->
+          <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+        <!--&lt;!&ndash;</td>&ndash;&gt;-->
+      <!--</tr>-->
+    <!--</pv-table>-->
     <p-table
       #table
       [tableStyleClass]="'table table-filter table-bordered table-hover table-striped'"

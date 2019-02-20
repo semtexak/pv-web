@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {UserService} from '../../../../shared/service/user.service';
 import {LazyLoadEvent} from 'primeng/api';
 import {IPageUser} from '../../../../shared/model/page/i-page-user';
@@ -8,7 +8,7 @@ import {IUser, Role, Sex} from '../../../../shared/model/base/i-user';
   selector: 'pv-users',
   templateUrl: './users.component.html'
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent {
 
   Role: typeof Role = Role;
   Sex: typeof Sex = Sex;
@@ -58,7 +58,8 @@ export class UsersComponent implements OnInit {
     ];
   }
 
-  ngOnInit() {
+  reloadData() {
+    this.callService(this.page.page, this.prepareQuery(), this.sort);
   }
 
   loadLazy(event: LazyLoadEvent) {

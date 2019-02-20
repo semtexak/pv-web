@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {LazyLoadEvent} from 'primeng/api';
 import {ClientService} from '../../../../shared/service/client.service';
 import {IPageClient} from '../../../../shared/model/page/i-page-client';
@@ -8,7 +8,7 @@ import {Service} from '../../../../shared/model/base/i-application';
   selector: 'pv-clients',
   templateUrl: './clients.component.html'
 })
-export class ClientsComponent implements OnInit {
+export class ClientsComponent {
 
   Service: typeof Service = Service;
   page: IPageClient = {
@@ -57,7 +57,8 @@ export class ClientsComponent implements OnInit {
     ];
   }
 
-  ngOnInit() {
+  reloadData() {
+    this.callService(this.page.page, this.prepareQuery(), this.sort);
   }
 
   loadLazy(event: LazyLoadEvent) {

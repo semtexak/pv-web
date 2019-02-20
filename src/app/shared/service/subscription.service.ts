@@ -15,4 +15,8 @@ export class SubscriptionService extends HttpService {
   getSubscriptions(page: number, filter: string, orderBy: string): Observable<any> {
     return this.http.get(`${this.API_URL}/subscription-service/subscriptions/all?page=${page}${filter ? '&' + filter : ''}${orderBy ? '&sort=' + orderBy : ''}`);
   }
+
+  getUserSubscriptions(page: number, filter: string, orderBy: string): Observable<any> {
+    return this.http.get(`${this.API_URL}/subscription-service/subscriptions?page=${page}${filter ? '&' + filter : ''}${orderBy ? '&sort=' + orderBy : ''}`);
+  }
 }

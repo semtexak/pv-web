@@ -32,14 +32,18 @@ export class OrdersComponent {
       {field: 'hash', header: 'ID'},
       {field: 'appId', header: 'Stránka'},
       {field: 'price.amount', header: 'Cena'},
-      {field: 'createdAt', header: 'Vytvořeno'},
       {field: 'status', header: 'Stav'},
+      {field: 'createdAt', header: 'Vytvořeno'},
     ];
     this.filterOptions.status = [
       {name: 'Vše', value: null},
       {name: 'Nezaplaceno', value: 0},
       {name: 'Zaplaceno', value: 1},
     ];
+  }
+
+  reloadData() {
+    this.callService(this.page.page, this.prepareQuery(), this.sort);
   }
 
   loadLazy(event: LazyLoadEvent) {
