@@ -19,6 +19,9 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { TooltipModule } from 'ng2-tooltip-directive';
+import {TableComponent} from './component/table/table.component';
+import {TableModule} from '../../../node_modules/primeng/table';
+import {NgSelectModule} from '@ng-select/ng-select';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -31,7 +34,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PerfectScrollbarModule,
     FormsModule,
     TooltipModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TableModule,
+    NgSelectModule
   ],
   declarations: [
     AlertsComponent,
@@ -45,6 +50,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TabContentDirective,
     CartComponent,
     CartItemComponent,
+    TableComponent
   ],
   providers: [
     CookieService,
@@ -67,10 +73,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TabComponent,
     CartComponent,
     CartItemComponent,
+    TableComponent,
     FormsModule,
     PerfectScrollbarModule,
     PipeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TableModule,
+    NgSelectModule
   ]
 })
 export class SharedModule {

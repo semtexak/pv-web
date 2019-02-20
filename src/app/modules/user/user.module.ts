@@ -10,15 +10,11 @@ import { HelpComponent } from './help/help.component';
 import { OrdersComponent } from './orders/orders.component';
 import {SharedModule} from '../../shared/shared.module';
 import { SocialMediaComponent } from './component/social-media/social-media.component';
-import {TableModule} from 'primeng/table';
-import {NgSelectModule} from '@ng-select/ng-select';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
-    TableModule,
-    NgSelectModule,
     UserRoutingModule
   ],
   declarations: [MyAccountComponent, ServicesComponent, DonationsComponent, SubscriptionsComponent, HelpComponent, OrdersComponent, SocialMediaComponent]

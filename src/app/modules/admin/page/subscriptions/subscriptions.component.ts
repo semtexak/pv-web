@@ -1,9 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {SubscriptionService} from '../../../../shared/service/subscription.service';
 import {LazyLoadEvent} from 'primeng/api';
-import {ISubscription} from '../../../../shared/model/i-subscription';
 import {IPageSubscription} from '../../../../shared/model/page/i-page-subscription';
-import {IPageClient} from '../../../../shared/model/page/i-page-client';
 
 @Component({
   selector: 'pv-subscriptions',
@@ -11,7 +9,6 @@ import {IPageClient} from '../../../../shared/model/page/i-page-client';
 })
 export class SubscriptionsComponent {
 
-  public subscriptions: ISubscription[];
   page: IPageSubscription = {
     content: [],
     page: 0,
@@ -49,6 +46,10 @@ export class SubscriptionsComponent {
       {name: 'Pozastaveno', value: 2},
       {name: 'Aktivní', value: 3},
     ];
+  }
+
+  reloadData() {
+    this.callService(this.page.page, this.prepareQuery(), this.sort);
   }
 
   loadLazy(event: LazyLoadEvent) {
