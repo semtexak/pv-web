@@ -2,241 +2,133 @@
   <h2 class="page__title">Můj účet
     <button class="btn refresh"><span class="fas fa-sync-alt"></span></button>
   </h2>
-  <div class="card overflow-hidden">
+  <div class="card">
     <div class="row no-gutters">
       <div class="col-md-3 pt-0 col-delimiter-right">
         <div class="list-group list-group-flush account-settings-links">
-          <a class="list-group-item list-group-item-action active show">General</a>
-          <a class="list-group-item list-group-item-action">Change
-            password</a>
-          <a class="list-group-item list-group-item-action">Info</a>
-          <a class="list-group-item list-group-item-action">Social
-            links</a>
-          <a class="list-group-item list-group-item-action">Connections</a>
-          <a class="list-group-item list-group-item-action">Notifications</a>
+          <a class="list-group-item list-group-item-action" [ngClass]="{'active show': tab.active}"
+             *ngFor="let tab of tabs" (click)="selectTab(tab)">{{tab.title}}</a>
         </div>
       </div>
       <div class="col-md-9">
         <div class="tab-content">
-          <div class="tab-pane" id="account-general">
-            <div class="card-body media align-items-center">
-              <img src="https://via.placeholder.com/80x80" alt="" class="d-block ui-w-80">
-              <div class="media-body ml-4">
-                <label class="btn btn-outline-primary">
-                  Upload new photo
-                  <input type="file" class="account-settings-fileinput">
-                </label> &nbsp;
-                <button type="button" class="btn btn-default md-btn-flat">Reset</button>
+          <div class="tab-pane fade" #general [ngClass]="{'active show': tabs[0].active}">
+            <form class="form-horizontal" [formGroup]="form" novalidate (ngSubmit)="onSubmit(form.value)">
+              <div class="card-body media align-items-center">
+                <img src="https://via.placeholder.com/80x80" alt="" *ngIf="!appImg" class="user-avatar">
+                <img [src]="appImg" class="user-avatar" alt="" title="" *ngIf="appImg">
+                <div class="media-body ml-4">
+                  <label class="btn btn-outline-primary">
+                    Upload new photo
+                    <input type="file" (change)="onSelectFile($event)">
+                  </label> &nbsp;
+                  <button type="button" class="btn btn-outline-secondary" (click)="removeImage()">Reset</button>
 
-                <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
+                  <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
+                </div>
               </div>
-            </div>
-            <hr class="border-light m-0">
+              <hr class="border-light m-0">
 
-            <div class="card-body">
-              <div class="form-group">
-                <label class="control-label">Username</label>
-                <input type="text" class="form-control mb-1" value="nmaxwell" data-cip-id="cIPJQ342845640">
-              </div>
-              <div class="form-group">
-                <label class="control-label">Name</label>
-                <input type="text" class="form-control" value="Nelle Maxwell" data-cip-id="cIPJQ342845641">
-              </div>
-              <div class="form-group">
-                <label class="control-label">E-mail</label>
-                <input type="text" class="form-control mb-1" value="nmaxwell@mail.com" data-cip-id="cIPJQ342845642">
+              <div class="card-body">
+                  <div class="form-group" [ngClass]="{'has-error':userInfoForm.controls['firstName'].invalid && userInfoForm.controls['firstName'].dirty}">
+                    <label class="control-label" for="firstName">Jméno <span class="required">*</span></label>
+                    <input id="firstName" type="text" class="form-control" [formControl]="userInfoForm.controls['firstName']">
+                    <div class="validation-message text-right" *ngIf="userInfoForm.get('firstName').invalid && userInfoForm.get('firstName').dirty">
+                            <span *ngIf="userInfoForm.get('firstName').errors.required">
+                               <span>Pole není vyplněno.</span>
+                            </span>
+                    </div>
+                  </div>
+
+                <div class="form-group" [ngClass]="{'has-error': userInfoForm.controls['lastName'].invalid && userInfoForm.controls['lastName'].dirty}">
+                  <label class="control-label" for="lastName">Příjmení <span class="required">*</span></label>
+                  <input id="lastName" type="text" class="form-control" [formControl]="userInfoForm.controls['lastName']">
+                  <div class="validation-message text-right" *ngIf="userInfoForm.get('lastName').invalid && userInfoForm.get('lastName').dirty">
+                            <span *ngIf="userInfoForm.get('lastName').errors.required">
+                               <span>Pole není vyplněno.</span>
+                            </span>
+                  </div>
+                </div>
+                <div class="form-group" [ngClass]="{'has-error':userInfoForm.controls['email'].invalid && userInfoForm.controls['email'].dirty}">
+                  <label class="control-label" for="email">E-mail <span class="required">*</span></label>
+                  <input id="email" type="text" class="form-control" [formControl]="userInfoForm.controls['email']">
+                  <div class="validation-message text-right" *ngIf="userInfoForm.get('email').invalid && userInfoForm.get('email').dirty">
+                            <span *ngIf="userInfoForm.get('email').errors.required">
+                               <span>Pole není vyplněno.</span>
+                            </span>
+                  </div>
+                </div>
                 <div class="alert alert-warning mt-3">
-                  Your email is not confirmed. Please check your inbox.<br>
-                  <a href="javascript:void(0)">Resend confirmation</a>
+                  Váš e-mail nebyl ověřen. Ověřte, prosím, svůj e-mail kliknutím na odkaz v zaslaném e-mailu.<br>
+                  <a href="">Odeslat ověření</a>
                 </div>
               </div>
-              <div class="form-group">
-                <label class="control-label">Company</label>
-                <input type="text" class="form-control" value="Company Ltd." data-cip-id="cIPJQ342845643">
-              </div>
-            </div>
-
+            </form>
           </div>
-          <div class="tab-pane" id="account-change-password">
+          <div class="tab-pane fade" #password [ngClass]="{'active show': tabs[1].active}">
             <div class="card-body pb-2">
-
-              <div class="form-group">
-                <label class="control-label">Current password</label>
-                <input type="password" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label class="control-label">New password</label>
-                <input type="password" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label class="control-label">Repeat new password</label>
-                <input type="password" class="form-control">
-              </div>
-
-            </div>
-          </div>
-          <div class="tab-pane" id="account-info">
-            <div class="card-body pb-2">
-
-              <div class="form-group">
-                <label class="control-label">Bio</label>
-                <textarea class="form-control" rows="5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nunc arcu, dignissim sit amet sollicitudin iaculis, vehicula id urna. Sed luctus urna nunc. Donec fermentum, magna sit amet rutrum pretium, turpis dolor molestie diam, ut lacinia diam risus eleifend sapien. Curabitur ac nibh nulla. Maecenas nec augue placerat, viverra tellus non, pulvinar risus.</textarea>
-              </div>
-              <div class="form-group">
-                <label class="control-label">Birthday</label>
-                <input type="text" class="form-control" value="May 3, 1995">
-              </div>
-              <div class="form-group">
-                <label class="control-label">Country</label>
-                <select class="custom-select">
-                  <option>USA</option>
-                  <option selected="">Canada</option>
-                  <option>UK</option>
-                  <option>Germany</option>
-                  <option>France</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="control-label">Languages</label>
-                <div class="position-relative"><select multiple=""
-                                                       class="account-settings-multiselect form-control w-100 select2-hidden-accessible"
-                                                       data-select2-id="1" tabindex="-1" aria-hidden="true">
-                  <option selected="" data-select2-id="3">English</option>
-                  <option>German</option>
-                  <option>French</option>
-                </select><span class="select2 select2-container select2-container--default" dir="ltr"
-                               data-select2-id="2" style="width: 100px;"><span class="selection"><span
-                  class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true"
-                  aria-expanded="false" tabindex="-1"><ul class="select2-selection__rendered"><li
-                  class="select2-selection__choice" title="English" data-select2-id="4"><span
-                  class="select2-selection__choice__remove" role="presentation">×</span>English</li><li
-                  class="select2-search select2-search--inline"><input class="select2-search__field" type="search"
-                                                                       tabindex="0" autocomplete="off" autocorrect="off"
-                                                                       autocapitalize="none" spellcheck="false"
-                                                                       role="textbox" aria-autocomplete="list"
-                                                                       placeholder="" style="width: 0.75em;"></li></ul></span></span><span
-                  class="dropdown-wrapper" aria-hidden="true"></span></span></div>
-              </div>
-
-            </div>
-            <hr class="border-light m-0">
-            <div class="card-body pb-2">
-
-              <h6 class="mb-4">Contacts</h6>
-              <div class="form-group">
-                <label class="control-label">Phone</label>
-                <input type="text" class="form-control" value="+0 (123) 456 7891">
-              </div>
-              <div class="form-group">
-                <label class="control-label">Website</label>
-                <input type="text" class="form-control" value="">
-              </div>
-
-            </div>
-            <hr class="border-light m-0">
-            <div class="card-body pb-2">
-
-              <h6 class="mb-4">Interests</h6>
-              <div class="form-group">
-                <label class="control-label">Favorite music</label>
-                <div class="bootstrap-tagsinput">
-                  <div style="position:absolute;width:0;height:0;z-index:-100;opacity:0;overflow:hidden;">
-                    <div class="bootstrap-tagsinput-input"
-                         style="position:absolute;z-index:-101;top:-9999px;opacity:0;white-space:nowrap;"></div>
-                  </div>
-                  <span class="tag badge badge-default">Rock<span data-role="remove"></span></span> <span
-                  class="tag badge badge-default">Alternative<span data-role="remove"></span></span> <span
-                  class="tag badge badge-default">Electro<span data-role="remove"></span></span> <span
-                  class="tag badge badge-default">Drum &amp; Bass<span data-role="remove"></span></span> <span
-                  class="tag badge badge-default">Dance<span data-role="remove"></span></span> <input type="text"
-                                                                                                      placeholder=""
-                                                                                                      style="width: 12px;">
+              <div class="form-group" [ngClass]="{'has-error':passwordForm.get('password').invalid && passwordForm.get('password').dirty}">
+                <label class="control-label" for="password">Současné heslo</label>
+                <input class="form-control" id="password" placeholder="Heslo" type="password" [formControl]="passwordForm.get('password')">
+                <div class="validation-message" *ngIf="passwordForm.get('password').invalid && passwordForm.get('password').dirty">
+                  <span *ngIf="passwordForm.get('password').hasError('required')">Pole není vyplněno.</span>
+                  <span *ngIf="!passwordForm.get('password').hasError('required')">
+                </span>
                 </div>
-                <input type="text" class="form-control account-settings-tagsinput"
-                       value="Rock,Alternative,Electro,Drum &amp; Bass,Dance" style="display: none;">
               </div>
-              <div class="form-group">
-                <label class="control-label">Favorite movies</label>
-                <div class="bootstrap-tagsinput">
-                  <div style="position:absolute;width:0;height:0;z-index:-100;opacity:0;overflow:hidden;">
-                    <div class="bootstrap-tagsinput-input"
-                         style="position:absolute;z-index:-101;top:-9999px;opacity:0;white-space:nowrap;"></div>
-                  </div>
-                  <span class="tag badge badge-default">The Green Mile<span data-role="remove"></span></span> <span
-                  class="tag badge badge-default">Pulp Fiction<span data-role="remove"></span></span> <span
-                  class="tag badge badge-default">Back to the Future<span data-role="remove"></span></span> <span
-                  class="tag badge badge-default">WALL·E<span data-role="remove"></span></span> <span
-                  class="tag badge badge-default">Django Unchained<span data-role="remove"></span></span> <span
-                  class="tag badge badge-default">The Truman Show<span data-role="remove"></span></span> <span
-                  class="tag badge badge-default">Home Alone<span data-role="remove"></span></span> <span
-                  class="tag badge badge-default">Seven Pounds<span data-role="remove"></span></span> <input type="text"
-                                                                                                             placeholder=""
-                                                                                                             style="width: 12px;">
+              <div class="form-group" [ngClass]="{'has-error':passwordForm.get('newPassword').invalid && passwordForm.get('newPassword').dirty}">
+                <label class="control-label" for="newPassword">Nové heslo</label>
+                <input class="form-control" id="newPassword" placeholder="Heslo" type="password" [formControl]="passwordForm.get('newPassword')">
+                <div class="validation-message" *ngIf="passwordForm.get('newPassword').invalid && passwordForm.get('newPassword').dirty">
+                  <span *ngIf="passwordForm.get('newPassword').hasError('required')">Pole není vyplněno.</span>
+                  <span *ngIf="!passwordForm.get('newPassword').hasError('required')">
+                   <span *ngIf="passwordForm.get('newPassword').hasError('minlength')">Heslo musí obsahovat alespoň 8 znaků.</span>
+                </span>
                 </div>
-                <input type="text" class="form-control account-settings-tagsinput"
-                       value="The Green Mile,Pulp Fiction,Back to the Future,WALL·E,Django Unchained,The Truman Show,Home Alone,Seven Pounds"
-                       style="display: none;">
+              </div>
+              <div class="form-group" [ngClass]="{'has-error':passwordForm.get('newPasswordConfirm').invalid && passwordForm.get('newPasswordConfirm').dirty}">
+                <label class="control-label" for="newPasswordConfirm">Nové heslo znovu</label>
+                <input class="form-control" id="newPasswordConfirm" placeholder="Heslo" type="password" [formControl]="passwordForm.get('newPasswordConfirm')">
+                <div class="validation-message" *ngIf="passwordForm.get('newPasswordConfirm').invalid && passwordForm.get('newPasswordConfirm').dirty">
+                  <span *ngIf="passwordForm.get('newPasswordConfirm').hasError('required')">Pole není vyplněno.</span>
+                  <span *ngIf="passwordForm.get('newPasswordConfirm').hasError('matchFields')">Hesla nesouhlasí.</span>
+                </div>
               </div>
 
             </div>
           </div>
-          <div class="tab-pane" id="account-social-links">
+          <div class="tab-pane fade" #connections [ngClass]="{'active show': tabs[2].active}">
+            <div class="card-body">
+              <pv-social-media [type]="'twitter'" [linked]="social.twitter"
+                               [email]="'twitter@twitter.com'"
+                               (onStatusChange)="onStatusChange($event)"></pv-social-media>
+            </div>
+            <hr class="border-light m-0">
+            <div class="card-body">
+              <pv-social-media [type]="'google'" [linked]="social.google"
+                               [email]="'google@google.com'"
+                               (onStatusChange)="onStatusChange($event)"></pv-social-media>
+            </div>
+            <hr class="border-light m-0">
+            <div class="card-body">
+              <pv-social-media [type]="'facebook'" [linked]="social.facebook"
+                               [email]="'facebook@facebook.com'"
+                               (onStatusChange)="onStatusChange($event)"></pv-social-media>
+            </div>
+            <hr class="border-light m-0">
+            <div class="card-body">
+              <pv-social-media [type]="'instagram'" [linked]="social.instagram"
+                               [email]="'instagram@instagram.com'"
+                               (onStatusChange)="onStatusChange($event)"></pv-social-media>
+            </div>
+          </div>
+          <div class="tab-pane fade" #notifications [ngClass]="{'active show': tabs[3].active}">
             <div class="card-body pb-2">
-
-              <div class="form-group">
-                <label class="control-label">Twitter</label>
-                <input type="text" class="form-control" value="https://twitter.com/user">
-              </div>
-              <div class="form-group">
-                <label class="control-label">Facebook</label>
-                <input type="text" class="form-control" value="https://www.facebook.com/user">
-              </div>
-              <div class="form-group">
-                <label class="control-label">Google+</label>
-                <input type="text" class="form-control" value="">
-              </div>
-              <div class="form-group">
-                <label class="control-label">LinkedIn</label>
-                <input type="text" class="form-control" value="">
-              </div>
-              <div class="form-group">
-                <label class="control-label">Instagram</label>
-                <input type="text" class="form-control" value="https://www.instagram.com/user">
-              </div>
-
-            </div>
-          </div>
-          <div class="tab-pane fade" id="account-connections">
-            <div class="card-body">
-              <pv-social-media [type]="'twitter'" [linked]="social.twitter" [email]="'twitter@twitter.com'"></pv-social-media>
-            </div>
-            <hr class="border-light m-0">
-            <div class="card-body">
-              <pv-social-media [type]="'google'" [linked]="social.google" [email]="'google@google.com'"></pv-social-media>
-            </div>
-            <hr class="border-light m-0">
-            <div class="card-body">
-              <pv-social-media [type]="'facebook'" [linked]="social.facebook" [email]="'facebook@facebook.com'"></pv-social-media>
-            </div>
-            <hr class="border-light m-0">
-            <div class="card-body">
-              <pv-social-media [type]="'instagram'" [linked]="social.instagram" [email]="'instagram@instagram.com'"></pv-social-media>
-            </div>
-          </div>
-          <div class="tab-pane active show  fade" id="account-notifications">
-            <div class="card-body pb-2">
-
               <h6 class="mb-4">Activity</h6>
-
               <div class="form-group">
                 <label class="switcher">
                   <input type="checkbox" class="switcher-input" checked="">
-                  <span class="switcher-indicator">
-                              <span class="switcher-yes"></span>
-                              <span class="switcher-no"></span>
-                            </span>
+                  <span class="switcher-indicator switcher-indicator--rounded"></span>
                   <span class="switcher-label">Email me when someone comments on my article</span>
                 </label>
               </div>
@@ -303,4 +195,9 @@
       </div>
     </div>
   </div>
+
+  <div class="text-right mt-3">
+    <button type="button" class="btn btn-primary" (click)="onSubmit(form.value)" [disabled]="form.invalid">Uložit změny</button>
+  </div>
+
 </div>

@@ -144,3 +144,64 @@ input.form-control, .custom-file label {
     border-color: $input-border-hover-color;
   }
 }
+
+.switcher {
+  padding-left: 50px;
+
+  .switcher-input {
+    position: absolute;
+    z-index: -1;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+  }
+
+  .switcher-label {
+    @include rem-fallback(font-size, 13);
+  }
+
+  .switcher-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    width: 38px;
+    height: 22px;
+    //font-size: .625rem;
+    line-height: 1.375rem;
+    background-color: $switcher-unchecked-background;
+    transition: background .2s ease-in-out;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 16px;
+      height: 16px;
+      background-color: $switcher-slider-background;
+      transition: left .2s ease-in-out;
+    }
+  }
+
+  .switcher-input:checked ~ .switcher-indicator {
+    background: $switcher-checked-background;
+    color: $switcher-color;
+
+    &:after {
+      left: 19px;
+    }
+  }
+
+  .switcher-input:not(:checked) ~ .switcher-indicator:after {
+    box-shadow: 0 0 0 1px rgba(24,28,33,0.04), 0 1px 6px rgba(24,28,33,0.09);
+  }
+
+  .switcher-indicator--rounded {
+    border-radius: 10px;
+
+    &:after {
+      border-radius: 50%;
+    }
+  }
+}

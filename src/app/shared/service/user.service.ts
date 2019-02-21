@@ -75,4 +75,8 @@ export class UserService extends HttpService {
   getUser(id: number): Observable<any> {
     return this.http.get(`${this.API_URL}/user-service/users/${id}`);
   }
+
+  getSelf(): Observable<any> {
+    return this.http.get(`${this.API_URL}/user-service/user/self`);
+  }
 }

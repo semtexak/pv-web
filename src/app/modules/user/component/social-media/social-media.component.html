@@ -9,7 +9,7 @@
       <span class="connected-email">{{email}}</span>
     </ng-container>
     <ng-template #instagram>
-      <button type="button" class="btn btn-social instagram">Connect to <strong>Instagram</strong></button>
+      <button type="button" class="btn btn-social instagram" (click)="changeStatus()">Connect to <strong>Instagram</strong></button>
     </ng-template>
   </ng-container>
   <ng-container *ngSwitchCase="'google'">
@@ -22,7 +22,7 @@
       <span class="connected-email">{{email}}</span>
     </ng-container>
     <ng-template #google>
-      <button type="button" class="btn btn-social google">Connect to <strong>Google</strong></button>
+      <button type="button" class="btn btn-social google" (click)="changeStatus()">Connect to <strong>Google</strong></button>
     </ng-template>
   </ng-container>
   <ng-container *ngSwitchCase="'facebook'">
@@ -35,7 +35,7 @@
       <span class="connected-email">{{email}}</span>
     </ng-container>
     <ng-template #facebook>
-      <button type="button" class="btn btn-social facebook">Connect to <strong>Facebook</strong></button>
+      <button type="button" class="btn btn-social facebook" (click)="changeStatus()">Connect to <strong>Facebook</strong></button>
     </ng-template>
   </ng-container>
   <ng-container *ngSwitchCase="'twitter'">
@@ -48,7 +48,7 @@
       <span class="connected-email">{{email}}</span>
     </ng-container>
     <ng-template #twitter>
-      <button type="button" class="btn btn-social twitter">Connect to <strong>Twitter</strong></button>
+      <button type="button" class="btn btn-social twitter" (click)="changeStatus()">Connect to <strong>Twitter</strong></button>
     </ng-template>
   </ng-container>
 </ng-container>
