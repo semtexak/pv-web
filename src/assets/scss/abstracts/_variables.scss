@@ -5,8 +5,9 @@ $font-family: 'Open Sans', sans-serif;
 $font-awesome-font-family: 'Font Awesome 5 Free';
 $headings-color: #414141;
 $text-muted: #a3a4a6;
+$text-light: #909090;
 
-$primary: #02A1BF;
+$primary: #24abf2;
 $secondary: #b4b4b5;
 $primary-dark-color: #01748A;
 $selection-color: $primary;
@@ -51,6 +52,12 @@ $input-border-hover-color: #dddddd;
 $input-border-focus-color: $primary;
 $input-error-color: $danger-color;
 $input-error-border-color: #f594a7;
+
+/* Input switcher */
+$switcher-checked-background: #26B4FF;
+$switcher-unchecked-background: rgba(24,28,33,0.1);
+$switcher-color: #ffffff;
+$switcher-slider-background: $switcher-color;
 
 /* Navbar */
 $navbar-background-color: #ffffff;
