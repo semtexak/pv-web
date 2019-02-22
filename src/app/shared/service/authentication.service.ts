@@ -131,4 +131,7 @@ export class AuthenticationService extends HttpService {
     );
   }
 
+  facebookLogin(accessToken: string) {
+    return this.http.post(`${this.API_URL}/user-service/user/facebook`, JSON.stringify({accessToken: accessToken}), this.jsonHttpOptions);
+  }
 }

@@ -22,12 +22,30 @@ import {DonationService} from '../shared/service/donation.service';
 import {OrderService} from '../shared/service/order.service';
 import {ApplicationService} from '../shared/service/application.service';
 import {CartService} from '../shared/service/cart.service';
+import {AuthServiceConfig, FacebookLoginProvider, LoginOpt, SocialLoginModule} from 'angularx-social-login';
+
+export function getSocialConfig() {
+  const fbLoginOptions: LoginOpt = {
+    scope: 'email',
+    return_scopes: true,
+    enable_profile_selector: true
+  };
+  return new AuthServiceConfig(
+    [
+      {
+        id: FacebookLoginProvider.PROVIDER_ID,
+        provider: new FacebookLoginProvider('200484067346822', fbLoginOptions)
+      },
+    ]
+  );
+}
 
 @NgModule({
   imports: [
     CommonModule,
     CoreRoutingModule,
     HttpClientModule,
+    SocialLoginModule,
     NgHttpLoaderModule,
     SharedModule
   ],
@@ -56,6 +74,10 @@ import {CartService} from '../shared/service/cart.service';
     OrderService,
     AlertService,
     CartService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: getSocialConfig
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
