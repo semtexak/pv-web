@@ -48,6 +48,7 @@ export class InvoicesComponent {
       this.filterOptions.period.push({name: `${this.months[+tmp.format('M') - 1]} ${tmp.format('YYYY')}`, value: tmp.format('YYYY-MM')});
     }
 
+    console.log(this.period);
   }
 
   reloadData() {
