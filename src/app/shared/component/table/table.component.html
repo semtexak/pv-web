@@ -1,35 +1,35 @@
-<div class="row">
-  <div class="col-3" *ngFor="let col of cols" [ngSwitch]="col.field">
-    <div class="form-group">
-      <label *ngSwitchCase="'period'" class="control-label" for="appId">Období</label>
-      <label *ngSwitchCase="'appId'" class="control-label" for="appId">Stránka</label>
-      <input *ngSwitchCase="'hash'" [name]="'hash'" [id]="'hash'" type="text" pInputText placeholder="Vyhledat hash"
-             class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
-      <input *ngSwitchCase="'appId'" name="appId" id="appId" type="text" pInputText placeholder="Vyhledat app id"
-             class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
-      <!--<ng-select *ngSwitchCase="'period'" [name]="'period'" [id]="'period'" [items]="filterOptions.period" bindLabel="name" bindValue="value" [(ngModel)]="period" (change)="addFilter($event, col.field)"></ng-select>-->
-    </div>
-  </div>
-</div>
+<!--<div class="row">-->
+  <!--<div class="col-3" *ngFor="let col of cols" [ngSwitch]="col.field">-->
+    <!--<div class="form-group">-->
+      <!--<label *ngSwitchCase="'period'" class="control-label" for="appId">Období</label>-->
+      <!--<label *ngSwitchCase="'appId'" class="control-label" for="appId">Stránka</label>-->
+      <!--<input *ngSwitchCase="'hash'" [name]="'hash'" [id]="'hash'" type="text" pInputText placeholder="Vyhledat hash"-->
+             <!--class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">-->
+      <!--<input *ngSwitchCase="'appId'" name="appId" id="appId" type="text" pInputText placeholder="Vyhledat app id"-->
+             <!--class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">-->
+      <!--&lt;!&ndash;<ng-select *ngSwitchCase="'period'" [name]="'period'" [id]="'period'" [items]="filterOptions.period" bindLabel="name" bindValue="value" [(ngModel)]="period" (change)="addFilter($event, col.field)"></ng-select>&ndash;&gt;-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
 
-<div class="table-responsive">
-  <p-table
-    #table
-    [tableStyleClass]="'table table-filter table-bordered table-hover table-striped'"
-    [value]="page.content"
-    [columns]="cols"
-    [rows]="page.size"
-    [totalRecords]="page.totalElements"
-    sortField="createdAt"
-    [sortOrder]="1"
-    [lazy]="true"
-    (onLazyLoad)="loadLazy($event)"
-    [paginator]="page.totalPages > 1">
-    <ng-template pTemplate="header" let-columns>
-      <ng-content select="[header]"></ng-content>
-    </ng-template>
-    <ng-template pTemplate="body" let-row>
-      <ng-content select="[body]"></ng-content>
-    </ng-template>
-  </p-table>
-</div>
+<!--<div class="table-responsive">-->
+  <!--<p-table-->
+    <!--#table-->
+    <!--[tableStyleClass]="'table table-filter table-bordered table-hover table-striped'"-->
+    <!--[value]="page.content"-->
+    <!--[columns]="cols"-->
+    <!--[rows]="page.size"-->
+    <!--[totalRecords]="page.totalElements"-->
+    <!--sortField="createdAt"-->
+    <!--[sortOrder]="1"-->
+    <!--[lazy]="true"-->
+    <!--(onLazyLoad)="loadLazy($event)"-->
+    <!--[paginator]="page.totalPages > 1">-->
+    <!--<ng-template pTemplate="header" let-columns>-->
+      <!--<ng-content select="[header]"></ng-content>-->
+    <!--</ng-template>-->
+    <!--<ng-template pTemplate="body" let-row>-->
+      <!--<ng-content select="[body]"></ng-content>-->
+    <!--</ng-template>-->
+  <!--</p-table>-->
+<!--</div>-->
