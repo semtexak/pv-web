@@ -5,6 +5,8 @@ import {AuthenticationService} from '../../../../shared/service/authentication.s
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
 import {AlertService} from '../../../../shared/service/alert.service';
+import {AuthService, FacebookLoginProvider, SocialUser} from 'angularx-social-login';
+import {from} from 'rxjs';
 
 @Component({
   selector: 'pv-sign-in',
@@ -19,6 +21,7 @@ export class SignInComponent implements OnInit {
   private redirectUrl: string = '/';
 
   constructor(private authenticationService: AuthenticationService,
+              private facebookService: AuthService,
               private alertService: AlertService,
               private router: Router,
               private route: ActivatedRoute,
@@ -42,6 +45,10 @@ export class SignInComponent implements OnInit {
       if (redirect) {
         this.redirectUrl = redirect;
       }
+    });
+
+    this.facebookService.authState.subscribe((user) => {
+      console.log(user);
     });
   }
 
@@ -72,6 +79,18 @@ export class SignInComponent implements OnInit {
         });
     }
     // this.authenticationService.saveUser().subscribe(cc => console.log(cc));
+  }
+
+  facebookAuth(): void {
+    from(this.facebookService.signIn(FacebookLoginProvider.PROVIDER_ID)).subscribe((user: SocialUser) => {
+      console.log('got SocialUser');
+      console.log(user);
+      this.authenticationService.facebookLogin(user.authToken).subscribe(response => console.log(response));
+    });
+  }
+
+  signOut(): void {
+    from(this.facebookService.signOut()).subscribe(response => console.log(response));
   }
 
 }
