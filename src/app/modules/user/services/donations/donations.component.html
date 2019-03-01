@@ -15,7 +15,7 @@
       [paginator]="page.totalPages > 1">
       <ng-template pTemplate="header" let-columns>
         <tr>
-          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+          <th *ngFor="let col of columns" [pSortableColumnDisabled]="!col.sort" [pSortableColumn]="col.field">
             {{col.header}}
             <p-sortIcon *ngIf="col.sort" [field]="col.field"></p-sortIcon>
           </th>
@@ -23,15 +23,15 @@
             Akce
           </th>
         </tr>
-        <tr>
-          <th *ngFor="let col of columns" [ngSwitch]="col.field">
-            <!--<input *ngSwitchCase="'appId'" type="text" pInputText placeholder="Vyhledat app id"-->
-                   <!--class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">-->
-            <!--<input *ngSwitchCase="'user'" type="text" pInputText placeholder="Vyhledat uživatele"-->
-                   <!--class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">-->
-          </th>
-          <th></th>
-        </tr>
+        <!--<tr>-->
+          <!--<th *ngFor="let col of columns" [ngSwitch]="col.field">-->
+            <!--&lt;!&ndash;<input *ngSwitchCase="'appId'" type="text" pInputText placeholder="Vyhledat app id"&ndash;&gt;-->
+                   <!--&lt;!&ndash;class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">&ndash;&gt;-->
+            <!--&lt;!&ndash;<input *ngSwitchCase="'user'" type="text" pInputText placeholder="Vyhledat uživatele"&ndash;&gt;-->
+                   <!--&lt;!&ndash;class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">&ndash;&gt;-->
+          <!--</th>-->
+          <!--<th></th>-->
+        <!--</tr>-->
       </ng-template>
       <ng-template pTemplate="body" let-row>
         <tr>

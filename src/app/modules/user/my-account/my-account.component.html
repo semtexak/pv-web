@@ -2,11 +2,16 @@
   <h2 class="page__title">Můj účet
     <button class="btn refresh"><span class="fas fa-sync-alt"></span></button>
   </h2>
+  <div class="row no-gutters">
+    <div class="col-12">
+      <pv-alerts></pv-alerts>
+    </div>
+  </div>
   <div class="card">
     <div class="row no-gutters">
       <div class="col-md-3 pt-0 col-delimiter-right">
         <div class="list-group list-group-flush account-settings-links">
-          <a class="list-group-item list-group-item-action" [ngClass]="{'active show': tab.active}"
+          <a class="list-group-item btn list-group-item-action" [ngClass]="{'active show': tab.active, 'disabled': tab.disabled}"
              *ngFor="let tab of tabs" (click)="selectTab(tab)">{{tab.title}}</a>
         </div>
       </div>
@@ -30,29 +35,37 @@
               <hr class="border-light m-0">
 
               <div class="card-body">
-                  <div class="form-group" [ngClass]="{'has-error':userInfoForm.controls['firstName'].invalid && userInfoForm.controls['firstName'].dirty}">
-                    <label class="control-label" for="firstName">Jméno <span class="required">*</span></label>
-                    <input id="firstName" type="text" class="form-control" [formControl]="userInfoForm.controls['firstName']">
-                    <div class="validation-message text-right" *ngIf="userInfoForm.get('firstName').invalid && userInfoForm.get('firstName').dirty">
+                <div class="form-group"
+                     [ngClass]="{'has-error':userInfoForm.controls['firstName'].invalid && userInfoForm.controls['firstName'].dirty}">
+                  <label class="control-label" for="firstName">Jméno <span class="required">*</span></label>
+                  <input id="firstName" type="text" class="form-control"
+                         [formControl]="userInfoForm.controls['firstName']">
+                  <div class="validation-message text-right"
+                       *ngIf="userInfoForm.get('firstName').invalid && userInfoForm.get('firstName').dirty">
                             <span *ngIf="userInfoForm.get('firstName').errors.required">
                                <span>Pole není vyplněno.</span>
                             </span>
-                    </div>
                   </div>
+                </div>
 
-                <div class="form-group" [ngClass]="{'has-error': userInfoForm.controls['lastName'].invalid && userInfoForm.controls['lastName'].dirty}">
+                <div class="form-group"
+                     [ngClass]="{'has-error': userInfoForm.controls['lastName'].invalid && userInfoForm.controls['lastName'].dirty}">
                   <label class="control-label" for="lastName">Příjmení <span class="required">*</span></label>
-                  <input id="lastName" type="text" class="form-control" [formControl]="userInfoForm.controls['lastName']">
-                  <div class="validation-message text-right" *ngIf="userInfoForm.get('lastName').invalid && userInfoForm.get('lastName').dirty">
+                  <input id="lastName" type="text" class="form-control"
+                         [formControl]="userInfoForm.controls['lastName']">
+                  <div class="validation-message text-right"
+                       *ngIf="userInfoForm.get('lastName').invalid && userInfoForm.get('lastName').dirty">
                             <span *ngIf="userInfoForm.get('lastName').errors.required">
                                <span>Pole není vyplněno.</span>
                             </span>
                   </div>
                 </div>
-                <div class="form-group" [ngClass]="{'has-error':userInfoForm.controls['email'].invalid && userInfoForm.controls['email'].dirty}">
+                <div class="form-group"
+                     [ngClass]="{'has-error':userInfoForm.controls['email'].invalid && userInfoForm.controls['email'].dirty}">
                   <label class="control-label" for="email">E-mail <span class="required">*</span></label>
                   <input id="email" type="text" class="form-control" [formControl]="userInfoForm.controls['email']">
-                  <div class="validation-message text-right" *ngIf="userInfoForm.get('email').invalid && userInfoForm.get('email').dirty">
+                  <div class="validation-message text-right"
+                       *ngIf="userInfoForm.get('email').invalid && userInfoForm.get('email').dirty">
                             <span *ngIf="userInfoForm.get('email').errors.required">
                                <span>Pole není vyplněno.</span>
                             </span>
@@ -67,29 +80,38 @@
           </div>
           <div class="tab-pane fade" #password [ngClass]="{'active show': tabs[1].active}">
             <div class="card-body pb-2">
-              <div class="form-group" [ngClass]="{'has-error':passwordForm.get('password').invalid && passwordForm.get('password').dirty}">
-                <label class="control-label" for="password">Současné heslo</label>
-                <input class="form-control" id="password" placeholder="Heslo" type="password" [formControl]="passwordForm.get('password')">
-                <div class="validation-message" *ngIf="passwordForm.get('password').invalid && passwordForm.get('password').dirty">
-                  <span *ngIf="passwordForm.get('password').hasError('required')">Pole není vyplněno.</span>
-                  <span *ngIf="!passwordForm.get('password').hasError('required')">
+              <div class="form-group"
+                   [ngClass]="{'has-error':passwordForm.get('currentPassword').invalid && passwordForm.get('currentPassword').dirty}">
+                <label class="control-label" for="currentPassword">Současné heslo</label>
+                <input class="form-control" id="currentPassword" placeholder="Heslo" type="password"
+                       [formControl]="passwordForm.get('currentPassword')">
+                <div class="validation-message"
+                     *ngIf="passwordForm.get('currentPassword').invalid && passwordForm.get('currentPassword').dirty">
+                  <span *ngIf="passwordForm.get('currentPassword').hasError('required')">Pole není vyplněno.</span>
+                  <span *ngIf="!passwordForm.get('currentPassword').hasError('required')">
                 </span>
                 </div>
               </div>
-              <div class="form-group" [ngClass]="{'has-error':passwordForm.get('newPassword').invalid && passwordForm.get('newPassword').dirty}">
+              <div class="form-group"
+                   [ngClass]="{'has-error':passwordForm.get('newPassword').invalid && passwordForm.get('newPassword').dirty}">
                 <label class="control-label" for="newPassword">Nové heslo</label>
-                <input class="form-control" id="newPassword" placeholder="Heslo" type="password" [formControl]="passwordForm.get('newPassword')">
-                <div class="validation-message" *ngIf="passwordForm.get('newPassword').invalid && passwordForm.get('newPassword').dirty">
+                <input class="form-control" id="newPassword" placeholder="Heslo" type="password"
+                       [formControl]="passwordForm.get('newPassword')">
+                <div class="validation-message"
+                     *ngIf="passwordForm.get('newPassword').invalid && passwordForm.get('newPassword').dirty">
                   <span *ngIf="passwordForm.get('newPassword').hasError('required')">Pole není vyplněno.</span>
                   <span *ngIf="!passwordForm.get('newPassword').hasError('required')">
                    <span *ngIf="passwordForm.get('newPassword').hasError('minlength')">Heslo musí obsahovat alespoň 8 znaků.</span>
                 </span>
                 </div>
               </div>
-              <div class="form-group" [ngClass]="{'has-error':passwordForm.get('newPasswordConfirm').invalid && passwordForm.get('newPasswordConfirm').dirty}">
+              <div class="form-group"
+                   [ngClass]="{'has-error':passwordForm.get('newPasswordConfirm').invalid && passwordForm.get('newPasswordConfirm').dirty}">
                 <label class="control-label" for="newPasswordConfirm">Nové heslo znovu</label>
-                <input class="form-control" id="newPasswordConfirm" placeholder="Heslo" type="password" [formControl]="passwordForm.get('newPasswordConfirm')">
-                <div class="validation-message" *ngIf="passwordForm.get('newPasswordConfirm').invalid && passwordForm.get('newPasswordConfirm').dirty">
+                <input class="form-control" id="newPasswordConfirm" placeholder="Heslo" type="password"
+                       [formControl]="passwordForm.get('newPasswordConfirm')">
+                <div class="validation-message"
+                     *ngIf="passwordForm.get('newPasswordConfirm').invalid && passwordForm.get('newPasswordConfirm').dirty">
                   <span *ngIf="passwordForm.get('newPasswordConfirm').hasError('required')">Pole není vyplněno.</span>
                   <span *ngIf="passwordForm.get('newPasswordConfirm').hasError('matchFields')">Hesla nesouhlasí.</span>
                 </div>
@@ -197,7 +219,16 @@
   </div>
 
   <div class="text-right mt-3">
-    <button type="button" class="btn btn-primary" (click)="onSubmit(form.value)" [disabled]="form.invalid">Uložit změny</button>
+    <button type="button" class="btn btn-lg btn-primary" *ngIf="tabs[0].active"
+            (click)="onSubmit('user_data', userInfoForm.value)" [disabled]="userInfoForm.invalid">Uložit údaje
+    </button>
+    <button type="button" class="btn btn-lg btn-primary" *ngIf="tabs[1].active"
+            (click)="onSubmit('user_password', passwordForm.value)" [disabled]="passwordForm.invalid">Změnit heslo
+    </button>
+    <button type="button" class="btn btn-lg btn-primary" *ngIf="tabs[3].active"
+            (click)="onSubmit('user_notifications', notificationForm.value)" [disabled]="notificationForm.invalid">
+      Uložit nastavení
+    </button>
   </div>
 
 </div>

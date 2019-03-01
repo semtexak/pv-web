@@ -16,9 +16,9 @@
       dataKey="hash">
       <ng-template pTemplate="header" let-columns>
         <tr>
-          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+          <th *ngFor="let col of columns" [pSortableColumnDisabled]="!col.sort" [pSortableColumn]="col.field">
             {{col.header}}
-            <p-sortIcon [field]="col.field"></p-sortIcon>
+            <p-sortIcon *ngIf="col.sort" [field]="col.field"></p-sortIcon>
           </th>
           <th class="action">
             Akce
@@ -26,8 +26,8 @@
         </tr>
         <tr>
           <th *ngFor="let col of columns" [ngSwitch]="col.field">
-            <input *ngSwitchCase="'hash'" type="text" pInputText placeholder="Vyhledat hash"
-                   class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
+            <!--<input *ngSwitchCase="'hash'" type="text" pInputText placeholder="Vyhledat hash"-->
+                   <!--class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">-->
             <input *ngSwitchCase="'appId'" type="text" pInputText placeholder="Vyhledat app id"
                    class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
             <input *ngSwitchCase="'user'" type="text" pInputText placeholder="Vyhledat uživatele"
@@ -40,8 +40,9 @@
       </ng-template>
       <ng-template pTemplate="body" let-row let-expanded="expanded" let-columns="columns">
         <tr [ngClass]="{'expanded': expanded}" [pRowToggler]="row">
-          <td><strong>{{row.hash}}</strong></td>
-          <td>{{row.appId}}</td>
+          <!--<td><strong>{{row.hash}}</strong></td>-->
+          <td>{{row.application?.name}}</td>
+          <td>{{test(row.products)}}</td>
           <td>{{row.price?.amount|price:row.price.currency}}</td>
           <td>
             <span class="status" [ngSwitch]="row.status" [ngClass]="{'success': row.status === 'PAID', 'error': row.status === 'NOT_ACTIVE'}">
