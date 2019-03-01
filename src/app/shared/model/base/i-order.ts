@@ -1,4 +1,5 @@
 import {Price} from './price';
+import {IApplication} from './i-application';
 
 export interface IOrder {
   id: number;
@@ -6,6 +7,7 @@ export interface IOrder {
   status: Status;
   price: Price;
   products: IProduct[];
+  application: IApplication;
   createdAt: number;
 }
 

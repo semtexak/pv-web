@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {IPageOrder} from '../../../shared/model/page/i-page-order';
 import {OrderService} from '../../../shared/service/order.service';
 import {LazyLoadEvent} from 'primeng/api';
 import {Service} from '../../../shared/model/base/i-application';
+import {IProduct, ProductType} from '../../../shared/model/base/i-order';
 
 @Component({
   selector: 'pv-orders',
@@ -29,11 +30,12 @@ export class OrdersComponent {
 
   constructor(private orderService: OrderService) {
     this.cols = [
-      {field: 'hash', header: 'ID'},
-      {field: 'appId', header: 'Stránka'},
-      {field: 'price.amount', header: 'Cena'},
-      {field: 'status', header: 'Stav'},
-      {field: 'createdAt', header: 'Vytvořeno'},
+      // {field: 'hash', header: 'ID'},
+      {field: 'application.name', header: 'Stránka', sort: true},
+      {field: 'products', header: 'Popis', sort: false},
+      {field: 'price.amount', header: 'Cena', sort: true},
+      {field: 'status', header: 'Stav', sort: true},
+      {field: 'createdAt', header: 'Vytvořeno', sort: true},
     ];
     this.filterOptions.status = [
       {name: 'Vše', value: null},
@@ -64,7 +66,7 @@ export class OrdersComponent {
 
   addFilter(value: string, field: string) {
     if (value) {
-      if (typeof(value) === 'object') {
+      if (typeof (value) === 'object') {
         value = value['value'];
         if (value !== null) {
           this.filter.set(field, value);
@@ -87,4 +89,12 @@ export class OrdersComponent {
     return queryArray.join('&');
   }
 
+  test(products: IProduct[]) {
+    const results = [];
+    const types = products.map(item => item.type).filter((value, index, self) => self.indexOf(value) === index);
+    types.forEach(type => {
+      results.push(`${products.filter(it => it.type === type).length}x ${type === ProductType.DONATION ? 'Dar' : (type === ProductType.SUBSCRIPTION ? 'Předplatné' : 'Placený obsah')}`);
+    });
+    return results.join(', ');
+  }
 }

@@ -2,6 +2,10 @@ import {AfterContentInit, Component, ElementRef, OnInit, ViewChild, ViewChildren
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../../shared/service/user.service';
 import {MatchPasswordValidation} from '../../../core/validation/match-password-validation';
+import {AlertService} from '../../../shared/service/alert.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {AuthenticationService} from '../../../shared/service/authentication.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'pv-my-account',
@@ -28,6 +32,9 @@ export class MyAccountComponent implements OnInit, AfterContentInit {
   file: File = null;
 
   constructor(private formBuilder: FormBuilder,
+              private alertService: AlertService,
+              private authenticationService: AuthenticationService,
+              private router: Router,
               private userService: UserService) {
   }
 
@@ -38,7 +45,7 @@ export class MyAccountComponent implements OnInit, AfterContentInit {
       'email': [null, Validators.compose([Validators.pattern('^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$'), Validators.required])],
     });
     this.passwordForm = this.formBuilder.group({
-      'password': [null, Validators.compose([Validators.required])],
+      'currentPassword': [null, Validators.compose([Validators.required])],
       'newPassword': [null, Validators.compose([Validators.minLength(8), Validators.required])],
       'newPasswordConfirm': [null, Validators.required],
     }, {
@@ -67,10 +74,10 @@ export class MyAccountComponent implements OnInit, AfterContentInit {
 
   ngAfterContentInit() {
     this.tabs = [
-      {key: 'general', title: 'Obecné', active: true, content: this.general},
-      {key: 'password', title: 'Změna hesla', active: false, content: this.password},
-      {key: 'connections', title: 'Propojené účty', active: false, content: this.connections},
-      {key: 'notifications', title: 'Notifikace', active: false, content: this.notifications},
+      {key: 'general', title: 'Obecné', active: true, disabled: false, content: this.general},
+      {key: 'password', title: 'Změna hesla', active: false, disabled: false, content: this.password},
+      {key: 'connections', title: 'Propojené účty', active: false, disabled: false, content: this.connections},
+      {key: 'notifications', title: 'Notifikace', active: false, disabled: true, content: this.notifications},
     ];
   }
 
@@ -80,8 +87,38 @@ export class MyAccountComponent implements OnInit, AfterContentInit {
     }
   }
 
-  onSubmit(values: any) {
+  onSubmit(form: string, values: any) {
     console.log(values);
+    switch (form) {
+      case 'user_data':
+        this.userService.updateUserData(values).subscribe(response => {
+          if (response.status === 204) {
+            this.alertService.success('Vaše údaje byly úspěšně uloženy. Pro aplikaci změn je potřeba se odhlásit.')
+          }
+        });
+        break;
+      case 'user_password':
+        this.userService.changePassword(values).subscribe(data => {
+          console.log(data);
+          this.authenticationService.logout().subscribe(success => {
+            console.log(`Loggout: ${success}`);
+            if (success) {
+              this.router.navigate(['/uzivatel/prihlaseni']).then(value => {
+                this.alertService.success('Změna hesla proběhla úspěšně. Přihlašte se.');
+              });
+            }
+          });
+        }, e => {
+          if (e instanceof HttpErrorResponse) {
+            if (e.error.status === 409) {
+              this.alertService.error('Špatně zadané současné heslo.');
+            }
+          } else {
+            this.alertService.error('Vyskytla se chyba.');
+          }
+        });
+        break;
+    }
   }
 
   onSelectFile(_event) { // called each time file input changes
@@ -107,5 +144,6 @@ export interface Tab {
   key: string;
   title: string;
   active: boolean;
+  disabled: boolean;
   content: ElementRef;
 }
