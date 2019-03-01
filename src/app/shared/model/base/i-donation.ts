@@ -1,3 +1,5 @@
+import {IApplication} from './i-application';
+
 export interface IDonation {
 
   id: number;
@@ -5,7 +7,7 @@ export interface IDonation {
   active: boolean;
   createdAt: number;
   roles: Role[];
-
+  application: IApplication;
 }
 
 export enum Role {

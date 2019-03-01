@@ -1,4 +1,4 @@
-<div class="container-fluid mb-5">
+<div class="container-fluid mb-5 donations">
   <h2 class="page__title"><span class="page__title--disabled">Uživatel /</span> Dary <button class="btn refresh" (click)="reloadData()"><span class="fas fa-sync-alt"></span></button></h2>
   <div class="table-responsive">
     <p-table
@@ -17,7 +17,7 @@
         <tr>
           <th *ngFor="let col of columns" [pSortableColumn]="col.field">
             {{col.header}}
-            <p-sortIcon [field]="col.field"></p-sortIcon>
+            <p-sortIcon *ngIf="col.sort" [field]="col.field"></p-sortIcon>
           </th>
           <th class="action">
             Akce
@@ -25,17 +25,17 @@
         </tr>
         <tr>
           <th *ngFor="let col of columns" [ngSwitch]="col.field">
-            <input *ngSwitchCase="'appId'" type="text" pInputText placeholder="Vyhledat app id"
-                   class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
-            <input *ngSwitchCase="'user'" type="text" pInputText placeholder="Vyhledat uživatele"
-                   class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">
+            <!--<input *ngSwitchCase="'appId'" type="text" pInputText placeholder="Vyhledat app id"-->
+                   <!--class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">-->
+            <!--<input *ngSwitchCase="'user'" type="text" pInputText placeholder="Vyhledat uživatele"-->
+                   <!--class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">-->
           </th>
           <th></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-row>
         <tr>
-          <td><a routerLink="/admin/stranky/{{row.appId}}">{{row.appId}}</a></td>
+          <td><img class="client__logo" src="https://localhost:8765/client-service/applications/img/{{row.application.appId}}.png" alt="{{row.application.name}}">{{row.application.name}}</td>
           <td>{{row.comment}}</td>
           <td>{{row.price?.amount|price: row.price?.currency}}</td>
           <td>{{row.createdAt|date: 'dd. MM. yyyy HH:mm:ss'}}</td>

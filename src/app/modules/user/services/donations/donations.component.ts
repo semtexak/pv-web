@@ -23,10 +23,10 @@ export class DonationsComponent {
 
   constructor(private donationService: DonationService) {
     this.cols = [
-      {field: 'appId', header: 'Stránka'},
-      {field: 'comment', header: 'Komentář'},
-      {field: 'price', header: 'Cena'},
-      {field: 'createdAt', header: 'Datum'},
+      {field: 'appId', header: 'Stránka', sort: false},
+      {field: 'comment', header: 'Komentář', sort: true},
+      {field: 'price', header: 'Cena', sort: true},
+      {field: 'createdAt', header: 'Datum', sort: true},
     ];
   }
 
