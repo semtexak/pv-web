@@ -54,10 +54,6 @@ export class InvoicesComponent {
     this.callService(this.page.page, this.prepareQuery(), this.sort);
   }
 
-  reloadData() {
-    this.callService(this.page.page, this.prepareQuery(), this.sort);
-  }
-
   loadLazy(event: LazyLoadEvent) {
     if (event.sortField) {
       this.sort = `${event.sortField},${event.sortOrder > 0 ? 'asc' : 'desc'}`;
