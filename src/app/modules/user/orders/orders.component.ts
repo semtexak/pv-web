@@ -31,7 +31,7 @@ export class OrdersComponent {
   constructor(private orderService: OrderService) {
     this.cols = [
       // {field: 'hash', header: 'ID'},
-      {field: 'application.name', header: 'Stránka', sort: true},
+      {field: 'application.name', header: 'Stránka', sort: false},
       {field: 'products', header: 'Popis', sort: false},
       {field: 'price.amount', header: 'Cena', sort: true},
       {field: 'status', header: 'Stav', sort: true},

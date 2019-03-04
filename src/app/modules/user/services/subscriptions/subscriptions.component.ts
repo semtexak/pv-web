@@ -27,12 +27,11 @@ export class SubscriptionsComponent {
 
   constructor(private subscriptionService: SubscriptionService) {
     this.cols = [
-      {field: 'hash', header: 'ID'},
-      {field: 'appId', header: 'Stránka'},
-      {field: 'user', header: 'Uživatel'},
-      {field: 'lastSubscription.validTo', header: 'Platnost do'},
-      {field: 'automaticRenew', header: 'Obnovování'},
-      {field: 'status', header: 'Stav'},
+      {field: 'appId', header: 'Stránka', sort: false},
+      {field: 'user', header: 'Uživatel', sort: false},
+      {field: 'lastSubscription.validTo', header: 'Platnost do', sort: true},
+      {field: 'automaticRenew', header: 'Obnovování', sort: true},
+      {field: 'status', header: 'Stav', sort: true},
     ];
     this.filterOptions.automaticRenew = [
       {name: 'Vše', value: null},
