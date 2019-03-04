@@ -1,4 +1,4 @@
-<div class="container-fluid mb-5">
+<div class="container-fluid mb-5 orders">
   <h2 class="page__title"><span class="page__title--disabled">Uživatel /</span> Platby <button class="btn refresh" (click)="reloadData()"><span class="fas fa-sync-alt"></span></button></h2>
   <div class="table-responsive">
     <p-table
@@ -41,7 +41,7 @@
       <ng-template pTemplate="body" let-row let-expanded="expanded" let-columns="columns">
         <tr [ngClass]="{'expanded': expanded}" [pRowToggler]="row">
           <!--<td><strong>{{row.hash}}</strong></td>-->
-          <td>{{row.application?.name}}</td>
+          <td><img class="client__logo" src="https://localhost:8765/client-service/applications/img/{{row.application.appId}}.png" alt="{{row.application.name}}">{{row.application.name}}</td>
           <td>{{test(row.products)}}</td>
           <td>{{row.price?.amount|price:row.price.currency}}</td>
           <td>
