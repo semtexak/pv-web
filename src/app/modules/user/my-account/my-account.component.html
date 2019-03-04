@@ -18,7 +18,7 @@
       <div class="col-md-9">
         <div class="tab-content">
           <div class="tab-pane fade" #general [ngClass]="{'active show': tabs[0].active}">
-            <form class="form-horizontal" [formGroup]="form" novalidate (ngSubmit)="onSubmit(form.value)">
+            <form class="form-horizontal" [formGroup]="form" novalidate>
               <div class="card-body media align-items-center">
                 <img src="https://via.placeholder.com/80x80" alt="" *ngIf="!appImg" class="user-avatar">
                 <img [src]="appImg" class="user-avatar" alt="" title="" *ngIf="appImg">
