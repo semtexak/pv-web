@@ -1,5 +1,5 @@
 <div class="container-fluid mb-5 mt-3 my-account">
-  <h2 class="page__title">Můj účet
+  <h2 class="page__title"><span class="page__title--disabled">Uživatel /</span> Můj účet
     <button class="btn refresh"><span class="fas fa-sync-alt"></span></button>
   </h2>
   <div class="row no-gutters">
@@ -19,7 +19,7 @@
         <div class="tab-content">
           <div class="tab-pane fade" #general [ngClass]="{'active show': tabs[0].active}">
             <form class="form-horizontal" [formGroup]="form" novalidate>
-              <div class="card-body media align-items-center">
+              <div class="card-body media align-items-center" *ngIf="false">
                 <img src="https://via.placeholder.com/80x80" alt="" *ngIf="!appImg" class="user-avatar">
                 <img [src]="appImg" class="user-avatar" alt="" title="" *ngIf="appImg">
                 <div class="media-body ml-4">
@@ -71,7 +71,7 @@
                             </span>
                   </div>
                 </div>
-                <div class="alert alert-warning mt-3">
+                <div class="alert alert-warning mt-3" *ngIf="false">
                   Váš e-mail nebyl ověřen. Ověřte, prosím, svůj e-mail kliknutím na odkaz v zaslaném e-mailu.<br>
                   <a href="">Odeslat ověření</a>
                 </div>
@@ -119,7 +119,13 @@
 
             </div>
           </div>
-          <div class="tab-pane fade" #connections [ngClass]="{'active show': tabs[2].active}">
+          <div class="tab-pane fade" #payment [ngClass]="{'active show': tabs[2].active}">
+            <div class="card-body">
+              <button class="btn btn-secondary delete-card"><span class="fas fa-credit-card"></span> Odstranit zapamatovanou kartu</button>
+            </div>
+
+          </div>
+          <div class="tab-pane fade" #connections [ngClass]="{'active show': tabs[3].active}">
             <div class="card-body">
               <pv-social-media [type]="'twitter'" [linked]="social.twitter"
                                [email]="'twitter@twitter.com'"
@@ -144,7 +150,7 @@
                                (onStatusChange)="onStatusChange($event)"></pv-social-media>
             </div>
           </div>
-          <div class="tab-pane fade" #notifications [ngClass]="{'active show': tabs[3].active}">
+          <div class="tab-pane fade" #notifications [ngClass]="{'active show': tabs[4].active}">
             <div class="card-body pb-2">
               <h6 class="mb-4">Activity</h6>
               <div class="form-group">

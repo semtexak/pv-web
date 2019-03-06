@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IPageSubscription} from '../../../../shared/model/page/i-page-subscription';
 import {SubscriptionService} from '../../../../shared/service/subscription.service';
 import {LazyLoadEvent} from 'primeng/api';
+import {User} from '../../../../shared/model/user';
+import {AuthenticationService} from '../../../../shared/service/authentication.service';
 
 @Component({
   selector: 'pv-subscriptions',
   templateUrl: './subscriptions.component.html'
 })
-export class SubscriptionsComponent {
+export class SubscriptionsComponent implements OnInit {
 
   page: IPageSubscription = {
     content: [],
@@ -24,11 +26,12 @@ export class SubscriptionsComponent {
     automaticRenew: [],
     status: []
   };
+  user: User;
 
-  constructor(private subscriptionService: SubscriptionService) {
+  constructor(private authenticationService: AuthenticationService,
+              private subscriptionService: SubscriptionService) {
     this.cols = [
       {field: 'appId', header: 'Stránka', sort: false},
-      {field: 'user', header: 'Uživatel', sort: false},
       {field: 'lastSubscription.validTo', header: 'Platnost do', sort: true},
       {field: 'automaticRenew', header: 'Obnovování', sort: true},
       {field: 'status', header: 'Stav', sort: true},
@@ -45,6 +48,10 @@ export class SubscriptionsComponent {
       {name: 'Pozastaveno', value: 2},
       {name: 'Aktivní', value: 3},
     ];
+  }
+
+  ngOnInit(): void {
+    this.authenticationService.loggedUser.subscribe((user: User) => this.user = user);
   }
 
   reloadData() {
@@ -69,7 +76,7 @@ export class SubscriptionsComponent {
 
   addFilter(value: string, field: string) {
     if (value) {
-      if (typeof(value) === 'object') {
+      if (typeof (value) === 'object') {
         value = value['value'];
         if (value !== null) {
           this.filter.set(field, value);

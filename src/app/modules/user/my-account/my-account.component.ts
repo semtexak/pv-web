@@ -76,7 +76,8 @@ export class MyAccountComponent implements OnInit, AfterContentInit {
     this.tabs = [
       {key: 'general', title: 'Obecné', active: true, disabled: false, content: this.general},
       {key: 'password', title: 'Změna hesla', active: false, disabled: false, content: this.password},
-      {key: 'connections', title: 'Propojené účty', active: false, disabled: false, content: this.connections},
+      {key: 'payment', title: 'Platební karta', active: false, disabled: false, content: this.connections},
+      {key: 'connections', title: 'Propojené účty', active: false, disabled: true, content: this.connections},
       {key: 'notifications', title: 'Notifikace', active: false, disabled: true, content: this.notifications},
     ];
   }

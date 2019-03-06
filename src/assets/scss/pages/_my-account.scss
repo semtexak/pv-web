@@ -22,6 +22,17 @@
     max-height: 80px;
   }
 
+  .delete-card {
+    color: $secondary-color;
+    font-weight: 600;
+    padding: 10px 15px;
+
+    .fas {
+      @include rem-fallback(font-size, 14);
+      margin-right: 7px;
+    }
+  }
+
   .social-media-remove {
     position: absolute;
     right: 30px;

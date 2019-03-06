@@ -24,8 +24,8 @@ export class DonationsComponent {
   constructor(private donationService: DonationService) {
     this.cols = [
       {field: 'appId', header: 'Stránka', sort: false},
-      {field: 'comment', header: 'Komentář', sort: true},
       {field: 'price', header: 'Cena', sort: true},
+      {field: 'comment', header: 'Pravidelná', sort: false},
       {field: 'createdAt', header: 'Datum', sort: true},
     ];
   }

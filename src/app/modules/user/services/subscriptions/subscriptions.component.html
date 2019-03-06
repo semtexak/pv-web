@@ -40,8 +40,6 @@
       <ng-template pTemplate="body" let-row>
         <tr>
           <td><img class="client__logo" src="https://localhost:8765/client-service/applications/img/{{row.application.appId}}.png" alt="{{row.application.name}}">{{row.application.name}}</td>
-          <td><a routerLink="/admin/klienti/{{row.appId}}">{{row.appId}}</a></td>
-          <td><a routerLink="/admin/uzivatele/{{row.user}}">{{row.user}}</a></td>
           <td>{{row.lastSubscription?.validTo|date: 'dd. MM. yyyy HH:mm:ss'}}</td>
           <td>
           <span class="status" [ngSwitch]="row.automaticRenew" [ngClass]="[row.automaticRenew ? 'success' : 'error']">
