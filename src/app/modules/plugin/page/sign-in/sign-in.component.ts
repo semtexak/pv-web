@@ -5,6 +5,7 @@ import {AlertService} from '../../../../shared/service/alert.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ISingInForm} from '../../../../shared/model/form/i-sing-in-form';
 import {HttpErrorResponse} from '@angular/common/http';
+import { WindowService } from 'src/app/shared/service/window.service';
 
 @Component({
   selector: 'pv-sign-in',
@@ -18,6 +19,7 @@ export class SignInComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService,
               private alertService: AlertService,
+              private w: WindowService,
               private route: ActivatedRoute,
               private router: Router,
               private formBuilder: FormBuilder) {
@@ -25,6 +27,7 @@ export class SignInComponent implements OnInit {
       'username': [null, Validators.compose([Validators.pattern('^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$'), Validators.required])],
       'password': [null, Validators.required]
     });
+    this.sendMessage();
   }
 
   ngOnInit(): void {
@@ -35,6 +38,14 @@ export class SignInComponent implements OnInit {
       }
     });
   }
+
+  sendMessage() {
+    console.log('Small layout');
+    if (this.w.nativeWindow['parentIFrame']) {
+      this.w.nativeWindow['parentIFrame'].sendMessage({action: 'layout', data: 'sm'});
+    }
+  }
+
 
   onSubmit(data: ISingInForm): void {
     if (this.form.valid) {

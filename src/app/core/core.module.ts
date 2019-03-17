@@ -23,6 +23,7 @@ import {OrderService} from '../shared/service/order.service';
 import {ApplicationService} from '../shared/service/application.service';
 import {CartService} from '../shared/service/cart.service';
 import {AuthServiceConfig, FacebookLoginProvider, LoginOpt, SocialLoginModule} from 'angularx-social-login';
+import { WindowService } from '../shared/service/window.service';
 
 export function getSocialConfig() {
   const fbLoginOptions: LoginOpt = {
@@ -74,6 +75,7 @@ export function getSocialConfig() {
     OrderService,
     AlertService,
     CartService,
+    WindowService,
     {
       provide: AuthServiceConfig,
       useFactory: getSocialConfig

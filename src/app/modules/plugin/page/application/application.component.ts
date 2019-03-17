@@ -11,6 +11,7 @@ import {CartService} from '../../../../shared/service/cart.service';
 import {HttpResponse} from '@angular/common/http';
 import {OrderService} from '../../../../shared/service/order.service';
 import {Price} from '../../../../shared/model/base/price';
+import { WindowService } from 'src/app/shared/service/window.service';
 
 @Component({
   selector: 'pv-application',
@@ -31,6 +32,7 @@ export class ApplicationComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
+              private w: WindowService,
               private authenticationService: AuthenticationService,
               private applicationService: ApplicationService,
               private applicationContextService: ApplicationContextService,
@@ -45,7 +47,15 @@ export class ApplicationComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.sendMessage();
     this.loadData();
+  }
+
+  sendMessage(size: string) {
+    console.log('Small layout');
+    if (this.w.nativeWindow['parentIFrame']) {
+      this.w.nativeWindow['parentIFrame'].sendMessage({action: 'layout', data: size});
+    }
   }
 
   loadData() {
