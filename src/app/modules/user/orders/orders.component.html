@@ -9,7 +9,7 @@
       [rows]="page.size"
       [totalRecords]="page.totalElements"
       sortField="createdAt"
-      [sortOrder]="1"
+      [sortOrder]="0"
       [lazy]="true"
       (onLazyLoad)="loadLazy($event)"
       [paginator]="page.totalPages > 1"

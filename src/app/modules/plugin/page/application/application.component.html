@@ -37,26 +37,26 @@
               Použít mou zapamatovanou kartu
             </label>
           </div>
-          <div class="form-group form-check mt-2"
+          <!-- <div class="form-group form-check mt-2"
                [ngClass]="{'has-error':form.controls['auto-renew'].invalid && form.controls['auto-renew'].dirty}">
             <input type="checkbox" name="auto-renew" id="auto-renew" class=""
                    [formControl]="form.controls['auto-renew']">
             <label for="auto-renew" class="form-check-label">
               Obnova
             </label>
-          </div>
+          </div> -->
           <div class="form-group mb-0">
-            <button class="btn btn-primary btn-gradient btn-gradient--success btn-lg btn-full order-submit"
+            <button class="btn btn-success btn-gradient btn-gradient--success btn-lg btn-full order-submit"
                     [hidden]="!order || order?.status !== OrderStatus.PAID"
                     [disabled]="formDisabled || (order && order.status === OrderStatus.PAID)">Zaplaceno
             </button>
             <button (click)="proceedToPayment()"
-                    class="btn btn-primary btn-gradient btn-gradient--success btn-lg btn-full order-submit"
+                    class="btn btn-success btn-gradient btn-gradient--success btn-lg btn-full order-submit"
                     [hidden]="!order || order?.status === OrderStatus.PAID"
                     [disabled]="formDisabled || (order && order.status === OrderStatus.PAID)">K platební bráně
             </button>
             <button (click)="createOrder()"
-                    class="btn btn-primary btn-gradient btn-gradient--success btn-lg btn-full order-submit"
+                    class="btn btn-success btn-gradient btn-gradient--success btn-lg btn-full order-submit"
                     [hidden]="!newOrder || order" [disabled]="formDisabled">Zaplatit:
               {{newOrder.price.amount|price:newOrder.price.currency}}
             </button>

@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {OrderService} from '../../../../../shared/service/order.service';
-import {IOrder, Status} from '../../../../../shared/model/base/i-order';
-import {ApplicationContextService} from '../../../service/application-context.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { OrderService } from '../../../../../shared/service/order.service';
+import { IOrder, Status } from '../../../../../shared/model/base/i-order';
+import { ApplicationContextService } from '../../../service/application-context.service';
 
 @Component({
   selector: 'pv-order-status',
@@ -14,8 +14,8 @@ export class OrderStatusComponent implements OnInit {
   OrderStatus = Status;
 
   constructor(private route: ActivatedRoute,
-              private orderService: OrderService,
-              private applicationContext: ApplicationContextService) {
+    private orderService: OrderService,
+    private applicationContext: ApplicationContextService) {
   }
 
   ngOnInit() {
@@ -33,7 +33,15 @@ export class OrderStatusComponent implements OnInit {
 
   /** TODO remove */
   testUpdateOrderStatus(status: string) {
-    this.orderService.testUpdateOrderStatus(this.order.hash, status).subscribe(response => console.log(response));
+    this.orderService.testUpdateOrderStatus(this.order.hash, status).subscribe(response => {
+      if (response.status === 204) {
+        this.orderService.getOrderStatus(this.orderHash).subscribe((order: IOrder) => {
+          console.log(order);
+          this.order = order;
+          this.applicationContext.order.next(order);
+        });
+      }
+    });
   }
 
 }

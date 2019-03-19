@@ -87,6 +87,7 @@ export class ApplicationComponent implements OnInit {
 
       this.orderService.createOrder({
         appId: this.application.appId,
+        recurent: products[0].data.recurent,
         products: products.map(el => {
           return {name: el.name, price: el.price, type: el.type};
         })

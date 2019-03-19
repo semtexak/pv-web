@@ -1,7 +1,7 @@
 .orders {
   .client__logo {
-    max-width: 70px;
-    max-height: 40px;
+    max-width: $client-page-max-width * 1px;
+    max-height: $client-page-max-height * 1px;
     margin-right: 10px;
   }
 }

@@ -3,6 +3,25 @@
   flex-direction: row;
 
   .product__section {
+    display: flex;
+    flex-direction: column;
     flex: 1;
+    padding: 10px 20px;
+    border: 1px solid $product-section-border;
+    margin: 15px;
+
+    .product__header {
+      text-align: left;
+
+      h2 {
+        margin-bottom: 10px;
+        font-weight: 100;
+        @include rem-fallback(font-size, 20);
+      }
+
+      p {
+        @include rem-fallback(font-size, 13);
+      }
+    }
   }
 }

@@ -25,6 +25,7 @@ export interface IProduct {
   quantity: number;
   price: Price;
   type: ProductType;
+  data?: any;
 }
 
 

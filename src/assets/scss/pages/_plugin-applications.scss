@@ -1,12 +1,14 @@
 .plugin-applications {
-
   .payment--stretch {
     display: flex;
     flex-direction: column;
     flex: 1 0 auto;
   }
 
-  .client, .user, .payment__info, .payment__cart {
+  .client,
+  .user,
+  .payment__info,
+  .payment__cart {
     border-bottom: 1px solid #eeeeee;
   }
 
@@ -50,7 +52,7 @@
     top: 17px;
     color: $cart-toggler-color;
     padding: 5px 15px;
-    transition: all .2s ease;
+    transition: all 0.2s ease;
 
     @include media-breakpoint-up(md) {
       display: none;
@@ -62,7 +64,7 @@
     }
 
     .notification__badge {
-      transition: transform .2s;
+      transition: transform 0.2s;
       content: attr(data-count);
       position: absolute;
       top: 5px;
@@ -98,7 +100,8 @@
       background-color: $cart-empty-background;
 
       ul.products {
-        &:before, &:after {
+        &:before,
+        &:after {
           content: none;
         }
       }
@@ -118,7 +121,7 @@
       //padding-bottom: 30px;
 
       &:before {
-        content: '';
+        content: "";
         position: absolute;
         bottom: 29px;
         left: 0;
@@ -129,7 +132,7 @@
       }
 
       &:after {
-        content: '\f078';
+        content: "\f078";
         font-family: $font-awesome-font-family;
         font-weight: 900;
         position: absolute;
@@ -147,6 +150,7 @@
 
       .product__item {
         display: flex;
+        width: 100%;
         line-height: 2.5;
 
         &:not(:last-child) {
@@ -171,14 +175,15 @@
         }
       }
     }
-
   }
 
-  .payment__cart, .payment__info {
+  .payment__cart,
+  .payment__info {
     position: relative;
 
-    &:before, &:after {
-      content: '';
+    &:before,
+    &:after {
+      content: "";
       height: 1px;
       width: 100%;
       position: absolute;
@@ -195,7 +200,6 @@
   }
 
   .payment__info {
-
     table {
       table-layout: fixed;
       width: 100%;
@@ -220,7 +224,8 @@
           display: none;
         }
 
-        td, th {
+        td,
+        th {
           display: block;
           text-align: left !important;
         }
@@ -245,6 +250,10 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+    }
+
+    form {
+      width: 100%;
     }
   }
 }
