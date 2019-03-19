@@ -8,7 +8,8 @@ $text-muted: #a3a4a6;
 $text-light: #909090;
 
 $primary: #24abf2;
-$secondary: #eaeaea;
+//$secondary: #eaeaea;
+$secondary: #adadad;
 $primary-dark-color: #01748A;
 $selection-color: $primary;
 $secondary-color: #231f20;
@@ -92,7 +93,7 @@ $plugin-gradient-start-color: #082e4b;
 $plugin-gradient-end-color: #01adce;
 
 
-  /* Bootstrap defaults */
+/* Bootstrap defaults */
 $enable-rounded: false;
 $enable-shadows: false;
 
@@ -130,6 +131,8 @@ $chart-label-color: #949494;
 
 /* Cart */
 $cart-empty-background: #fbfbfb;
+$cart-toggler-color: #ffffff;
+$cart-toggler-inside-color: #666666;
 
 /* Refresh button */
 $refresh-button-color: #e0e0e0;

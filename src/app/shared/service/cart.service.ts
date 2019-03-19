@@ -59,6 +59,10 @@ export class CartService {
     return result;
   }
 
+  totalProducts(): number {
+    return this._items.length;
+  }
+
   pop() {
     this._items.pop();
     this.items.next(this._items);

@@ -16,6 +16,7 @@
       padding: 21px;
       margin-bottom: 0;
       line-height: 1;
+      //transition: all 2s ease;
 
       &.payment__heading--gradient {
         @include gradient-x($plugin-gradient-start-color, $plugin-gradient-end-color);
@@ -77,10 +78,13 @@
     padding: 0 15px 15px;
 
     .btn {
-      padding: 13px 15px;
-      @include rem-fallback(font-size, 15);
+      padding: 7px 15px;
+      min-height: 41px;
+      @include rem-fallback(font-size, 14);
       text-align: left;
-
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
       &.plugin-secondary {
         &.btn-outline-secondary:hover {
@@ -107,10 +111,18 @@
 
 
       &.btn-cta, &.add-to-cart {
-        @include rem-fallback(font-size, 20);
-        font-weight: 100;
+        @include rem-fallback(font-size, 17);
+        //font-weight: 100;
         text-align: center;
         margin-bottom: 15px;
+
+        justify-content: center;
+        font-weight: 600;
+        text-transform: uppercase;
+
+        .fas {
+          margin-right: 11px;
+        }
       }
 
 

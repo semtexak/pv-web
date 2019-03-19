@@ -1,5 +1,5 @@
 <div class="plugin-applications">
-  <div class="side side--left">
+  <div class="side side--left" [ngClass]="{'active': cartToggle}">
     <header>
       <div class="client">
         <!--<pv-alert></pv-alert>-->
@@ -16,15 +16,15 @@
       </div>
     </header>
     <section class="payment payment--stretch">
-      <ng-template #noOrder>
-        <div class="payment__cart payment--stretch" [ngClass]="{'payment__cart--empty': isCartEmpty}">
-          <ng-container *ngIf="isCartEmpty">
-            Vaše objednávka zatím neobsahuje žádnou položku.
-          </ng-container>
-          <pv-cart (onChange)="onCartChanged($event)" [compactMode]="true"></pv-cart>
-        </div>
-      </ng-template>
-      <div class="payment__cart payment--stretch" *ngIf="order; else noOrder">
+      <div class="cart__toggler" [ngClass]="{'cart__toggler--inside': cartToggle}" (click)="cartToggle = !cartToggle">
+        <span class="fas fa-shopping-cart">
+          <span class="notification__badge new">{{totalProducts}}</span>
+        </span>
+      </div>
+      <div class="payment__cart payment--stretch" [ngClass]="{'payment__cart--empty': isCartEmpty}">
+        <ng-container *ngIf="isCartEmpty">
+          Vaše objednávka zatím neobsahuje žádnou položku.
+        </ng-container>
         <pv-cart (onChange)="onCartChanged($event)" [compactMode]="true"></pv-cart>
       </div>
       <div class="payment__form">
@@ -46,23 +46,32 @@
             </label>
           </div>
           <div class="form-group mb-0">
-              <button class="btn btn-primary btn-gradient btn-gradient--success btn-lg btn-full order-submit"
-                      [hidden]="!order || order?.status !== OrderStatus.PAID" [disabled]="formDisabled || (order && order.status === OrderStatus.PAID)">Zaplaceno</button>
-              <button (click)="proceedToPayment()" class="btn btn-primary btn-gradient btn-gradient--success btn-lg btn-full order-submit"
-                      [hidden]="!order || order?.status === OrderStatus.PAID" [disabled]="formDisabled || (order && order.status === OrderStatus.PAID)">K platební bráně</button>
-              <button (click)="createOrder()" class="btn btn-primary btn-gradient btn-gradient--success btn-lg btn-full order-submit"
-                     [hidden]="!newOrder || order" [disabled]="formDisabled">Zaplatit: {{newOrder.price.amount|price:newOrder.price.currency}}</button>
+            <button class="btn btn-primary btn-gradient btn-gradient--success btn-lg btn-full order-submit"
+                    [hidden]="!order || order?.status !== OrderStatus.PAID"
+                    [disabled]="formDisabled || (order && order.status === OrderStatus.PAID)">Zaplaceno
+            </button>
+            <button (click)="proceedToPayment()"
+                    class="btn btn-primary btn-gradient btn-gradient--success btn-lg btn-full order-submit"
+                    [hidden]="!order || order?.status === OrderStatus.PAID"
+                    [disabled]="formDisabled || (order && order.status === OrderStatus.PAID)">K platební bráně
+            </button>
+            <button (click)="createOrder()"
+                    class="btn btn-primary btn-gradient btn-gradient--success btn-lg btn-full order-submit"
+                    [hidden]="!newOrder || order" [disabled]="formDisabled">Zaplatit:
+              {{newOrder.price.amount|price:newOrder.price.currency}}
+            </button>
           </div>
         </form>
       </div>
     </section>
     <!--<footer class="text-center">-->
-      <!--<p class="mb-0">Více o službě <a href="http://payvont.com" target="_blank">Payvont</a>.</p>-->
+    <!--<p class="mb-0">Více o službě <a href="http://payvont.com" target="_blank">Payvont</a>.</p>-->
     <!--</footer>-->
   </div>
   <div class="plugin-content side side--right">
-    <button (click)="sendMessage('sm')">SM</button>
-    <button (click)="sendMessage('lg')">LG</button>
+    <!--<button (click)="sendMessage('sm')">SM</button>-->
+    <!--<button (click)="sendMessage('md')">MD</button>-->
+    <!--<button (click)="sendMessage('lg')">LG</button>-->
     <router-outlet></router-outlet>
   </div>
 </div>

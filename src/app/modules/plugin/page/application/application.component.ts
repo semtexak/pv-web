@@ -29,6 +29,8 @@ export class ApplicationComponent implements OnInit {
     price: Price
   };
   OrderStatus = Status;
+  totalProducts: number;
+  cartToggle = false;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -47,12 +49,11 @@ export class ApplicationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sendMessage();
+    this.sendMessage('lg');
     this.loadData();
   }
 
   sendMessage(size: string) {
-    console.log('Small layout');
     if (this.w.nativeWindow['parentIFrame']) {
       this.w.nativeWindow['parentIFrame'].sendMessage({action: 'layout', data: size});
     }
@@ -117,6 +118,7 @@ export class ApplicationComponent implements OnInit {
 
   onCartChanged(items: number) {
     this.isCartEmpty = items === 0;
+    this.totalProducts = this.cartService.totalProducts();
 
     const price = this.cartService.totalPrice();
     if (price['czk']) {

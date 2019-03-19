@@ -1,6 +1,9 @@
 @import "../abstracts/variables";
 @import "../abstracts/mixin";
 
+/*
+ * Layout for plugin module
+ */
 body.plugin {
   background-color: transparent;
   margin-bottom: 0;
@@ -18,16 +21,35 @@ body.plugin {
 
       &.side--left {
         width: 300px;
+        transition: transform .2s ease;
+
+        &.active {
+          transform: translateX(0);
+        }
       }
 
       &.side--right {
-        flex: 1 0 auto;
+        //flex: 1 0 auto;
+        flex: 1;
         margin-left: 20px;
+        min-height: 441px;
 
         pv-services, pv-donation, pv-subscription {
           display: flex;
           flex-direction: column;
           height: 100%;
+        }
+      }
+
+      @include media-breakpoint-down(sm){
+        &.side--left {
+          position: absolute;
+          z-index: 2;
+          transform: translateX(-100%);
+        }
+
+        &.side--right {
+          margin-left: 0;
         }
       }
     }

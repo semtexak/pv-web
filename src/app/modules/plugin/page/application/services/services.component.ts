@@ -19,11 +19,11 @@ export class ServicesComponent implements OnInit {
   ngOnInit() {
     this.applicationContextService.application.subscribe(app => {
       this.application = app;
-      // if (app && app.configurations.length > 0) {
-      //   if (app.configurations.length === 1) {
-      //     this.selectService(app.configurations.pop().type);
-      //   }
-      // }
+      if (app && app.configurations.length > 0) {
+        if (app.configurations.length === 1) {
+          this.selectService(app.configurations.pop().type);
+        }
+      }
     });
   }
 
