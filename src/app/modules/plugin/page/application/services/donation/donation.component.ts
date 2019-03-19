@@ -71,6 +71,20 @@ export class DonationComponent implements OnInit {
     }
   }
 
+  addOrEditToCart(amount: number, renew: boolean = false) {
+    this.cartService.clear();
+    const product: CartItem = {
+      name: `Příspěvek (${renew ? 'měsíční' : 'jednorázový'}) (${this.application.domain})`,
+      quantity: 1,
+      type: ProductType.DONATION,
+      price: {
+        amount: amount,
+        currency: 'CZK'
+      }
+    };
+    this.cartService.add(product, true);
+  };
+
   goBack() {
   }
 

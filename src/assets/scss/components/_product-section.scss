@@ -1,0 +1,8 @@
+.products {
+  display: flex;
+  flex-direction: row;
+
+  .product__section {
+    flex: 1;
+  }
+}

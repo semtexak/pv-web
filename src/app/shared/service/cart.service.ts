@@ -47,6 +47,11 @@ export class CartService {
     }
   }
 
+  clear(): void {
+    this._items = [];
+    this.items.next(this._items);
+  }
+
   totalPrice() {
     const result = {};
     const currenciesInCart = Array.from(new Set(this._items.map(it => it.price.currency)));
