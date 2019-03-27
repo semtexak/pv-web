@@ -19,6 +19,7 @@ export class NotLoggedGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (this.isLoggedIn) {
+      console.log('Logged, but should be.');
       this.router.navigate(['/']);
       return false;
     }

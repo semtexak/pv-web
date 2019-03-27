@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {IcoValidation} from '../../../../core/validation/ico-validation';
 import {ClientService} from '../../../../shared/service/client.service';
@@ -12,6 +12,7 @@ import {Router} from '@angular/router';
 })
 export class SignUpComponent implements OnInit {
 
+  @ViewChild('tabs') tabs;
   form: FormGroup;
   hideAres = false;
   states = [
@@ -105,7 +106,11 @@ export class SignUpComponent implements OnInit {
     );
   }
 
-
+  selectTab(tab) {
+    if (this.tabs) {
+      this.tabs.selectTab(tab);
+    }
+  }
 
   // onChange($event) {
   //   if($event.nextId === 'company-tab') {

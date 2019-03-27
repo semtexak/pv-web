@@ -21,7 +21,7 @@ export class ServicesComponent implements OnInit {
       this.application = app;
       if (app && app.configurations.length > 0) {
         if (app.configurations.length === 1) {
-          this.selectService(app.configurations.pop().type);
+          this.selectService(app.configurations[0].type);
         }
       }
     });

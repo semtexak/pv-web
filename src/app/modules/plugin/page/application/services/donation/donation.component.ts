@@ -39,12 +39,11 @@ export class DonationComponent implements OnInit {
       this.application = app;
 
       if (app) {
-        console.log(this.application.configurations);
         const cfg = app.configurations.find(config => config.type === 'donation');
         if (cfg) {
           this.donationConfiguration = cfg;
         } else if (!cfg && app.configurations.length > 0) {
-          this.router.navigate([app.configurations.pop().type], {relativeTo: this.route});
+          this.router.navigate([app.configurations[0].type], {relativeTo: this.route});
         } else {
           this.router.navigate(['/no-service-available'], {relativeTo: this.route});
         }
@@ -74,7 +73,7 @@ export class DonationComponent implements OnInit {
   addOrEditToCart(amount: number, recurent: boolean = false) {
     this.cartService.clear();
     const product: CartItem = {
-      name: `Příspěvek (${recurent ? 'měsíční' : 'jednorázový'}) (${this.application.domain})`,
+      name: `Příspěvek (${recurent ? 'měsíční' : 'jednorázový'})`,
       quantity: 1,
       type: ProductType.DONATION,
       price: {

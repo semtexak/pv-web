@@ -6,11 +6,8 @@ import {ISingUpForm} from '../../../../shared/model/form/i-sing-up-form';
 import {Router} from '@angular/router';
 import {AlertService} from '../../../../shared/service/alert.service';
 import {environment} from '../../../../../environments/environment';
-import {catchError, switchMap} from 'rxjs/operators';
-import {IToken} from '../../../../shared/model/i-token';
-import {HttpErrorResponse} from '../../../../../../node_modules/@angular/common/http';
+import {HttpErrorResponse} from '@angular/common/http';
 import {AuthenticationService} from '../../../../shared/service/authentication.service';
-import {of} from 'rxjs';
 
 @Component({
   selector: 'pv-sign-up',

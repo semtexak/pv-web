@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../../../shared/service/authentication.service';
 import {AlertService} from '../../../../shared/service/alert.service';
@@ -13,9 +13,11 @@ import { WindowService } from 'src/app/shared/service/window.service';
 })
 export class SignInComponent implements OnInit {
 
+  @ViewChild('username') usernameInput: ElementRef;
+  @ViewChild('password') passwordInput: ElementRef;
   public form: FormGroup;
   public error: string;
-  private redirectUrl: string = '/';
+  redirectUrl: string = '/';
 
   constructor(private authenticationService: AuthenticationService,
               private alertService: AlertService,
@@ -35,6 +37,13 @@ export class SignInComponent implements OnInit {
       const redirect = queryParams['redirect'];
       if (redirect) {
         this.redirectUrl = redirect;
+      }
+      const login = queryParams['e'];
+      this.form.get('username').setValue(login);
+      if (login) {
+        this.passwordInput.nativeElement.focus();
+      } else {
+        this.usernameInput.nativeElement.focus();
       }
     });
   }

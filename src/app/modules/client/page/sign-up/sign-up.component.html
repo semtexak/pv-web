@@ -9,10 +9,10 @@
         </h6>
         <ng-container *ngIf="!completed">
         <form class="form-horizontal" [formGroup]="form" novalidate>
-          <div class="card-body">
-              <pv-tabs>
-                <pv-tab title="Základní údaje">
-                  <fieldset>
+              <pv-tabs #tabs>
+                <pv-tab title="Základní údaje" #tab1>
+                  <div class="card-body">
+                    <fieldset>
                     <div class="row">
                       <div class="col-6">
                         <div class="form-group" [ngClass]="{'has-error':form.controls['company'].invalid && form.controls['company'].dirty}">
@@ -151,9 +151,27 @@
                       </div>
                     </div>
                   </fieldset>
+                  </div>
+                  <div class="card-footer">
+                    <div class="row">
+                      <div class="col" *ngIf="!hideAres">
+                        <div class="form-group text-left mb-2">
+                          <button class="btn btn-sm btn-sharp" [ngClass]="{'btn-primary': form.controls['ico'].valid, 'btn-outline-primary': form.controls['ico'].invalid}" (click)="loadClientDataFromAres(form.value.ico)"
+                                  [disabled]="form.controls['ico'].invalid"><span class="flaticon-grid-world"></span> Načíst data z databáze ARES
+                          </button>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group text-right mb-2">
+                          <button class="btn btn-primary" (click)="selectTab(tab2)">Pokračovat</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </pv-tab>
-                <pv-tab title="Kontaktní osoba">
-                  <fieldset>
+                <pv-tab title="Kontaktní osoba" #tab2>
+                  <div class="card-body">
+                    <fieldset>
                     <div class="row">
                       <div class="col-6">
                         <div class="form-group" [ngClass]="{'has-error':form.controls['personName'].invalid && form.controls['personName'].dirty}">
@@ -192,9 +210,20 @@
                       </div>
                     </div>
                   </fieldset>
+                  </div>
+                  <div class="card-footer">
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group text-right mb-2">
+                          <button class="btn btn-primary" (click)="selectTab(tab3)">Pokračovat</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </pv-tab>
-                <pv-tab title="Bankovní spojení">
-                  <fieldset>
+                <pv-tab title="Bankovní spojení" #tab3>
+                  <div class="card-body">
+                    <fieldset>
                     <div class="row">
                       <div class="col-6">
                         <div class="row">
@@ -243,32 +272,32 @@
                       </div>
                     </div>
                   </fieldset>
+                  </div>
+                  <div class="card-footer">
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="form-group form-check mt-2" [ngClass]="{'has-error':form.controls['agreement'].invalid && form.controls['agreement'].dirty}">
+                          <input type="checkbox" name="agreement" id="agreement" class=""
+                                 [formControl]="form.controls['agreement']">
+                          <label for="agreement" class="form-check-label">
+                            Souhlasím se zpracováním osobních údajů. <span class="required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-6" *ngIf="!hideAres">
+                        <div class="form-group text-right mb-2">
+                          <button class="btn btn-sm btn-sharp" [ngClass]="{'btn-primary': form.controls['ico'].valid, 'btn-outline-primary': form.controls['ico'].invalid}" (click)="loadClientDataFromAres(form.value.ico)"
+                                  [disabled]="form.controls['ico'].invalid"><span class="flaticon-grid-world"></span> Načíst data z databáze ARES
+                          </button>
+                          <input type="submit" class="btn btn-primary" value="Dokončit" (click)="sendData(form.value)" >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </pv-tab>
               </pv-tabs>
-
-          </div>
         </form>
-        <div class="card-footer">
-          <div class="row">
-            <div class="col-6">
-              <div class="form-group form-check mt-2" [ngClass]="{'has-error':form.controls['agreement'].invalid && form.controls['agreement'].dirty}">
-                <input type="checkbox" name="agreement" id="agreement" class=""
-                       [formControl]="form.controls['agreement']">
-                <label for="agreement" class="form-check-label">
-                  Souhlasím se zpracováním osobních údajů. <span class="required">*</span>
-                </label>
-              </div>
-            </div>
-            <div class="col-6" *ngIf="!hideAres">
-              <div class="form-group text-right mb-2">
-                <button class="btn btn-sm btn-sharp" [ngClass]="{'btn-primary': form.controls['ico'].valid, 'btn-outline-primary': form.controls['ico'].invalid}" (click)="loadClientDataFromAres(form.value.ico)"
-                        [disabled]="form.controls['ico'].invalid"><span class="flaticon-grid-world"></span> Načíst data z databáze ARES
-                </button>
-                <button class="btn btn-primary" (click)="sendData(form.value)">SEND</button>
-              </div>
-            </div>
-          </div>
-        </div>
+
         </ng-container>
         <ng-container *ngIf="completed">
           <div class="card-body">
