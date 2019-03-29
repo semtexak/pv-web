@@ -286,9 +286,6 @@
                       </div>
                       <div class="col-6" *ngIf="!hideAres">
                         <div class="form-group text-right mb-2">
-                          <button class="btn btn-sm btn-sharp" [ngClass]="{'btn-primary': form.controls['ico'].valid, 'btn-outline-primary': form.controls['ico'].invalid}" (click)="loadClientDataFromAres(form.value.ico)"
-                                  [disabled]="form.controls['ico'].invalid"><span class="flaticon-grid-world"></span> Načíst data z databáze ARES
-                          </button>
                           <input type="submit" class="btn btn-primary" value="Dokončit" (click)="sendData(form.value)" >
                         </div>
                       </div>

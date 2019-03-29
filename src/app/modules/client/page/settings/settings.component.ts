@@ -23,6 +23,7 @@ export class SettingsComponent implements OnInit {
   @ViewChild('tabs') tabs: TabsComponent;
   activeTab: TabComponent;
   application: IApplication = null;
+  snippetCode: string;
 
   initFormData = [
     {
@@ -33,7 +34,10 @@ export class SettingsComponent implements OnInit {
     {
       type: 'subscription',
       debug: false,
-      active: false
+      active: false,
+      // checkOnLoad: false,
+      // popupOnLoad: false,
+      // closable: false
     },
     {
       type: 'paid-content',
@@ -55,6 +59,7 @@ export class SettingsComponent implements OnInit {
       this.initForm();
       if (params['appId']) {
         this.appId = params['appId'];
+        this.initCodeSnippet(params['appId']);
         this.setDefaults(this.initFormData, 'INIT');
         this.loadData();
       }
@@ -64,7 +69,7 @@ export class SettingsComponent implements OnInit {
   loadData() {
     this.applicationService.getApplication(this.appId).subscribe((application: IApplication) => {
       this.application = application;
-      if (this.application && this.application.configurations.length > 0) {
+      if (this.application && this.application.configurations && this.application.configurations.length > 0) {
         this.setDefaults(this.application.configurations, 'LOAD');
       }
     });
@@ -148,5 +153,9 @@ export class SettingsComponent implements OnInit {
       'subscription': this.subscriptionForm,
       'paid-content': this.paidContentForm
     });
+  }
+
+  private initCodeSnippet(appId: string) {
+    this.snippetCode = appId;
   }
 }

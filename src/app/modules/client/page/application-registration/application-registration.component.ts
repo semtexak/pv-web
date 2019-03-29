@@ -74,7 +74,7 @@ export class ApplicationRegistrationComponent implements OnInit {
         console.log(location);
         if (location) {
           const appId = location.split('/').pop();
-          this.router.navigate([`/klient/stranka/${appId}/nastaveni`]).then(() => this.alertService.success('Registrace nové stránky proběhla úspěšně. Nastavte si požadované služby a začněte vydělávat.'))
+          this.router.navigate([`/klient/stranka/${appId}/nastaveni`]).then(() => this.alertService.success('Registrace nové stránky proběhla úspěšně. Nastavte si požadované služby a začněte vydělávat.</>'));
         }
       });
     }
