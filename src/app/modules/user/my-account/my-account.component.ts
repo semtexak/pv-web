@@ -6,6 +6,7 @@ import {AlertService} from '../../../shared/service/alert.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {AuthenticationService} from '../../../shared/service/authentication.service';
 import {Router} from '@angular/router';
+import {LoadingBarService} from '@ngx-loading-bar/core';
 
 @Component({
   selector: 'pv-my-account',
@@ -33,6 +34,7 @@ export class MyAccountComponent implements OnInit, AfterContentInit {
 
   constructor(private formBuilder: FormBuilder,
               private alertService: AlertService,
+              private loadingService: LoadingBarService,
               private authenticationService: AuthenticationService,
               private router: Router,
               private userService: UserService) {
@@ -70,6 +72,10 @@ export class MyAccountComponent implements OnInit, AfterContentInit {
       this.tabs.forEach(el => el.active = false);
       this.tabs.find(el => el.key === tab.key).active = true;
     }
+  }
+
+  simulate() {
+    this.loadingService.start();
   }
 
   ngAfterContentInit() {

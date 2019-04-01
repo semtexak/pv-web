@@ -1,5 +1,12 @@
 <div class="plugin-applications">
   <div class="side side--left" [ngClass]="{'active': cartToggle}">
+    <div class="loading-overlay" *ngIf="loading">
+      <!--<div class="loader">-->
+        <!--<span class="loader-stick"></span>-->
+        <!--<span class="loader-stick"></span>-->
+        <!--<span class="loader-stick"></span>-->
+      <!--</div>-->
+    </div>
     <header>
       <div class="client">
         <!--<pv-alert></pv-alert>-->
@@ -55,11 +62,18 @@
                     [hidden]="!order || order?.status === OrderStatus.PAID"
                     [disabled]="formDisabled || (order && order.status === OrderStatus.PAID)">K platební bráně
             </button>
-            <button (click)="createOrder()"
-                    class="btn btn-success btn-gradient btn-gradient--success btn-lg btn-full order-submit"
-                    [hidden]="!newOrder || order" [disabled]="formDisabled">Zaplatit:
-              {{newOrder.price.amount|price:newOrder.price.currency}}
-            </button>
+            <!--<button (click)="onCreateOrder()"-->
+                    <!--class="btn btn-success btn-gradient btn-gradient&#45;&#45;success btn-lg btn-full order-submit"-->
+                    <!--[hidden]="!newOrder || order" [disabled]="formDisabled">Zaplatit:-->
+              <!--{{newOrder.price.amount|price:newOrder.price.currency}}-->
+            <!--</button>-->
+            <pv-loading-button
+              (onClick)="onCreateOrder($event)"
+              [hidden]="!newOrder || order"
+              [disabled]="formDisabled"
+              [loading]="loading"
+              [value]="newOrder.price.amount|price:newOrder.price.currency"
+            ></pv-loading-button>
           </div>
         </form>
       </div>

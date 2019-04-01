@@ -11,7 +11,9 @@ import {CartService} from '../../../../shared/service/cart.service';
 import {HttpResponse} from '@angular/common/http';
 import {OrderService} from '../../../../shared/service/order.service';
 import {Price} from '../../../../shared/model/base/price';
-import { WindowService } from 'src/app/shared/service/window.service';
+import {WindowService} from 'src/app/shared/service/window.service';
+import {interval, Observable, of} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'pv-application',
@@ -31,6 +33,8 @@ export class ApplicationComponent implements OnInit {
   OrderStatus = Status;
   totalProducts: number;
   cartToggle = false;
+
+  loading = false;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -81,7 +85,7 @@ export class ApplicationComponent implements OnInit {
     });
   }
 
-  createOrder(): void {
+  createOrder(): Observable<boolean> {
     if (this.form.valid && !this.cartService.empty()) {
       const products = this.cartService.items.getValue();
 
@@ -91,12 +95,22 @@ export class ApplicationComponent implements OnInit {
         products: products.map(el => {
           return {name: el.name, price: el.price, type: el.type};
         })
-      }).subscribe((response: HttpResponse<any>) => {
-        const location = response.headers.get('Location');
-        if (location) {
-          this.router.navigate([`/plugin/app/${this.application.appId}/status`], {queryParams: {order: location.split('/').pop()}});
-        }
-      });
+      }).pipe(
+        map((response: HttpResponse<any>) => {
+          const location = response.headers.get('Location');
+          if (location) {
+            // this.router.navigate([`/plugin/app/${this.application.appId}/status`], {queryParams: {order: location.split('/').pop()}});
+            console.log('Navigating...');
+            return of(true);
+          }
+          console.log('Loaction is not present');
+          return of(false);
+        })
+      );
+    } else {
+
+      console.log('Not valid or cart is empty', this.form.valid, this.cartService.totalProducts());
+      return of(false);
     }
   }
 
@@ -149,5 +163,40 @@ export class ApplicationComponent implements OnInit {
       error => {
         console.log(error);
       });
+  }
+
+  onCreateOrder() {
+    this.loading = true;
+    this.testSub().subscribe();
+  }
+
+  testSub(): Observable<any> {
+    if (this.form.valid && !this.cartService.empty()) {
+      const products = this.cartService.items.getValue();
+
+      return this.orderService.createOrder({
+        appId: this.application.appId,
+        recurent: products[0].data.recurent,
+        products: products.map(el => {
+          return {name: el.name, price: el.price, type: el.type};
+        })
+      }).pipe(
+        map((response: HttpResponse<any>) => {
+          this.loading = false;
+          const location = response.headers.get('Location');
+          if (location) {
+            this.router.navigate([`/plugin/app/${this.application.appId}/status`], {queryParams: {order: location.split('/').pop()}});
+            console.log('Navigating...');
+            return of(true);
+          }
+          console.log('Loaction is not present');
+          return of(false);
+        })
+      );
+    } else {
+
+      console.log('Not valid or cart is empty', this.form.valid, this.cartService.totalProducts());
+      return of(false);
+    }
   }
 }

@@ -20,6 +20,11 @@ import { TooltipModule } from 'ng2-tooltip-directive';
 import {TableComponent} from './component/table/table.component';
 import {TableModule} from 'primeng/table';
 import {NgSelectModule} from '@ng-select/ng-select';
+import {EditorDirective} from './directive/editor.directive';
+import { LoadingButtonComponent } from './component/loading-button/loading-button.component';
+import {LoadingBarModule} from '@ngx-loading-bar/core';
+import {LoadingBarRouterModule} from '@ngx-loading-bar/router';
+import {LoadingBarHttpClientModule} from '@ngx-loading-bar/http-client';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -34,7 +39,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TooltipModule,
     ReactiveFormsModule,
     TableModule,
-    NgSelectModule
+    NgSelectModule,
+    LoadingBarHttpClientModule,
+    LoadingBarRouterModule,
+    LoadingBarModule,
   ],
   declarations: [
     AlertsComponent,
@@ -46,7 +54,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DropdownToggleDirective,
     CartComponent,
     CartItemComponent,
+    EditorDirective,
     TableComponent,
+    LoadingButtonComponent,
   ],
   providers: [
     CookieService,
@@ -61,6 +71,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DropdownToggleDirective,
     TooltipModule,
     PricePipe,
+    LoadingBarHttpClientModule,
+    LoadingBarRouterModule,
+    LoadingBarModule,
     AlertsComponent,
     AlertComponent,
     TabsComponent,
@@ -68,10 +81,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CartComponent,
     CartItemComponent,
     TableComponent,
+    EditorDirective,
     FormsModule,
     PerfectScrollbarModule,
     PipeModule,
     ReactiveFormsModule,
+    LoadingButtonComponent,
     TableModule,
     NgSelectModule
   ]

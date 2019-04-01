@@ -32,6 +32,10 @@ input.form-control, .custom-file label {
   }
 }
 
+textarea.form-control.code {
+  min-height: 222px
+}
+
 .form-check {
   padding-left: 0;
 

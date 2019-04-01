@@ -29,6 +29,16 @@
     }
   }
 
+  &.btn--loading {
+    position: relative;
+    z-index: 4;
+    opacity: .8;
+
+    .btn-loader .loader-stick {
+      background-color: $white;
+    }
+  }
+
   &.facebook {
     background-color: $facebook-background!important;;
     color: $facebook-color!important;

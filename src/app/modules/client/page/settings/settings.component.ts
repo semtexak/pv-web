@@ -8,6 +8,7 @@ import {IApplication} from '../../../../shared/model/base/i-application';
 import {Title} from '@angular/platform-browser';
 import {HttpResponse} from '@angular/common/http';
 import {AlertService} from '../../../../shared/service/alert.service';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'pv-settings',
@@ -45,6 +46,18 @@ export class SettingsComponent implements OnInit {
       active: false
     }
   ];
+
+  code = '<script>\n' +
+    '(function (d, s, id) {\n' +
+    '   var js, fjs = d.getElementsByTagName(s)[0];\n' +
+    '   if (d.getElementById(id)) return;\n' +
+    '   js = d.createElement(s);\n' +
+    '   js.id = id;\n' +
+    '   js.src = ' + environment.PLUGIN_URL + ';\n' +
+    '   js.onload = window.payvontInit;\n' +
+    '   fjs.parentNode.insertBefore(js, fjs);\n' +
+    '}(document, \'script\', \'payvont-script\'));\n' +
+    '</script>';
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
