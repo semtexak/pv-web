@@ -68,7 +68,7 @@
               <!--{{newOrder.price.amount|price:newOrder.price.currency}}-->
             <!--</button>-->
             <pv-loading-button
-              (onClick)="onCreateOrder($event)"
+              (onClick)="onCreateOrder()"
               [hidden]="!newOrder || order"
               [disabled]="formDisabled"
               [loading]="loading"
