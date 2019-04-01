@@ -1,0 +1,7 @@
+ngx-loading-bar {
+  &.loading-bar-fixed {
+    .bar .peg {
+      width: 100% !important;
+    }
+  }
+}
