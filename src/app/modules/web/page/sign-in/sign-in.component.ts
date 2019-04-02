@@ -19,6 +19,7 @@ export class SignInComponent implements OnInit {
   public form: FormGroup;
   public error: string;
   private redirectUrl: string = '/';
+  loading = false;
 
   constructor(private authenticationService: AuthenticationService,
               private facebookService: AuthService,
@@ -54,8 +55,10 @@ export class SignInComponent implements OnInit {
 
   onSubmit(data: ISingInForm): void {
     if (this.form.valid) {
+      this.loading = true;
       this.authenticationService.authenticate(data).subscribe(() => {
           console.log(`Redirecting to: ${this.redirectUrl}`);
+          this.loading = false;
           this.router.navigateByUrl(this.redirectUrl);
         },
         error => {
@@ -75,6 +78,7 @@ export class SignInComponent implements OnInit {
               }
             }
           }
+          this.loading = false;
           console.log(error);
         });
     }

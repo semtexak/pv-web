@@ -1,9 +1,9 @@
 <button
   (click)="click()"
-  class="btn btn-success btn-gradient btn-gradient--success btn-lg btn-full order-submit"
+  [class]="class"
   [ngClass]="{'btn--loading': loading}"
   [hidden]="hidden" [disabled]="disabled">
-  <span *ngIf="!loading">Zaplatit:</span>
+  <span *ngIf="!loading">{{value}}</span>
   <div *ngIf="loading" class="btn-loader">
     <span class="loader-stick"></span>
     <span class="loader-stick"></span>

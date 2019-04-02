@@ -10,6 +10,7 @@ export class LoadingButtonComponent implements OnInit {
   @Input() hidden = false;
   @Input() disabled = false;
   @Input() loading = false;
+  @Input() class = '';
   @Input() value = '';
 
   constructor() {

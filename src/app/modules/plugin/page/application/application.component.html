@@ -70,9 +70,10 @@
             <pv-loading-button
               (onClick)="onCreateOrder()"
               [hidden]="!newOrder || order"
+              [class]="'btn btn-success btn-gradient btn-gradient--success btn-lg btn-full order-submit'"
               [disabled]="formDisabled"
               [loading]="loading"
-              [value]="newOrder.price.amount|price:newOrder.price.currency"
+              [value]="'Zaplatit: ' + newOrder.price.amount|price:newOrder.price.currency"
             ></pv-loading-button>
           </div>
         </form>

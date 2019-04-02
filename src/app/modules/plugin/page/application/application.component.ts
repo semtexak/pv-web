@@ -85,35 +85,6 @@ export class ApplicationComponent implements OnInit {
     });
   }
 
-  createOrder(): Observable<boolean> {
-    if (this.form.valid && !this.cartService.empty()) {
-      const products = this.cartService.items.getValue();
-
-      this.orderService.createOrder({
-        appId: this.application.appId,
-        recurent: products[0].data.recurent,
-        products: products.map(el => {
-          return {name: el.name, price: el.price, type: el.type};
-        })
-      }).pipe(
-        map((response: HttpResponse<any>) => {
-          const location = response.headers.get('Location');
-          if (location) {
-            // this.router.navigate([`/plugin/app/${this.application.appId}/status`], {queryParams: {order: location.split('/').pop()}});
-            console.log('Navigating...');
-            return of(true);
-          }
-          console.log('Loaction is not present');
-          return of(false);
-        })
-      );
-    } else {
-
-      console.log('Not valid or cart is empty', this.form.valid, this.cartService.totalProducts());
-      return of(false);
-    }
-  }
-
   toggleDisabledState(disabled: boolean) {
     for (const controlKey of Object.keys(this.form.controls)) {
       if (controlKey !== 'active' && controlKey !== 'type') {
@@ -167,10 +138,10 @@ export class ApplicationComponent implements OnInit {
 
   onCreateOrder() {
     this.loading = true;
-    this.testSub().subscribe();
+    this.createOrder().subscribe();
   }
 
-  testSub(): Observable<any> {
+  createOrder(): Observable<any> {
     if (this.form.valid && !this.cartService.empty()) {
       const products = this.cartService.items.getValue();
 

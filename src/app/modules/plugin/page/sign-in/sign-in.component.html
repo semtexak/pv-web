@@ -35,7 +35,11 @@
               </div>
             </div>
             <div class="form-group">
-              <button class="btn btn-primary btn-gradient btn-lg btn-full" type="submit">Přihlásit</button>
+              <pv-loading-button
+                [loading]="loading"
+                [class]="'btn btn-primary btn-gradient btn-lg btn-full'"
+                [value]="'Přihlásit'"
+              ></pv-loading-button>
             </div>
             <div class="form-group">
               <div class="social-media-divider">

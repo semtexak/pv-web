@@ -18,6 +18,7 @@ export class SignInComponent implements OnInit {
   public form: FormGroup;
   public error: string;
   redirectUrl: string = '/';
+  loading = false;
 
   constructor(private authenticationService: AuthenticationService,
               private alertService: AlertService,
@@ -58,12 +59,13 @@ export class SignInComponent implements OnInit {
 
   onSubmit(data: ISingInForm): void {
     if (this.form.valid) {
+      this.loading = true;
       this.authenticationService.authenticate(data).subscribe(() => {
         console.log(`Redirecting to: ${this.redirectUrl}`);
+          this.loading = false;
           this.router.navigateByUrl(this.redirectUrl);
         },
         error => {
-          console.log(error);
           if (error instanceof HttpErrorResponse) {
             if (!error.error.error_description) {
               this.alertService.error('Vyskytla se neznámá chyba. Prosím, opakujte akci pozdějí.');
@@ -79,6 +81,7 @@ export class SignInComponent implements OnInit {
               }
             }
           }
+          this.loading = false;
           console.log(error);
         });
     }
