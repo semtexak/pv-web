@@ -47,18 +47,6 @@ export class SettingsComponent implements OnInit {
     }
   ];
 
-  code = '<script>\n' +
-    '(function (d, s, id) {\n' +
-    '   var js, fjs = d.getElementsByTagName(s)[0];\n' +
-    '   if (d.getElementById(id)) return;\n' +
-    '   js = d.createElement(s);\n' +
-    '   js.id = id;\n' +
-    '   js.src = ' + environment.PLUGIN_URL + ';\n' +
-    '   js.onload = window.payvontInit;\n' +
-    '   fjs.parentNode.insertBefore(js, fjs);\n' +
-    '}(document, \'script\', \'payvont-script\'));\n' +
-    '</script>';
-
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private titleService: Title,
@@ -169,6 +157,21 @@ export class SettingsComponent implements OnInit {
   }
 
   private initCodeSnippet(appId: string) {
-    this.snippetCode = appId;
+    this.snippetCode = '<script>\n' +
+      '(function (d, s, id) {\n' +
+      '   var js, fjs = d.getElementsByTagName(s)[0];\n' +
+      '   if (d.getElementById(id)) return;\n' +
+      '   js = d.createElement(s);\n' +
+      '   js.id = id;\n' +
+      '   js.src = \'' + environment.PLUGIN_URL + '\';\n' +
+      '   js.onload = function() {\n' +
+      '     window.payvont = new Payvont({\n' +
+      '       appId: \'' + this.appId + '\',\n' +
+      '       debug: true,\n' +
+      '     });\n' +
+      '   };\n' +
+      '   fjs.parentNode.insertBefore(js, fjs);\n' +
+      '}(document, \'script\', \'payvont-script\'));\n' +
+      '</script>';
   }
 }
