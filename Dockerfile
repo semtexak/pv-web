@@ -4,6 +4,14 @@ WORKDIR /app
 COPY package*.json /app/
 RUN npm install
 COPY ./ /app/
+
+WORKDIR /app/plugin
+RUN npm install
+RUN npm run build
+RUN cat dist/js/bundle.js
+RUN mkdir -p /app/src/assets/plugin && cp -R dist/ /app/src/assets/plugin
+RUN rm -fr /app/plugin
+
 ARG configuration=production
 RUN npm run build -- --output-path=./dist/out --configuration $configuration
 

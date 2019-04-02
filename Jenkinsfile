@@ -12,6 +12,10 @@ pipeline{
                     registry = "tomasblaha"
                     appName = "pv-web"
                     tag = env.GIT_COMMIT
+                  
+                    stage("Clone plugin reposiotry"){
+                      sh "git clone https://github.com/semtexak/pv-plugin.git plugin"
+                    }
 
                     stage("Docker BUILD"){
                       sh "docker build -t $registry/$appName:$tag ."
