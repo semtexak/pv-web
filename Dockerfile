@@ -8,8 +8,7 @@ COPY ./ /app/
 WORKDIR /app/plugin
 RUN npm install
 RUN npm run build
-RUN cat /app/plugin/dist/js/bundle.js
-RUN cp /app/plugin/dist /app/src/assets/plugin
+RUN cp /app/plugin/dist/ /app/src/assets/plugin/
 RUN rm -fr /app/plugin
 
 ARG configuration=production
