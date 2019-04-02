@@ -8,8 +8,7 @@ COPY ./ /app/
 WORKDIR /app/plugin
 RUN npm install
 RUN npm run build
-RUN mkdir /app/src/assets/plugin
-RUN cp /app/plugin/dist/ /app/src/assets/plugin/
+RUN mkdir -p /app/src/assets/plugin && cp /app/plugin/dist/ /app/src/assets/plugin/
 RUN rm -fr /app/plugin
 
 ARG configuration=production
