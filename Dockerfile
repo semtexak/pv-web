@@ -9,7 +9,7 @@ WORKDIR /app/plugin
 RUN npm install
 RUN npm run build
 RUN cat dist/js/bundle.js
-RUN mkdir -p /app/src/assets/plugin && cp dist/ /app/src/assets/plugin
+RUN mkdir -p /app/src/assets/plugin && cp -R dist/ /app/src/assets/plugin
 RUN rm -fr /app/plugin
 
 ARG configuration=production
