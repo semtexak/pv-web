@@ -6,6 +6,7 @@ RUN npm install
 COPY ./ /app/
 
 WORKDIR /app/plugin
+RUN npm install
 RUN npm run build
 RUN cp /app/plugin/dist /app/src/assets/plugin
 RUN rm -fr /app/plugin
