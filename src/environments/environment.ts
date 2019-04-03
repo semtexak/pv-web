@@ -1,5 +1,5 @@
-const protocol = 'https';
-const hostname = 'payvont.com';
+const protocol = 'http';
+const hostname = 'localhost';
 
 export const environment = {
   production: false,

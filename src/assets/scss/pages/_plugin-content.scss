@@ -52,6 +52,11 @@
     }
   }
 
+  pv-order-status {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
 
   .payment__content {
     padding: 15px;

@@ -1,5 +1,6 @@
 <div class="plugin-applications">
   <div class="side side--left" [ngClass]="{'active': cartToggle}">
+    <ngx-loading-bar [color]="'#24abf2'" [includeSpinner]="false" [fixed]="false" [diameter]="'20px'" [height]="'3px'"></ngx-loading-bar>
     <div class="loading-overlay" *ngIf="loading">
       <!--<div class="loader">-->
         <!--<span class="loader-stick"></span>-->
