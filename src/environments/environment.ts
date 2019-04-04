@@ -3,6 +3,7 @@ const hostname = 'localhost';
 
 export const environment = {
   production: false,
+  hostname: hostname,
   API_URL: `${protocol}://${hostname}:8765`,
   PLUGIN_URL: `${protocol}://${hostname}/assets/plugin/dist/js/bundle.js`,
   grantType: 'password',

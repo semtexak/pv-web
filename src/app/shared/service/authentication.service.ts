@@ -18,6 +18,7 @@ export class AuthenticationService extends HttpService {
   private grantType = environment.grantType;
   private clientId = environment.clientId;
   private clientSecret = environment.clientSecret;
+  private domain = environment.hostname;
 
   private static mapUser(userData: User) {
     const user = new User();
@@ -102,7 +103,7 @@ export class AuthenticationService extends HttpService {
   private saveToken(token: IToken) {
     const current = new Date();
     const expiresAt = new Date(current.getTime() + (token.expires_in * 1000));
-    this.cookieService.set('act', token.access_token, expiresAt, '/');
+    this.cookieService.set('act', token.access_token, expiresAt, '/', `.${this.domain}`);
     console.log('Saving token', token.access_token);
     console.log(this.getToken());
   }
