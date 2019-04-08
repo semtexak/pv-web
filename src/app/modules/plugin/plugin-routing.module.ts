@@ -10,18 +10,18 @@ import {OrderStatusComponent} from './page/application/order-status/order-status
 import {ServicesComponent} from './page/application/services/services.component';
 
 const routes: Routes = [
-  {
-    path: 'sign-in',
-    component: SignInComponent
-  },
-  {
-    path: 'sign-up',
-    component: SignUpComponent
-  },
+  // {
+  //   path: 'sign-in',
+  //   component: SignInComponent
+  // },
+  // {
+  //   path: 'sign-up',
+  //   component: SignUpComponent
+  // },
   {
     path: 'app/:appId',
     component: ApplicationComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     data: {redirectUrl: '/plugin/sign-in'},
     children: [
       {

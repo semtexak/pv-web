@@ -8,81 +8,86 @@
         <!--<span class="loader-stick"></span>-->
       <!--</div>-->
     </div>
-    <header>
-      <div class="client">
-        <!--<pv-alert></pv-alert>-->
-        <img *ngIf="application" class="client__logo"
-             src="http://localhost:8765/client-service/applications/img/{{application.appId}}.png"
-             alt="{{application.name}}">
-      </div>
-      <div class="user">
-        <div class="col-md-12 col-sm-12 text-center">
-          <h2 class="user__name">{{user?.name}}
-            <small class="user__logout" (click)="logout()">(<a>Odhlásit</a>)</small>
-          </h2>
+    <ng-container *ngIf="user">
+      <header>
+        <div class="client">
+          <!--<pv-alert></pv-alert>-->
+          <img *ngIf="application?.image" class="client__logo"
+               src="http://localhost:8765/client-service/applications/img/{{application.image}}"
+               alt="{{application.name}}">
         </div>
-      </div>
-    </header>
-    <section class="payment payment--stretch">
-      <div class="cart__toggler" [ngClass]="{'cart__toggler--inside': cartToggle}" (click)="cartToggle = !cartToggle">
-        <span class="fas fa-shopping-cart">
-          <span class="notification__badge new">{{totalProducts}}</span>
-        </span>
-      </div>
-      <div class="payment__cart payment--stretch" [ngClass]="{'payment__cart--empty': isCartEmpty}">
-        <ng-container *ngIf="isCartEmpty">
-          Vaše objednávka zatím neobsahuje žádnou položku.
-        </ng-container>
-        <pv-cart (onChange)="onCartChanged($event)" [compactMode]="true"></pv-cart>
-      </div>
-      <div class="payment__form">
-        <form [formGroup]="form">
-          <div class="form-group form-check mt-2"
-               [ngClass]="{'has-error':form.controls['use-remembered-card'].invalid && form.controls['use-remembered-card'].dirty}">
-            <input type="checkbox" name="use-remembered-card" id="use-remembered-card" class=""
-                   [formControl]="form.controls['use-remembered-card']">
-            <label for="use-remembered-card" class="form-check-label">
-              Použít mou zapamatovanou kartu
-            </label>
+        <div class="user">
+          <div class="col-md-12 col-sm-12 text-center">
+            <h2 class="user__name">{{user?.name}}
+              <small class="user__logout" (click)="logout()">(<a>Odhlásit</a>)</small>
+            </h2>
           </div>
-          <!-- <div class="form-group form-check mt-2"
-               [ngClass]="{'has-error':form.controls['auto-renew'].invalid && form.controls['auto-renew'].dirty}">
-            <input type="checkbox" name="auto-renew" id="auto-renew" class=""
-                   [formControl]="form.controls['auto-renew']">
-            <label for="auto-renew" class="form-check-label">
-              Obnova
-            </label>
-          </div> -->
-          <div class="form-group mb-0">
-            <button class="btn btn-success btn-gradient btn-gradient--success btn-lg btn-full order-submit"
-                    [hidden]="!order || order?.status !== OrderStatus.PAID"
-                    [disabled]="formDisabled || (order && order.status === OrderStatus.PAID)">Zaplaceno
-            </button>
-            <button (click)="proceedToPayment()"
-                    class="btn btn-success btn-gradient btn-gradient--success btn-lg btn-full order-submit"
-                    [hidden]="!order || order?.status === OrderStatus.PAID"
-                    [disabled]="formDisabled || (order && order.status === OrderStatus.PAID)">K platební bráně
-            </button>
-            <!--<button (click)="onCreateOrder()"-->
-                    <!--class="btn btn-success btn-gradient btn-gradient&#45;&#45;success btn-lg btn-full order-submit"-->
-                    <!--[hidden]="!newOrder || order" [disabled]="formDisabled">Zaplatit:-->
-              <!--{{newOrder.price.amount|price:newOrder.price.currency}}-->
-            <!--</button>-->
-            <pv-loading-button
-              (onClick)="onCreateOrder()"
-              [hidden]="!newOrder || order"
-              [class]="'btn btn-success btn-gradient btn-gradient--success btn-lg btn-full order-submit'"
-              [disabled]="formDisabled"
-              [loading]="loading"
-              [value]="'Zaplatit: ' + newOrder.price.amount|price:newOrder.price.currency"
-            ></pv-loading-button>
-          </div>
-        </form>
-      </div>
-    </section>
-    <!--<footer class="text-center">-->
-    <!--<p class="mb-0">Více o službě <a href="http://payvont.com" target="_blank">Payvont</a>.</p>-->
-    <!--</footer>-->
+        </div>
+      </header>
+      <section class="payment payment--stretch">
+        <div class="cart__toggler" [ngClass]="{'cart__toggler--inside': cartToggle}" (click)="cartToggle = !cartToggle">
+          <span class="fas fa-shopping-cart">
+            <span class="notification__badge new">{{totalProducts}}</span>
+          </span>
+        </div>
+        <div class="payment__cart payment--stretch" [ngClass]="{'payment__cart--empty': isCartEmpty}">
+          <ng-container *ngIf="isCartEmpty">
+            Vaše objednávka zatím neobsahuje žádnou položku.
+          </ng-container>
+          <pv-cart (onChange)="onCartChanged($event)" [compactMode]="true"></pv-cart>
+        </div>
+        <div class="payment__form">
+          <form [formGroup]="form">
+            <div class="form-group form-check mt-2"
+                 [ngClass]="{'has-error':form.controls['use-remembered-card'].invalid && form.controls['use-remembered-card'].dirty}">
+              <input type="checkbox" name="use-remembered-card" id="use-remembered-card" class=""
+                     [formControl]="form.controls['use-remembered-card']">
+              <label for="use-remembered-card" class="form-check-label">
+                Použít mou zapamatovanou kartu
+              </label>
+            </div>
+            <!-- <div class="form-group form-check mt-2"
+                 [ngClass]="{'has-error':form.controls['auto-renew'].invalid && form.controls['auto-renew'].dirty}">
+              <input type="checkbox" name="auto-renew" id="auto-renew" class=""
+                     [formControl]="form.controls['auto-renew']">
+              <label for="auto-renew" class="form-check-label">
+                Obnova
+              </label>
+            </div> -->
+            <div class="form-group mb-0">
+              <button class="btn btn-success btn-gradient btn-gradient--success btn-lg btn-full order-submit"
+                      [hidden]="!order || order?.status !== OrderStatus.PAID"
+                      [disabled]="formDisabled || (order && order.status === OrderStatus.PAID)">Zaplaceno
+              </button>
+              <button (click)="proceedToPayment()"
+                      class="btn btn-success btn-gradient btn-gradient--success btn-lg btn-full order-submit"
+                      [hidden]="!order || order?.status === OrderStatus.PAID"
+                      [disabled]="formDisabled || (order && order.status === OrderStatus.PAID)">K platební bráně
+              </button>
+              <!--<button (click)="onCreateOrder()"-->
+                      <!--class="btn btn-success btn-gradient btn-gradient&#45;&#45;success btn-lg btn-full order-submit"-->
+                      <!--[hidden]="!newOrder || order" [disabled]="formDisabled">Zaplatit:-->
+                <!--{{newOrder.price.amount|price:newOrder.price.currency}}-->
+              <!--</button>-->
+              <pv-loading-button
+                (onClick)="onCreateOrder()"
+                [hidden]="!newOrder || order"
+                [class]="'btn btn-success btn-gradient btn-gradient--success btn-lg btn-full order-submit'"
+                [disabled]="formDisabled"
+                [loading]="loading"
+                [value]="'Zaplatit: ' + newOrder.price.amount|price:newOrder.price.currency"
+              ></pv-loading-button>
+            </div>
+          </form>
+        </div>
+      </section>
+      <!--<footer class="text-center">-->
+      <!--<p class="mb-0">Více o službě <a href="http://payvont.com" target="_blank">Payvont</a>.</p>-->
+      <!--</footer>-->
+    </ng-container>
+    <!--<ng-template #notLogged>-->
+      <!--<pv-sign-in></pv-sign-in>-->
+    <!--</ng-template>-->
   </div>
   <div class="plugin-content side side--right">
     <!--<button (click)="sendMessage('sm')">SM</button>-->
