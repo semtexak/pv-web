@@ -14,6 +14,7 @@ import {Price} from '../../../../shared/model/base/price';
 import {WindowService} from 'src/app/shared/service/window.service';
 import {interval, Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'pv-application',
@@ -33,6 +34,7 @@ export class ApplicationComponent implements OnInit {
   OrderStatus = Status;
   totalProducts: number;
   cartToggle = false;
+  baseUrl = environment.basePluginImagePath;
 
   loading = false;
 

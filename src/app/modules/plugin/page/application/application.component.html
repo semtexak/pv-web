@@ -13,7 +13,7 @@
         <div class="client">
           <!--<pv-alert></pv-alert>-->
           <img *ngIf="application?.image" class="client__logo"
-               src="http://localhost:8765/client-service/applications/img/{{application.image}}"
+               src="{{baseUrl}}:8765/client-service/applications/img/{{application.image}}"
                alt="{{application.name}}">
         </div>
         <div class="user">

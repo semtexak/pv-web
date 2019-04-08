@@ -1,11 +1,14 @@
 const protocol = 'http';
 const hostname = 'localhost';
+const pluginHostname = 'payvont.local.com';
+const pluginPort = '8080';
 
 export const environment = {
   production: false,
+  basePluginImagePath: `${protocol}://${hostname}:4200`,
   hostname: hostname,
   API_URL: `${protocol}://${hostname}:8765`,
-  PLUGIN_URL: `${protocol}://${hostname}/assets/plugin/dist/js/bundle.js`,
+  PLUGIN_URL: `${protocol}://${pluginHostname}:${pluginPort}/assets/plugin/dist/js/bundle.js`,
   grantType: 'password',
   clientId: 'test',
   clientSecret: 'secret',
