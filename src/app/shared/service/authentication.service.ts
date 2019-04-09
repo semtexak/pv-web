@@ -125,13 +125,25 @@ export class AuthenticationService extends HttpService {
   public logout(): Observable<boolean> {
     return this.logoutBackend().pipe(
       switchMap(() => {
-        this.cookieService.delete('act', '/');
+        if (this.domain === 'localhost') {
+          this.cookieService.delete('act', '/');
+        } else {
+          this.cookieService.delete('act', '/', `.${this.domain}`);
+        }
         localStorage.removeItem('udata');
         this.loggedUser.next(null);
         return of(true);
       }),
       catchError(error => {
         console.log(error);
+
+        if (this.domain === 'localhost') {
+          this.cookieService.delete('act', '/');
+        } else {
+          this.cookieService.delete('act', '/', `.${this.domain}`);
+        }
+        localStorage.removeItem('udata');
+        this.loggedUser.next(null);
         return of(false);
       })
     );
