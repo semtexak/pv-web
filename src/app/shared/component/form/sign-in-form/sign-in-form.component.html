@@ -1,0 +1,66 @@
+<div [ngClass]="boxClass">
+  <header>
+    <h2>Přihlášení</h2>
+  </header>
+  <div class="box-inner">
+    <form [formGroup]="form" (submit)="onSubmit(form.value)">
+      <div class="form-group validate" [ngClass]="{'has-error':form.get('username').invalid && form.get('username').dirty}">
+        <label for="email">E-mail</label>
+        <input class="form-control" #username id="email" placeholder="jan.novak@email.cz" type="email" [formControl]="form.get('username')">
+        <div class="validation-message" *ngIf="form.get('username').invalid && form.get('username').dirty">
+                <span *ngIf="form.get('username').hasError('required')">
+                   <span>Pole není vyplněno.</span>
+                </span>
+          <span *ngIf="!form.get('username').hasError('required')">
+                   <span *ngIf="form.get('username').hasError('pattern')">Pole není ve tvaru platné e-mailové adresy.</span>
+                </span>
+        </div>
+      </div>
+      <div class="form-group validate" [ngClass]="{'has-error':form.get('password').invalid && form.get('password').dirty}">
+        <label for="password">Heslo</label>
+        <input class="form-control" #password.
+               id="password" placeholder="Heslo" type="password" [formControl]="form.get('password')">
+        <div class="validation-message" *ngIf="form.get('password').invalid && form.get('password').dirty">
+          <span *ngIf="form.get('password').hasError('required')">Pole není vyplněno.</span>
+        </div>
+      </div>
+      <div class="form-group form-check">
+        <div class="row">
+          <div class="col-12 text-right">
+            <a class="text-small" routerLink="/uzivatel/zapomenute-heslo" target="_blank">Zapomenuté heslo?</a>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <pv-loading-button
+          [loading]="loading"
+          [class]="'btn btn-primary btn-gradient btn-lg btn-full'"
+          [value]="'Přihlásit'"
+        ></pv-loading-button>
+      </div>
+      <div class="form-group">
+        <div class="social-media-divider">
+          <span>nebo</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-6">
+            <a class="btn btn-secondary facebook btn-md btn-full">
+              facebook
+            </a>
+          </div>
+          <div class="col-6">
+            <a class="btn btn-secondary google btn-md btn-full">
+              Google+
+            </a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <footer class="text-center">
+    <p class="mb-0" *ngIf="!plugin">Nemáte účet? <a routerLink="../registrace" [queryParams]="{redirect: redirectUrl}">Zaregistrujte se</a>.</p>
+    <p class="mb-0" *ngIf="plugin">Nemáte účet? <a (click)="goToSignUpPage()">Zaregistrujte se</a>.</p>
+  </footer>
+</div>
