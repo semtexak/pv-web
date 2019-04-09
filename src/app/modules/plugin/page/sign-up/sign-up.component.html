@@ -1,57 +1,10 @@
 <section class="">
   <div class="container-fluid">
     <div class="row">
-      <div class="box box__plugin-login col-12 col-sm-4 p-4">
-        <header>
-          <h2>Registrace</h2>
-        </header>
-        <div class="box-inner">
-          <form [formGroup]="form" (submit)="onSubmit(form.value)">
-            <div class="form-group" [ngClass]="{'has-error':form.get('email').invalid && form.get('email').dirty}">
-              <label for="email">E-mail</label>
-              <input class="form-control" id="email" placeholder="jan.novak@email.cz" type="email" [formControl]="form.get('email')">
-              <div class="validation-message" *ngIf="form.get('email').invalid && form.get('email').dirty">
-                <span *ngIf="form.get('email').hasError('required')">
-                   <span>Pole není vyplněno.</span>
-                </span>
-                <span *ngIf="!form.get('email').hasError('required')">
-                   <span *ngIf="form.get('email').hasError('pattern')">Pole není ve tvaru platné e-mailové adresy.</span>
-                </span>
-              </div>
-            </div>
-            <div class="form-group" [ngClass]="{'has-error':form.get('password').invalid && form.get('password').dirty}">
-              <label for="password">Heslo</label>
-              <input class="form-control" id="password" placeholder="Heslo" type="password" [formControl]="form.get('password')">
-              <div class="validation-message" *ngIf="form.get('password').invalid && form.get('password').dirty">
-                <span *ngIf="form.get('password').hasError('required')">Pole není vyplněno.</span>
-                <span *ngIf="!form.get('password').hasError('required')">
-                   <span *ngIf="form.get('password').hasError('minlength')">Heslo musí obsahovat alespoň 8 znaků.</span>
-                </span>
-              </div>
-            </div>
-            <div class="form-group" [ngClass]="{'has-error':form.get('passwordConfirm').invalid && form.get('passwordConfirm').dirty}">
-              <label for="password_verification">Heslo znovu</label>
-              <input class="form-control" id="password_verification" placeholder="Heslo" type="password" [formControl]="form.get('passwordConfirm')">
-              <div class="validation-message" *ngIf="form.get('passwordConfirm').invalid && form.get('passwordConfirm').dirty">
-                <span *ngIf="form.get('passwordConfirm').hasError('required')">Pole není vyplněno.</span>
-                <span *ngIf="form.get('passwordConfirm').hasError('matchFields')">Hesla nesouhlasí.</span>
-              </div>
-            </div>
-            <div class="form-group form-check">
-              <input id="agreement" name="agreement" type="checkbox">
-              <label class="form-check-label" for="agreement">
-                Souhlasím s <a href="#!">podmínkami</a>.
-              </label>
-            </div>
-            <div class="form-group">
-              <button class="btn btn-primary btn-gradient btn-lg btn-full" type="submit" [disabled]="form.invalid">Registrovat</button>
-            </div>
-          </form>
-        </div>
-        <footer class="text-center">
-          <p class="mb-0">Máte již účet? <a routerLink="/plugin/sign-in" [queryParams]="{redirect: redirectUrl}">Přihlašte se</a>.</p>
-        </footer>
+      <div class="col-12 col-sm-4 mr-auto ml-auto">
+        <pv-sign-up-form [boxClass]="'box box__login box--centered'"></pv-sign-up-form>
       </div>
     </div>
   </div>
 </section>
+

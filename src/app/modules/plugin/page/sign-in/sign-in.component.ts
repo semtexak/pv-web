@@ -26,27 +26,27 @@ export class SignInComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private formBuilder: FormBuilder) {
-    this.form = this.formBuilder.group({
-      'username': [null, Validators.compose([Validators.pattern('^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$'), Validators.required])],
-      'password': [null, Validators.required]
-    });
+    // this.form = this.formBuilder.group({
+    //   'username': [null, Validators.compose([Validators.pattern('^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$'), Validators.required])],
+    //   'password': [null, Validators.required]
+    // });
     this.sendMessage();
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(queryParams => {
-      const redirect = queryParams['redirect'];
-      if (redirect) {
-        this.redirectUrl = redirect;
-      }
-      const login = queryParams['e'];
-      this.form.get('username').setValue(login);
-      if (login) {
-        this.passwordInput.nativeElement.focus();
-      } else {
-        this.usernameInput.nativeElement.focus();
-      }
-    });
+    // this.route.queryParams.subscribe(queryParams => {
+    //   const redirect = queryParams['redirect'];
+    //   if (redirect) {
+    //     this.redirectUrl = redirect;
+    //   }
+    //   const login = queryParams['e'];
+    //   this.form.get('username').setValue(login);
+    //   if (login) {
+    //     this.passwordInput.nativeElement.focus();
+    //   } else {
+    //     this.usernameInput.nativeElement.focus();
+    //   }
+    // });
   }
 
   sendMessage() {
@@ -57,33 +57,33 @@ export class SignInComponent implements OnInit {
   }
 
 
-  onSubmit(data: ISingInForm): void {
-    if (this.form.valid) {
-      this.loading = true;
-      this.authenticationService.authenticate(data).subscribe(() => {
-        console.log(`Redirecting to: ${this.redirectUrl}`);
-          this.loading = false;
-          this.router.navigateByUrl(this.redirectUrl);
-        },
-        error => {
-          if (error instanceof HttpErrorResponse) {
-            if (!error.error.error_description) {
-              this.alertService.error('Vyskytla se neznámá chyba. Prosím, opakujte akci pozdějí.');
-            } else {
-              if (error.error.error_description.includes('disabled')) {
-                this.alertService.warning('Uživatel nebyl aktivován, nejprve proveďte aktivaci.');
-              } else if (error.error.error_description.includes('locked')) {
-                this.alertService.error('Uživatel byl zablokován.');
-              } else if (error.error.error_description.includes('credentials')) {
-                this.alertService.error('Špatná kombinace jména a hesla.');
-              } else {
-                this.alertService.error('Vyskytla se chyba.');
-              }
-            }
-          }
-          this.loading = false;
-          console.log(error);
-        });
-    }
-  }
+  // onSubmit(data: ISingInForm): void {
+  //   if (this.form.valid) {
+  //     this.loading = true;
+  //     this.authenticationService.authenticate(data).subscribe(() => {
+  //       console.log(`Redirecting to: ${this.redirectUrl}`);
+  //         this.loading = false;
+  //         this.router.navigateByUrl(this.redirectUrl);
+  //       },
+  //       error => {
+  //         if (error instanceof HttpErrorResponse) {
+  //           if (!error.error.error_description) {
+  //             this.alertService.error('Vyskytla se neznámá chyba. Prosím, opakujte akci pozdějí.');
+  //           } else {
+  //             if (error.error.error_description.includes('disabled')) {
+  //               this.alertService.warning('Uživatel nebyl aktivován, nejprve proveďte aktivaci.');
+  //             } else if (error.error.error_description.includes('locked')) {
+  //               this.alertService.error('Uživatel byl zablokován.');
+  //             } else if (error.error.error_description.includes('credentials')) {
+  //               this.alertService.error('Špatná kombinace jména a hesla.');
+  //             } else {
+  //               this.alertService.error('Vyskytla se chyba.');
+  //             }
+  //           }
+  //         }
+  //         this.loading = false;
+  //         console.log(error);
+  //       });
+  //   }
+  // }
 }

@@ -25,6 +25,8 @@ import { LoadingButtonComponent } from './component/loading-button/loading-butto
 import {LoadingBarModule} from '@ngx-loading-bar/core';
 import {LoadingBarRouterModule} from '@ngx-loading-bar/router';
 import {LoadingBarHttpClientModule} from '@ngx-loading-bar/http-client';
+import {SignInFormComponent} from './component/form/sign-in-form/sign-in-form.component';
+import { SignUpFormComponent } from './component/form/sign-up-form/sign-up-form.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -54,9 +56,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DropdownToggleDirective,
     CartComponent,
     CartItemComponent,
+    SignInFormComponent,
+    SignUpFormComponent,
     EditorDirective,
     TableComponent,
     LoadingButtonComponent,
+    SignUpFormComponent,
   ],
   providers: [
     CookieService,
@@ -79,6 +84,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TabsComponent,
     TabComponent,
     CartComponent,
+    SignInFormComponent,
+    SignUpFormComponent,
     CartItemComponent,
     TableComponent,
     EditorDirective,

@@ -7,6 +7,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CartService} from '../../../../../../shared/service/cart.service';
 import {CartItem} from '../../../../../../shared/model/base/cart-item';
 import {ProductType} from '../../../../../../shared/model/base/i-order';
+import {AuthenticationService} from '../../../../../../shared/service/authentication.service';
+import {User} from '../../../../../../shared/model/user';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'pv-donation',
@@ -18,9 +21,11 @@ export class DonationComponent implements OnInit {
   form: FormGroup;
   select: boolean;
   donationConfiguration: any;
-  customPrice: number = 0;
+  isLogged: boolean = false;
+  // customPrice: number = 0;
 
-  constructor(private router: Router,
+  constructor(private authenticationService: AuthenticationService,
+              private router: Router,
               private route: ActivatedRoute,
               private _location: Location,
               private formBuilder: FormBuilder,
@@ -35,6 +40,7 @@ export class DonationComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.select = params['select'] !== undefined;
     });
+    this.authenticationService.loggedUser.pipe(map((user: User) => !(user === undefined || user === null))).subscribe((isLogged: boolean) => this.isLogged = isLogged);
     this.applicationContextService.application.subscribe((app: IApplication) => {
       this.application = app;
 

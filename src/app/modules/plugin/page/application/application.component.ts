@@ -28,6 +28,7 @@ export class ApplicationComponent implements OnInit {
   user: User;
   form: FormGroup;
   isCartEmpty: boolean = true;
+  stayOnSamePageAfterLogin: boolean = true;
   newOrder: {
     price: Price
   };
@@ -35,7 +36,7 @@ export class ApplicationComponent implements OnInit {
   totalProducts: number;
   cartToggle = false;
   baseUrl = environment.basePluginImagePath;
-
+  showLogin = true;
   loading = false;
 
   constructor(private route: ActivatedRoute,
@@ -131,7 +132,9 @@ export class ApplicationComponent implements OnInit {
 
   logout(): void {
     this.authenticationService.logout().subscribe(() => {
-        this.router.navigate(['/plugin/sign-in'], {queryParams: {redirect: this.route.snapshot['_routerState'].url}});
+        if (!this.stayOnSamePageAfterLogin) {
+          this.router.navigate(['/plugin/sign-in'], {queryParams: {redirect: this.route.snapshot['_routerState'].url}});
+        }
       },
       error => {
         console.log(error);

@@ -103,7 +103,12 @@ export class AuthenticationService extends HttpService {
   private saveToken(token: IToken) {
     const current = new Date();
     const expiresAt = new Date(current.getTime() + (token.expires_in * 1000));
-    this.cookieService.set('act', token.access_token, expiresAt, '/', `.${this.domain}`);
+    console.log('act', token.access_token, expiresAt, '/', `.${this.domain}`);
+    if (this.domain === 'localhost') {
+      this.cookieService.set('act', token.access_token, expiresAt, '/');
+    } else {
+      this.cookieService.set('act', token.access_token, expiresAt, '/', `.${this.domain}`);
+    }
     console.log('Saving token', token.access_token);
     console.log(this.getToken());
   }

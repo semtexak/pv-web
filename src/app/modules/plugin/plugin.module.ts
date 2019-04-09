@@ -10,6 +10,8 @@ import { DonationComponent } from './page/application/services/donation/donation
 import { SubscriptionComponent } from './page/application/services/subscription/subscription.component';
 import { OrderStatusComponent } from './page/application/order-status/order-status.component';
 import { ServicesComponent } from './page/application/services/services.component';
+import { SideComponent } from './page/side/side.component';
+import { PayComponent } from './page/side/pay/pay.component';
 
 @NgModule({
   imports: [
@@ -17,6 +19,6 @@ import { ServicesComponent } from './page/application/services/services.componen
     PluginRoutingModule,
     SharedModule
   ],
-  declarations: [SignInComponent, SignUpComponent, ApplicationComponent, DonationComponent, SubscriptionComponent, OrderStatusComponent, ServicesComponent]
+  declarations: [SignInComponent, SignUpComponent, ApplicationComponent, DonationComponent, SubscriptionComponent, OrderStatusComponent, ServicesComponent, SideComponent, PayComponent]
 })
 export class PluginModule { }

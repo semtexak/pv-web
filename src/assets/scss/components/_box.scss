@@ -3,10 +3,8 @@
 
 .box {
   background-color: #fff;
-  -webkit-box-shadow: 0 5px 10px 0 rgba(0,0,0,.15);
-  box-shadow: 0 5px 10px 0 rgba(0,0,0,.15);
 
-  &.box--login, &.box--activate, &.box__plugin-login {
+  &.box__login, &.box__activate {
 
     header h2 {
       text-align: center;
@@ -41,20 +39,26 @@
     }
   }
 
-  &.box--login, &.box--activate {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  &.box--activate {
+  &.box__activate {
     header h2 {
       margin-bottom: 1rem;
     }
   }
 
-  &.box__plugin-login {
+  &.box__login {
     width: 100%;
-    max-width: 310px;
-    min-width: 310px;
+    max-width: $box-login-width * 1px;
+    min-width: $box-login-width * 1px;
+    padding: 1.5rem;
+  }
+
+  &.box--centered {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &.box--shadow {
+    -webkit-box-shadow: 0 5px 10px 0 rgba(0,0,0,.15);
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,.15);
   }
 }

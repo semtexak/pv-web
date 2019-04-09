@@ -3,11 +3,11 @@
   <h1 class="payment__heading payment__heading--gradient">Podpořte nás, prosím.</h1>
 </header>
 <section class="payment__content p-4">
-  <div class="content-stretch content-stretch--center" *ngIf="!select">
+  <div class="content content--stretch content--center" *ngIf="!select">
     <p>Chtěli byste nás finančně podpořit? <br /> Nabízíme možnost jak <strong>jednorázového</strong>, tak i <strong>opakovaného</strong> příspěvku.</p>
     <h2>Předem děkujeme za jakýkoliv finanční příspěvek.</h2>
   </div>
-  <div class="content-stretch content-stretch--center" *ngIf="select">
+  <div class="content content--stretch content--center" [ngClass]="{'content--disabled': !isLogged}" *ngIf="select">
     <form class="form-horizontal" [formGroup]="form" novalidate *ngIf="donationConfiguration">
       <div class="products">
         <div class="product__section">

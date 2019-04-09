@@ -8,7 +8,7 @@
         <!--<span class="loader-stick"></span>-->
       <!--</div>-->
     </div>
-    <ng-container *ngIf="user">
+    <ng-container *ngIf="user; else notLogged">
       <header>
         <div class="client">
           <!--<pv-alert></pv-alert>-->
@@ -65,7 +65,7 @@
                       [disabled]="formDisabled || (order && order.status === OrderStatus.PAID)">K platební bráně
               </button>
               <!--<button (click)="onCreateOrder()"-->
-                      <!--class="btn btn-success btn-gradient btn-gradient&#45;&#45;success btn-lg btn-full order-submit"-->
+                      <!--class="btn btn-success btn-gradient btn-gradient--success btn-lg btn-full order-submit"-->
                       <!--[hidden]="!newOrder || order" [disabled]="formDisabled">Zaplatit:-->
                 <!--{{newOrder.price.amount|price:newOrder.price.currency}}-->
               <!--</button>-->
@@ -85,9 +85,14 @@
       <!--<p class="mb-0">Více o službě <a href="http://payvont.com" target="_blank">Payvont</a>.</p>-->
       <!--</footer>-->
     </ng-container>
-    <!--<ng-template #notLogged>-->
-      <!--<pv-sign-in></pv-sign-in>-->
-    <!--</ng-template>-->
+    <ng-template #notLogged>
+      <ng-container *ngIf="showLogin; else register">
+        <pv-sign-in-form [plugin]="true" [stayOnSamePageAfterLogin]="stayOnSamePageAfterLogin" (onNavigate)="showLogin = false" [boxClass]="'box box__login'"></pv-sign-in-form>
+      </ng-container>
+      <ng-template #register>
+        <pv-sign-up-form [plugin]="true" [stayOnSamePageAfterLogin]="stayOnSamePageAfterLogin" (onNavigate)="showLogin = true" [boxClass]="'box box__login'"></pv-sign-up-form>
+      </ng-template>
+    </ng-template>
   </div>
   <div class="plugin-content side side--right">
     <!--<button (click)="sendMessage('sm')">SM</button>-->

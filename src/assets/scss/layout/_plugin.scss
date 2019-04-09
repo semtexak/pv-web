@@ -21,7 +21,7 @@ body.plugin {
 
       &.side--left {
         position: relative;
-        width: 300px;
+        width: $box-login-width * 1px;
         transition: transform .2s ease;
 
         &.active {

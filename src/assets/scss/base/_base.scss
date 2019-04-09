@@ -11,10 +11,23 @@ body {
   margin-bottom: $footer-height;
 }
 
-a, a:focus, a:hover, a:active {
-  outline: 0;
-  cursor: pointer;
+a, a:not([href]):not([tabindex]) {
+  color: $link-color;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &:not([href]):not([tabindex]):hover,
+  &:not([href]):not([tabindex]):focus,
+  &:not([href]):not([tabindex]):active {
+    color: $link-hover-color;
+    text-decoration: underline;
+    outline: 0;
+    cursor: pointer;
+  }
 }
+
+
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
