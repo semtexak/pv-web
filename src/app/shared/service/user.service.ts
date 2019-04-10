@@ -34,8 +34,13 @@ export class UserService extends HttpService {
           console.log('Calling authentication method.');
           return this.authenticationService.authenticate({username: form.email, password: form.password}).pipe(
             switchMap(() => {
-              console.log('Autologin redirect to:', redirectUri);
-              return this.router.navigateByUrl(redirectUri);
+              if (redirectUri === '') {
+                console.log('Autologin redirect is undefined, exit.');
+                return of(false);
+              } else {
+                console.log('Autologin redirect to:', redirectUri);
+                return this.router.navigateByUrl(redirectUri);
+              }
             })
           );
         }),

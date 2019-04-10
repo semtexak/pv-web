@@ -52,6 +52,7 @@ export class SignUpFormComponent implements OnInit {
   }
 
   onSubmit(form: ISingUpForm): void {
+    console.log(`Redirect url is: ${this.redirectUrl}`);
     this.userService.registerUser(form, this.redirectUrl).subscribe(data => {
       // this.router.navigateByUrl(this.redirectUrl).then(value => {
       //   this.alertService.success('Registrace proběhla úspěšně. Na e-mail vám byly zaslány <strong>informace k aktivaci</strong> účtu.');

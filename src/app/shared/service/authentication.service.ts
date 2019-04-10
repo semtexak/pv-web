@@ -65,14 +65,11 @@ export class AuthenticationService extends HttpService {
     console.log('SaveUser()');
     return this.getUserData().pipe(
       switchMap((userData: User) => {
-        console.log('AAA');
         const user = AuthenticationService.mapUser(userData);
-        console.log(`User received: ${userData.email}`);
         localStorage.setItem('udata', JSON.stringify(user));
         this.loggedUser.next(user);
         return this.getUserApplications(user.id).pipe(
           map(applications => {
-            console.log(applications);
             const userTmp = this.loggedUser.getValue();
             userTmp.applications = applications;
             this.loggedUser.next(userTmp);

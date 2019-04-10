@@ -10,6 +10,7 @@ import {ProductType} from '../../../../../../shared/model/base/i-order';
 import {AuthenticationService} from '../../../../../../shared/service/authentication.service';
 import {User} from '../../../../../../shared/model/user';
 import {map} from 'rxjs/operators';
+import {WindowService} from '../../../../../../shared/service/window.service';
 
 @Component({
   selector: 'pv-donation',
@@ -28,6 +29,7 @@ export class DonationComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private _location: Location,
+              private w: WindowService,
               private formBuilder: FormBuilder,
               private cartService: CartService,
               private applicationContextService: ApplicationContextService) {
@@ -94,6 +96,12 @@ export class DonationComponent implements OnInit {
   };
 
   goBack() {
+  }
+
+  sendCloseMessage() {
+    if (this.w.nativeWindow['parentIFrame']) {
+      this.w.nativeWindow['parentIFrame'].sendMessage({action: 'close'});
+    }
   }
 
 }

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { OrderService } from '../../../../../shared/service/order.service';
 import { IOrder, Status } from '../../../../../shared/model/base/i-order';
 import { ApplicationContextService } from '../../../service/application-context.service';
+import {WindowService} from '../../../../../shared/service/window.service';
 
 @Component({
   selector: 'pv-order-status',
@@ -14,6 +15,7 @@ export class OrderStatusComponent implements OnInit {
   OrderStatus = Status;
 
   constructor(private route: ActivatedRoute,
+    private w: WindowService,
     private orderService: OrderService,
     private applicationContext: ApplicationContextService) {
   }
@@ -44,4 +46,9 @@ export class OrderStatusComponent implements OnInit {
     });
   }
 
+  sendCloseMessage() {
+    if (this.w.nativeWindow['parentIFrame']) {
+      this.w.nativeWindow['parentIFrame'].sendMessage({action: 'close'});
+    }
+  }
 }
