@@ -1,4 +1,4 @@
-const protocol = 'https';
+const protocol = 'http';
 const hostname = 'payvont.com';
 
 export const environment = {
