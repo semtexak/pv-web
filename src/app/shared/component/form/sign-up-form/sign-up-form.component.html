@@ -47,6 +47,6 @@
   </div>
   <footer class="text-center">
     <p class="mb-0" *ngIf="!plugin">Máte již účet? <a routerLink="../prihlaseni" [queryParams]="{redirect: redirectUrl}">Přihlašte se</a>.</p>
-    <p class="mb-0" *ngIf="plugin">Máte již účet? <a routerLink="" (click)="goToSignInPage()">Přihlašte se</a>.</p>
+    <p class="mb-0" *ngIf="plugin">Máte již účet? <a (click)="goToSignInPage()">Přihlašte se</a>.</p>
   </footer>
 </div>
