@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {IPageDonation} from '../../../../shared/model/page/i-page-donation';
 import {DonationService} from '../../../../shared/service/donation.service';
 import {LazyLoadEvent} from 'primeng/api';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'pv-donations',
@@ -20,6 +21,7 @@ export class DonationsComponent {
   cols = [];
   filter: Map<string, any> = new Map();
   sort = null;
+  baseUrl = environment.basePluginImagePath;
 
   constructor(private donationService: DonationService) {
     this.cols = [

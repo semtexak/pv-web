@@ -20,8 +20,9 @@ export class ServicesComponent implements OnInit {
     this.applicationContextService.application.subscribe(app => {
       this.application = app;
       if (app && app.configurations.length > 0) {
-        if (app.configurations.length === 1) {
-          this.selectService(app.configurations[0].type);
+        const active = app.configurations.filter(config => config.active);
+        if (active.length === 1) {
+          this.selectService(active[0].type);
         }
       }
     });

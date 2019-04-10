@@ -1,6 +1,12 @@
 @import "../abstracts/variables";
 @import "../components/input";
 
+form {
+  p {
+    @include rem-fallback(font-size, 11);
+  }
+}
+
 .form-group {
   position: relative;
 

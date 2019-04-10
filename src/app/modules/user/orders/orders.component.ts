@@ -4,6 +4,7 @@ import {OrderService} from '../../../shared/service/order.service';
 import {LazyLoadEvent} from 'primeng/api';
 import {Service} from '../../../shared/model/base/i-application';
 import {IProduct, ProductType} from '../../../shared/model/base/i-order';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'pv-orders',
@@ -27,6 +28,7 @@ export class OrdersComponent {
     automaticRenew: [],
     status: []
   };
+  baseUrl = environment.basePluginImagePath;
 
   constructor(private orderService: OrderService) {
     this.cols = [

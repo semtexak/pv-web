@@ -11,15 +11,12 @@ body {
   margin-bottom: $footer-height;
 }
 
-a, a:not([href]):not([tabindex]) {
+a {
   color: $link-color;
 
   &:hover,
   &:focus,
-  &:active,
-  &:not([href]):not([tabindex]):hover,
-  &:not([href]):not([tabindex]):focus,
-  &:not([href]):not([tabindex]):active {
+  &:active {
     color: $link-hover-color;
     text-decoration: underline;
     outline: 0;

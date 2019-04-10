@@ -35,7 +35,12 @@
       </ng-template>
       <ng-template pTemplate="body" let-row>
         <tr>
-          <td><img class="client__logo" src="https://localhost:8765/client-service/applications/img/{{row.application.appId}}.png" alt="{{row.application.name}}">{{row.application.name}}</td>
+          <td>
+            <img *ngIf="row.application?.image" class="client__logo"
+                 src="{{baseUrl}}:8765/client-service/applications/img/{{row.application.image}}"
+                 alt="{{row.application.image}}">{{row.application.name}}
+            <!--<img class="client__logo" src="https://localhost:8765/client-service/applications/img/{{row.application.appId}}.png" alt="{{row.application.name}}">{{row.application.name}}-->
+          </td>
           <td>{{row.price?.amount|price: row.price?.currency}}</td>
           <td>Ne</td>
           <td>{{row.createdAt|date: 'dd. MM. yyyy HH:mm:ss'}}</td>

@@ -46,14 +46,15 @@
                 Použít mou zapamatovanou kartu
               </label>
             </div>
-            <!-- <div class="form-group form-check mt-2"
-                 [ngClass]="{'has-error':form.controls['auto-renew'].invalid && form.controls['auto-renew'].dirty}">
-              <input type="checkbox" name="auto-renew" id="auto-renew" class=""
-                     [formControl]="form.controls['auto-renew']">
-              <label for="auto-renew" class="form-check-label">
-                Obnova
-              </label>
-            </div> -->
+            <!--<div class="form-group form-check mt-2"-->
+                 <!--[ngClass]="{'has-error':form.controls['auto-renew'].invalid && form.controls['auto-renew'].dirty}">-->
+              <!--<input type="checkbox" name="auto-renew" id="auto-renew" class=""-->
+                     <!--[formControl]="form.controls['auto-renew']">-->
+              <!--<label for="auto-renew" class="form-check-label">-->
+                <!--Obnova-->
+              <!--</label>-->
+            <!--</div>-->
+
             <div class="form-group mb-0">
               <button class="btn btn-success btn-gradient btn-gradient--success btn-lg btn-full order-submit"
                       [hidden]="!order || order?.status !== OrderStatus.PAID"
@@ -77,13 +78,11 @@
                 [loading]="loading"
                 [value]="'Zaplatit: ' + newOrder.price.amount|price:newOrder.price.currency"
               ></pv-loading-button>
+              <p class="text-center mb-0 mt-2">Platby probíhají pomocí služby <a href="http://payvont.com" target="_blank">Payvont</a>.</p>
             </div>
           </form>
         </div>
       </section>
-      <!--<footer class="text-center">-->
-      <!--<p class="mb-0">Více o službě <a href="http://payvont.com" target="_blank">Payvont</a>.</p>-->
-      <!--</footer>-->
     </ng-container>
     <ng-template #notLogged>
       <ng-container *ngIf="showLogin; else register">

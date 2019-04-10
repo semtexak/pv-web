@@ -4,6 +4,7 @@ import {SubscriptionService} from '../../../../shared/service/subscription.servi
 import {LazyLoadEvent} from 'primeng/api';
 import {User} from '../../../../shared/model/user';
 import {AuthenticationService} from '../../../../shared/service/authentication.service';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'pv-subscriptions',
@@ -27,6 +28,7 @@ export class SubscriptionsComponent implements OnInit {
     status: []
   };
   user: User;
+  baseUrl = environment.basePluginImagePath;
 
   constructor(private authenticationService: AuthenticationService,
               private subscriptionService: SubscriptionService) {

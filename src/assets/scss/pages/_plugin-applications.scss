@@ -238,7 +238,7 @@
   }
 
   .payment__form {
-    padding: 10px 15px 15px;
+    padding: 10px 15px 10px 15px;
 
     .order-submit {
       @include rem-fallback(font-size, 18);
@@ -275,7 +275,7 @@
       }
 
       &:after {
-        content: 'Pro nákup je potřeba se přihlásit.';
+        content: 'Nejprve se, prosím, přihlašte.';
         position: absolute;
         display: flex;
         justify-content: center;
