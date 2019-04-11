@@ -97,7 +97,7 @@ export class AuthenticationService extends HttpService {
     return this.http.delete(`${this.API_URL}/user-service/user/logout`);
   }
 
-  private saveToken(token: IToken) {
+  public saveToken(token: IToken) {
     const current = new Date();
     const expiresAt = new Date(current.getTime() + (token.expires_in * 1000));
     console.log('act', token.access_token, expiresAt, '/', `.${this.domain}`);

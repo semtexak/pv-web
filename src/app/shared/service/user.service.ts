@@ -26,6 +26,10 @@ export class UserService extends HttpService {
     return this.http.put(`${this.API_URL}/user-service/user/forgot-password`, JSON.stringify({email: email}), this.jsonHttpOptions);
   }
 
+  pairAccount(pairKey: string, at: string): Observable<any> {
+    return this.http.put(`${this.API_URL}/user-service/user/facebook/pair?p=${pairKey}`, JSON.stringify({accessToken: at}), this.jsonHttpOptions);
+  }
+
   registerUser(form: ISingUpForm, redirectUri: string = '/'): Observable<any> {
     if (this.autoLogin) {
       console.log('Autologin enabled');

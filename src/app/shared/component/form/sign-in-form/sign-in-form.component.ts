@@ -1,10 +1,15 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthenticationService} from '../../../../shared/service/authentication.service';
-import {AlertService} from '../../../../shared/service/alert.service';
+import {AuthenticationService} from '../../../service/authentication.service';
+import {AlertService} from '../../../service/alert.service';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
-import {ISingInForm} from '../../../../shared/model/form/i-sing-in-form';
-import {HttpErrorResponse} from '@angular/common/http';
+import {ISingInForm} from '../../../model/form/i-sing-in-form';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import {FacebookLoginProvider, SocialUser} from 'angularx-social-login';
+import {AuthService} from 'angularx-social-login';
+import {fromPromise} from 'rxjs/internal-compatibility';
+import {from, of} from 'rxjs';
+import {IToken} from '../../../model/i-token';
 
 @Component({
   selector: 'pv-sign-in-form',
@@ -13,7 +18,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 export class SignInFormComponent implements OnInit {
 
   @Input() stayOnSamePageAfterLogin: boolean = false;
-  @Input() redirectAfterLoginUrl: string;
+  @Input() redirectAfterLoginUrl: string = '';
   @Input() boxClass: string;
   @Input() registerLink: string = '../registrace';
   @Input() plugin = false;
@@ -24,10 +29,12 @@ export class SignInFormComponent implements OnInit {
   public form: FormGroup;
   redirectUrl: string = '/';
   loading = false;
+  private data: SocialUser;
 
   constructor(private authenticationService: AuthenticationService,
               private alertService: AlertService,
               private route: ActivatedRoute,
+              private authService: AuthService,
               private router: Router,
               private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
@@ -42,9 +49,7 @@ export class SignInFormComponent implements OnInit {
       if (redirect) {
         this.redirectUrl = redirect;
       }
-      if (this.redirectAfterLoginUrl) {
-        this.redirectUrl = this.redirectAfterLoginUrl;
-      }
+
       const login = queryParams['e'];
       this.form.get('username').setValue(login);
       if (login) {
@@ -53,6 +58,10 @@ export class SignInFormComponent implements OnInit {
         this.usernameInput.nativeElement.focus();
       }
     });
+    if (this.redirectAfterLoginUrl) {
+      this.redirectUrl = this.redirectAfterLoginUrl;
+    }
+    this.authService.authState.subscribe(data => this.data = data);
   }
 
   onSubmit(data: ISingInForm): void {
@@ -85,6 +94,30 @@ export class SignInFormComponent implements OnInit {
           console.log(error);
         });
     }
+  }
+
+  doFacebookLogin() {
+    let observable;
+    if (!this.data) {
+      observable = from(this.authService.signIn(FacebookLoginProvider.PROVIDER_ID));
+    } else {
+      observable = of(this.data);
+    }
+    observable.subscribe((response: SocialUser) => {
+      this.authenticationService.facebookLogin(response.authToken).subscribe((token: IToken) => {
+        console.log(response);
+        if (token && token.access_token) {
+          this.authenticationService.saveToken(token);
+          this.authenticationService.saveUser().subscribe(() => {
+            if (!this.stayOnSamePageAfterLogin) {
+              this.router.navigateByUrl(this.redirectUrl);
+            }
+          });
+          console.log('Can login via facebook.', token.access_token);
+        }
+      });
+    });
+
   }
 
   goToSignUpPage() {

@@ -12,6 +12,7 @@ import { SignUpComponent } from './page/sign-up/sign-up.component';
 import { UserActivationComponent } from './page/user-activation/user-activation.component';
 import { PasswordChangeComponent } from './page/password-change/password-change.component';
 import { ActivationKeyComponent } from './page/activation-key/activation-key.component';
+import { PairAccountComponent } from './page/pair-account/pair-account.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { ActivationKeyComponent } from './page/activation-key/activation-key.com
     WebRoutingModule,
     SharedModule
   ],
-  declarations: [ReceivePaymentComponent, HomepageComponent, ContactComponent, SignInComponent, ForgotPasswordComponent, SignUpComponent, UserActivationComponent, PasswordChangeComponent, ActivationKeyComponent]
+  declarations: [ReceivePaymentComponent, HomepageComponent, ContactComponent, SignInComponent, ForgotPasswordComponent, SignUpComponent, UserActivationComponent, PasswordChangeComponent, ActivationKeyComponent, PairAccountComponent]
 })
 export class WebModule { }

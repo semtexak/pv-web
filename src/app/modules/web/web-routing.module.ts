@@ -11,6 +11,7 @@ import {NotLoggedGuard} from '../../core/guard/not-logged.guard';
 import {ActivationKeyComponent} from './page/activation-key/activation-key.component';
 import {PasswordChangeComponent} from './page/password-change/password-change.component';
 import {AuthGuard} from '../../core/guard/auth.guard';
+import {PairAccountComponent} from './page/pair-account/pair-account.component';
 
 const routes: Routes = [
   {
@@ -31,11 +32,18 @@ const routes: Routes = [
       },
       {
         path: 'registrace',
-        component: SignUpComponent
+        component: SignUpComponent,
+        canActivate: [NotLoggedGuard]
+      },
+      {
+        path: 'propojeni-uctu',
+        component: PairAccountComponent,
+        canActivate: [NotLoggedGuard]
       },
       {
         path: 'zapomenute-heslo',
-        component: ForgotPasswordComponent
+        component: ForgotPasswordComponent,
+        canActivate: [NotLoggedGuard]
       },
       {
         path: 'zmena-hesla',

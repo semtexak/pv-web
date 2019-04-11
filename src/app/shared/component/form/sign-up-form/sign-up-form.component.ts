@@ -61,9 +61,9 @@ export class SignUpFormComponent implements OnInit {
       if (error instanceof HttpErrorResponse) {
         if (!error.error.error_description) {
           if (error.error.status === 409) {
-            this.router.navigate(['/plugin/sign-in'], {queryParams: {e: form.email}}).then(() => {
+            // this.router.navigate(['/plugin/sign-in'], {queryParams: {e: form.email}}).then(() => {
               this.alertService.info('Zadaný e-mail je již registrován. Přihlašte se prosím.');
-            });
+            // });
           } else {
             this.alertService.error('Vyskytla se neznámá chyba. Prosím, opakujte akci později.');
           }

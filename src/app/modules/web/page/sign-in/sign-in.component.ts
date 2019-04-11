@@ -48,9 +48,9 @@ export class SignInComponent implements OnInit {
     //   }
     // });
 
-    this.facebookService.authState.subscribe((user) => {
-      console.log(user);
-    });
+    // this.facebookService.authState.subscribe((user) => {
+    //   console.log(user);
+    // });
   }
 
   // onSubmit(data: ISingInForm): void {
