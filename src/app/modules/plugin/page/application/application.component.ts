@@ -143,7 +143,7 @@ export class ApplicationComponent implements OnInit {
 
   onCreateOrder() {
     this.loading = true;
-    this.createOrder().subscribe();
+    this.createOrder().subscribe(() => this.loading = false, error1 => this.loading = false);
   }
 
   createOrder(): Observable<any> {
@@ -162,15 +162,12 @@ export class ApplicationComponent implements OnInit {
           const location = response.headers.get('Location');
           if (location) {
             this.router.navigate([`/plugin/app/${this.application.appId}/status`], {queryParams: {order: location.split('/').pop()}});
-            console.log('Navigating...');
             return of(true);
           }
-          console.log('Loaction is not present');
           return of(false);
         })
       );
     } else {
-
       console.log('Not valid or cart is empty', this.form.valid, this.cartService.totalProducts());
       return of(false);
     }

@@ -10,6 +10,7 @@ import {AuthService} from 'angularx-social-login';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {from, of} from 'rxjs';
 import {IToken} from '../../../model/i-token';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'pv-sign-in-form',
@@ -29,6 +30,7 @@ export class SignInFormComponent implements OnInit {
   public form: FormGroup;
   redirectUrl: string = '/';
   loading = false;
+  socialStatus = environment.socialStatus;
   private data: SocialUser;
 
   constructor(private authenticationService: AuthenticationService,

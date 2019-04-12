@@ -7,6 +7,9 @@ export const environment = {
   production: false,
   basePluginImagePath: `${protocol}://${hostname}:4200`,
   hostname: hostname,
+  socialStatus: {
+    facebook: true
+  },
   API_URL: `${protocol}://${hostname}:8765`,
   PLUGIN_URL: `${protocol}://${pluginHostname}:${pluginPort}/assets/plugin/dist/js/bundle.js`,
   grantType: 'password',

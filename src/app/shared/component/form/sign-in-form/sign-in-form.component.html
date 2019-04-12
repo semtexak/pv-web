@@ -46,7 +46,7 @@
       <div class="form-group">
         <div class="row">
           <div class="col-12">
-            <button class="btn btn-secondary facebook btn-md btn-full" [disabled]="true" (click)="doFacebookLogin()">
+            <button class="btn btn-secondary facebook btn-md btn-full" [disabled]="!socialStatus.facebook" (click)="doFacebookLogin()">
               Přihlásit přes Facebook
             </button>
           </div>
