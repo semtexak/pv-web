@@ -93,6 +93,6 @@ export class UserService extends HttpService {
   updateUserData(values: any): Observable<any> {
     const response = this.jsonHttpOptions;
     response['observe'] = 'response';
-    return this.http.put(`${this.API_URL}/user-service/user/change-data`, JSON.stringify(values), response);
+    return this.http.put(`${this.API_URL}/user-service/user`, JSON.stringify(values), response);
   }
 }
