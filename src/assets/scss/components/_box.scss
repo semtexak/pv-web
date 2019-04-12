@@ -10,6 +10,10 @@
       text-align: center;
     }
 
+    a.disabled {
+      color: $link-color;
+    }
+
     p {
       @include rem-fallback(font-size, 12);
     }
