@@ -27,8 +27,8 @@ export class OrderStatusComponent implements OnInit {
       this.orderHash = params['order'];
       if (this.orderHash) {
         this.orderService.getOrderStatus(this.orderHash).pipe(switchMap((order: IOrder) => {
-          this.order = order;
-          this.applicationContext.order.next(order);
+          // this.order = order;
+          // this.applicationContext.order.next(order);
           return this.orderService.testUpdateOrderStatus(order.hash, 'PAID').pipe(
             switchMap((response: HttpResponse<any>) => {
               // if (response.status === 204) {

@@ -1,4 +1,4 @@
-const protocol = 'http';
+const protocol = 'https';
 const hostname = 'localhost';
 const pluginHostname = 'payvont.local.com';
 const pluginPort = '8080';
