@@ -23,7 +23,7 @@ export class SignInFormComponent implements OnInit {
   @Input() boxClass: string;
   @Input() registerLink: string = '../registrace';
   @Input() plugin = false;
-  @Output() onNavigate = new EventEmitter();
+  @Output() onNavigate: EventEmitter<string> = new EventEmitter();
 
   @ViewChild('username') usernameInput: ElementRef;
   @ViewChild('password') passwordInput: ElementRef;
@@ -123,6 +123,6 @@ export class SignInFormComponent implements OnInit {
   }
 
   goToSignUpPage() {
-    this.onNavigate.emit();
+    this.onNavigate.emit('register');
   }
 }

@@ -1,0 +1,110 @@
+.form-wizard {
+  display: flex;
+  padding: 30px 0;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+  border-bottom: 1px solid $wizard-steps-border-color;
+
+  .form-wizard__item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &.disabled {
+      opacity: .7;
+    }
+
+    &:last-child .form-wizard__item__step {
+      justify-content: flex-start;
+    }
+
+    &:not(:first-child) .form-wizard__item__step:before,
+    &:not(:last-child) .form-wizard__item__step:after {
+      content: '';
+      height: 5px;
+      width: calc(50% - #{$wizard-step-icon-width / 2 * 1px});
+      background-color: $wizard-step-background;
+      z-index: 1;
+    }
+
+    &.success {
+      .form-wizard__item__step {
+
+        &:before,
+        &:after,
+        .form-wizard__item__icon {
+          background-color: $success-color !important;
+          color: $white !important;
+        }
+      }
+    }
+
+    &.active {
+      .form-wizard__item__step {
+
+        &:before,
+        &:after,
+        .form-wizard__item__icon {
+          background-color: $primary !important;
+          color: $white !important;
+        }
+      }
+
+      .form-wizard__item__title {
+        font-weight: 600;
+      }
+    }
+
+    &.error {
+      .form-wizard__item__step {
+
+        &:before,
+        &:after,
+        .form-wizard__item__icon {
+          background-color: $danger-color !important;
+          color: $white !important;
+        }
+      }
+    }
+
+
+    .form-wizard__item__title {
+      font-weight: 400;
+      color: $wizard-step-color;
+      @include rem-fallback(font-size, 13);
+    }
+
+    .form-wizard__item__step {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      height: $wizard-step-icon-width * 1px;
+      border-radius: 50%;
+
+      .form-wizard__item__icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $wizard-step-background;
+        width: $wizard-step-icon-width * 1px;
+        height: $wizard-step-icon-width * 1px;
+        border-radius: 50%;
+        z-index: 2;
+        @include rem-fallback(font-size, 18);
+      }
+    }
+
+    .form-wizard__item__title {
+      width: 100%;
+    }
+
+    .form-wizard__item__step + .form-wizard__item__title {
+      margin-top: 5px;
+    }
+  }
+
+}

@@ -64,4 +64,8 @@ export class OrderStatusComponent implements OnInit {
       this.w.nativeWindow['parentIFrame'].sendMessage({action: 'close'});
     }
   }
+
+  webpayTest() {
+    this.orderService.testWebpay().subscribe(response => console.log(response));
+  }
 }

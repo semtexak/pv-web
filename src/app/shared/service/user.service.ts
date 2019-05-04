@@ -14,6 +14,7 @@ import {Router} from '@angular/router';
   providedIn: 'root'
 })
 export class UserService extends HttpService {
+
   private autoLogin = environment.autoLogin;
 
   constructor(private authenticationService: AuthenticationService,

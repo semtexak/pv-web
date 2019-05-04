@@ -4,7 +4,9 @@
 .box {
   background-color: #fff;
 
-  &.box__login, &.box__activate {
+  &.box__login,
+  &.box__activate,
+  &.box__password-change {
 
     header h2 {
       text-align: center;
@@ -43,7 +45,9 @@
     }
   }
 
-  &.box__activate {
+  &.box__activate, &.box__password-change {
+    padding: 1.5rem;
+
     header h2 {
       margin-bottom: 1rem;
     }

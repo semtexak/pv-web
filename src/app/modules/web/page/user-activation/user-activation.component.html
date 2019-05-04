@@ -1,36 +1,39 @@
 <section class="login">
   <div class="container">
     <div class="row">
-      <div class="col-4 mr-auto ml-auto p-0">
+      <div class="col-12 col-sm-4 mr-auto ml-auto p-0">
         <pv-alerts></pv-alerts>
       </div>
     </div>
     <div class="row">
-      <div class="box box--activate col-4 p-4" *ngIf="activationSuccess === true">
-        <header>
-          <h2>Aktivace účtu</h2>
-        </header>
-        <div class="box-inner">
-          <div class="alert alert-success">
-            <p>Aktivace účtu byla <strong class="text-primary">úspěšná</strong>.</p>
+      <div class="col-12 col-sm-4 mr-auto ml-auto">
+        <div class="box box__activate box--centered box--shadow" *ngIf="activationSuccess === true">
+          <header class="box__header">
+            <h2>Aktivace účtu</h2>
+          </header>
+          <div class="box__body">
+            <div class="alert alert-success">
+              <p>Aktivace účtu byla <strong class="text-primary">úspěšná</strong>.</p>
+            </div>
           </div>
+          <footer class="box__footer text-center">
+            <p class="mb-0">Pokračujte na <a routerLink="/uzivatel/prihlaseni">přihlášení</a>.</p>
+          </footer>
         </div>
-        <footer class="text-center">
-          <p class="mb-0">Pokračujte na <a routerLink="/uzivatel/prihlaseni">přihlášení</a>.</p>
-        </footer>
-      </div>
-      <div class="box box--activate col-4 p-4" *ngIf="activationSuccess === false">
-        <header>
-          <h2>Aktivace účtu</h2>
-        </header>
-        <div class="box-inner">
-          <div class="alert alert-danger">
-            <p>Aktivace účtu se <strong class="text-danger">nezdařila</strong>. Pokud problém přetrvává, vygenerujte si, prosím, nový aktivační klíč, který Vám bude zaslán na e-mail uvedený při registraci.</p>
+        <div class="box box__activate box--centered box--shadow" *ngIf="activationSuccess === false">
+          <header class="box__header">
+            <h2>Aktivace účtu</h2>
+          </header>
+          <div class="box__body">
+            <div class="alert alert-danger">
+              <p>Aktivace účtu se <strong class="text-danger">nezdařila</strong>. Pokud problém přetrvává, vygenerujte
+                si, prosím, nový aktivační klíč, který Vám bude zaslán na e-mail uvedený při registraci.</p>
+            </div>
           </div>
+          <footer class="box__footer text-center">
+            <p class="mb-0">Vygenerovat nový <a routerLink="/uzivatel/aktivace/novy-klic">aktivační klíč</a>.</p>
+          </footer>
         </div>
-        <footer class="text-center">
-          <p class="mb-0">Vygenerovat nový <a routerLink="/uzivatel/aktivace/novy-klic">aktivační klíč</a>.</p>
-        </footer>
       </div>
     </div>
   </div>

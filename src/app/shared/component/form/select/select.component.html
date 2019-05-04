@@ -1,0 +1,14 @@
+<div class="form-group" [ngClass]="{'form-group--error': control?.invalid && control?.dirty}">
+  <label *ngIf="!hideLabel" class="control-label" [for]="id">{{label}}
+    <span class="required" *ngIf="showRequired && required">*</span>
+    <span class="required" *ngIf="!showRequired && !required">(nepovinné)</span>
+  </label>
+
+  <ng-select [items]="items" labelForId="state" bindLabel="name" bindValue="id" [formControl]="control"></ng-select>
+
+  <div class="validation-message text-right" *ngIf="control?.invalid && control?.dirty">
+  <span *ngIf="control?.errors['required']">
+    <span>Pole není vyplněno.</span>
+  </span>
+  </div>
+</div>

@@ -38,6 +38,7 @@ export class ApplicationComponent implements OnInit {
   baseUrl = environment.basePluginImagePath;
   showLogin = true;
   loading = false;
+  show: string = 'login';
 
   constructor(private route: ActivatedRoute,
               private router: Router,

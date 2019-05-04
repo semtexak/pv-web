@@ -54,25 +54,6 @@
     @include rem-fallback(font-size, 13);
   }
 
-  .list-group-item.list-group-item-action {
-    padding: 1rem 2rem;
-    color: $my-account-list-group-action-color;
-    @include rem-fallback(font-size, 14);
-    font-family: $sidebar-font;
-    border-color: $my-account-list-group-action-border-color;
-
-    &:hover {
-      background-color: $my-account-list-group-action-hover-background;
-    }
-    &.active {
-      font-weight: 600;
-      background-color: $my-account-list-group-action-active-background;
-    }
-    &:hover, &.active {
-      color: $my-account-list-group-action-active-color;
-    }
-  }
-
   .col-delimiter-right {
     border-right: 1px solid $card-header-border-color;
   }

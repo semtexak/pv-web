@@ -32,6 +32,24 @@ input.form-control, .custom-file label {
   }
 }
 
+input.form-control.form-control--icon {
+  position: relative;
+  padding-right: 4rem;
+
+  & + .form-control__icon {
+    position: absolute;
+    top: 50%;
+
+    &.form-control__icon--right {
+      right: 1rem;
+    }
+
+    &.form-control__icon--left {
+      left: 1rem;
+    }
+  }
+}
+
 textarea.form-control.code {
   min-height: 222px
 }

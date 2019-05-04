@@ -10,7 +10,6 @@ const routes: Routes = [
   {
     path: 'app/:appId',
     component: ApplicationComponent,
-    // canActivate: [AuthGuard],
     data: {redirectUrl: '/plugin/sign-in'},
     children: [
       {

@@ -1,8 +1,8 @@
 <div [ngClass]="boxClass">
-  <header>
+  <header class="box__header">
     <h2>Registrace</h2>
   </header>
-  <div class="box-inner">
+  <div class="box__body">
     <form [formGroup]="form" (submit)="onSubmit(form.value)">
       <div class="form-group" [ngClass]="{'has-error':form.get('email').invalid && form.get('email').dirty}">
         <label for="email">E-mail</label>
@@ -45,7 +45,7 @@
       </div>
     </form>
   </div>
-  <footer class="text-center">
+  <footer class="box__footer text-center">
     <p class="mb-0" *ngIf="!plugin">Máte již účet? <a routerLink="../prihlaseni" [queryParams]="{redirect: redirectUrl}">Přihlašte se</a>.</p>
     <p class="mb-0" *ngIf="plugin">Máte již účet? <a (click)="goToSignInPage()">Přihlašte se</a>.</p>
   </footer>

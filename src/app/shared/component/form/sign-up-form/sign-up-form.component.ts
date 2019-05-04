@@ -18,7 +18,7 @@ export class SignUpFormComponent implements OnInit {
   @Input() stayOnSamePageAfterLogin: boolean = false;
   @Input() boxClass: string;
   @Input() plugin = false;
-  @Output() onNavigate = new EventEmitter();
+  @Output() onNavigate: EventEmitter<string> = new EventEmitter();
 
   public form: FormGroup;
   private autoLogin = environment.autoLogin;
@@ -54,9 +54,7 @@ export class SignUpFormComponent implements OnInit {
   onSubmit(form: ISingUpForm): void {
     console.log(`Redirect url is: ${this.redirectUrl}`);
     this.userService.registerUser(form, this.redirectUrl).subscribe(data => {
-      // this.router.navigateByUrl(this.redirectUrl).then(value => {
-      //   this.alertService.success('Registrace proběhla úspěšně. Na e-mail vám byly zaslány <strong>informace k aktivaci</strong> účtu.');
-      // });
+      this.onNavigate.emit('confirm')
     }, error => {
       if (error instanceof HttpErrorResponse) {
         if (!error.error.error_description) {
@@ -86,7 +84,6 @@ export class SignUpFormComponent implements OnInit {
   }
 
   goToSignInPage() {
-    this.onNavigate.emit();
+    this.onNavigate.emit('login');
   }
-
 }

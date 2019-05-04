@@ -1,8 +1,8 @@
 <div [ngClass]="boxClass">
-  <header>
+  <header class="box__header">
     <h2>Přihlášení</h2>
   </header>
-  <div class="box-inner">
+  <div class="box__body">
     <form [formGroup]="form" (submit)="onSubmit(form.value)">
       <div class="form-group validate" [ngClass]="{'has-error':form.get('username').invalid && form.get('username').dirty}">
         <label for="email">E-mail</label>
@@ -59,7 +59,7 @@
       </div>
     </form>
   </div>
-  <footer class="text-center">
+  <footer class="box__footer text-center">
     <p class="mb-0" *ngIf="!plugin">Nemáte účet? <a routerLink="../registrace" [queryParams]="{redirect: redirectUrl}">Zaregistrujte se</a>.</p>
     <p class="mb-0" *ngIf="plugin">Nemáte účet? <a (click)="goToSignUpPage()">Zaregistrujte se</a>.</p>
   </footer>

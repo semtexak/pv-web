@@ -1,0 +1,22 @@
+<div class="form-group" [ngClass]="{'form-group--error': control?.invalid && control?.dirty}">
+  <label *ngIf="!hideLabel" class="control-label" [for]="id">{{label}}
+    <span class="required" *ngIf="showRequired && required">*</span>
+    <span class="required" *ngIf="!showRequired && !required">(nepovinné)</span>
+  </label>
+  <input
+    [id]="id"
+    [type]="type"
+    [placeholder]="placeholder"
+    class="form-control"
+    [ngClass]="{'form-control--icon': iconOptions.enabled}"
+    [formControl]="control">
+  <!--<div *ngIf="iconOptions.enabled" class="form-control__icon" [ngClass]="{'form-control__icon&#45;&#45;left': iconOptions.alignmentToLeft, 'form-control__icon&#45;&#45;right': !iconOptions.alignmentToLeft}">-->
+  <!--<span class="fas" [ngClass]="iconOptions.class"></span>-->
+  <!--</div>-->
+
+  <div class="validation-message text-right" *ngIf="control?.invalid && control?.dirty">
+  <span *ngIf="control?.errors['required']">
+    <span>Pole není vyplněno.</span>
+  </span>
+  </div>
+</div>

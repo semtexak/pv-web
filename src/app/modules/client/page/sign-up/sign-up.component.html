@@ -1,307 +1,312 @@
-<div class="container-fluid client-sign-up">
+<div class="container-fluid mb-5 mt-3 my-account client-sign-up">
   <h2 class="page__title"><span class="page__title--disabled">Klient /</span> Účet</h2>
-  <div class="row">
+
+
+  <div class="row no-gutters">
     <div class="col-12">
       <pv-alerts></pv-alerts>
-      <div class="card mb-4">
-        <h6 class="card-header">
-          Default
-        </h6>
-        <ng-container *ngIf="!completed">
+    </div>
+  </div>
+  <div class="card">
+    <div class="row no-gutters">
+      <div class="col-md-12 pt-0">
+
+        <!--<pv-wizard></pv-wizard>-->
+
+        <ul class="form-wizard">
+          <li class="form-wizard__item" [ngClass]="{'active': tab.active, 'disabled': tab.disabled, 'success': tab.status === 'success', 'error': tab.status === 'error'}"
+              *ngFor="let tab of tabs" (click)="selectTab(tab)">
+            <div class="form-wizard__item__step"><span class="form-wizard__item__icon fas" [ngClass]="tab.icon"></span></div>
+            <div class="form-wizard__item__title">{{tab.title}}</div>
+          </li>
+        </ul>
+
+      </div>
+      <div class="col-md-12">
         <form class="form-horizontal" [formGroup]="form" novalidate>
-              <pv-tabs #tabs>
-                <pv-tab title="Základní údaje" #tab1>
-                  <div class="card-body">
-                    <fieldset>
-                    <div class="row">
-                      <div class="col-6">
-                        <div class="form-group" [ngClass]="{'has-error':form.controls['company'].invalid && form.controls['company'].dirty}">
-                              <label class="control-label" for="company">Firma <span class="required">*</span></label>
-                              <input id="company" type="text" placeholder="Vyhledat dle názvu subjektu" class="form-control has-icon" [formControl]="form.controls['company']">
-                              <span class="input-search flaticon-magnifying-glass"></span>
-                              <div class="validation-message text-right" *ngIf="form.get('company').invalid && form.get('company').dirty">
-                              <span *ngIf="form.get('company').errors.required">
-                                 <span>Pole není vyplněno.</span>
-                              </span>
-                              </div>
-                        </div>
+          <div class="tab-content">
+            <div class="tab-pane fade" #baseInfo [ngClass]="{'active show': tabs[0].active}">
+              <div class="card-body">
+                <fieldset>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="form-group text-left mt-2"
+                           [ngClass]="{'has-error': baseInfoForm.get('subjectType').invalid && baseInfoForm.get('subjectType').dirty}">
+                        <pv-radio
+                          [id]="'subject-type'"
+                          [control]="baseInfoForm.get('subjectType')"
+                          [label]="'Typ osoby'"
+                          [items]="[{label: 'Fyzická', value: SubjectType.PHYSICAL}, {label: 'Právnická', value: SubjectType.CORPORATE}]"></pv-radio>
                       </div>
-                      <div class="col-6">
-                        <div class="form-group" [ngClass]="{'has-error':form.controls['ico'].invalid && form.controls['ico'].dirty}">
-                              <label class="control-label" for="ico">IČO <span class="required">*</span></label>
-                              <input id="ico" type="text" placeholder="Vyhledat IČO subjektu" class="form-control" [formControl]="form.controls['ico']">
-                              <span class="input-search flaticon-magnifying-glass"></span>
-                              <div class="validation-message" *ngIf="form.get('ico').invalid && form.get('ico').dirty">
-                                <span *ngIf="form.controls['ico'].hasError('required')">Pole není vyplněno.</span>
-                                <span *ngIf="form.controls['ico'].hasError('NotValid')">Nejedná se o platné IČO.</span>
-                              </div>
-                            </div>
-                            <div class="col-6">
-                              <span class="flaticon-info-2 input-popup" ngbPopover="You see, I show up on hover!" triggers="hover" popoverTitle="Pop title"></span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <pv-input
+                        [id]="'company'"
+                        [type]="'text'"
+                        [control]="baseInfoForm.get('company')"
+                        [label]="'Firma'"
+                        [placeholder]="'Název firmy'"></pv-input>
+                    </div>
+                    <div class="col-6">
+                      <div class="row">
+                        <div class="col-6">
+                          <pv-input
+                            [id]="'ico'"
+                            [type]="'number'"
+                            [control]="baseInfoForm.get('ico')"
+                            [label]="'IČO'"
+                            [placeholder]="'Vyhledat IČO subjektu'"></pv-input>
+                        </div>
+                        <div class="col-6">
+                          <pv-input
+                            [id]="'dic'"
+                            [type]="'text'"
+                            [control]="baseInfoForm.get('dic')"
+                            [label]="'DIČ'"
+                            [placeholder]="'DIČ'"></pv-input>
                         </div>
                       </div>
                     </div>
+                  </div>
 
-                    <!-- Street & DIC -->
-                    <div class="row">
-                      <div class="col-6">
-                        <div class="form-group" [ngClass]="{'has-error':form.controls['address'].invalid && form.controls['address'].dirty}">
-                              <label class="control-label" for="address">Ulice</label>
-                              <input id="address" type="text" class="form-control" [formControl]="form.controls['address']">
-                              <div class="validation-message text-right" *ngIf="form.get('address').invalid && form.get('address').dirty">
-                              <span *ngIf="form.get('address').errors.required">
-                                 <span>Pole není vyplněno.</span>
-                              </span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-6">
-                        <div class="form-group" [ngClass]="{'has-error':form.controls['dic'].invalid && form.controls['dic'].dirty}">
-                              <label class="control-label" for="dic">DIČ</label>
-                              <input id="dic" type="text" class="form-control" [formControl]="form.controls['dic']" [required]="">
-                              <div class="validation-message text-right" *ngIf="form.get('dic').invalid && form.get('dic').dirty">
-                              <span *ngIf="form.get('dic').errors.required">
-                                 <span>Pole není vyplněno.</span>
-                              </span>
-                              </div>
-                        </div>
-                      </div>
+                  <!-- Street & DIC -->
+                  <div class="row">
+                    <div class="col-6">
+                      <pv-input
+                        [id]="'street'"
+                        [type]="'text'"
+                        [control]="addressForm.get('street')"
+                        [label]="'Ulice'"
+                        [placeholder]="'Ulice'"></pv-input>
                     </div>
 
-                    <!-- ZIP, City & phone -->
-                    <div class="row">
-                      <div class="col-6">
-                        <div class="row">
+                    <div class="col-6">
+                      <pv-input
+                        [id]="'email'"
+                        [type]="'text'"
+                        [control]="baseInfoForm.get('email')"
+                        [label]="'E-mail'"
+                        [placeholder]="'E-mail'"></pv-input>
+                    </div>
+                  </div>
+
+                  <!-- ZIP, City & phone -->
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="row">
                         <div class="col-4">
-                          <div class="form-group" [ngClass]="{'has-error':form.controls['zip'].invalid && form.controls['zip'].dirty}">
-                              <label class="control-label" for="zip">PSČ</label>
-                              <input id="zip" type="text" class="form-control" [formControl]="form.controls['zip']">
-                              <div class="validation-message text-right" *ngIf="form.get('zip').invalid && form.get('zip').dirty">
-                              <span *ngIf="form.get('zip').errors.required">
-                                 <span>Pole není vyplněno.</span>
-                              </span>
-                              </div>
-                          </div>
+                          <pv-input
+                            [id]="'zip'"
+                            [type]="'text'"
+                            [control]="addressForm.get('zip')"
+                            [label]="'PSČ'"
+                            [placeholder]="'PSČ'"></pv-input>
                         </div>
                         <div class="col-8">
-                          <div class="form-group" [ngClass]="{'has-error':form.controls['city'].invalid && form.controls['city'].dirty}">
-                            <label class="control-label" for="city">Město</label>
-                            <input id="city" type="text" class="form-control" [formControl]="form.controls['city']">
-                            <div class="validation-message text-right" *ngIf="form.get('city').invalid && form.get('city').dirty">
-                              <span *ngIf="form.get('city').errors.required">
-                                 <span>Pole není vyplněno.</span>
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        </div>
-                      </div>
-                      <div class="col-6">
-                        <div class="row">
-                          <div class="col-6">
-                            <div class="form-group" [ngClass]="{'has-error':form.controls['phone'].invalid && form.controls['phone'].dirty}">
-                              <label class="control-label" for="phone">Telefon <span class="required">*</span></label>
-                              <input id="phone" type="text" class="form-control" [formControl]="form.controls['phone']">
-                              <div class="validation-message text-right" *ngIf="form.get('phone').invalid && form.get('phone').dirty">
-                                {{form.get('phone').errors}}
-                                <span *ngIf="form.get('phone').errors.required">
-                                   <span>Pole není vyplněno.</span>
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                      </div>
-                      </div>
-
-
-                    <!-- State & E-mail -->
-                    <div class="row">
-                      <div class="col-6">
-                        <div class="form-group" [ngClass]="{'has-error':form.controls['state'].invalid && form.controls['state'].dirty}">
-                              <label class="control-label" for="state">Stát</label>
-                              <ng-select [items]="states" bindLabel="name" bindValue="id" formControlName="state"></ng-select>
-                              <!--<select id="state" name="state" formControlName="state">-->
-                              <!--<option [value]="null">Vyberte stát</option>-->
-                              <!--<option *ngFor="let v of states;" [value]="v.value">-->
-                              <!--{{v.name}}-->
-                              <!--</option>-->
-                              <!--</select>-->
-                              <div class="validation-message text-right" *ngIf="form.get('state').invalid && form.get('state').dirty">
-                              <span *ngIf="form.get('state').errors.required">
-                                 <span>Pole není vyplněno.</span>
-                              </span>
-                              </div>
-                        </div>
-                      </div>
-                      <div class="col-6">
-                        <div class="form-group" [ngClass]="{'has-error':form.controls['email'].invalid && form.controls['email'].dirty}">
-                              <label class="control-label" for="email">E-mail <span class="required">*</span></label>
-                              <input id="email" type="email" class="form-control" [formControl]="form.controls['email']">
-                              <div class="validation-message text-right" *ngIf="form.get('email').invalid && form.get('email').dirty">
-                              <span *ngIf="form.get('email').errors.required">
-                                 <span>Pole není vyplněno.</span>
-                              </span>
-                                <span *ngIf="!form.get('email').errors.required">
-                                <span *ngIf="form.get('email').errors.email">Pole není ve tvaru platné e-mailové adresy.</span>
-                              </span>
-                              </div>
-                        </div>
-                      </div>
-                    </div>
-                  </fieldset>
-                  </div>
-                  <div class="card-footer">
-                    <div class="row">
-                      <div class="col" *ngIf="!hideAres">
-                        <div class="form-group text-left mb-2">
-                          <button class="btn btn-sm btn-sharp" [ngClass]="{'btn-primary': form.controls['ico'].valid, 'btn-outline-primary': form.controls['ico'].invalid}" (click)="loadClientDataFromAres(form.value.ico)"
-                                  [disabled]="form.controls['ico'].invalid"><span class="flaticon-grid-world"></span> Načíst data z databáze ARES
-                          </button>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="form-group text-right mb-2">
-                          <button class="btn btn-primary" (click)="selectTab(tab2)">Pokračovat</button>
+                          <pv-input
+                            [id]="'city'"
+                            [type]="'text'"
+                            [control]="addressForm.get('city')"
+                            [label]="'Město'"
+                            [placeholder]="'Město'"></pv-input>
                         </div>
                       </div>
                     </div>
                   </div>
-                </pv-tab>
-                <pv-tab title="Kontaktní osoba" #tab2>
-                  <div class="card-body">
-                    <fieldset>
-                    <div class="row">
-                      <div class="col-6">
-                        <div class="form-group" [ngClass]="{'has-error':form.controls['personName'].invalid && form.controls['personName'].dirty}">
-                              <label class="control-label" for="personName">Jméno <span class="required">*</span></label>
-                              <input id="personName" type="text" class="form-control" [formControl]="form.controls['personName']">
-                              <div class="validation-message text-right" *ngIf="form.get('personName').invalid && form.get('personName').dirty">
-                              <span *ngIf="form.get('personName').errors.required">
-                                 <span>Pole není vyplněno.</span>
-                              </span>
-                              </div>
-                        </div>
-                      </div>
-                        <div class="col-6">
-                            <div class="form-group" [ngClass]="{'has-error':form.controls['personSurname'].invalid && form.controls['personSurname'].dirty}">
-                              <label class="control-label" for="personSurname">Příjmení <span class="required">*</span></label>
-                              <input id="personSurname" type="text" class="form-control" [formControl]="form.controls['personSurname']">
-                              <div class="validation-message text-right" *ngIf="form.get('personSurname').invalid && form.get('personSurname').dirty">
-                              <span *ngIf="form.get('personSurname').errors.required">
-                                 <span>Pole není vyplněno.</span>
-                              </span>
-                              </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-6">
-                        <div class="form-group" [ngClass]="{'has-error':form.controls['personPhone'].invalid && form.controls['personPhone'].dirty}">
-                              <label class="control-label" for="personPhone">Telefon <span class="required">*</span></label>
-                              <input id="personPhone" type="text" class="form-control" [formControl]="form.controls['personPhone']">
-                              <div class="validation-message" *ngIf="form.get('personPhone').invalid && form.get('personPhone').dirty">
-                              <span *ngIf="form.get('personPhone').errors.required">
-                                 <span>Pole není vyplněno.</span>
-                              </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </fieldset>
-                  </div>
-                  <div class="card-footer">
-                    <div class="row">
-                      <div class="col">
-                        <div class="form-group text-right mb-2">
-                          <button class="btn btn-primary" (click)="selectTab(tab3)">Pokračovat</button>
-                        </div>
-                      </div>
+
+
+                  <!-- State & E-mail -->
+                  <div class="row">
+                    <div class="col-6">
+                      <pv-select
+                        [id]="'state'"
+                        [items]="states"
+                        [control]="addressForm.get('state')"
+                        [label]="'Stát'"></pv-select>
                     </div>
                   </div>
-                </pv-tab>
-                <pv-tab title="Bankovní spojení" #tab3>
-                  <div class="card-body">
-                    <fieldset>
-                    <div class="row">
-                      <div class="col-6">
-                        <div class="row">
-                          <div class="col-8">
-                            <div class="form-group" [ngClass]="{'has-error':form.controls['bankNumber'].invalid && form.controls['bankNumber'].dirty}">
-                              <label class="control-label" for="bankNumber">Číslo účtu <span class="required">*</span></label>
-                              <input id="bankNumber" type="text" class="form-control" [formControl]="form.controls['bankNumber']">
-                              <div class="validation-message text-right" *ngIf="form.get('bankNumber').invalid && form.get('bankNumber').dirty">
-                              <span *ngIf="form.get('bankNumber').errors.required">
-                                 <span>Pole není vyplněno.</span>
-                              </span>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-4">
-                            <div class="form-group" [ngClass]="{'has-error':form.controls['bankCode'].invalid && form.controls['bankCode'].dirty}">
-                              <label class="control-label" for="bankCode">Kód banky <span class="required">*</span></label>
-                              <input id="bankCode" type="text" class="form-control" [formControl]="form.controls['bankCode']">
-                              <div class="validation-message text-right" *ngIf="form.get('bankCode').invalid && form.get('bankCode').dirty">
-                              <span *ngIf="form.get('bankCode').errors.required">
-                                 <span>Pole není vyplněno.</span>
-                              </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-12">
-                            <div class="form-group" [ngClass]="{'has-error':form.controls['iban'].invalid && form.controls['iban'].dirty}">
-                              <label class="control-label" for="iban">IBAN</label>
-                              <input id="iban" type="text" class="form-control" [formControl]="form.controls['iban']">
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-12">
-                            <div class="form-group" [ngClass]="{'has-error':form.controls['swift'].invalid && form.controls['swift'].dirty}">
-                              <label class="control-label" for="swift">SWIFT</label>
-                              <input id="swift" type="text" class="form-control" [formControl]="form.controls['swift']">
-                            </div>
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-                  </fieldset>
-                  </div>
-                  <div class="card-footer">
-                    <div class="row">
-                      <div class="col-6">
-                        <div class="form-group form-check mt-2" [ngClass]="{'has-error':form.controls['agreement'].invalid && form.controls['agreement'].dirty}">
-                          <input type="checkbox" name="agreement" id="agreement" class=""
-                                 [formControl]="form.controls['agreement']">
-                          <label for="agreement" class="form-check-label">
-                            Souhlasím se zpracováním osobních údajů. <span class="required">*</span>
-                          </label>
-                        </div>
-                      </div>
-                      <div class="col-6" *ngIf="!hideAres">
-                        <div class="form-group text-right mb-2">
-                          <input type="submit" class="btn btn-primary" value="Dokončit" (click)="sendData(form.value)" >
-                        </div>
-                      </div>
+                </fieldset>
+              </div>
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col" *ngIf="!hideAres">
+                    <div class="form-group text-left mb-2">
+                      <button class="btn btn-sm btn-sharp"
+                              [ngClass]="{'btn-primary': baseInfoForm.get('ico').value, 'btn-outline-primary': !baseInfoForm.get('ico').value}"
+                              (click)="loadClientDataFromAres(baseInfoForm.get('ico').value)"
+                              [disabled]="!baseInfoForm.get('ico').value"><span
+                        class="flaticon-grid-world"></span> Načíst data z databáze ARES
+                      </button>
                     </div>
                   </div>
-                </pv-tab>
-              </pv-tabs>
-        </form>
+                  <div class="col">
+                    <div class="form-group text-right mb-2">
+                      <button class="btn btn-primary" (click)="nextStep(baseInfoForm, tabs[0], tabs[1])">Pokračovat</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" #contactPerson [ngClass]="{'active show': tabs[1].active}">
+              <div class="card-body">
+                <fieldset>
+                  <div class="row">
+                    <div class="col-6">
+                      <pv-input
+                        [id]="'name'"
+                        [type]="'text'"
+                        [control]="contactPersonForm.get('name')"
+                        [label]="'Jméno'"
+                        [placeholder]="'Jméno kontaktní osoby'"></pv-input>
+                    </div>
+                    <div class="col-6">
+                      <pv-input
+                        [id]="'surname'"
+                        [type]="'text'"
+                        [control]="contactPersonForm.get('surname')"
+                        [label]="'Příjmení'"
+                        [placeholder]="'Příjmení kontaktní osoby'"></pv-input>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <pv-input
+                        [id]="'phone'"
+                        [type]="'text'"
+                        [control]="contactPersonForm.get('phone')"
+                        [label]="'Telefon'"
+                        [placeholder]="'Telefonní číslo kontaktní osoby'"></pv-input>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group text-right mb-2">
+                      <button class="btn btn-primary" (click)="nextStep(contactPersonForm, tabs[1], tabs[2])">Pokračovat</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" #bank [ngClass]="{'active show': tabs[2].active}">
+              <div class="card-body">
+                <fieldset>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="row">
+                        <div class="col-8">
+                          <pv-input
+                            [id]="'bankNumber'"
+                            [type]="'text'"
+                            [control]="bankForm.get('bankNumber')"
+                            [label]="'Číslo účtu'"
+                            [placeholder]="'Číslo účtu'"></pv-input>
+                        </div>
+                        <div class="col-4">
+                          <pv-input
+                            [id]="'bankCode'"
+                            [type]="'text'"
+                            [control]="bankForm.get('bankCode')"
+                            [label]="'Kód banky'"
+                            [placeholder]="'Kód banky'"></pv-input>
+                        </div>
+                      </div>
 
-        </ng-container>
-        <ng-container *ngIf="completed">
-          <div class="card-body">
-            Registrace proběhla v pořádku.
+                      <div class="row">
+                        <div class="col-12">
+                          <pv-input
+                            [id]="'iban'"
+                            [type]="'text'"
+                            [control]="bankForm.get('iban')"
+                            [label]="'IBAN'"
+                            [placeholder]="'IBAN'"></pv-input>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-12">
+                          <pv-input
+                            [id]="'swift'"
+                            [type]="'text'"
+                            [control]="bankForm.get('swift')"
+                            [label]="'SWIFT'"
+                            [placeholder]="'SWIFT'"></pv-input>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group form-check mt-2"
+                         [ngClass]="{'has-error':bankForm.controls['agreement'].invalid && bankForm.controls['agreement'].dirty}">
+                      <input type="checkbox" name="agreement" id="agreement" class=""
+                             [formControl]="bankForm.controls['agreement']">
+                      <label for="agreement" class="form-check-label">
+                        Souhlasím se zpracováním osobních údajů. <span class="required">*</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-6" *ngIf="!hideAres">
+                    <div class="form-group text-right mb-2">
+                      <input type="submit" class="btn btn-primary" value="Dokončit" (click)="nextStep(bankForm, tabs[2])">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </ng-container>
+        </form>
       </div>
     </div>
   </div>
+
+
+  <!--<div class="row">-->
+  <!--<div class="col-12">-->
+  <!--<pv-alerts></pv-alerts>-->
+  <!--<div class="card mb-4">-->
+  <!--<h6 class="card-header">-->
+  <!--Default-->
+  <!--</h6>-->
+  <!--<ng-container *ngIf="!completed">-->
+  <!--<form class="form-horizontal" [formGroup]="form" novalidate>-->
+  <!--<pv-tabs #tabs>-->
+  <!--<pv-tab title="Základní údaje" #tab1>-->
+  <!--<div class="card-body">-->
+
+  <!--</div>-->
+  <!---->
+  <!--</pv-tab>-->
+  <!--<pv-tab title="Kontaktní osoba" #tab2>-->
+  <!--<div class="card-body">-->
+
+  <!--</div>-->
+  <!---->
+  <!--</pv-tab>-->
+  <!--<pv-tab title="Bankovní spojení" #tab3>-->
+  <!--<div class="card-body">-->
+
+  <!--</div>-->
+  <!---->
+  <!--</pv-tab>-->
+  <!--</pv-tabs>-->
+  <!--</form>-->
+
+  <!--</ng-container>-->
+  <!--<ng-container *ngIf="completed">-->
+  <!--<div class="card-body">-->
+  <!--Registrace proběhla v pořádku.-->
+  <!--</div>-->
+  <!--</ng-container>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
 </div>

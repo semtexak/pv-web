@@ -26,7 +26,8 @@ form {
     width: 100%;
   }
 
-  &.has-error {
+  &.has-error,
+  &.form-group--error {
     label, input.form-control, .validation-message {
       color: $input-error-color;
     }
@@ -37,6 +38,19 @@ form {
 
     input.form-control {
       border-color: $input-error-border-color;
+    }
+
+    ::placeholder {
+      color: $input-error-color;
+      opacity: 1; /* Firefox */
+    }
+
+    :-ms-input-placeholder {
+      color: $input-error-color;
+    }
+
+    ::-ms-input-placeholder {
+      color: $input-error-color;
     }
   }
 }

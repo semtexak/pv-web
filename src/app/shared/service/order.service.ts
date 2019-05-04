@@ -39,4 +39,8 @@ export class OrderService extends HttpService {
     response['observe'] = 'response';
     return this.http.put(`${this.API_URL}/order-service/orders/${hash}?status=${status}`, null, response);
   }
+
+  testWebpay(): Observable<any> {
+    return this.http.get(`${this.API_URL}/order-service/orders/webpay/create-order`)
+  }
 }

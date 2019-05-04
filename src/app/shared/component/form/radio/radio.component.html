@@ -1,0 +1,20 @@
+<div class="form-group" [ngClass]="{'form-group--error': control?.invalid && control?.dirty}">
+  <label *ngIf="!hideLabel" class="control-label" [for]="id">{{label}}
+    <span class="required" *ngIf="showRequired && required">*</span>
+    <span class="required" *ngIf="!showRequired && !required">(nepovinné)</span>
+  </label>
+  <div class="form-check mb-2" *ngFor="let radio of items">
+    <input
+      [id]="id + '_' + radio.value"
+      type="radio"
+      class="form-check--active"
+      [value]="radio.value"
+      [formControl]="control">
+    <label [for]="id + '_' + radio.value">{{radio.label}}</label>
+  </div>
+  <div class="validation-message text-right" *ngIf="control?.invalid && control?.dirty">
+  <span *ngIf="control?.errors['required']">
+    <span>Pole není vyplněno.</span>
+  </span>
+  </div>
+</div>

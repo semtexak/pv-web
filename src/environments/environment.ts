@@ -1,4 +1,4 @@
-const protocol = 'https';
+const protocol = 'http';
 const hostname = 'localhost';
 const pluginHostname = 'payvont.local.com';
 const pluginPort = '8080';
@@ -15,7 +15,8 @@ export const environment = {
   grantType: 'password',
   clientId: 'test',
   clientSecret: 'secret',
-  autoLogin: true
+  autoLogin: false,
+  autoLoginOnActivation: true,
 };
 
 /*
