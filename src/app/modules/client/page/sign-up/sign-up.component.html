@@ -14,7 +14,11 @@
         <!--<pv-wizard></pv-wizard>-->
 
         <ul class="form-wizard">
-          <li class="form-wizard__item" [ngClass]="{'active': tab.active, 'disabled': tab.disabled, 'success': tab.status === 'success', 'error': tab.status === 'error'}"
+          <li class="form-wizard__item" [ngClass]="{
+          'form-wizard__item--active': tab.active,
+          'form-wizard__item--disabled': tab.disabled,
+          'form-wizard__item--success': tab.status === 'success',
+          'form-wizard__item--error': tab.status === 'error'}"
               *ngFor="let tab of tabs" (click)="selectTab(tab)">
             <div class="form-wizard__item__step"><span class="form-wizard__item__icon fas" [ngClass]="tab.icon"></span></div>
             <div class="form-wizard__item__title">{{tab.title}}</div>
@@ -143,7 +147,7 @@
                   </div>
                   <div class="col">
                     <div class="form-group text-right mb-2">
-                      <button class="btn btn-primary" (click)="nextStep(baseInfoForm, tabs[0], tabs[1])">Pokračovat</button>
+                      <button class="btn btn-primary" (click)="nextStep([baseInfoForm, addressForm], tabs[0], tabs[1])">Pokračovat</button>
                     </div>
                   </div>
                 </div>
@@ -186,7 +190,7 @@
                 <div class="row">
                   <div class="col">
                     <div class="form-group text-right mb-2">
-                      <button class="btn btn-primary" (click)="nextStep(contactPersonForm, tabs[1], tabs[2])">Pokračovat</button>
+                      <button class="btn btn-primary" (click)="nextStep([contactPersonForm], tabs[1], tabs[2])">Pokračovat</button>
                     </div>
                   </div>
                 </div>
@@ -198,10 +202,18 @@
                   <div class="row">
                     <div class="col-6">
                       <div class="row">
-                        <div class="col-8">
+                        <div class="col-4">
+                          <pv-input
+                            [id]="'bankPrefix'"
+                            [type]="'number'"
+                            [control]="bankForm.get('bankPrefix')"
+                            [label]="'Prefix'"
+                            [placeholder]="'Prefix'"></pv-input>
+                        </div>
+                        <div class="col-4">
                           <pv-input
                             [id]="'bankNumber'"
-                            [type]="'text'"
+                            [type]="'number'"
                             [control]="bankForm.get('bankNumber')"
                             [label]="'Číslo účtu'"
                             [placeholder]="'Číslo účtu'"></pv-input>
@@ -209,7 +221,7 @@
                         <div class="col-4">
                           <pv-input
                             [id]="'bankCode'"
-                            [type]="'text'"
+                            [type]="'number'"
                             [control]="bankForm.get('bankCode')"
                             [label]="'Kód banky'"
                             [placeholder]="'Kód banky'"></pv-input>
@@ -256,7 +268,7 @@
                   </div>
                   <div class="col-6" *ngIf="!hideAres">
                     <div class="form-group text-right mb-2">
-                      <input type="submit" class="btn btn-primary" value="Dokončit" (click)="nextStep(bankForm, tabs[2])">
+                      <input type="submit" class="btn btn-primary" value="Dokončit" (click)="nextStep([bankForm], tabs[2])">
                     </div>
                   </div>
                 </div>

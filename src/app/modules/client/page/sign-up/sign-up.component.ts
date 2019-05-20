@@ -1,11 +1,15 @@
 import {AfterContentInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Form, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {IcoValidation} from '../../../../core/validation/ico-validation';
 import {ClientService} from '../../../../shared/service/client.service';
 import {AlertService} from '../../../../shared/service/alert.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Tab} from '../../../user/my-account/my-account.component';
+import {catchError, map, switchMap} from 'rxjs/operators';
+import {of} from 'rxjs';
+import {IToken} from '../../../../shared/model/i-token';
+import {AuthenticationService} from '../../../../shared/service/authentication.service';
 
 @Component({
   selector: 'pv-sign-up',
@@ -36,8 +40,10 @@ export class SignUpComponent implements OnInit, AfterContentInit {
 
   constructor(private formBuilder: FormBuilder,
               private alertService: AlertService,
+              private authenticationService: AuthenticationService,
               private router: Router,
-              private clientService: ClientService) { }
+              private clientService: ClientService) {
+  }
 
   ngOnInit() {
     this.baseInfoForm = this.formBuilder.group({
@@ -45,17 +51,16 @@ export class SignUpComponent implements OnInit, AfterContentInit {
       'company': [null, Validators.compose([Validators.required])],
       'ico': [null, null],
       'dic': [null, null],
-      'email': [null, Validators.compose([Validators.required, Validators.email])],
-      'address': [null, null],
+      'email': [null, Validators.compose([Validators.required, Validators.email])]
     }, {
       validator: IcoValidation.IsValid
     });
 
     this.addressForm = this.formBuilder.group({
-      'street': [null, null],
-      'city': [null, null],
-      'zip': [null, null],
-      'state': [null, null],
+      'street': [null, Validators.compose([Validators.required])],
+      'city': [null, Validators.compose([Validators.required])],
+      'zip': [null, Validators.required],
+      'state': [null, Validators.required],
     });
     this.contactPersonForm = this.formBuilder.group({
       'name': [null, Validators.compose([Validators.required])],
@@ -63,6 +68,7 @@ export class SignUpComponent implements OnInit, AfterContentInit {
       'phone': [null, Validators.compose([Validators.required, Validators.pattern('^[0-9\\-\\+]{9,15}$')])],
     });
     this.bankForm = this.formBuilder.group({
+      'bankPrefix': [null, null],
       'bankNumber': [null, Validators.compose([Validators.required])],
       'bankCode': [null, Validators.compose([Validators.required])],
       'iban': [null, null],
@@ -107,27 +113,40 @@ export class SignUpComponent implements OnInit, AfterContentInit {
       ...form.get('baseInfoForm').value,
       address: form.get('addressForm').value,
       contactPerson: form.get('contactPersonForm').value,
-      bank: form.get('bankForm').value};
+      bank: form.get('bankForm').value
+    };
     console.log(values);
     if (this.form.invalid) {
       Object.keys(this.form.controls).forEach(key => {
-        this.form.get(key).markAsDirty();
+        if (key === '')
+          this.form.get(key).markAsDirty();
       });
     } else {
-      this.clientService.createClient(values).subscribe(data => {
-        this.completed = true;
-        this.router.navigate(['/klient/stranka/registrace']).then(value => {
-          this.alertService.success('Váš klientský účet byl založen.');
-        });
-      }, e => {
-        if (e instanceof HttpErrorResponse) {
-          if (e.error.status === 422) {
-            this.alertService.error('Vyskytla se chyba. Zkontrolujte správnost všech údajů.');
+      this.clientService.createClient(values).pipe(
+        switchMap((token: IToken) => {
+            this.authenticationService.saveToken(token);
+            return this.authenticationService.saveUser().pipe(
+              map(() => true),
+              switchMap((status: boolean) => {
+                return this.router.navigate(['/klient/stranka/registrace']).then(value => {
+                  this.alertService.success('Váš klientský účet byl založen.');
+                });
+              }),
+              catchError(err => of(false))
+            );
+        }),
+        catchError(error => {
+          console.log(error);
+          if (error instanceof HttpErrorResponse) {
+            if (error.error && error.error.status === 422) {
+              this.alertService.error('Vyskytla se chyba. Zkontrolujte správnost všech údajů.');
+            }
+          } else {
+            this.alertService.error('Vyskytla se chyba.');
           }
-        } else {
-          this.alertService.error('Vyskytla se chyba.');
-        }
-      });
+          return of(false);
+        })
+      ).subscribe();
     }
   }
 
@@ -169,23 +188,24 @@ export class SignUpComponent implements OnInit, AfterContentInit {
   //     this.hideAres = true;
   //   }
   // }
-  nextStep(form: FormGroup, current: any = null, next: any = null) {
-    console.log(form);
+  nextStep(forms: Array<FormGroup>, current: any = null, next: any = null) {
     this.sendData(this.form);
-    if (form.invalid) {
-      Object.keys(form.controls).forEach(key => {
-        form.get(key).markAsDirty();
-      });
-      current.status = 'error';
-    } else {
-      if (next) {
-        next.disabled = false;
-        current.status = 'success';
-        this.selectTab(next);
+    forms.forEach((form: FormGroup) => {
+      if (form.invalid) {
+        Object.keys(form.controls).forEach(key => {
+          form.get(key).markAsDirty();
+        });
+        current.status = 'error';
       } else {
-        this.sendData(this.form);
+        if (next) {
+          next.disabled = false;
+          current.status = 'success';
+          this.selectTab(next);
+        } else {
+          this.sendData(this.form);
+        }
       }
-    }
+    });
   }
 
   isPreviousValid(tab: Tab): boolean {

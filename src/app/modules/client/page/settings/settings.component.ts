@@ -92,11 +92,15 @@ export class SettingsComponent implements OnInit {
   setDefaults(values: Array<any>, source: string) {
     console.log(`---------- ${source} ----------`);
     for (const item of values) {
+      item.type = item.type.toLowerCase();
       console.log(item.type);
       const subForm = this.form.controls[item.type];
       if (this.tabs.tabs) {
+        console.log(`Looking for ${item.type.toLowerCase()}`);
         const tabByType: TabComponent = this.tabs.tabs.find(tab => tab.type === item.type);
-        tabByType.activated = item.active;
+        if (tabByType) {
+          tabByType.activated = item.active;
+        }
       }
       for (const valKey of Object.keys(item)) {
         const control = subForm.get(valKey);

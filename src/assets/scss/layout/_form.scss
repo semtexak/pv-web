@@ -28,7 +28,7 @@ form {
 
   &.has-error,
   &.form-group--error {
-    label, input.form-control, .validation-message {
+    label, input.form-control, .validation-message, .ng-value-container {
       color: $input-error-color;
     }
 
@@ -36,7 +36,7 @@ form {
       font-weight: 600;
     }
 
-    input.form-control {
+    input.form-control, .ng-select-container {
       border-color: $input-error-border-color;
     }
 

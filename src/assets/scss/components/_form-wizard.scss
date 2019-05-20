@@ -12,7 +12,7 @@
     flex-direction: column;
     align-items: center;
 
-    &.disabled {
+    &.form-wizard__item--disabled {
       opacity: .7;
     }
 
@@ -26,10 +26,11 @@
       height: 5px;
       width: calc(50% - #{$wizard-step-icon-width / 2 * 1px});
       background-color: $wizard-step-background;
+      transition: all .2s ease;
       z-index: 1;
     }
 
-    &.success {
+    &.form-wizard__item--success {
       .form-wizard__item__step {
 
         &:before,
@@ -41,7 +42,7 @@
       }
     }
 
-    &.active {
+    &.form-wizard__item--active {
       .form-wizard__item__step {
 
         &:before,
@@ -57,7 +58,7 @@
       }
     }
 
-    &.error {
+    &.form-wizard__item--error {
       .form-wizard__item__step {
 
         &:before,
@@ -94,6 +95,7 @@
         height: $wizard-step-icon-width * 1px;
         border-radius: 50%;
         z-index: 2;
+        transition: all .2s ease;
         @include rem-fallback(font-size, 18);
       }
     }
