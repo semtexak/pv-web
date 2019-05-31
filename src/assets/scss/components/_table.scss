@@ -1,6 +1,17 @@
 @import "../abstracts/variables";
 @import "../abstracts/mixin";
 
+.table {
+  .col--fit {
+    white-space: nowrap;
+    width: 1%;
+  }
+
+  .row--expanse {
+    padding: 1rem 1.3rem;
+  }
+}
+
 .table-filter {
   background-color: #ffffff;
 

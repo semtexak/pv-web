@@ -17,13 +17,18 @@
                     <fieldset>
                       <div class="row">
                         <div class="col-12">
-                          <div class="form-group form-delimiter pb-4 mt-2" [ngClass]="{'has-error': donationForm.controls['active'].invalid && donationForm.controls['active'].dirty}">
+                          <div class="form-group form-delimiter pb-4 mt-2"
+                               [ngClass]="{'has-error': donationForm.controls['active'].invalid && donationForm.controls['active'].dirty}">
                             <div class="form-check form-check-inline">
-                              <input type="radio" class="form-check--active" id="donation_active" (change)="toggleDisabledState(true)" [value]="true" [formControl]="donationForm.controls['active']">
+                              <input type="radio" class="form-check--active" id="donation_active"
+                                     (change)="toggleDisabledState(true)" [value]="true"
+                                     [formControl]="donationForm.controls['active']">
                               <label for="donation_active">Aktivní</label>
                             </div>
                             <div class="form-check form-check-inline">
-                              <input type="radio" class="form-check--nonactive" id="donation_nonactive" (change)="toggleDisabledState(false)" [value]="false" [formControl]="donationForm.controls['active']">
+                              <input type="radio" class="form-check--nonactive" id="donation_nonactive"
+                                     (change)="toggleDisabledState(false)" [value]="false"
+                                     [formControl]="donationForm.controls['active']">
                               <label for="donation_nonactive">Neaktivní</label>
                             </div>
                           </div>
@@ -35,37 +40,48 @@
                     <fieldset>
                       <div class="row">
                         <div class="col-12">
-                          <div class="form-group form-delimiter pb-4 mt-2" [ngClass]="{'has-error': subscriptionForm.controls['active'].invalid && subscriptionForm.controls['active'].dirty}">
+                          <div class="form-group form-delimiter pb-4 mt-2"
+                               [ngClass]="{'has-error': subscriptionForm.controls['active'].invalid && subscriptionForm.controls['active'].dirty}">
                             <div class="form-check form-check-inline">
-                              <input type="radio" class="form-check--active" name="subscription_active" id="subscription_active" (change)="toggleDisabledState(true)" [value]="true" [formControl]="subscriptionForm.controls['active']">
+                              <input type="radio" class="form-check--active" name="subscription_active"
+                                     id="subscription_active" (change)="toggleDisabledState(true)" [value]="true"
+                                     [formControl]="subscriptionForm.controls['active']">
                               <label for="subscription_active">Aktivní</label>
                             </div>
                             <div class="form-check form-check-inline">
-                              <input type="radio" class="form-check--nonactive" name="subscription_active" id="subscription_nonactive" (change)="toggleDisabledState(false)" [value]="false" [formControl]="subscriptionForm.controls['active']">
+                              <input type="radio" class="form-check--nonactive" name="subscription_active"
+                                     id="subscription_nonactive" (change)="toggleDisabledState(false)" [value]="false"
+                                     [formControl]="subscriptionForm.controls['active']">
                               <label for="subscription_nonactive">Neaktivní</label>
                             </div>
                           </div>
                         </div>
                         <div class="col-12">
-                          <div class="form-group form-check mt-2" [ngClass]="{'has-error': subscriptionForm.controls['checkOnLoad'].invalid && subscriptionForm.controls['checkOnLoad'].dirty}">
-                            <input type="checkbox" name="checkOnLoad" id="checkOnLoad" class="" [formControl]="subscriptionForm.controls['checkOnLoad']">
+                          <div class="form-group form-check mt-2"
+                               [ngClass]="{'has-error': subscriptionForm.controls['checkOnLoad'].invalid && subscriptionForm.controls['checkOnLoad'].dirty}">
+                            <input type="checkbox" name="checkOnLoad" id="checkOnLoad" class=""
+                                   [formControl]="subscriptionForm.controls['checkOnLoad']">
                             <label for="checkOnLoad" class="form-check-label">
                               Kontrolovat předplatné po načtení
                             </label>
                           </div>
                         </div>
                         <div class="col-12">
-                          <div class="form-group form-check mt-2" [ngClass]="{'has-error': subscriptionForm.controls['popupOnLoad'].invalid && subscriptionForm.controls['popupOnLoad'].dirty}">
-                            <input type="checkbox" name="popupOnLoad" id="popupOnLoad" class="" [formControl]="subscriptionForm.controls['popupOnLoad']">
-                            <label for="popupOnLoad" class="form-check-label" >
+                          <div class="form-group form-check mt-2"
+                               [ngClass]="{'has-error': subscriptionForm.controls['popupOnLoad'].invalid && subscriptionForm.controls['popupOnLoad'].dirty}">
+                            <input type="checkbox" name="popupOnLoad" id="popupOnLoad" class=""
+                                   [formControl]="subscriptionForm.controls['popupOnLoad']">
+                            <label for="popupOnLoad" class="form-check-label">
                               Vyskakování okna po načtení stránky
                             </label>
                           </div>
                         </div>
                         <div class="col-12">
-                          <div class="form-group form-check mt-2" [ngClass]="{'has-error': subscriptionForm.controls['closable'].invalid && subscriptionForm.controls['closable'].dirty}">
-                            <input type="checkbox" name="closable" id="closable" class="" [formControl]="subscriptionForm.controls['closable']">
-                            <label for="closable" class="form-check-label" >
+                          <div class="form-group form-check mt-2"
+                               [ngClass]="{'has-error': subscriptionForm.controls['closable'].invalid && subscriptionForm.controls['closable'].dirty}">
+                            <input type="checkbox" name="closable" id="closable" class=""
+                                   [formControl]="subscriptionForm.controls['closable']">
+                            <label for="closable" class="form-check-label">
                               Umožnit návštěvníkům zavření vyskakovacího okna
                             </label>
                           </div>
@@ -77,13 +93,18 @@
                     <fieldset>
                       <div class="row">
                         <div class="col-12">
-                          <div class="form-group form-delimiter pb-4 mt-2" [ngClass]="{'has-error': paidContentForm.controls['active'].invalid && paidContentForm.controls['active'].dirty}">
+                          <div class="form-group form-delimiter pb-4 mt-2"
+                               [ngClass]="{'has-error': paidContentForm.controls['active'].invalid && paidContentForm.controls['active'].dirty}">
                             <div class="form-check form-check-inline">
-                              <input type="radio" class="form-check--active" name="paid-content_active" id="paid-content_active" [value]="true" [formControl]="paidContentForm.controls['active']">
+                              <input type="radio" class="form-check--active" name="paid-content_active"
+                                     id="paid-content_active" [value]="true"
+                                     [formControl]="paidContentForm.controls['active']">
                               <label for="paid-content_active">Aktivní</label>
                             </div>
                             <div class="form-check form-check-inline">
-                              <input type="radio" class="form-check--nonactive" name="paid-content_active" id="paid-content_nonactive" [value]="false" [formControl]="paidContentForm.controls['active']">
+                              <input type="radio" class="form-check--nonactive" name="paid-content_active"
+                                     id="paid-content_nonactive" [value]="false"
+                                     [formControl]="paidContentForm.controls['active']">
                               <label for="paid-content_nonactive">Neaktivní</label>
                             </div>
                           </div>
@@ -97,9 +118,12 @@
                 <div class="row">
                   <div class="col-12">
                     <div class="form-group text-right mb-0">
-                      <input type="submit" class="btn btn-primary" value="Uložit" [hidden]="activeTab !== t1" [disabled]="donationForm.invalid">
-                      <input type="submit" class="btn btn-primary" value="Uložit" [hidden]="activeTab !== t2" [disabled]="subscriptionForm.invalid">
-                      <input type="submit" class="btn btn-primary" value="Uložit" [hidden]="activeTab !== t3" [disabled]="paidContentForm.invalid">
+                      <input type="submit" class="btn btn-primary" value="Uložit" [hidden]="activeTab !== t1"
+                             [disabled]="donationForm.invalid">
+                      <input type="submit" class="btn btn-primary" value="Uložit" [hidden]="activeTab !== t2"
+                             [disabled]="subscriptionForm.invalid">
+                      <input type="submit" class="btn btn-primary" value="Uložit" [hidden]="activeTab !== t3"
+                             [disabled]="paidContentForm.invalid">
                     </div>
                   </div>
                 </div>
@@ -113,6 +137,50 @@
               Kód pro vložení do stránky
             </h6>
             <div class="card-body">
+              <form [formGroup]="pluginCustomizationForm" novalidate>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group mt-2"
+                         [ngClass]="{'has-error': pluginCustomizationForm.controls['position'].invalid && pluginCustomizationForm.controls['position'].dirty}">
+                      <div class="form-check form-check-inline">
+                        <input type="radio" name="position" id="position_bottom"
+                               [value]="'top'" [formControl]="pluginCustomizationForm.controls['position']">
+                        <label for="position_bottom">Nahoře</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input type="radio" name="position"
+                               id="position_top" [value]="'bottom'"
+                               [formControl]="pluginCustomizationForm.controls['position']">
+                        <label for="position_top">Dole</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group form-check mt-1"
+                         [ngClass]="{'has-error': pluginCustomizationForm.controls['marginBody'].invalid && pluginCustomizationForm.controls['marginBody'].dirty}">
+                      <input type="checkbox" name="marginBody" id="marginBody" class=""
+                             [formControl]="pluginCustomizationForm.controls['marginBody']">
+                      <label for="marginBody" class="form-check-label">
+                        Posunout obsah stránky
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group form-check mt-1"
+                         [ngClass]="{'has-error': pluginCustomizationForm.controls['debug'].invalid && pluginCustomizationForm.controls['debug'].dirty}">
+                      <input type="checkbox" name="debug" id="debug" class=""
+                             [formControl]="pluginCustomizationForm.controls['debug']">
+                      <label for="debug" class="form-check-label">
+                        Testovací provoz
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </form>
               <textarea pvEditor class="form-control code">{{snippetCode}}</textarea>
             </div>
           </div>

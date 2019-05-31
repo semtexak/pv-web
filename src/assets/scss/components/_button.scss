@@ -68,6 +68,15 @@
     }
   }
 
+  &.btn-row--toggle {
+    padding: 0;
+    color: $foreground-color;
+
+    &:disabled {
+      opacity: 0.25;
+    }
+  }
+
   &.btn--disabled[disabled] {
     background: $secondary;
     color: $secondary-color;

@@ -9,6 +9,7 @@ import {Title} from '@angular/platform-browser';
 import {HttpResponse} from '@angular/common/http';
 import {AlertService} from '../../../../shared/service/alert.service';
 import {environment} from '../../../../../environments/environment';
+import {BannerPosition} from '../../../../shared/model/enum/banner-position';
 
 @Component({
   selector: 'pv-settings',
@@ -20,6 +21,7 @@ export class SettingsComponent implements OnInit {
   donationForm: FormGroup;
   subscriptionForm: FormGroup;
   paidContentForm: FormGroup;
+  pluginCustomizationForm: FormGroup;
   appId: string;
   @ViewChild('tabs') tabs: TabsComponent;
   activeTab: TabComponent;
@@ -53,6 +55,27 @@ export class SettingsComponent implements OnInit {
               private alertService: AlertService,
               private applicationService: ApplicationService) {
     this.titleService.setTitle('Nastavení stránky');
+
+    this.pluginCustomizationForm = this.formBuilder.group({
+      'position': ['top', Validators.compose([Validators.required])],
+      'marginBody': [null, Validators.compose([Validators.required])],
+      'debug': [false, Validators.compose([Validators.required])],
+    });
+
+    this.pluginCustomizationForm.valueChanges.subscribe((options: PluginOptions) => {
+      this.updateCodeSnippet(options);
+    });
+
+    this.pluginCustomizationForm.get('position').valueChanges.subscribe(value => {
+      let validators = null;
+      let control = this.pluginCustomizationForm.get('marginBody');
+      if (value === BannerPosition.TOP) {
+        validators = [Validators.required];
+      }
+
+      control.setValidators(validators);
+      control.updateValueAndValidity();
+    });
   }
 
   ngOnInit() {
@@ -60,9 +83,9 @@ export class SettingsComponent implements OnInit {
       this.initForm();
       if (params['appId']) {
         this.appId = params['appId'];
-        this.initCodeSnippet(params['appId']);
         this.setDefaults(this.initFormData, 'INIT');
         this.loadData();
+        this.updateCodeSnippet(this.pluginCustomizationForm.value);
       }
     });
   }
@@ -70,7 +93,7 @@ export class SettingsComponent implements OnInit {
   loadData() {
     this.applicationService.getApplication(this.appId).subscribe((application: IApplication) => {
       this.application = application;
-      if (this.application && this.application.configurations && this.application.configurations.length > 0) {
+      if (this.application.configurations.length > 0 && this.application.configurations && this.application) {
         this.setDefaults(this.application.configurations, 'LOAD');
       }
     });
@@ -160,7 +183,22 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  private initCodeSnippet(appId: string) {
+  private updateCodeSnippet(pluginOptions: PluginOptions) {
+    pluginOptions.appId = this.appId;
+    let optionsFormatted = Object.keys(pluginOptions).reduce((options, val) => {
+      let value = pluginOptions[val];
+      if (value === null) {
+        return options;
+      }
+      switch (typeof pluginOptions[val]) {
+        case 'string':
+          value = `'${value}'`;
+          break;
+      }
+      options.push(`${val}: ${value}`);
+      return options;
+    }, []);
+
     this.snippetCode = '<script>\n' +
       '(function (d, s, id) {\n' +
       '   var js, fjs = d.getElementsByTagName(s)[0];\n' +
@@ -170,12 +208,18 @@ export class SettingsComponent implements OnInit {
       '   js.src = \'' + environment.PLUGIN_URL + '\';\n' +
       '   js.onload = function() {\n' +
       '     window.payvont = new Payvont({\n' +
-      '       appId: \'' + this.appId + '\',\n' +
-      '       debug: true,\n' +
+      '       ' + optionsFormatted.join(',') + '\n' +
       '     });\n' +
       '   };\n' +
       '   fjs.parentNode.insertBefore(js, fjs);\n' +
       '}(document, \'script\', \'payvont-script\'));\n' +
       '</script>';
   }
+}
+
+export interface PluginOptions {
+  appId: string;
+  position: string;
+  marginBody: boolean;
+  debug: boolean;
 }

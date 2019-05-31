@@ -1,5 +1,7 @@
 <div class="container-fluid mb-5 donations">
-  <h2 class="page__title"><span class="page__title--disabled">Uživatel /</span> Dary <button class="btn refresh" (click)="reloadData()"><span class="fas fa-sync-alt"></span></button></h2>
+  <h2 class="page__title"><span class="page__title--disabled">Uživatel /</span> Dary
+    <button class="btn refresh" (click)="reloadData()"><span class="fas fa-sync-alt"></span></button>
+  </h2>
   <div class="table-responsive">
     <p-table
       #table
@@ -12,29 +14,36 @@
       [sortOrder]="0"
       [lazy]="true"
       (onLazyLoad)="loadLazy($event)"
-      [paginator]="page.totalPages > 1">
+      [paginator]="page.totalPages > 1"
+      dataKey="id">
       <ng-template pTemplate="header" let-columns>
         <tr>
+          <th class="col--fit"></th>
           <th *ngFor="let col of columns" [pSortableColumnDisabled]="!col.sort" [pSortableColumn]="col.field">
             {{col.header}}
             <p-sortIcon *ngIf="col.sort" [field]="col.field"></p-sortIcon>
           </th>
-          <th class="action">
+          <th class="action col--fit">
             Akce
           </th>
         </tr>
         <!--<tr>-->
-          <!--<th *ngFor="let col of columns" [ngSwitch]="col.field">-->
-            <!--&lt;!&ndash;<input *ngSwitchCase="'appId'" type="text" pInputText placeholder="Vyhledat app id"&ndash;&gt;-->
-                   <!--&lt;!&ndash;class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">&ndash;&gt;-->
-            <!--&lt;!&ndash;<input *ngSwitchCase="'user'" type="text" pInputText placeholder="Vyhledat uživatele"&ndash;&gt;-->
-                   <!--&lt;!&ndash;class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">&ndash;&gt;-->
-          <!--</th>-->
-          <!--<th></th>-->
+        <!--<th *ngFor="let col of columns" [ngSwitch]="col.field">-->
+        <!--&lt;!&ndash;<input *ngSwitchCase="'appId'" type="text" pInputText placeholder="Vyhledat app id"&ndash;&gt;-->
+        <!--&lt;!&ndash;class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">&ndash;&gt;-->
+        <!--&lt;!&ndash;<input *ngSwitchCase="'user'" type="text" pInputText placeholder="Vyhledat uživatele"&ndash;&gt;-->
+        <!--&lt;!&ndash;class="form-control has-icon" (keyup.enter)="addFilter($event.target.value, col.field)">&ndash;&gt;-->
+        <!--</th>-->
+        <!--<th></th>-->
         <!--</tr>-->
       </ng-template>
-      <ng-template pTemplate="body" let-row>
-        <tr>
+      <ng-template pTemplate="body" let-row let-expanded="expanded">
+        <tr [ngClass]="{'expanded': expanded}">
+          <td class="row--expanse">
+            <button class="btn btn-link btn-row--toggle" [pRowToggler]="row" [disabled]="!row.recurrent">
+              <span class="fas" [ngClass]="expanded ? 'fa-chevron-up' : 'fa-chevron-down'"></span>
+            </button>
+          </td>
           <td>
             <img *ngIf="row.application?.image" class="client__logo"
                  src="{{baseUrl}}:8765/client-service/applications/img/{{row.application.image}}"
@@ -42,7 +51,7 @@
             <!--<img class="client__logo" src="https://localhost:8765/client-service/applications/img/{{row.application.appId}}.png" alt="{{row.application.name}}">{{row.application.name}}-->
           </td>
           <td>{{row.price?.amount|price: row.price?.currency}}</td>
-          <td>Ne</td>
+          <td>{{row.recurrent ? 'Ano' : 'Ne'}}</td>
           <td>{{row.createdAt|date: 'dd. MM. yyyy HH:mm:ss'}}</td>
           <!--<td>{{row.createdAt|date: 'dd. MM. yyyy HH:mm:ss'}}</td>-->
           <td class="action-column">
@@ -50,6 +59,33 @@
               <!--<li><a class="btn-xs"><span class="fas fa-pencil-alt"></span></a></li>-->
               <!--<li><a class="btn-xs"><span class="fas fa-trash"></span></a></li>-->
             </ul>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="rowexpansion" let-row let-columns="columns">
+        <tr>
+          <td [attr.colspan]="columns.length + 1">
+            <table class="table table-filter table-bordered table-hover table-striped">
+              <thead>
+              <tr>
+                <th>Stránka</th>
+                <th>Cena</th>
+                <th>Datum</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let donation of row.childrens">
+                <td>
+                  <img *ngIf="row.application?.image" class="client__logo"
+                       src="{{baseUrl}}:8765/client-service/applications/img/{{row.application.image}}"
+                       alt="{{row.application.image}}">{{row.application.name}}
+                  <!--<img class="client__logo" src="https://localhost:8765/client-service/applications/img/{{row.application.appId}}.png" alt="{{row.application.name}}">{{row.application.name}}-->
+                </td>
+                <td>{{donation.price?.amount|price: row.price?.currency}}</td>
+                <td>{{donation.createdAt|date: 'dd. MM. yyyy HH:mm:ss'}}</td>
+              </tr>
+              </tbody>
+            </table>
           </td>
         </tr>
       </ng-template>

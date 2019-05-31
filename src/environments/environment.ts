@@ -1,6 +1,6 @@
 const protocol = 'http';
 const hostname = 'localhost';
-const pluginHostname = 'payvont.local.com';
+const pluginHostname = hostname;
 const pluginPort = '8080';
 
 export const environment = {
@@ -11,7 +11,7 @@ export const environment = {
     facebook: true
   },
   API_URL: `${protocol}://${hostname}:8765`,
-  PLUGIN_URL: `${protocol}://${pluginHostname}:${pluginPort}/assets/plugin/dist/js/bundle.js`,
+  PLUGIN_URL: `${protocol}://${pluginHostname}:${pluginPort}/js/bundle.js`,
   grantType: 'password',
   clientId: 'test',
   clientSecret: 'secret',
