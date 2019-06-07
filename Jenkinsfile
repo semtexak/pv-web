@@ -2,32 +2,24 @@ pipeline{
     agent any
   
     environment {
-      DOCKER_HUB_PWD = credentials('dockerHubPwd')
+        GITHUB_LOGIN = credentials('Git')
     }
-
+  
     stages{
         stage("Main"){
             steps{
                 script{
-                    registry = "tomasblaha"
                     appName = "pv-web"
                     tag = env.GIT_COMMIT
                   
                     stage("Clone plugin reposiotry"){
-                      sh "git clone https://github.com/semtexak/pv-plugin.git plugin"
+                      sh "git clone https://${GITHUB_LOGIN}@github.com/semtexak/pv-plugin.git plugin"
                     }
 
                     stage("Docker BUILD"){
-                      sh "docker build -t $registry/$appName:$tag ."
-                      sh "docker tag $registry/$appName:$tag $registry/$appName:latest"
-                    }
-                    
-                    stage("Docker LOGIN"){
-                        sh "docker login -u $registry -p ${DOCKER_HUB_PWD}"
-                    }
-
-                    stage("Docker PUSH"){
-                        sh "docker push $registry/$appName:$tag"
+                      sh "docker build -t $appName:$tag ."
+                      sh "docker rmi $appName:latest || true"
+                      sh "docker tag $appName:$tag $appName:latest"
                     }
                 }
             }
