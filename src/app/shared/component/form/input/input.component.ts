@@ -7,11 +7,11 @@ import {FormControl} from '@angular/forms';
 })
 export class InputComponent implements OnInit, OnChanges {
 
-  @Input() protected control: FormControl = undefined;
-  @Input() protected label: string = 'Label';
-  @Input() protected id: string = undefined;
-  @Input() protected placeholder: string = undefined;
-  @Input() protected showRequired: boolean = true;
+  @Input() control: FormControl = undefined;
+  @Input() label: string = 'Label';
+  @Input() id: string = undefined;
+  @Input() placeholder: string = undefined;
+  @Input() showRequired: boolean = true;
 
   @Input() type: string = 'text';
   required: boolean = false;
