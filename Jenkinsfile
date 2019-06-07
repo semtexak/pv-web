@@ -1,6 +1,10 @@
 pipeline{
     agent any
   
+    environment {
+        GITHUB_LOGIN = credentials('Git')
+    }
+  
     stages{
         stage("Main"){
             steps{
@@ -9,7 +13,7 @@ pipeline{
                     tag = env.GIT_COMMIT
                   
                     stage("Clone plugin reposiotry"){
-                      sh "git clone https://github.com/semtexak/pv-plugin.git plugin"
+                      sh "git clone https://${GITHUB_LOGIN}@github.com/semtexak/pv-plugin.git plugin"
                     }
 
                     stage("Docker BUILD"){
