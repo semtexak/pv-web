@@ -6,7 +6,7 @@ import {DropdownDirective} from './dropdown.directive';
 })
 export class DropdownMenuDirective {
 
-  @HostBinding('class.show') isOpen = false;
+  @HostBinding('class.pv-dropdown--open') isOpen = false;
   private dropdownMenu: DropdownDirective;
 
   constructor(@Host() @Inject(forwardRef(() => DropdownDirective)) dropdownMenu: DropdownDirective) {

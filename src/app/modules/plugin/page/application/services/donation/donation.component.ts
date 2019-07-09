@@ -78,10 +78,10 @@ export class DonationComponent implements OnInit {
     }
   }
 
-  addOrEditToCart(amount: number, recurent: boolean = false) {
+  addOrEditToCart(amount: number, recurrent: boolean = false) {
     this.cartService.clear();
     const product: CartItem = {
-      name: `Příspěvek (${recurent ? 'měsíční' : 'jednorázový'})`,
+      name: `Příspěvek (${recurrent ? 'měsíční' : 'jednorázový'})`,
       quantity: 1,
       type: ProductType.DONATION,
       price: {
@@ -89,7 +89,7 @@ export class DonationComponent implements OnInit {
         currency: 'CZK'
       },
       data: {
-        recurent: recurent
+        recurrent: recurrent
       }
     };
     this.cartService.add(product, true);

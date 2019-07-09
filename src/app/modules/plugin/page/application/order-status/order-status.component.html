@@ -1,5 +1,6 @@
 <header class="payment__header">
   <h1 class="payment__heading payment__heading--gradient" *ngIf="order && order.status !== OrderStatus.PAID" [ngClass]="{'payment__heading--success': order?.status === OrderStatus.PAID}">Objednávka č. <ng-container *ngIf="order">{{order?.createdAt|date: 'yyyy'}}{{(order?.id|number:'6.0').replace(',', '')}}</ng-container></h1>
+  <h1 class="payment__heading payment__heading--gradient" *ngIf="!order"> Ověřujeme stav platby...</h1>
   <h1 class="payment__heading payment__heading--gradient payment__heading--success" *ngIf="order?.status === OrderStatus.PAID"> Děkujeme</h1>
   <!--<h1 class="payment__heading payment__heading&#45;&#45;gradient payment__heading&#45;&#45;success" *ngIf="order?.status === OrderStatus.PAID">Objednávka byla zaplacena.</h1>-->
   <!--<h1 class="payment__heading payment__heading&#45;&#45;gradient payment__heading&#45;&#45;error" *ngIf="order?.status !== OrderStatus.">Objednávka nebyla zaplacena.</h1>-->

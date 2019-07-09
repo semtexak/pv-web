@@ -17,7 +17,7 @@ export class DropdownToggleDirective implements OnInit {
     this.dropdownMenu.status.next(this.isOpen);
   }
 
-  @HostListener('document:click') mouseClickDismiss() {
+  @HostListener('window:click') mouseClickDismiss() {
     if (this.isOpen && this.outerClick) {
       this.isOpen = false;
       this.dropdownMenu.status.next(this.isOpen);

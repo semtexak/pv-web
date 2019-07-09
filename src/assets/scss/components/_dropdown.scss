@@ -1,6 +1,8 @@
 @import "../abstracts/variables";
 
 .dropdown {
+
+
   .dropdown-menu {
     padding: 0;
     margin: 0;
@@ -26,5 +28,64 @@
       left: 50%;
       transform: translateX(-50%);
     }
+  }
+}
+
+.pv-dropdown {
+  position: absolute;
+  top: calc(100% + 15px);
+  right: 0;
+  width: 160px;
+  transition: all .3s ease-in;
+  background-color: #ffffff;
+  transform: translateY(-10%);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 3;
+
+  @media (max-width: 575px) {
+    right: unset;
+    left: 0;
+  }
+
+  ul {
+    padding: 4px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    list-style: none;
+
+    li {
+      transition: all .3s;
+
+      a {
+        display: block;
+        cursor: pointer;
+        padding: 5px 12px;
+        color: rgba(0,0,0,.65);
+        font-weight: 400;
+        font-size: 1em;
+        line-height: 22px;
+        white-space: nowrap;
+        text-decoration: none;
+
+        &:hover {
+          background-color: $action-list-background;
+          text-decoration: none;
+        }
+      }
+
+      &.pv-dropdown__divider {
+        height: 1px;
+        margin: 4px 0;
+        overflow: hidden;
+        line-height: 0;
+        background-color: #e8e8e8;
+      }
+    }
+  }
+
+  &.pv-dropdown--open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
   }
 }

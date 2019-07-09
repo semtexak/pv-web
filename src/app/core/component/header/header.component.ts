@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   public fixedHeader: boolean;
   public sidebarMinimized: boolean;
   public isOnTop = false;
+  public notificationsCount: number;
   private scrollOffset = null;
 
   constructor(private authenticationService: AuthenticationService,
@@ -32,9 +33,11 @@ export class HeaderComponent implements OnInit, AfterViewInit {
               private layoutService: LayoutService) {
     this.layoutService.fixedHeader.subscribe((status: boolean) => this.fixedHeader = status);
     this.layoutService.sidebarMinimized.subscribe((status: boolean) => this.sidebarMinimized = status);
-    this.notificationService.notifications.subscribe(notifications => {
+    this.notificationService.notifications$.subscribe(notifications => {
       this.notifications = notifications;
-      this.notificationsPreview = notifications.slice(0, 10);
+      this.notificationsPreview = notifications;
+      this.notificationsCount = this.notificationsPreview.filter((notification: INotification) => !notification.acknowledged).length;
+      console.log(this.notificationsCount);
     });
   }
 

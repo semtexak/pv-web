@@ -85,13 +85,13 @@
       </section>
     </ng-container>
     <ng-template #notLogged>
-      <ng-container *ngIf="show === 'confirm'">
+      <ng-container *ngIf="show === 'login'">
         <pv-sign-in-form [plugin]="true" [stayOnSamePageAfterLogin]="stayOnSamePageAfterLogin" (onNavigate)="show = $event" [boxClass]="'box box__login'"></pv-sign-in-form>
       </ng-container>
-      <ng-container *ngIf="show === 'login'">
+      <ng-container *ngIf="show === 'confirm'">
         Confirm
         <pv-activation></pv-activation>
-      </ng-container>
+      </ng-container>ssssss
       <ng-container *ngIf="show === 'register'">
         <pv-sign-up-form [plugin]="true" [stayOnSamePageAfterLogin]="stayOnSamePageAfterLogin" (onNavigate)="show = $event" [boxClass]="'box box__login'"></pv-sign-up-form>
       </ng-container>

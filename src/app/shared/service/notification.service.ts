@@ -4,39 +4,43 @@ import * as SockJS from 'sockjs-client';
 import {CompatClient, Stomp} from '@stomp/stompjs';
 import {BehaviorSubject} from 'rxjs';
 import {INotification} from '../model/base/i-notification';
+import {AuthenticationService} from './authentication.service';
+import {User} from '../model/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
 
-  private _notifications: INotification[] = [];
+  private notifications: INotification[] = [];
   private stompClient: CompatClient;
 
-  notifications: BehaviorSubject<INotification[]> = new BehaviorSubject(this._notifications);
+  notifications$: BehaviorSubject<INotification[]> = new BehaviorSubject(this.notifications);
 
-  constructor() {
-    // this.connect();
+  constructor(private authenticationService: AuthenticationService) {
+    this.authenticationService.loggedUser.subscribe((user: User) => {
+      console.log(user);
+      if (user) {
+        this.connect(user.id);
+      } else {
+        this.disconnect();
+      }
+    });
   }
 
-  connect() {
-
-    // const socket = new SockJS('sdads');
+  connect(userId: number) {
     const socket = new SockJS('http://localhost:10000/notifications');
-    // const socket = new SockJS('http://localhost:8765/ws');
     this.stompClient = Stomp.over(socket);
     this.stompClient.debug(null);
 
-    const _this = this;
-    this.stompClient.connect({}, function (frame) {
-      _this.stompClient.subscribe('/pv/notifications', function (notificationsResponse) {
-        _this._notifications = JSON.parse(notificationsResponse.body);
-        console.log(_this._notifications);
-        _this.notifications.next(_this._notifications);
+    this.stompClient.connect({userId: userId}, frame => {
+      this.stompClient.subscribe(`/pv/notifications/${userId}`, response => {
+        this.notifications = JSON.parse(response.body);
+        this.notifications$.next(this.notifications);
       });
-      _this.stompClient.subscribe('/topic/notification', function (notificationResponse) {
-        _this._notifications.push(JSON.parse(notificationResponse.body));
-        _this.notifications.next(_this._notifications);
+      this.stompClient.subscribe(`/topic/notification/${userId}`, response => {
+        this.notifications.push(JSON.parse(response.body));
+        this.notifications$.next(this.notifications);
       });
     });
   }
@@ -44,9 +48,9 @@ export class NotificationService {
   disconnect() {
     if (this.stompClient != null) {
       this.stompClient.disconnect();
+      console.log('Disconnected!');
     }
 
-    console.log('Disconnected!');
   }
 
   sendTest() {

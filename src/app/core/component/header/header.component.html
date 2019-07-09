@@ -29,7 +29,7 @@
         </ng-container>
         <ng-template #admin>
           <li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="active">Zpět</a>
+            <a class="nav-link" routerLink="/" routerLinkActive="active">Zpět</a>
           </li>
         </ng-template>
 
@@ -44,20 +44,22 @@
             <a class="nav-link notification" pvDropdownToggle>
               <span class="flaticon-bell-2"></span>
               <span class="notification__badge"
-                    [ngClass]="{'notification--empty': !notifications || (notifications && notifications.length === 0), 'notification--new': shake}">{{notifications.length}}</span>
+                    [ngClass]="{'notification--empty': !notifications || (notifications && notificationsCount === 0), 'notification--new': shake}">{{notificationsCount}}</span>
             </a>
-            <div class="dropdown-menu notification__list" pvDropdownMenu aria-labelledby="navbarDropdown">
+            <div class="pv-dropdown notification__list" pvDropdownMenu aria-labelledby="navbarDropdown">
               <div class="notification__header row">
                 <div class="col-9">
-                  Notifications ({{notifications.length}})
+                  Notifications ({{notificationsPreview.length}})
                 </div>
                 <div class="col-3 text-right">A</div>
               </div>
               <div class="notification__content row">
-                <ng-container *ngIf="notifications && notifications.length > 0; else notificationsEmpty">
+                <ng-container *ngIf="notificationsPreview && notificationsPreview.length > 0; else notificationsEmpty">
                   <ul>
-                    <li *ngFor="let notification of notifications">
-                      <span class="notification__icon icon icon--sm icon--rounded icon--light" [ngClass]="{'icon--info': notification.type === 'user'}"><span class="fas fa-user"></span></span>
+                    <li *ngFor="let notification of notificationsPreview">
+                      <span class="notification__icon icon icon--sm icon--rounded icon--light"
+                            [ngClass]="{'icon--info': notification.type === 'user'}"><span
+                        class="fas fa-user"></span></span>
                       <span class="notification__message">{{notification.message | truncate: 50}}</span>
                     </li>
                   </ul>
@@ -69,15 +71,25 @@
               <a href="" class="notification__footer col-12 text-center"><span class=""></span> Zobrazit vše</a>
             </div>
           </li>
+          <!--<li class="nav-item user-section" pvDropdown>-->
+          <!--<a class="nav-link dropdown-toggle" pvDropdownToggle href="#" role="button">-->
+          <!--{{user.name}}-->
+          <!--</a>-->
+          <!--<div class="dropdown-menu" pvDropdownMenu aria-labelledby="navbarDropdown">-->
+          <!--<a class="dropdown-item" routerLink="/zakaznik">Můj účet</a>-->
+          <!--<a class="dropdown-item" routerLink="/uzivatel/zmena-hesla">Změna hesla</a>-->
+          <!--<div class="dropdown-divider"></div>-->
+          <!--<a class="dropdown-item" (click)="logout()">Odhlásit</a>-->
+          <!--</div>-->
+          <!--</li>-->
           <li class="nav-item user-section" pvDropdown>
-            <a class="nav-link dropdown-toggle" pvDropdownToggle href="#" role="button">
-              {{user.name}}
-            </a>
-            <div class="dropdown-menu" pvDropdownMenu aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" routerLink="/zakaznik">Můj účet</a>
-              <a class="dropdown-item" routerLink="/uzivatel/zmena-hesla">Změna hesla</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" (click)="logout()">Odhlásit</a>
+            <a class="nav-link dropdown-toggle" pvDropdownToggle href="#" role="button">{{user.name}}</a>
+            <div class="pv-dropdown" pvDropdownMenu>
+              <ul>
+                <li><a href="http://payvont.com/zakaznik" target="_blank">Můj účet</a></li>
+                <li class="pv-dropdown__divider"></li>
+                <li><a href="" target="_blank">Odhlásit</a></li>
+              </ul>
             </div>
           </li>
         </ng-template>

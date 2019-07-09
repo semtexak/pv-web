@@ -22,7 +22,12 @@ export class ServicesComponent implements OnInit {
       if (app && app.configurations.length > 0) {
         const active = app.configurations.filter(config => config.active);
         if (active.length === 1) {
-          this.selectService(active[0].type);
+          console.log(active[0].type);
+          if (active[0].type === 'donation') {
+            this.selectService(active[0].type, {select: true});
+          } else {
+            this.selectService(active[0].type);
+          }
         }
       }
     });
@@ -32,7 +37,8 @@ export class ServicesComponent implements OnInit {
     return this.application && (this.application.configurations.findIndex(el => el.type === service && el.active) !== -1);
   }
 
-  selectService(service: string) {
-    this.router.navigate([service], {relativeTo: this.route});
+  selectService(service: string, queryParams = null) {
+    console.log(service, queryParams);
+    this.router.navigate([service], {relativeTo: this.route, queryParams: queryParams});
   }
 }
