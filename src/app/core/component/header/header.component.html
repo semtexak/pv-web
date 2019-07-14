@@ -86,9 +86,10 @@
             <a class="nav-link dropdown-toggle" pvDropdownToggle href="#" role="button">{{user.name}}</a>
             <div class="pv-dropdown" pvDropdownMenu>
               <ul>
-                <li><a href="http://payvont.com/zakaznik" target="_blank">Můj účet</a></li>
+                <li><a routerLink="/zakaznik">Můj účet</a></li>
+                <li><a routerLink="/uzivatel/zmena-hesla">Změna hesla</a></li>
                 <li class="pv-dropdown__divider"></li>
-                <li><a href="" target="_blank">Odhlásit</a></li>
+                <li><a (click)="logout()">Odhlásit</a></li>
               </ul>
             </div>
           </li>
