@@ -13,6 +13,8 @@ import {ServicesComponent} from './page/application/services/services.component'
 import {SideComponent} from './page/side/side.component';
 import {PayComponent} from './page/side/pay/pay.component';
 import {ActivationComponent} from './page/application/activation/activation.component';
+import { HowItWorksComponent } from './page/how-it-works/how-it-works.component';
+import { FooterComponent } from './component/footer/footer.component';
 
 @NgModule({
   imports: [
@@ -30,7 +32,9 @@ import {ActivationComponent} from './page/application/activation/activation.comp
     ServicesComponent,
     SideComponent,
     PayComponent,
-    ActivationComponent
+    ActivationComponent,
+    HowItWorksComponent,
+    FooterComponent
   ]
 })
 export class PluginModule {

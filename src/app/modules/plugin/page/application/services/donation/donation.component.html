@@ -100,19 +100,4 @@
     </form>
   </div>
 </section>
-<section class="payment__action">
-  <div class="row">
-    <div class="col">
-      <button (click)="selectDonate()" *ngIf="!select" class="btn btn-primary btn-gradient btn-gradient--success btn-lg btn-full btn-cta">Přispět</button>
-      <!--<button (click)="addToCart()" *ngIf="select" [disabled]="form.invalid" class="btn btn-primary btn-gradient btn-gradient&#45;&#45;success btn-lg btn-full add-to-cart btn-cta"><span class="fas fa-shopping-cart"></span> Do košíku</button>-->
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-6 mt-2">
-      <button class="btn btn-outline-info btn-md plugin-secondary btn-full">Jak to funguje? <span class="fas fa-chevron-right"></span></button>
-    </div>
-    <div class="col-sm-6 mt-2">
-      <button class="btn btn-outline-secondary plugin-secondary btn-md btn-full" (click)="sendCloseMessage()">Pokračovat na web <span class="fas fa-chevron-right"></span></button>
-    </div>
-  </div>
-</section>
+<pv-footer [appId]="application.appId" [type]="'donation'"></pv-footer>
