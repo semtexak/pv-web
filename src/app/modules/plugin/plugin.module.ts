@@ -15,6 +15,7 @@ import {PayComponent} from './page/side/pay/pay.component';
 import {ActivationComponent} from './page/application/activation/activation.component';
 import { HowItWorksComponent } from './page/how-it-works/how-it-works.component';
 import { FooterComponent } from './component/footer/footer.component';
+import { DonationProductComponent } from './page/application/services/donation/donation-product/donation-product.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { FooterComponent } from './component/footer/footer.component';
     PayComponent,
     ActivationComponent,
     HowItWorksComponent,
-    FooterComponent
+    FooterComponent,
+    DonationProductComponent
   ]
 })
 export class PluginModule {

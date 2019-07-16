@@ -1,0 +1,31 @@
+<div class="product__section">
+  <div class="product__header">
+    <h2>{{recurrent ? 'Měsíčně' : 'Jednorázově'</h2>
+    <p>Zvolte prosím částku, kterou chcete {{recurrent ? 'měsíčně přispívat' : 'přispět'}}.</p>
+  </div>
+  <div class="product__content">
+    <div class="form-group text-left mt-2" [ngClass]="{'has-error': control.invalid && control.dirty}">
+      <div class="form-check mb-2" *ngFor="let price of prices; let i = index" (click)="addOrEditToCart(price)">
+        <input type="radio" class="form-check--active" [id]="'donation_price_' + i" [value]="recurrent ? price + 'r' : price" [formControl]="control">
+        <label [for]="'donation_price_' + i">{{price|price:'CZK'}}</label>
+      </div>
+      <!--<div class="form-check mb-2" (click)="addOrEditToCart(99)">-->
+        <!--<input type="radio" class="form-check&#45;&#45;active" id="donation_price_3" [value]="'99r'" [formControl]="form.controls['price']">-->
+        <!--<label for="donation_price_3">{{99|price:'CZK'}}</label>-->
+      <!--</div>-->
+      <!--<div class="form-check mb-2" (click)="addOrEditToCart(149)">-->
+        <!--<input type="radio" class="form-check&#45;&#45;active" id="donation_price_4" [value]="'149r'" [formControl]="form.controls['price']">-->
+        <!--<label for="donation_price_4">{{149|price:'CZK'}}</label>-->
+      <!--</div>-->
+      <!---->
+      <!--<div class="form-check mb-2" (click)="addOrEditToCart(donationConfiguration.maxDonate, recurrent)">-->
+        <!--<input type="radio" class="form-check&#45;&#45;active" id="donation_price_5" [value]="donationConfiguration.maxDonate + 'r'" [formControl]="form.controls['price']">-->
+        <!--<label for="donation_price_5">{{donationConfiguration.maxDonate|price:'CZK'}}</label>-->
+      <!--</div>-->
+      <!--<div class="form-check mb-2">-->
+      <!--<input type="radio" class="form-check&#45;&#45;active" id="donation_price_6" [value]="customPrice" [formControl]="form.controls['price']">-->
+      <!--<label for="donation_price_6">jiná</label>-->
+      <!--</div>-->
+    </div>
+  </div>
+</div>
