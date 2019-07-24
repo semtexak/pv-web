@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: row;
 
+  pv-donation-product {
+    flex: 1;
+  }
+
   .product__section {
     display: flex;
     flex-direction: column;

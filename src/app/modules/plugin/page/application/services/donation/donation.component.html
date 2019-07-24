@@ -4,61 +4,17 @@
 </header>
 <section class="payment__content p-4">
   <div class="content content--stretch content--center" *ngIf="!select">
-    <p>Chtěli byste nás finančně podpořit? <br /> Nabízíme možnost jak <strong>jednorázového</strong>, tak i <strong>opakovaného</strong> příspěvku.</p>
+    <p>Chtěli byste nás finančně podpořit? <br /> Nabízíme možnost jak <strong>jednorázového</strong>, tak i
+      <strong>opakovaného</strong> příspěvku.</p>
     <h2>Předem děkujeme za jakýkoliv finanční příspěvek.</h2>
   </div>
   <div class="content content--stretch content--center" [ngClass]="{'content--disabled': !isLogged}" *ngIf="select">
     <form class="form-horizontal" [formGroup]="form" novalidate *ngIf="donationConfiguration">
-      <!--<div class="products">-->
-
-
+      <div class="products">
         <pv-donation-product [control]="form.get('price')" [recurrent]="true"></pv-donation-product>
         <pv-donation-product [control]="form.get('price')"></pv-donation-product>
-
-        <!--<div class="product__section">-->
-          <!--<div class="product__header">-->
-            <!--<h2>Jednorázově</h2>-->
-            <!--<p>Zvolte prosím částku, kterou chcete jednorázově přispět.</p>-->
-          <!--</div>-->
-          <!--<div class="product__content">-->
-            <!--<div class="form-group text-left mt-2" [ngClass]="{'has-error': form.controls['price'].invalid && form.controls['price'].dirty}">-->
-              <!--&lt;!&ndash;<div class="form-check mb-2">&ndash;&gt;-->
-              <!--&lt;!&ndash;<input type="radio" class="form-check&#45;&#45;active" id="donation_price_1" [value]="donationConfiguration.minDonate" [formControl]="form.controls['price']">&ndash;&gt;-->
-              <!--&lt;!&ndash;<label for="donation_price_1" (click)="addOrEditToCart(donationConfiguration.minDonate)">{{donationConfiguration.minDonate|price:'CZK'}}</label>&ndash;&gt;-->
-              <!--&lt;!&ndash;</div>&ndash;&gt;-->
-              <!--&lt;!&ndash;<div class="form-check mb-2">&ndash;&gt;-->
-              <!--&lt;!&ndash;<input type="radio" class="form-check&#45;&#45;active" id="donation_price_1" [value]="19" [formControl]="form.controls['price']">&ndash;&gt;-->
-              <!--&lt;!&ndash;<label for="donation_price_1">{{19|price:'CZK'}}</label>&ndash;&gt;-->
-              <!--&lt;!&ndash;</div>&ndash;&gt;-->
-              <!--<div class="form-check mb-2" (click)="addOrEditToCart(49)">-->
-                <!--<input type="radio" class="form-check&#45;&#45;active" id="donation_price_6" [value]="49" [formControl]="form.controls['price']">-->
-                <!--<label for="donation_price_6">{{49|price:'CZK'}}</label>-->
-              <!--</div>-->
-              <!--<div class="form-check mb-2" (click)="addOrEditToCart(99)">-->
-                <!--<input type="radio" class="form-check&#45;&#45;active" id="donation_price_7" [value]="99" [formControl]="form.controls['price']">-->
-                <!--<label for="donation_price_7">{{99|price:'CZK'}}</label>-->
-              <!--</div>-->
-              <!--<div class="form-check mb-2" (click)="addOrEditToCart(149)">-->
-                <!--<input type="radio" class="form-check&#45;&#45;active" id="donation_price_8" [value]="149" [formControl]="form.controls['price']">-->
-                <!--<label for="donation_price_8">{{149|price:'CZK'}}</label>-->
-              <!--</div>-->
-              <!--&lt;!&ndash;<div class="form-check mb-2">&ndash;&gt;-->
-              <!--&lt;!&ndash;<input type="radio" class="form-check&#45;&#45;active" id="donation_price_5" [value]="199" [formControl]="form.controls['price']">&ndash;&gt;-->
-              <!--&lt;!&ndash;<label for="donation_price_5">{{199|price:'CZK'}}</label>&ndash;&gt;-->
-              <!--&lt;!&ndash;</div>&ndash;&gt;-->
-              <!--<div class="form-check mb-2" (click)="addOrEditToCart(donationConfiguration.maxDonate)">-->
-                <!--<input type="radio" class="form-check&#45;&#45;active" id="donation_price_9" [value]="donationConfiguration.maxDonate" [formControl]="form.controls['price']">-->
-                <!--<label for="donation_price_9">{{donationConfiguration.maxDonate|price:'CZK'}}</label>-->
-              <!--</div>-->
-              <!--&lt;!&ndash;<div class="form-check mb-2">&ndash;&gt;-->
-              <!--&lt;!&ndash;<input type="radio" class="form-check&#45;&#45;active" id="donation_price_6" [value]="customPrice" [formControl]="form.controls['price']">&ndash;&gt;-->
-              <!--&lt;!&ndash;<label for="donation_price_6">jiná</label>&ndash;&gt;-->
-              <!--&lt;!&ndash;</div>&ndash;&gt;-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
+      </div>
     </form>
   </div>
 </section>
-<pv-footer [appId]="application.appId" [type]="'donation'"></pv-footer>
+<pv-footer [appId]="application.appId" [type]="'donation'" [purchasing]="select"></pv-footer>

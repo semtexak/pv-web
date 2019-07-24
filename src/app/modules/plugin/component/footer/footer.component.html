@@ -1,15 +1,15 @@
 <section class="payment__action">
   <div class="row">
     <div class="col">
-      <a [routerLink]="['/plugin/app/' + appId + '/' + type, {select: true}]" *ngIf="!select"
+      <a [routerLink]="['/plugin/app/' + appId + '/' + type]" [queryParams]="{select: true}" *ngIf="!purchasing"
         class="btn btn-primary btn-gradient btn-gradient--success btn-lg btn-full btn-cta">Přispět</a>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-6 mt-2">
-      <a routerLink="/plugin/app/{{appId}}/{{type}}/how-it-works"
+      <button [tooltip]="'V přípravě.'" [placement]="'top'"
         class="btn btn-outline-info btn-md plugin-secondary btn-full">Jak to funguje? <span
-          class="fas fa-chevron-right"></span></a>
+          class="fas fa-chevron-right"></span></button>
     </div>
     <div class="col-sm-6 mt-2">
       <button class="btn btn-outline-secondary plugin-secondary btn-md btn-full">Pokračovat

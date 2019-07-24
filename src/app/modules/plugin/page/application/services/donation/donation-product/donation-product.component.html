@@ -1,13 +1,13 @@
 <div class="product__section">
   <div class="product__header">
-    <h2>{{recurrent ? 'Měsíčně' : 'Jednorázově'</h2>
+    <h2>{{recurrent ? 'Měsíčně' : 'Jednorázově'}}</h2>
     <p>Zvolte prosím částku, kterou chcete {{recurrent ? 'měsíčně přispívat' : 'přispět'}}.</p>
   </div>
   <div class="product__content">
     <div class="form-group text-left mt-2" [ngClass]="{'has-error': control.invalid && control.dirty}">
       <div class="form-check mb-2" *ngFor="let price of prices; let i = index" (click)="addOrEditToCart(price)">
-        <input type="radio" class="form-check--active" [id]="'donation_price_' + i" [value]="recurrent ? price + 'r' : price" [formControl]="control">
-        <label [for]="'donation_price_' + i">{{price|price:'CZK'}}</label>
+        <input type="radio" class="form-check--active" [id]="'donation_price_' + i + (recurrent ? 'r' : '')" [value]="recurrent ? price + 'r' : price" [formControl]="control">
+        <label [for]="'donation_price_' + i + (recurrent ? 'r' : '')">{{price|price:'CZK'}}</label>
       </div>
       <!--<div class="form-check mb-2" (click)="addOrEditToCart(99)">-->
         <!--<input type="radio" class="form-check&#45;&#45;active" id="donation_price_3" [value]="'99r'" [formControl]="form.controls['price']">-->

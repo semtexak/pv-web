@@ -9,6 +9,7 @@ export class FooterComponent implements OnInit {
 
   @Input() appId: string;
   @Input() type: string;
+  @Input() purchasing: boolean = false;
 
   constructor() { }
 
