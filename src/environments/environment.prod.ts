@@ -13,7 +13,7 @@ export const environment = {
   grantType: 'password',
   clientId: 'test',
   clientSecret: 'secret',
-  autoLogin: false,
+  autoLogin: true,
   autoLoginOnActivation: true,
   activationRequired: false
 };

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, APP_ID } from '@angular/core';
 import { HowItWorksComponent } from '../../page/how-it-works/how-it-works.component';
+import { WindowService } from 'src/app/shared/service/window.service';
 
 @Component({
   selector: 'pv-footer',
@@ -11,9 +12,16 @@ export class FooterComponent implements OnInit {
   @Input() type: string;
   @Input() purchasing: boolean = false;
 
-  constructor() { }
+  constructor(
+    private w: WindowService) { }
 
   ngOnInit() {
+  }
+
+  sendCloseMessage() {
+    if (this.w.nativeWindow['parentIFrame']) {
+      this.w.nativeWindow['parentIFrame'].sendMessage({action: 'close'});
+    }
   }
 
 }
