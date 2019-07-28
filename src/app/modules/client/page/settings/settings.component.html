@@ -171,6 +171,18 @@
                 <div class="row">
                   <div class="col-12">
                     <div class="form-group form-check mt-1"
+                         [ngClass]="{'has-error': pluginCustomizationForm.controls['fixed'].invalid && pluginCustomizationForm.controls['fixed'].dirty}">
+                      <input type="checkbox" name="fixed" id="fixed" class=""
+                             [formControl]="pluginCustomizationForm.controls['fixed']">
+                      <label for="fixed" class="form-check-label">
+                        Fixní
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group form-check mt-1"
                          [ngClass]="{'has-error': pluginCustomizationForm.controls['debug'].invalid && pluginCustomizationForm.controls['debug'].dirty}">
                       <input type="checkbox" name="debug" id="debug" class=""
                              [formControl]="pluginCustomizationForm.controls['debug']">

@@ -59,6 +59,7 @@ export class SettingsComponent implements OnInit {
     this.pluginCustomizationForm = this.formBuilder.group({
       'position': ['top', Validators.compose([Validators.required])],
       'marginBody': [null, Validators.compose([Validators.required])],
+      'fixed': [null, Validators.compose([Validators.required])],
       'debug': [false, Validators.compose([Validators.required])],
     });
 
