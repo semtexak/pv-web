@@ -61,6 +61,6 @@
   </div>
   <footer class="box__footer text-center">
     <p class="mb-0" *ngIf="!plugin">Nemáte účet? <a routerLink="../registrace" [queryParams]="{redirect: redirectUrl}">Zaregistrujte se</a>.</p>
-    <p class="mb-0" *ngIf="plugin">Nemáte účet? <a (click)="goToSignUpPage()">Zaregistrujte se</a>.</p>
+    <p class="mb-0" *ngIf="plugin">Nemáte účet? <a tabindex="1" (click)="goToSignUpPage()">Zaregistrujte se</a>.</p>
   </footer>
 </div>

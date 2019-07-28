@@ -15,4 +15,5 @@ export const environment = {
   clientSecret: 'secret',
   autoLogin: false,
   autoLoginOnActivation: true,
+  activationRequired: false
 };
