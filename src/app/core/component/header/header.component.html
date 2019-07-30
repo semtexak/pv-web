@@ -1,6 +1,24 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Payvont</span>
+      <span class="menu-spacer"></span>
+      <div>
+        <a mat-button [routerLink]="'/accounts'"> Přijímání plateb </a>
+        <a mat-button [routerLink]="'/create-account'">Kontakt</a>
+      </div>
+    </mat-toolbar-row>
+  
+    <!-- <mat-toolbar-row>
+        <span style="font-size: 12px;">SimpleCRM helps you easily manage your contacts</span>
+      </mat-toolbar-row> -->
+  </mat-toolbar>
+
 <nav class="navbar navbar-expand-lg"
-     [ngClass]="{'fixed-on-scroll': fixedHeader, 'transparent': fixedHeader && !isOnTop}" #nav
-     (window:scroll)="onWindowScroll($event)">
+  [ngClass]="{'fixed-on-scroll': false, 'transparent': fixedHeader && !isOnTop}" #nav
+  (window:scroll)="onWindowScroll($event)">
   <div [ngClass]="{'container': !adminSection, 'container-fluid': adminSection}">
     <a class="navbar-brand" routerLink="/">
       <!--<img [src]="fixedHeader && !isOnTop ? '../../../assets/images/logo-w.png' : '../../../assets/images/logo-c.png'"/>-->
@@ -8,12 +26,12 @@
 
 
     <button class="sidebar__toggler sidebar__toggler--dhover" type="button" *ngIf="adminSection"
-            (click)="toggleSidebar()">
+      (click)="toggleSidebar()">
       <span class="fl flaticon-menu"></span>
     </button>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -44,7 +62,7 @@
             <a class="nav-link notification" pvDropdownToggle>
               <span class="flaticon-bell-2"></span>
               <span class="notification__badge"
-                    [ngClass]="{'notification--empty': !notifications || (notifications && notificationsCount === 0), 'notification--new': shake}">{{notificationsCount}}</span>
+                [ngClass]="{'notification--empty': !notifications || (notifications && notificationsCount === 0), 'notification--new': shake}">{{notificationsCount}}</span>
             </a>
             <div class="pv-dropdown notification__list" pvDropdownMenu aria-labelledby="navbarDropdown">
               <div class="notification__header row">
@@ -58,8 +76,8 @@
                   <ul>
                     <li *ngFor="let notification of notificationsPreview">
                       <span class="notification__icon icon icon--sm icon--rounded icon--light"
-                            [ngClass]="{'icon--info': notification.type === 'user'}"><span
-                        class="fas fa-user"></span></span>
+                        [ngClass]="{'icon--info': notification.type === 'user'}"><span
+                          class="fas fa-user"></span></span>
                       <span class="notification__message">{{notification.message | truncate: 50}}</span>
                     </li>
                   </ul>

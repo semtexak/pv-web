@@ -31,6 +31,7 @@ import { InputComponent } from './component/form/input/input.component';
 import { SelectComponent } from './component/form/select/select.component';
 import { RadioComponent } from './component/form/radio/radio.component';
 import { WizardComponent } from './component/form/wizard/wizard.component';
+import { MaterialModule } from './material.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -49,6 +50,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     LoadingBarHttpClientModule,
     LoadingBarRouterModule,
     LoadingBarModule,
+    MaterialModule
   ],
   declarations: [
     AlertsComponent,
@@ -107,7 +109,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ReactiveFormsModule,
     LoadingButtonComponent,
     TableModule,
-    NgSelectModule
+    NgSelectModule,
+    MaterialModule
   ]
 })
 export class SharedModule {
