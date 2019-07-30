@@ -135,7 +135,7 @@ export class MyAccountComponent implements OnInit, AfterContentInit {
       reader.onload = (_eventInner) => { // called once readAsDataURL is completed
         _eventInner = _eventInner as ProgressEvent;
         this.appImg = _eventInner.target['result'];
-        this.form.controls['appImgStr'].setValue(reader.result.split(',')[1]);
+        this.form.controls['appImgStr'].setValue((reader.result as string).split(',')[1]);
       };
     }
     this.file = <File> _event.target.files[0];
