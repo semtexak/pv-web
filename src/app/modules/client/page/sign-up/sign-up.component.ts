@@ -25,9 +25,9 @@ export class SignUpComponent implements OnInit, AfterContentInit {
   bankForm: FormGroup;
   hideAres = false;
   tabs: Array<any>;
-  @ViewChild('baseInfo') t1: ElementRef;
-  @ViewChild('contactPerson') t2: ElementRef;
-  @ViewChild('bank') t3: ElementRef;
+  @ViewChild('baseInfo', { static: true }) t1: ElementRef;
+  @ViewChild('contactPerson', { static: true }) t2: ElementRef;
+  @ViewChild('bank', { static: true }) t3: ElementRef;
   states = [
     {
       id: 203, name: 'Česká republika'

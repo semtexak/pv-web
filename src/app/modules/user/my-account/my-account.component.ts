@@ -14,10 +14,10 @@ import {LoadingBarService} from '@ngx-loading-bar/core';
 })
 export class MyAccountComponent implements OnInit, AfterContentInit {
 
-  @ViewChild('general') general: ElementRef;
-  @ViewChild('password') password: ElementRef;
-  @ViewChild('connections') connections: ElementRef;
-  @ViewChild('notifications') notifications: ElementRef;
+  @ViewChild('general', { static: true }) general: ElementRef;
+  @ViewChild('password', { static: true }) password: ElementRef;
+  @ViewChild('connections', { static: true }) connections: ElementRef;
+  @ViewChild('notifications', { static: true }) notifications: ElementRef;
   tabs: Array<Tab> = [];
   social = {
     instagram: false,

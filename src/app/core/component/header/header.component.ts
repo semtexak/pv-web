@@ -14,7 +14,7 @@ import {INotification} from '../../../shared/model/base/i-notification';
 export class HeaderComponent implements OnInit, AfterViewInit {
 
   @Input() adminSection = false;
-  @ViewChild('nav') nav: ElementRef;
+  @ViewChild('nav', { static: true }) nav: ElementRef;
   public user: User;
   public shake = false;
   public notifications: INotification[] = [];

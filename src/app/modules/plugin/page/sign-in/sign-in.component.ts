@@ -13,8 +13,8 @@ import { WindowService } from 'src/app/shared/service/window.service';
 })
 export class SignInComponent implements OnInit {
 
-  @ViewChild('username') usernameInput: ElementRef;
-  @ViewChild('password') passwordInput: ElementRef;
+  @ViewChild('username', { static: false }) usernameInput: ElementRef;
+  @ViewChild('password', { static: false }) passwordInput: ElementRef;
   public form: FormGroup;
   public error: string;
   redirectUrl: string = '/';

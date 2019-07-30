@@ -25,8 +25,8 @@ export class SignInFormComponent implements OnInit {
   @Input() plugin = false;
   @Output() onNavigate: EventEmitter<string> = new EventEmitter();
 
-  @ViewChild('username') usernameInput: ElementRef;
-  @ViewChild('password') passwordInput: ElementRef;
+  @ViewChild('username', { static: true }) usernameInput: ElementRef;
+  @ViewChild('password', { static: false }) passwordInput: ElementRef;
   public form: FormGroup;
   redirectUrl: string = '/';
   loading = false;

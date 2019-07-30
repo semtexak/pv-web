@@ -23,7 +23,7 @@ export class SettingsComponent implements OnInit {
   paidContentForm: FormGroup;
   pluginCustomizationForm: FormGroup;
   appId: string;
-  @ViewChild('tabs') tabs: TabsComponent;
+  @ViewChild('tabs', { static: true }) tabs: TabsComponent;
   activeTab: TabComponent;
   application: IApplication = null;
   snippetCode: string;
