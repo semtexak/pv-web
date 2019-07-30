@@ -9,30 +9,30 @@ const routes: Routes = [
   {
     path: '',
     component: WebLayoutComponent,
-    loadChildren: '../modules/web/web.module#WebModule'
+    loadChildren: () => import('../modules/web/web.module').then(m => m.WebModule)
   },
   {
     path: 'zakaznik',
     component: AdminLayoutComponent,
-    loadChildren: '../modules/user/user.module#UserModule',
+    loadChildren: () => import('../modules/user/user.module').then(m => m.UserModule),
     canActivate: [AuthGuard]
   },
   {
     path: 'klient',
     component: AdminLayoutComponent,
-    loadChildren: '../modules/client/client.module#ClientModule',
+    loadChildren: () => import('../modules/client/client.module').then(m => m.ClientModule),
     canActivate: [AuthGuard]
   },
   {
     path: 'admin',
     component: AdminLayoutComponent,
-    loadChildren: '../modules/admin/admin.module#AdminModule',
+    loadChildren: () => import('../modules/admin/admin.module').then(m => m.AdminModule),
     canActivate: [AuthGuard]
   },
   {
     path: 'plugin',
     component: PluginLayoutComponent,
-    loadChildren: '../modules/plugin/plugin.module#PluginModule'
+    loadChildren: () => import('../modules/plugin/plugin.module').then(m => m.PluginModule)
   }
 ];
 
