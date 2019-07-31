@@ -24,6 +24,12 @@ import {ApplicationService} from '../shared/service/application.service';
 import {CartService} from '../shared/service/cart.service';
 import {AuthServiceConfig, FacebookLoginProvider, LoginOpt, SocialLoginModule} from 'angularx-social-login';
 import { WindowService } from '../shared/service/window.service';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 export function getSocialConfig() {
   const fbLoginOptions: LoginOpt = {
@@ -48,7 +54,13 @@ export function getSocialConfig() {
     HttpClientModule,
     SocialLoginModule,
     NgHttpLoaderModule,
-    SharedModule
+    SharedModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   declarations: [
     AdminLayoutComponent,

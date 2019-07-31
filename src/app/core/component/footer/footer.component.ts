@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'pv-footer',
-  templateUrl: './footer.component.html'
+  templateUrl: './mat-footer.component.html'
 })
 export class FooterComponent implements OnInit {
 

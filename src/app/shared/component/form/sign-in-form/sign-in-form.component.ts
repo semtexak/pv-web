@@ -7,7 +7,6 @@ import {ISingInForm} from '../../../model/form/i-sing-in-form';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {FacebookLoginProvider, SocialUser} from 'angularx-social-login';
 import {AuthService} from 'angularx-social-login';
-import {fromPromise} from 'rxjs/internal-compatibility';
 import {from, of} from 'rxjs';
 import {IToken} from '../../../model/i-token';
 import {environment} from '../../../../../environments/environment';
@@ -40,8 +39,8 @@ export class SignInFormComponent implements OnInit {
               private router: Router,
               private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
-      'username': [null, Validators.compose([Validators.pattern('^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$'), Validators.required])],
-      'password': [null, Validators.required]
+      username: [null, Validators.compose([Validators.pattern('^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$'), Validators.required])],
+      password: [null, Validators.required]
     });
   }
 
@@ -66,10 +65,10 @@ export class SignInFormComponent implements OnInit {
     this.authService.authState.subscribe(data => this.data = data);
   }
 
-  onSubmit(data: ISingInForm): void {
+  onSubmit(): void {
     if (this.form.valid) {
       this.loading = true;
-      this.authenticationService.authenticate(data).subscribe(() => {
+      this.authenticationService.authenticate(this.form.value as ISingInForm).subscribe(() => {
           if (!this.stayOnSamePageAfterLogin) {
             console.log(`Redirecting to: ${this.redirectUrl}`);
             this.loading = false;

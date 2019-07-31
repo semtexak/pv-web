@@ -41,6 +41,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   imports: [
     CommonModule,
     PipeModule,
+    MaterialModule,
     PerfectScrollbarModule,
     FormsModule,
     TooltipModule,
@@ -50,7 +51,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     LoadingBarHttpClientModule,
     LoadingBarRouterModule,
     LoadingBarModule,
-    MaterialModule
   ],
   declarations: [
     AlertsComponent,
@@ -81,6 +81,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     }
   ],
   exports: [
+    MaterialModule,
     DropdownDirective,
     DropdownMenuDirective,
     DropdownToggleDirective,
@@ -110,7 +111,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     LoadingButtonComponent,
     TableModule,
     NgSelectModule,
-    MaterialModule
   ]
 })
 export class SharedModule {

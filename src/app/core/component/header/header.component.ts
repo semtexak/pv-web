@@ -9,7 +9,10 @@ import {INotification} from '../../../shared/model/base/i-notification';
 
 @Component({
   selector: 'pv-header',
-  templateUrl: './header.component.html'
+  templateUrl: './mat-header.component.html',
+  styleUrls: [
+    './mat-header.component.css'
+  ]
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
 
@@ -40,6 +43,18 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       console.log(this.notificationsCount);
     });
   }
+
+  myWorkRoutes = [
+    {
+      icon: 'assignment',
+      route: 'sales/activities',
+      title: 'Activities',
+    }, {
+      icon: 'dashboard',
+      route: 'sales/dashboards',
+      title: 'Dashboards',
+    }
+  ];
 
   ngOnInit() {
     this.authenticationService.loggedUser.subscribe((user: User) => {

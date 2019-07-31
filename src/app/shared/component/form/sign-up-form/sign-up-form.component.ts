@@ -7,7 +7,7 @@ import {AuthenticationService} from '../../../service/authentication.service';
 import {AlertService} from '../../../service/alert.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ISingUpForm} from '../../../model/form/i-sing-up-form';
-import {HttpErrorResponse} from '../../../../../../node_modules/@angular/common/http';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'pv-sign-up-form',
@@ -51,9 +51,9 @@ export class SignUpFormComponent implements OnInit {
     });
   }
 
-  onSubmit(form: ISingUpForm): void {
+  onSubmit(): void {
     console.log(`Redirect url is: ${this.redirectUrl}`);
-    this.userService.registerUser(form, this.redirectUrl).subscribe(data => {
+    this.userService.registerUser(this.form as ISingUpForm, this.redirectUrl).subscribe(data => {
       console.log('Got data back');
       if (environment.activationRequired) {
         this.onNavigate.emit('confirm');

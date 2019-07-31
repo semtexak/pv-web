@@ -12,11 +12,16 @@ import {ActivationKeyComponent} from './page/activation-key/activation-key.compo
 import {PasswordChangeComponent} from './page/password-change/password-change.component';
 import {AuthGuard} from '../../core/guard/auth.guard';
 import {PairAccountComponent} from './page/pair-account/pair-account.component';
+import {AddressFormComponent} from './page/address-form/address-form.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomepageComponent
+  },
+  {
+    path: 'test',
+    component: AddressFormComponent
   },
   {
     path: 'prijimani-plateb',

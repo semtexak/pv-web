@@ -1,23 +1,5 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <button mat-icon-button>
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span>Payvont</span>
-      <span class="menu-spacer"></span>
-      <div>
-        <a mat-button [routerLink]="'/accounts'"> Přijímání plateb </a>
-        <a mat-button [routerLink]="'/create-account'">Kontakt</a>
-      </div>
-    </mat-toolbar-row>
-  
-    <!-- <mat-toolbar-row>
-        <span style="font-size: 12px;">SimpleCRM helps you easily manage your contacts</span>
-      </mat-toolbar-row> -->
-  </mat-toolbar>
-
 <nav class="navbar navbar-expand-lg"
-  [ngClass]="{'fixed-on-scroll': false, 'transparent': fixedHeader && !isOnTop}" #nav
+  [ngClass]="{'fixed-on-scroll': fixedHeader, 'transparent': fixedHeader && !isOnTop}" #nav
   (window:scroll)="onWindowScroll($event)">
   <div [ngClass]="{'container': !adminSection, 'container-fluid': adminSection}">
     <a class="navbar-brand" routerLink="/">

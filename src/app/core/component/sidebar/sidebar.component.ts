@@ -5,7 +5,7 @@ import {LayoutService} from '../../../shared/service/layout.service';
 
 @Component({
   selector: 'pv-sidebar',
-  templateUrl: './sidebar.component.html'
+  templateUrl: './mat-sidebar.component.html'
 })
 export class SidebarComponent implements OnInit {
 

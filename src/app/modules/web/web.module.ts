@@ -13,13 +13,26 @@ import { UserActivationComponent } from './page/user-activation/user-activation.
 import { PasswordChangeComponent } from './page/password-change/password-change.component';
 import { ActivationKeyComponent } from './page/activation-key/activation-key.component';
 import { PairAccountComponent } from './page/pair-account/pair-account.component';
+import { AddressFormComponent } from './page/address-form/address-form.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     WebRoutingModule,
-    SharedModule
+    SharedModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCardModule,
+    ReactiveFormsModule
   ],
-  declarations: [ReceivePaymentComponent, HomepageComponent, ContactComponent, SignInComponent, ForgotPasswordComponent, SignUpComponent, UserActivationComponent, PasswordChangeComponent, ActivationKeyComponent, PairAccountComponent]
+  declarations: [ReceivePaymentComponent, HomepageComponent, ContactComponent, SignInComponent, ForgotPasswordComponent, SignUpComponent, UserActivationComponent, PasswordChangeComponent, ActivationKeyComponent, PairAccountComponent, AddressFormComponent]
 })
 export class WebModule { }
