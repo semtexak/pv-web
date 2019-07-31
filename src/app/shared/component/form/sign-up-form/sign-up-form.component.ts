@@ -53,7 +53,7 @@ export class SignUpFormComponent implements OnInit {
 
   onSubmit(): void {
     console.log(`Redirect url is: ${this.redirectUrl}`);
-    this.userService.registerUser(this.form as ISingUpForm, this.redirectUrl).subscribe(data => {
+    this.userService.registerUser(this.form.value as ISingUpForm, this.redirectUrl).subscribe(data => {
       console.log('Got data back');
       if (environment.activationRequired) {
         this.onNavigate.emit('confirm');

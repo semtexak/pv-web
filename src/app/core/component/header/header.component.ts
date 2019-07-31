@@ -13,6 +13,7 @@ import {INotification} from '../../../shared/model/base/i-notification';
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
 
+  
   @Input() adminSection = false;
   @ViewChild('nav', { static: true }) nav: ElementRef;
   public user: User;
