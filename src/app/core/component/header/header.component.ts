@@ -9,10 +9,7 @@ import {INotification} from '../../../shared/model/base/i-notification';
 
 @Component({
   selector: 'pv-header',
-  templateUrl: './mat-header.component.html',
-  styleUrls: [
-    './mat-header.component.css'
-  ]
+  templateUrl: './mat-header.component.html'
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
 

@@ -1,0 +1,190 @@
+<section class="sidebar" [ngClass]="{'sidebar--minimized': isHidden}" perfectScrollbar>
+  <nav>
+    <header class="brand">
+      <span class="brand__logo">P</span>
+      <!--<span class="brand__name">Payvont</span>-->
+      <button class="sidebar__toggler" type="button" (click)="toggleSidebar()">
+      <span class="fl flaticon-menu"></span>
+      </button>
+    </header>
+    <div class="sidebar__content">
+      <div class="sidebar__customer">
+        <ul class="sidebar__nav">
+          <li class="sidebar__item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <a routerLink="/zakaznik">
+              <span class="fl fas fa-user"></span>
+              <span class="item-text">Můj účet</span>
+            </a>
+          </li>
+          <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown>
+            <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
+              <span class="fl fas fa-hammer"></span>
+              <span class="item-text">Služby</span>
+            </a>
+            <ul class="sidebar__dropdown-menu" routerLinkActive="show" pvDropdownMenu>
+              <li class="sidebar__item" routerLinkActive="active">
+                <a routerLink="/zakaznik/sluzby/dary">
+                  <span class="fl flaticon-credit-card"></span>
+                  <span class="item-text">Dary</span>
+                </a>
+              </li>
+              <li class="sidebar__item" routerLinkActive="active">
+                <a routerLink="/zakaznik/sluzby/predplatne">
+                  <span class="fl flaticon-credit-card"></span>
+                  <span class="item-text">Předplatné</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="sidebar__item" routerLinkActive="active">
+            <a routerLink="/zakaznik/platby">
+              <span class="fl fas fa-dollar-sign"></span>
+              <span class="item-text">Platby</span>
+            </a>
+          </li>
+          <li class="sidebar__item" routerLinkActive="active">
+            <a routerLink="/zakaznik/napoveda">
+              <span class="fl fas fa-question"></span>
+              <span class="item-text">Nápověda</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar__applications">
+        <h3>
+          <!--<span class="fl flaticon-internet"></span> -->
+          Moje stránky</h3>
+        <ul class="sidebar__nav" *ngIf="!user?.hasRole('CLIENT')">
+          <li class="sidebar__item" routerLinkActive="active">
+            <a routerLink="/klient/registrace">
+              <span class="fl fas fa-plus"></span>
+              <span class="item-text">Stát se partnerem</span>
+            </a>
+          </li>
+        </ul>
+        <ul class="sidebar__nav" *ngIf="user?.hasRole('CLIENT')">
+          <li class="sidebar__item" routerLinkActive="active" *ngIf="user?.hasRole('CLIENT')">
+            <a routerLink="/klient/stranka/registrace">
+              <span class="fl fas fa-plus"></span>
+              <span class="item-text">Přidat stránku</span>
+            </a>
+          </li>
+        </ul>
+        <ul class="sidebar__nav">
+          <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown
+              *ngFor="let application of user.applications">
+            <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
+              <span class="fl fas fa-desktop"></span>
+              <span class="item-text">{{application.name}}</span>
+            </a>
+            <ul class="sidebar__dropdown-menu" routerLinkActive="show" pvDropdownMenu>
+              <li class="sidebar__item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink="/klient/stranka/{{application.appId}}/prehled">
+                  <span class="item-text">Přehled</span>
+                </a>
+              </li>
+              <!--<li class="sidebar__item" routerLinkActive="active">-->
+              <!--<a routerLink="/klient/0123456789/objednavky">-->
+              <!--<span class="fl flaticon-wallet"></span>-->
+              <!--<span class="item-text">Objednávky</span>-->
+              <!--</a>-->
+              <!--</li>-->
+              <li class="sidebar__item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink="/klient/stranka/{{application.appId}}/nastaveni">
+                  <span class="item-text">Nastavení</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="sidebar__nav" *ngIf="user?.hasRole('CLIENT')">
+          <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown  *ngIf="user?.hasRole('CLIENT')">
+            <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
+              <span class="fl fas fa-key"></span>
+              <span class="item-text">Administrace</span>
+            </a>
+            <ul class="sidebar__dropdown-menu" routerLinkActive="show" pvDropdownMenu>
+              <li class="sidebar__item" routerLinkActive="active">
+                <a routerLink="/klient/faktury">
+                  <span class="item-text">Faktury</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar__admin" *ngIf="user?.hasRole('ADMIN')">
+        <h3> Administrace</h3>
+        <ul class="sidebar__nav">
+          <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown>
+            <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
+              <span class="fl fas fa-key"></span>
+              <span class="item-text">Administrace</span>
+            </a>
+            <ul class="sidebar__dropdown-menu" routerLinkActive="show" [routerLinkActiveOptions]="{exact: true}"
+                pvDropdownMenu>
+              <li class="sidebar__item" routerLinkActive="active">
+                <a routerLink="/admin/uzivatele">
+                  <!--<span class="fl flaticon-avatar-1"></span>-->
+                  <span class="item-text">Uživatelé</span>
+                </a>
+              </li>
+              <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown>
+                <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
+                  <span class="item-text">Klienti</span>
+                </a>
+                <ul class="sidebar__dropdown-menu" routerLinkActive="show" pvDropdownMenu>
+                  <li class="sidebar__item" routerLinkActive="active">
+                    <a routerLink="/admin/klienti">
+                      <span class="item-text">Přehled</span>
+                    </a>
+                  </li>
+                  <li class="sidebar__item" routerLinkActive="active">
+                    <a routerLink="/admin/stranky">
+                      <span class="item-text">Stránky</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="sidebar__item sidebar__dropdown" routerLinkActive="active show" pvDropdown>
+                <a class="sidebar__dropdown-toggle" pvDropdownToggle [outerClick]="false">
+                  <span class="fl flaticon-key-2"></span>
+                  <span class="item-text">Služby</span>
+                </a>
+                <ul class="sidebar__dropdown-menu" routerLinkActive="show" pvDropdownMenu>
+                  <li class="sidebar__item" routerLinkActive="active">
+                    <a routerLink="/admin/sluzby/predplatne">
+                      <!--<span class="fl flaticon-dashboard-1"></span>-->
+                      <span class="item-text">Předplatné</span>
+                    </a>
+                  </li>
+                  <li class="sidebar__item" routerLinkActive="active">
+                    <a routerLink="/admin/sluzby/dary">
+                      <!--<span class="fl flaticon-dashboard-1"></span>-->
+                      <span class="item-text">Dary</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="sidebar__item" routerLinkActive="active">
+                <a routerLink="/admin/objednavky">
+                  <!--<span class="fl flaticon-wallet"></span>-->
+                  <span class="item-text">Objednávky</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!--<footer>-->
+      <!--<div class="sidebar__phone">-->
+        <!--<span class="fl flaticon-call"></span> +420 606 606 606-->
+      <!--</div>-->
+      <!--<div class="sidebar__email">-->
+        <!--<span class="fl flaticon-email"></span> info@payvont.cz-->
+      <!--</div>-->
+    <!--</footer>-->
+  </nav>
+</section>
